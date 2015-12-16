@@ -1,17 +1,24 @@
 package de.rabea;
 
+import static de.rabea.Cell.*;
+
 public class Board {
 
-    private String[] cells;
+    private Cell[] cells;
 
     public Board() {
-        String emptySlot = "_";
-        this.cells = new String[] {emptySlot, emptySlot, emptySlot,
+        Cell emptySlot = EMPTY;
+        this.cells = new Cell[] {emptySlot, emptySlot, emptySlot,
                 emptySlot, emptySlot, emptySlot,
                 emptySlot, emptySlot, emptySlot};
     }
 
-    public String[] returnCells() {
+    public Cell[] returnCells() {
+        return cells;
+    }
+
+    public Cell[] placeMark(int position, Cell mark) {
+        cells[position] = mark;
         return cells;
     }
 }
