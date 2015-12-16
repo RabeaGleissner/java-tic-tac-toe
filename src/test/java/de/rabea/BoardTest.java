@@ -17,19 +17,41 @@ public class BoardTest {
     }
 
     @Test
-    public void emptyBoard() {
+    public void initiatesAnEmptyBoard() {
         Cell[] emptyBoard = {EMPTY, EMPTY, EMPTY,
-                               EMPTY, EMPTY, EMPTY,
-                               EMPTY, EMPTY, EMPTY};
+                             EMPTY, EMPTY, EMPTY,
+                             EMPTY, EMPTY, EMPTY};
         assertArrayEquals(emptyBoard, board.returnCells());
     }
 
     @Test
     public void placesAMark() {
         Cell[] cells = {EMPTY, X, EMPTY,
-                EMPTY, EMPTY, EMPTY,
-                EMPTY, EMPTY, EMPTY};
+                        EMPTY, EMPTY, EMPTY,
+                        EMPTY, EMPTY, EMPTY};
         assertThat(board.placeMark(1, X)).isEqualTo(cells);
+    }
 
+    @Test
+    public void boardIsEmpty() {
+        assertThat(board.isFull()).isFalse();
+    }
+
+    @Test
+    public void boardIsFull() {
+        fillUpBoard();
+        assertThat(board.isFull()).isTrue();
+    }
+
+    private void fillUpBoard() {
+        board.placeMark(0,X);
+        board.placeMark(1,X);
+        board.placeMark(2,O);
+        board.placeMark(3,X);
+        board.placeMark(4,X);
+        board.placeMark(5,O);
+        board.placeMark(6,X);
+        board.placeMark(7,O);
+        board.placeMark(8,O);
     }
 }

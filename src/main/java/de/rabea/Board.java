@@ -21,4 +21,19 @@ public class Board {
         cells[position] = mark;
         return cells;
     }
+
+    public boolean isFull() {
+        return emptyCellsCount() == 0;
+    }
+
+    private int emptyCellsCount() {
+        int count = 0;
+
+        for (Cell cell : cells) {
+            if (cell == EMPTY) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
