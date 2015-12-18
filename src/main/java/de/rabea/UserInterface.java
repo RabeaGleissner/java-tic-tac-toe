@@ -22,4 +22,9 @@ public class UserInterface {
         }
         return boardPrinter;
     }
+
+
+    public String askForPosition() {
+        return "Please select a position for your mark.";
+    }
 }
