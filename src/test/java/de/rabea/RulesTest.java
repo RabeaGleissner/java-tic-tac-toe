@@ -19,8 +19,9 @@ public class RulesTest {
 
     @Test
     public void gameOverWithoutWinner() {
-        rules = new Rules(new FullBoard());
+        rules = new Rules(new FullBoardNoWinner());
         assertTrue(rules.gameOver());
+        assertFalse(rules.winner());
     }
 
     @Test
@@ -68,12 +69,12 @@ public class RulesTest {
         }
     }
 
-    public class FullBoard extends Board {
+    public class FullBoardNoWinner extends Board {
         private Cell[] cells;
 
-        public FullBoard() {
+        public FullBoardNoWinner() {
             this.cells = new Cell[]{X, X, O,
-                                    O, X, O,
+                                    O, O, X,
                                     X, O, X};
         }
         @Override
