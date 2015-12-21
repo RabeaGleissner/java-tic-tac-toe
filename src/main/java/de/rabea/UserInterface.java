@@ -35,5 +35,17 @@ public class UserInterface {
         console.print(askUserForPosition);
     }
 
-
+    public Integer formattedUserChoice(String userChoiceForPosition) {
+        try {
+            Integer position = Integer.parseInt(userChoiceForPosition);
+            if (position >= 1 && position <= 8) {
+                position --;
+                return position;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("e = " + e);
+            return null;
+        }
+        return null;
+    }
 }

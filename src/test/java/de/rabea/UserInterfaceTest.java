@@ -50,4 +50,19 @@ public class UserInterfaceTest {
         userInterface.askForPosition();
         assertEquals("Please select a position for your mark.", fakeConsole.messagePrinted());
     }
+
+    @Test
+    public void formatUserInputForPlacingAMark() {
+        assertEquals(0, (int) userInterface.formattedUserChoice("1"));
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void formatInvalidUserInput() {
+        assertEquals(0, (int) userInterface.formattedUserChoice("x"));
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void formatInvalidUserInput2() {
+        assertEquals(0, (int) userInterface.formattedUserChoice("$%^&*"));
+    }
 }
