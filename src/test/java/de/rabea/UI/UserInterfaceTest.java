@@ -73,7 +73,8 @@ public class UserInterfaceTest {
 
     @Test
     public void askUserIfTheyWantToContinue() {
-        assertEquals("Do you want to play again? y/n", userInterface.playAgain());
+        userInterface.playAgain();
+        assertEquals("Do you want to play again? y/n", fakeConsole.messagePrinted());
     }
 
     @Test
@@ -94,5 +95,12 @@ public class UserInterfaceTest {
     @Test
     public void formatValidUserInputForReplayOptionNo() {
         assertEquals(Replay.NO, userInterface.formatUserInputForReplayOption("n"));
+    }
+
+    @Test
+    public void greetsUserAndExplainsGame() {
+        userInterface.greet();
+        assertEquals("Welcome to Tic Tac Toe. The first user to play is X. The second player is O.", fakeConsole.messagePrinted());
+
     }
 }

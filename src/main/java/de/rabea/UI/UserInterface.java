@@ -13,6 +13,7 @@ public class UserInterface {
 
     private String askUserForPosition = "Please select a position for your mark.";
     private String playAgain = "Do you want to play again? y/n";
+    private String greeting = "Welcome to Tic Tac Toe. The first user to play is X. The second player is O.";
 
     public String displayBoard(Cell[] cells) {
         String boardPrinter = "";
@@ -39,8 +40,8 @@ public class UserInterface {
         console.print(askUserForPosition);
     }
 
-    public String playAgain() {
-        return playAgain;
+    public void playAgain() {
+        console.print(playAgain);
     }
 
     public boolean wantsToPlayAgain(String userChoice) {
@@ -70,5 +71,9 @@ public class UserInterface {
         } else {
             return null;
         }
+    }
+
+    public void greet() {
+        console.print(greeting);
     }
 }
