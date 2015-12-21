@@ -1,6 +1,13 @@
 package de.rabea;
 
 public class UserInterface {
+    private final Console console;
+
+    public UserInterface(Console console) {
+        this.console = console;
+    }
+
+    private String askUserForPosition = "Please select a position for your mark.";
 
     public String displayBoard(Cell[] cells) {
         String boardPrinter = "";
@@ -24,7 +31,9 @@ public class UserInterface {
     }
 
 
-    public String askForPosition() {
-        return "Please select a position for your mark.";
+    public void askForPosition() {
+        console.print(askUserForPosition);
     }
+
+
 }

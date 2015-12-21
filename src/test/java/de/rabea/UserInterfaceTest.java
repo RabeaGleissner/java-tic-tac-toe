@@ -9,11 +9,12 @@ import static org.junit.Assert.assertEquals;
 public class UserInterfaceTest {
 
     private UserInterface userInterface;
+    private FakeConsole fakeConsole;
 
     @Before
     public void setup() {
-        userInterface = new UserInterface();
-
+        fakeConsole = new FakeConsole();
+        userInterface = new UserInterface(fakeConsole);
     }
 
     @Test
@@ -31,7 +32,22 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void asksTheUserForAPosition() {
-        assertEquals("Please select a position for your mark.", userInterface.askForPosition());
+    public void printMessageToConsole() {
+        String prompt = "message to user";
+        fakeConsole.print(prompt);
+        assertEquals(prompt, fakeConsole.messagePrinted());
+    }
+
+    @Test
+    public void getUserInput() {
+        String input = "1";
+        fakeConsole.userInput(input);
+        assertEquals(input, fakeConsole.readUserInput());
+    }
+
+    @Test
+    public void asksUserForPosition() {
+        userInterface.askForPosition();
+        assertEquals("Please select a position for your mark.", fakeConsole.messagePrinted());
     }
 }
