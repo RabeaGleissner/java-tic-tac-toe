@@ -11,7 +11,7 @@ public class Rules {
     }
 
     public boolean gameOver() {
-        return board.isFull();
+        return board.isFull() || winner();
     }
 
     public boolean winner() {

@@ -26,10 +26,15 @@ public class RulesTest {
     }
 
     @Test
+    public void gameOverWithWinner() {
+        rules = new Rules(new HorizontalWinningBoard());
+        assertTrue(rules.gameOver());
+    }
+
+    @Test
     public void verticalWinningCombination() {
         rules = new Rules(new VerticalWinningBoard());
         assertTrue(rules.winner());
-
     }
 
     @Test
