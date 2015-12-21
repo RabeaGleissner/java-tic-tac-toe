@@ -41,4 +41,11 @@ public class Board {
         return count;
     }
 
+    public Cell switchMark(Cell mark) {
+        if (mark == Cell.X) {
+            return Cell.O;
+        } else {
+            return Cell.X;
+        }
+    }
 }

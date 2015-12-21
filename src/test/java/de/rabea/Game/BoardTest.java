@@ -55,6 +55,16 @@ public class BoardTest {
         assertEquals(false, board.isChosenPositionAvailable(1));
     }
 
+    @Test
+    public void switchesMarkXtoO() {
+        assertEquals(Cell.O, board.switchMark(Cell.X));
+    }
+
+    @Test
+    public void switchesMarkOToX() {
+        assertEquals(Cell.X, board.switchMark(Cell.O));
+    }
+
     private void fillUpBoard() {
         board.placeMark(0,X);
         board.placeMark(1,X);
