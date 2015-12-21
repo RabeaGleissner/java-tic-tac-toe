@@ -1,17 +1,22 @@
 package de.rabea.game;
 
-import de.rabea.ui.RealConsole;
 import de.rabea.ui.UserInterface;
 
 public class Game {
 
-    UserInterface userInterface = new UserInterface(new RealConsole());
+    private final UserInterface userInterface;
+    private final Board board;
+    private final Rules rules;
 
-    public Game(UserInterface userInterface) {
+    public Game(UserInterface userInterface, Board board, Rules rules) {
         this.userInterface = userInterface;
+        this.board = board;
+        this.rules = rules;
     }
 
     public void play() {
         userInterface.greet();
+        userInterface.displayBoard(board.returnCells());
+        userInterface.askForPosition();
     }
 }
