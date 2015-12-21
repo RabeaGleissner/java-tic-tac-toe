@@ -25,7 +25,8 @@ public class UserInterfaceTest {
     @Test
     public void displaysEmptyBoard() {
         Board board = new Board();
-        assertThat(userInterface.displayBoard(board.returnCells())).isEqualTo("1 2 3 \n4 5 6 \n7 8 9 \n");
+        userInterface.displayBoard(board.returnCells());
+        assertThat(fakeConsole.messagePrinted()).isEqualTo("1 2 3 \n4 5 6 \n7 8 9 \n");
     }
 
     @Test
@@ -33,7 +34,8 @@ public class UserInterfaceTest {
         Board board = new Board();
         board.placeMark(1, Cell.X);
         board.placeMark(3, Cell.O);
-        assertThat(userInterface.displayBoard(board.returnCells())).isEqualTo("1 X 3 \nO 5 6 \n7 8 9 \n");
+        userInterface.displayBoard(board.returnCells());
+        assertThat(fakeConsole.messagePrinted()).isEqualTo("1 X 3 \nO 5 6 \n7 8 9 \n");
     }
 
     @Test
@@ -51,14 +53,19 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void asksUserForPosition() {
-        userInterface.askForPosition();
-        assertEquals("Please select a position for your mark.", fakeConsole.messagePrinted());
+    public void asksUserForPositionAndReturnFormattedPosition() {
+        fakeConsole.userInput("2");
+        assertEquals(1, (int) userInterface.returnUserChoiceForPosition(board.returnCells()));
     }
 
     @Test
     public void formatUserInputForPlacingAMark() {
         assertEquals(0, (int) userInterface.formatUserChoiceForPosition("1", board.returnCells()));
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void formatUserInputForPlacingAMarkWithWrongInt() {
+        assertEquals(null, (int) userInterface.formatUserChoiceForPosition("99", board.returnCells()));
     }
 
     @Test(expected=NullPointerException.class)

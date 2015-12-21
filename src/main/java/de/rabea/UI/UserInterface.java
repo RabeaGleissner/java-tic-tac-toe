@@ -15,7 +15,7 @@ public class UserInterface {
     private String playAgain = "Do you want to play again? y/n";
     private String greeting = "Welcome to Tic Tac Toe. The first user to play is X. The second player is O.";
 
-    public String displayBoard(Cell[] cells) {
+    public void displayBoard(Cell[] cells) {
         String boardPrinter = "";
         int i = 0;
         for (Enum cell : cells) {
@@ -33,10 +33,15 @@ public class UserInterface {
                 boardPrinter += "\n";
             }
         }
-        return boardPrinter;
+        console.print(boardPrinter);
     }
 
-    public void askForPosition() {
+    public Integer returnUserChoiceForPosition(Cell[] cells) {
+        askForPosition();
+        return formatUserChoiceForPosition(console.readUserInput(), cells);
+    }
+
+    private void askForPosition() {
         console.print(askUserForPosition);
     }
 
