@@ -13,11 +13,13 @@ public class UserInterfaceTest {
 
     private UserInterface userInterface;
     private FakeConsole fakeConsole;
+    private Board board;
 
     @Before
     public void setup() {
         fakeConsole = new FakeConsole();
         userInterface = new UserInterface(fakeConsole);
+        board = new Board();
     }
 
     @Test
@@ -56,17 +58,17 @@ public class UserInterfaceTest {
 
     @Test
     public void formatUserInputForPlacingAMark() {
-        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("1"));
+        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("1", board.returnCells()));
     }
 
     @Test(expected=NullPointerException.class)
     public void formatInvalidUserInput() {
-        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("x"));
+        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("x", board.returnCells()));
     }
 
     @Test(expected=NullPointerException.class)
     public void formatInvalidUserInput2() {
-        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("$%^&*"));
+        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("$%^&*", board.returnCells()));
     }
 
     @Test
@@ -92,6 +94,5 @@ public class UserInterfaceTest {
     @Test
     public void formatValidUserInputForReplayOptionNo() {
         assertEquals(Replay.NO, userInterface.formatUserInputForReplayOption("n"));
-
     }
 }

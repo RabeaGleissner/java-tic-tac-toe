@@ -47,10 +47,10 @@ public class UserInterface {
         return userChoice.equals("y");
     }
 
-    public Integer formatUserChoiceForPosition(String userChoiceForPosition) {
+    public Integer formatUserChoiceForPosition(String userChoiceForPosition, Cell[] cells) {
         try {
             Integer position = Integer.parseInt(userChoiceForPosition);
-            if (position >= 1 && position <= 8) {
+            if (position >= 1 && position <= cells.length) {
                 position --;
                 return position;
             }
