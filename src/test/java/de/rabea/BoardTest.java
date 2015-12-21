@@ -5,6 +5,7 @@ import org.junit.Test;
 import static de.rabea.Cell.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 
 public class BoardTest {
@@ -41,6 +42,17 @@ public class BoardTest {
     public void boardIsFull() {
         fillUpBoard();
         assertThat(board.isFull()).isTrue();
+    }
+
+    @Test
+    public void isChosenPositionStillFree() {
+        assertEquals(true, board.isChosenPositionAvailable(1));
+    }
+
+    @Test
+    public void isNotAValidUserChoice() {
+        board.placeMark(1, Cell.X);
+        assertEquals(false, board.isChosenPositionAvailable(1));
     }
 
     private void fillUpBoard() {

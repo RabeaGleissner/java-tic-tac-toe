@@ -26,6 +26,10 @@ public class Board {
         return emptyCellsCount() == 0;
     }
 
+    public boolean isChosenPositionAvailable(int position) {
+        return !(cells[position] == Cell.X || cells[position] == Cell.O);
+    }
+
     private int emptyCellsCount() {
         int count = 0;
 
@@ -36,4 +40,5 @@ public class Board {
         }
         return count;
     }
+
 }
