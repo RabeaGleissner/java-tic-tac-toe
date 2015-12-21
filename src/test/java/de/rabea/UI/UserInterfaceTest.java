@@ -1,5 +1,8 @@
-package de.rabea;
+package de.rabea.ui;
 
+import de.rabea.game.Board;
+import de.rabea.game.Cell;
+import de.rabea.game.Replay;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,16 +56,42 @@ public class UserInterfaceTest {
 
     @Test
     public void formatUserInputForPlacingAMark() {
-        assertEquals(0, (int) userInterface.formattedUserChoice("1"));
+        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("1"));
     }
 
     @Test(expected=NullPointerException.class)
     public void formatInvalidUserInput() {
-        assertEquals(0, (int) userInterface.formattedUserChoice("x"));
+        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("x"));
     }
 
     @Test(expected=NullPointerException.class)
     public void formatInvalidUserInput2() {
-        assertEquals(0, (int) userInterface.formattedUserChoice("$%^&*"));
+        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("$%^&*"));
+    }
+
+    @Test
+    public void askUserIfTheyWantToContinue() {
+        assertEquals("Do you want to play again? y/n", userInterface.playAgain());
+    }
+
+    @Test
+    public void userWantsToPlayAgain() {
+        assertEquals(true, userInterface.wantsToPlayAgain("y"));
+    }
+
+    @Test
+    public void dealWithInvalidUserInputForReplayOption() {
+        assertEquals(null, userInterface.formatUserInputForReplayOption("938"));
+    }
+
+    @Test
+    public void formatValidUserInputForReplayOptionYes() {
+        assertEquals(Replay.YES, userInterface.formatUserInputForReplayOption("Y"));
+    }
+
+    @Test
+    public void formatValidUserInputForReplayOptionNo() {
+        assertEquals(Replay.NO, userInterface.formatUserInputForReplayOption("n"));
+
     }
 }

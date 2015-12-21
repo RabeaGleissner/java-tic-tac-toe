@@ -1,10 +1,11 @@
-package de.rabea;
+package de.rabea.game;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import static de.rabea.Cell.*;
+import static de.rabea.game.Cell.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class RulesTest {
 

@@ -1,8 +1,8 @@
-package de.rabea;
+package de.rabea.game;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.Cell.*;
+import static de.rabea.game.Cell.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;

@@ -1,4 +1,6 @@
-package de.rabea;
+package de.rabea.ui;
+
+import de.rabea.game.Console;
 
 import java.util.Scanner;
 

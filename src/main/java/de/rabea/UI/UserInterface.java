@@ -1,4 +1,8 @@
-package de.rabea;
+package de.rabea.ui;
+
+import de.rabea.game.Cell;
+import de.rabea.game.Console;
+import de.rabea.game.Replay;
 
 public class UserInterface {
     private final Console console;

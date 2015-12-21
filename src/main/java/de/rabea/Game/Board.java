@@ -1,6 +1,6 @@
-package de.rabea;
+package de.rabea.game;
 
-import static de.rabea.Cell.*;
+import static de.rabea.game.Cell.*;
 
 public class Board {
 
