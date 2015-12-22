@@ -41,24 +41,16 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void asksUserForPositionAndReturnFormattedPosition() {
+    public void itReturnsThePositionThatTheUserEnters() {
         fakeConsole.userInput("2");
-        assertEquals(1, (int) userInterface.returnPlayersChosenPosition(board.returnCells()));
+        assertEquals((Integer) 2, userInterface.returnPlayersChosenPosition(board));
     }
 
     @Test
-    public void formatUserInputForPlacingAMark() {
-        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("1", board.returnCells()));
-    }
-
-    @Test(expected=NullPointerException.class)
-    public void formatUserInputForPlacingAMarkWithWrongInt() {
-        assertEquals(null, (int) userInterface.formatUserChoiceForPosition("99", board.returnCells()));
-    }
-
-    @Test(expected=NullPointerException.class)
-    public void formatInvalidUserInputForPosition() {
-        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("x", board.returnCells()));
+    public void itGivesAWarningWhenUserEntryIsNotANumber() {
+        fakeConsole.userInput("NaN", "8");
+        userInterface.returnPlayersChosenPosition(board);
+        assertEquals("Please select a position for your mark.", fakeConsole.messagePrinted());
     }
 
     @Test
@@ -74,8 +66,13 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void returnNullForInvalidUserInputForReplayOption() {
-        assertEquals(null, userInterface.formatUserInputForReplayOption("938"));
+    public void knowsIfUserInputIsANumber() {
+        assertTrue(userInterface.isInteger("938"));
+    }
+
+    @Test
+    public void knowsThatUserInputIsNotANumber() {
+        assertFalse(userInterface.isInteger("asdgsadg"));
     }
 
     @Test

@@ -2,13 +2,17 @@ package de.rabea.ui;
 
 import de.rabea.game.Console;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 public class FakeConsole implements Console {
 
-    private String userInput;
+    private List<String> userInput;
     private String consoleOutput;
 
     public FakeConsole() {
-        userInput = "";
+        userInput = new LinkedList<String>();
         consoleOutput = "";
     }
 
@@ -17,14 +21,14 @@ public class FakeConsole implements Console {
     }
 
     public String readUserInput() {
-        return userInput;
+        return userInput.remove(0);
     }
 
     public String messagePrinted() {
         return consoleOutput;
     }
 
-    public void userInput(String input) {
-        userInput = input;
+    public void userInput(String ... input) {
+        userInput.addAll(Arrays.asList(input));
     }
 }

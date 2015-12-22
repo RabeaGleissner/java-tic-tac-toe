@@ -1,5 +1,6 @@
 package de.rabea.ui;
 
+import de.rabea.game.Board;
 import de.rabea.game.Cell;
 import de.rabea.game.Console;
 import de.rabea.game.Replay;
@@ -14,6 +15,8 @@ public class UserInterface {
     private String greeting = "Welcome to Tic Tac Toe. The first user to play is X. The second player is O.";
     private String winnerAnnouncement = "Game over! The winner is: ";
     private String drawAnnouncement = "Game over! It's a draw.";
+    private String unavailablePosition = "Sorry, this position is not available!";
+    private String enterANumber = "Please enter a number between 1 and 9.";
 
     public void displayBoard(Cell[] cells) {
         String boardPrinter = "";
@@ -36,9 +39,20 @@ public class UserInterface {
         console.print(boardPrinter);
     }
 
-    public Integer returnPlayersChosenPosition(Cell[] cells) {
+    public Integer returnPlayersChosenPosition(Board board) {
         askForPosition();
-        return formatUserChoiceForPosition(console.readUserInput(), cells);
+        return getUsersPosition(board);
+    }
+
+    private Integer getUsersPosition(Board board) {
+        String userInput = console.readUserInput();
+        if (!(isInteger(userInput)) ) {
+            notANumberWarning();
+            return returnPlayersChosenPosition(board);
+        } else {
+            return Integer.parseInt(userInput);
+        }
+
     }
 
     public boolean playAgain() {
@@ -54,22 +68,24 @@ public class UserInterface {
         console.print(wantToPlayAgain);
     }
 
+    private void notANumberWarning() {
+        console.print(enterANumber);
+    }
+
+    public void positionUnavailableWarning() {
+        console.print(unavailablePosition);
+    }
     private boolean userReplayChoice(String userChoice) {
         return userChoice.equals("y");
     }
 
-    public Integer formatUserChoiceForPosition(String userChoiceForPosition, Cell[] cells) {
+    public boolean isInteger(String userEntry) {
         try {
-            Integer position = Integer.parseInt(userChoiceForPosition);
-            if (position >= 1 && position <= cells.length) {
-                position --;
-                return position;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("e = " + e);
-            return null;
+            Integer.parseInt(userEntry);
+            return true;
+        } catch( NumberFormatException e ){
+            return false;
         }
-        return null;
     }
 
     public Replay formatUserInputForReplayOption(String userInput) {

@@ -24,11 +24,10 @@ public class FakeUserInterface extends UserInterface {
     }
 
     @Override
-    public Integer returnPlayersChosenPosition(Cell[] cells) {
+    public Integer returnPlayersChosenPosition(Board board) {
         askForPositionWasCalled = true;
         UserInterface userInterface = new UserInterface(new FakeConsole());
-        Board board = new Board();
-        int position = userInterface.formatUserChoiceForPosition(moves.remove(0), board.returnCells());
+        int position = Integer.parseInt(moves.remove(0));
         return position;
     }
 
