@@ -26,7 +26,7 @@ public class Board {
         return emptyCellsCount() == 0;
     }
 
-    public boolean isChosenPositionAvailable(int position) {
+    public boolean isPositionAvailable(int position) {
         return !(cells[position] == Cell.X || cells[position] == Cell.O);
     }
 

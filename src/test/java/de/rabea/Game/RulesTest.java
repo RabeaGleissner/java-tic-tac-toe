@@ -22,7 +22,7 @@ public class RulesTest {
     public void gameOverWithoutWinner() {
         rules = new Rules(new FullBoardNoWinner());
         assertTrue(rules.gameOver());
-        assertFalse(rules.winner());
+        assertFalse(rules.hasWinner());
     }
 
     @Test
@@ -34,19 +34,19 @@ public class RulesTest {
     @Test
     public void verticalWinningCombination() {
         rules = new Rules(new VerticalWinningBoard());
-        assertTrue(rules.winner());
+        assertTrue(rules.hasWinner());
     }
 
     @Test
     public void horizontalWinningCombination() {
         rules = new Rules(new HorizontalWinningBoard());
-        assertTrue(rules.winner());
+        assertTrue(rules.hasWinner());
     }
 
     @Test
     public void diagonalWinningBoard() {
         rules = new Rules(new DiagonalWinningBoard());
-        assertTrue(rules.winner());
+        assertTrue(rules.hasWinner());
     }
 
     public class DiagonalWinningBoard extends Board {

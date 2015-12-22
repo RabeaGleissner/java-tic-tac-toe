@@ -24,7 +24,7 @@ public class FakeUserInterface extends UserInterface {
     }
 
     @Override
-    public Integer returnUserChoiceForPosition(Cell[] cells) {
+    public Integer returnPlayersChosenPosition(Cell[] cells) {
         askForPositionWasCalled = true;
         UserInterface userInterface = new UserInterface(new FakeConsole());
         Board board = new Board();
@@ -33,12 +33,12 @@ public class FakeUserInterface extends UserInterface {
     }
 
     @Override
-    public void announceWinner(Cell mark, boolean winner) {
+    public void announceGameEnd(Cell lastPlayedMark, boolean winner) {
         countAnnounceWinnerCalls ++;
     }
 
     @Override
-    public boolean userWantsToPlayAgain() {
+    public boolean playAgain() {
         return moves.remove(0).equals("y");
     }
 

@@ -7,14 +7,13 @@ public class Rules {
 
     public Rules(Board board) {
         this.board = board;
-
     }
 
     public boolean gameOver() {
-        return board.isFull() || winner();
+        return board.isFull() || hasWinner();
     }
 
-    public boolean winner() {
+    public boolean hasWinner() {
         Cell[] gameState = gameState();
         for (int[] combos : WINNING_COMBINATIONS) {
             if (gameState[combos[0]] == gameState[combos[1]] &&

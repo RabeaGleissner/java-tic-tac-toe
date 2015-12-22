@@ -17,13 +17,13 @@ public class Game {
         Rules rules = new Rules(board);
         while (!rules.gameOver()){
             userInterface.displayBoard(board.returnCells());
-            Integer usersChosenPosition = userInterface.returnUserChoiceForPosition(board.returnCells());
-            board.placeMark(usersChosenPosition, mark);
+            Integer position = userInterface.returnPlayersChosenPosition(board.returnCells());
+            board.placeMark(position, mark);
             mark = board.switchMark(mark);
         }
         userInterface.displayBoard(board.returnCells());
-        userInterface.announceGameEnd(board.switchMark(mark), rules.winner());
-        if (userInterface.askUserForReplay()) {
+        userInterface.announceGameEnd(board.switchMark(mark), rules.hasWinner());
+        if (userInterface.playAgain()) {
             play();
         }
     }

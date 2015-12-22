@@ -46,13 +46,13 @@ public class BoardTest {
 
     @Test
     public void isChosenPositionStillFree() {
-        assertEquals(true, board.isChosenPositionAvailable(1));
+        assertEquals(true, board.isPositionAvailable(1));
     }
 
     @Test
     public void isNotAValidUserChoice() {
         board.placeMark(1, Cell.X);
-        assertEquals(false, board.isChosenPositionAvailable(1));
+        assertEquals(false, board.isPositionAvailable(1));
     }
 
     @Test

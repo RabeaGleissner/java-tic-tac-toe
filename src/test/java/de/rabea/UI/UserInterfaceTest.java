@@ -6,6 +6,8 @@ import de.rabea.game.Replay;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.TestCase.assertFalse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
@@ -41,7 +43,7 @@ public class UserInterfaceTest {
     @Test
     public void asksUserForPositionAndReturnFormattedPosition() {
         fakeConsole.userInput("2");
-        assertEquals(1, (int) userInterface.returnUsersChosenPosition(board.returnCells()));
+        assertEquals(1, (int) userInterface.returnPlayersChosenPosition(board.returnCells()));
     }
 
     @Test
@@ -55,28 +57,24 @@ public class UserInterfaceTest {
     }
 
     @Test(expected=NullPointerException.class)
-    public void formatInvalidUserInput() {
+    public void formatInvalidUserInputForPosition() {
         assertEquals(0, (int) userInterface.formatUserChoiceForPosition("x", board.returnCells()));
     }
 
-    @Test(expected=NullPointerException.class)
-    public void formatInvalidUserInput2() {
-        assertEquals(0, (int) userInterface.formatUserChoiceForPosition("$%^&*", board.returnCells()));
+    @Test
+    public void asksIfUserWantsToPlayAgain() {
+        fakeConsole.userInput("y");
+        assertEquals(true, userInterface.playAgain());
     }
 
     @Test
-    public void askUserIfTheyWantToContinue() {
-        userInterface.playAgain();
+    public void askUserIfTheyWantToPlayAgain() {
+        userInterface.askForReplay();
         assertEquals("Do you want to play again? y/n", fakeConsole.messagePrinted());
     }
 
     @Test
-    public void userWantsToPlayAgain() {
-        assertEquals(true, userInterface.wantsToPlayAgain("y"));
-    }
-
-    @Test
-    public void dealWithInvalidUserInputForReplayOption() {
+    public void returnNullForInvalidUserInputForReplayOption() {
         assertEquals(null, userInterface.formatUserInputForReplayOption("938"));
     }
 
@@ -94,25 +92,18 @@ public class UserInterfaceTest {
     public void greetsUserAndExplainsGame() {
         userInterface.greet();
         assertEquals("Welcome to Tic Tac Toe. The first user to play is X. The second player is O.", fakeConsole.messagePrinted());
-
     }
 
     @Test
     public void announceWinner() {
-        userInterface.announceWinner(Cell.X, true);
+        userInterface.announceGameEnd(Cell.X, true);
         assertEquals("Game over! The winner is: X", fakeConsole.messagePrinted());
     }
 
     @Test
     public void announceDraw() {
-        userInterface.announceWinner(Cell.X, false);
+        userInterface.announceGameEnd(Cell.X, false);
         assertEquals("Game over! It's a draw.", fakeConsole.messagePrinted());
     }
 
-    @Test
-    public void asksIfUserWantsToPlayAgain() {
-        fakeConsole.userInput("y");
-        assertEquals(true , userInterface.userWantsToPlayAgain());
-
-    }
 }

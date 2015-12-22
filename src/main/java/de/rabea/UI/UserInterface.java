@@ -10,7 +10,7 @@ public class UserInterface {
         this.console = console;
     }
     private String askUserForPosition = "Please select a position for your mark.";
-    private String playAgain = "Do you want to play again? y/n";
+    private String wantToPlayAgain = "Do you want to play again? y/n";
     private String greeting = "Welcome to Tic Tac Toe. The first user to play is X. The second player is O.";
     private String winnerAnnouncement = "Game over! The winner is: ";
     private String drawAnnouncement = "Game over! It's a draw.";
@@ -36,25 +36,25 @@ public class UserInterface {
         console.print(boardPrinter);
     }
 
-    public Integer returnUserChoiceForPosition(Cell[] cells) {
+    public Integer returnPlayersChosenPosition(Cell[] cells) {
         askForPosition();
         return formatUserChoiceForPosition(console.readUserInput(), cells);
     }
 
-    public boolean userWantsToPlayAgain() {
-        playAgain();
-        return wantsToPlayAgain(console.readUserInput());
+    public boolean playAgain() {
+        askForReplay();
+        return userReplayChoice(console.readUserInput());
     }
 
     private void askForPosition() {
         console.print(askUserForPosition);
     }
 
-    public void playAgain() {
-        console.print(playAgain);
+    public void askForReplay() {
+        console.print(wantToPlayAgain);
     }
 
-    public boolean wantsToPlayAgain(String userChoice) {
+    private boolean userReplayChoice(String userChoice) {
         return userChoice.equals("y");
     }
 
@@ -87,9 +87,9 @@ public class UserInterface {
         console.print(greeting);
     }
 
-    public void announceWinner(Cell mark, boolean winner) {
+    public void announceGameEnd(Cell lastPlayedMark, boolean winner) {
         if (winner) {
-            console.print(winnerAnnouncement + mark.toString());
+            console.print(winnerAnnouncement + lastPlayedMark.toString());
         } else {
             console.print(drawAnnouncement);
         }
