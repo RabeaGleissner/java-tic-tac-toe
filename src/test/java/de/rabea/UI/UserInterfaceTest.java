@@ -110,4 +110,16 @@ public class UserInterfaceTest {
         assertEquals("Welcome to Tic Tac Toe. The first user to play is X. The second player is O.", fakeConsole.messagePrinted());
 
     }
+
+    @Test
+    public void announceWinner() {
+        userInterface.announceWinner(Cell.X, true);
+        assertEquals("Game over! The winner is: X", fakeConsole.messagePrinted());
+    }
+
+    @Test
+    public void announceDraw() {
+        userInterface.announceWinner(Cell.X, false);
+        assertEquals("Game over! It's a draw.", fakeConsole.messagePrinted());
+    }
 }

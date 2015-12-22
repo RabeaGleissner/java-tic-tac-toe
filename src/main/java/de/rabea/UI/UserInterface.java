@@ -6,14 +6,14 @@ import de.rabea.game.Replay;
 
 public class UserInterface {
     private final Console console;
-
     public UserInterface(Console console) {
         this.console = console;
     }
-
     private String askUserForPosition = "Please select a position for your mark.";
     private String playAgain = "Do you want to play again? y/n";
     private String greeting = "Welcome to Tic Tac Toe. The first user to play is X. The second player is O.";
+    private String winnerAnnouncement = "Game over! The winner is: ";
+    private String drawAnnouncement = "Game over! It's a draw.";
 
     public void displayBoard(Cell[] cells) {
         String boardPrinter = "";
@@ -39,6 +39,11 @@ public class UserInterface {
     public Integer returnUserChoiceForPosition(Cell[] cells) {
         askForPosition();
         return formatUserChoiceForPosition(console.readUserInput(), cells);
+    }
+
+    public boolean userWantsToPlayAgain() {
+        playAgain();
+        return wantsToPlayAgain(console.readUserInput());
     }
 
     private void askForPosition() {
@@ -80,5 +85,14 @@ public class UserInterface {
 
     public void greet() {
         console.print(greeting);
+    }
+
+    public void announceWinner(Cell mark, boolean winner) {
+        if (winner) {
+            console.print(winnerAnnouncement + mark.toString());
+        } else {
+            console.print(drawAnnouncement);
+        }
+
     }
 }
