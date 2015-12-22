@@ -16,7 +16,12 @@ public class Game {
 
     public void play() {
         userInterface.greet();
-        userInterface.displayBoard(board.returnCells());
-        userInterface.askForPosition();
+        Cell mark = Cell.X;
+        while (!rules.gameOver()){
+            userInterface.displayBoard(board.returnCells());
+            Integer usersChosenPosition = userInterface.returnUserChoiceForPosition(board.returnCells());
+            board.placeMark(usersChosenPosition, mark);
+            mark = board.switchMark(mark);
+        }
     }
 }

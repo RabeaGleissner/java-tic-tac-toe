@@ -1,13 +1,10 @@
 package de.rabea.game;
 
-import de.rabea.ui.FakeConsole;
-import de.rabea.ui.UserInterface;
+import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class GameTest {
     FakeUserInterface fakeUserInterface;
@@ -25,37 +22,10 @@ public class GameTest {
 
     @Test
     public void greetUserOnGameStart() {
+        fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2");
         game.play();
         assertTrue(fakeUserInterface.wasGreetUserCalled());
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
-    }
-
-    public static class FakeUserInterface extends UserInterface {
-
-        public boolean greetUserWasCalled = false;
-        public boolean askForPositionWasCalled = false;
-
-        public FakeUserInterface() {
-            super(new FakeConsole());
-        }
-
-        @Override
-        public void greet() {
-            greetUserWasCalled = true;
-        }
-
-        @Override
-        public void askForPosition() {
-            askForPositionWasCalled = true;
-        }
-
-        public boolean wasGreetUserCalled() {
-            return greetUserWasCalled;
-        }
-
-        public boolean wasAskForPositionCalled() {
-            return askForPositionWasCalled;
-        }
     }
 
 }
