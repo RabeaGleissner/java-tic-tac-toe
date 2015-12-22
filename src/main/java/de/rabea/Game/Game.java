@@ -5,23 +5,25 @@ import de.rabea.ui.UserInterface;
 public class Game {
 
     private final UserInterface userInterface;
-    private final Board board;
-    private final Rules rules;
 
-    public Game(UserInterface userInterface, Board board, Rules rules) {
+    public Game(UserInterface userInterface) {
         this.userInterface = userInterface;
-        this.board = board;
-        this.rules = rules;
     }
 
     public void play() {
         userInterface.greet();
         Cell mark = Cell.X;
+        Board board = new Board();
+        Rules rules = new Rules(board);
         while (!rules.gameOver()){
             userInterface.displayBoard(board.returnCells());
             Integer usersChosenPosition = userInterface.returnUserChoiceForPosition(board.returnCells());
             board.placeMark(usersChosenPosition, mark);
             mark = board.switchMark(mark);
+        }
+        userInterface.announceWinner(mark, rules.winner());
+        if (userInterface.userWantsToPlayAgain()) {
+            play();
         }
     }
 }
