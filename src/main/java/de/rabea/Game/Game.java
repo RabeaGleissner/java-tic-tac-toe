@@ -21,8 +21,9 @@ public class Game {
             board.placeMark(usersChosenPosition, mark);
             mark = board.switchMark(mark);
         }
-        userInterface.announceWinner(mark, rules.winner());
-        if (userInterface.userWantsToPlayAgain()) {
+        userInterface.displayBoard(board.returnCells());
+        userInterface.announceGameEnd(board.switchMark(mark), rules.winner());
+        if (userInterface.askUserForReplay()) {
             play();
         }
     }
