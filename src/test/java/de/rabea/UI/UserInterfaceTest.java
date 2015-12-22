@@ -39,23 +39,9 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void printMessageToConsole() {
-        String prompt = "message to user";
-        fakeConsole.print(prompt);
-        assertEquals(prompt, fakeConsole.messagePrinted());
-    }
-
-    @Test
-    public void getUserInput() {
-        String input = "1";
-        fakeConsole.userInput(input);
-        assertEquals(input, fakeConsole.readUserInput());
-    }
-
-    @Test
     public void asksUserForPositionAndReturnFormattedPosition() {
         fakeConsole.userInput("2");
-        assertEquals(1, (int) userInterface.returnUserChoiceForPosition(board.returnCells()));
+        assertEquals(1, (int) userInterface.returnUsersChosenPosition(board.returnCells()));
     }
 
     @Test
