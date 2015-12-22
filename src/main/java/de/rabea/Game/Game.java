@@ -17,14 +17,28 @@ public class Game {
         Rules rules = new Rules(board);
         while (!rules.gameOver()){
             userInterface.displayBoard(board.returnCells());
-            Integer position = userInterface.returnPlayersChosenPosition(board.returnCells());
-            board.placeMark(position, mark);
+            board.placeMark(usersPosition(board), mark);
             mark = board.switchMark(mark);
         }
         userInterface.displayBoard(board.returnCells());
         userInterface.announceGameEnd(board.switchMark(mark), rules.hasWinner());
         if (userInterface.playAgain()) {
             play();
+        }
+    }
+
+    private Integer usersPosition(Board board) {
+        Integer position = userInterface.returnPlayersChosenPosition(board);
+        position --;
+        return getValidPosition(position, board);
+    }
+
+    private Integer getValidPosition(Integer position, Board board) {
+        if (board.isPositionAvailable(position)) {
+            return position;
+        } else {
+            userInterface.positionUnavailableWarning();
+            return usersPosition(board);
         }
     }
 }

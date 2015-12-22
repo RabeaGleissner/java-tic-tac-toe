@@ -27,7 +27,8 @@ public class Board {
     }
 
     public boolean isPositionAvailable(int position) {
-        return !(cells[position] == Cell.X || cells[position] == Cell.O);
+        return position >= 0 && position <= cells.length &&
+                !(cells[position] == Cell.X || cells[position] == Cell.O);
     }
 
     private int emptyCellsCount() {
