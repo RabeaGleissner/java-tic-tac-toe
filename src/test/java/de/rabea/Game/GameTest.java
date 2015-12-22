@@ -4,6 +4,7 @@ import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GameTest {
@@ -17,15 +18,24 @@ public class GameTest {
         fakeUserInterface = new FakeUserInterface();
         board = new Board();
         rules = new Rules(board);
-        game = new Game(fakeUserInterface, board, rules);
+        game = new Game(fakeUserInterface);
     }
 
     @Test
-    public void greetUserOnGameStart() {
-        fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2");
+    public void playsTheGameOnce() {
+        fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
         game.play();
         assertTrue(fakeUserInterface.wasGreetUserCalled());
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
+        assertEquals(1, fakeUserInterface.announceWinnerCalled());
     }
 
+    @Test
+    public void playsTheGameTwice() {
+        fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "y", "1", "2", "5", "9", "7", "3", "6", "4", "8", "n");
+        game.play();
+        assertTrue(fakeUserInterface.wasGreetUserCalled());
+        assertTrue(fakeUserInterface.wasAskForPositionCalled());
+        assertEquals(2, fakeUserInterface.announceWinnerCalled());
+    }
 }
