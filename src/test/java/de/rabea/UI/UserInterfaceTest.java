@@ -122,4 +122,11 @@ public class UserInterfaceTest {
         userInterface.announceWinner(Cell.X, false);
         assertEquals("Game over! It's a draw.", fakeConsole.messagePrinted());
     }
+
+    @Test
+    public void asksIfUserWantsToPlayAgain() {
+        fakeConsole.userInput("y");
+        assertEquals(true , userInterface.userWantsToPlayAgain());
+
+    }
 }
