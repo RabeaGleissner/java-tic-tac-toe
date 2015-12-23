@@ -76,7 +76,13 @@ public class UserInterface {
         console.print(unavailablePosition);
     }
     private boolean userReplayChoice(String userChoice) {
-        return userChoice.equals("y");
+        if (formatUserInputForReplayOption(userChoice) == Replay.YES) {
+            return true;
+        } else if (formatUserInputForReplayOption(userChoice) == Replay.NO) {
+            return false;
+        } else {
+            return playAgain();
+        }
     }
 
     public boolean isInteger(String userEntry) {
