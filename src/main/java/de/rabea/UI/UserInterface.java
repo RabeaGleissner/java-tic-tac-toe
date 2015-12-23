@@ -29,7 +29,6 @@ public class UserInterface {
             } else {
                 boardImage += cell.toString();
             }
-            
             boardImage += " ";
 
             if (i%3 == 0) {
@@ -39,6 +38,17 @@ public class UserInterface {
         console.print(boardImage);
     }
 
+    public void greet() {
+        console.print(greeting);
+    }
+
+    public void announceGameEnd(Cell lastPlayedMark, boolean winner) {
+        if (winner) {
+            console.print(winnerAnnouncement + lastPlayedMark.toString());
+        } else {
+            console.print(drawAnnouncement);
+        }
+    }
     public Integer returnPlayersChosenPosition(Board board) {
         askForPosition();
         return getUsersPosition(board);
@@ -60,21 +70,6 @@ public class UserInterface {
         return userReplayChoice(console.readUserInput());
     }
 
-    private void askForPosition() {
-        console.print(askUserForPosition);
-    }
-
-    public void askForReplay() {
-        console.print(wantToPlayAgain);
-    }
-
-    private void notANumberWarning() {
-        console.print(enterANumber);
-    }
-
-    public void positionUnavailableWarning() {
-        console.print(unavailablePosition);
-    }
     private boolean userReplayChoice(String userChoice) {
         if (formatUserInputForReplayOption(userChoice) == Replay.YES) {
             return true;
@@ -85,16 +80,7 @@ public class UserInterface {
         }
     }
 
-    public boolean isInteger(String userEntry) {
-        try {
-            Integer.parseInt(userEntry);
-            return true;
-        } catch( NumberFormatException e ){
-            return false;
-        }
-    }
-
-    public Replay formatUserInputForReplayOption(String userInput) {
+    private Replay formatUserInputForReplayOption(String userInput) {
         String formatted = userInput.trim().toLowerCase();
         if (formatted.equals("y")) {
             return Replay.YES;
@@ -105,20 +91,33 @@ public class UserInterface {
         }
     }
 
-    public void greet() {
-        console.print(greeting);
+    public void positionUnavailableWarning() {
+        console.print(unavailablePosition);
     }
 
-    public void announceGameEnd(Cell lastPlayedMark, boolean winner) {
-        if (winner) {
-            console.print(winnerAnnouncement + lastPlayedMark.toString());
-        } else {
-            console.print(drawAnnouncement);
+    private boolean isInteger(String userEntry) {
+        try {
+            Integer.parseInt(userEntry);
+            return true;
+        } catch( NumberFormatException e ){
+            return false;
         }
     }
 
     private Integer subtractOneToMatchArrayIndeces(Integer position) {
         position --;
         return position;
+    }
+
+    private void askForPosition() {
+        console.print(askUserForPosition);
+    }
+
+    private void askForReplay() {
+        console.print(wantToPlayAgain);
+    }
+
+    private void notANumberWarning() {
+        console.print(enterANumber);
     }
 }

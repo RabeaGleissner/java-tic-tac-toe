@@ -2,7 +2,6 @@ package de.rabea.ui;
 
 import de.rabea.game.Board;
 import de.rabea.game.Cell;
-import de.rabea.game.Replay;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,35 +53,22 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void asksIfUserWantsToPlayAgain() {
+    public void userWantsToPlayAgain() {
         fakeConsole.userInput("y");
-        assertEquals(true, userInterface.playAgain());
+        assertTrue(userInterface.playAgain());
     }
 
     @Test
-    public void askUserIfTheyWantToPlayAgain() {
-        userInterface.askForReplay();
+    public void userDoesNotWantToPlayAgain() {
+        fakeConsole.userInput("n");
+        assertFalse(userInterface.playAgain());
+    }
+
+    @Test
+    public void userGivesBadInputForReplayOptions() {
+        fakeConsole.userInput("xyz", "n");
+        userInterface.playAgain();
         assertEquals("Do you want to play again? y/n", fakeConsole.messagePrinted());
-    }
-
-    @Test
-    public void knowsIfUserInputIsANumber() {
-        assertTrue(userInterface.isInteger("938"));
-    }
-
-    @Test
-    public void knowsThatUserInputIsNotANumber() {
-        assertFalse(userInterface.isInteger("asdgsadg"));
-    }
-
-    @Test
-    public void formatValidUserInputForReplayOptionYes() {
-        assertEquals(Replay.YES, userInterface.formatUserInputForReplayOption("Y"));
-    }
-
-    @Test
-    public void formatValidUserInputForReplayOptionNo() {
-        assertEquals(Replay.NO, userInterface.formatUserInputForReplayOption("n"));
     }
 
     @Test
@@ -103,4 +89,9 @@ public class UserInterfaceTest {
         assertEquals("Game over! It's a draw.", fakeConsole.messagePrinted());
     }
 
+    @Test
+    public void communicatesThatPositionIsUnavailable() {
+        userInterface.positionUnavailableWarning();
+        assertEquals("Sorry, this position is not available!", fakeConsole.messagePrinted());
+    }
 }
