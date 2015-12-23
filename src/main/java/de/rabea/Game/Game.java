@@ -27,17 +27,8 @@ public class Game {
         }
     }
 
-    private Integer usersPosition(Board board) {
+    public Integer usersPosition(Board board) {
         Integer position = userInterface.returnPlayersChosenPosition(board);
-        return getValidPosition(position, board);
-    }
-
-    private Integer getValidPosition(Integer position, Board board) {
-        if (board.isPositionAvailable(position)) {
-            return position;
-        } else {
-            userInterface.positionUnavailableWarning();
-            return usersPosition(board);
-        }
+        return board.getValidPosition(position, userInterface, this);
     }
 }
