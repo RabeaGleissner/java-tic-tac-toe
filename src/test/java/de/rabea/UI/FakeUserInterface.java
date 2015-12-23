@@ -28,6 +28,7 @@ public class FakeUserInterface extends UserInterface {
         askForPositionWasCalled = true;
         UserInterface userInterface = new UserInterface(new FakeConsole());
         int position = Integer.parseInt(moves.remove(0));
+        position --;
         return position;
     }
 

@@ -50,9 +50,9 @@ public class UserInterface {
             notANumberWarning();
             return returnPlayersChosenPosition(board);
         } else {
-            return Integer.parseInt(userInput);
+            Integer position = Integer.parseInt(userInput);
+            return subtractOneToMatchArrayIndeces(position);
         }
-
     }
 
     public boolean playAgain() {
@@ -109,6 +109,10 @@ public class UserInterface {
         } else {
             console.print(drawAnnouncement);
         }
+    }
 
+    private Integer subtractOneToMatchArrayIndeces(Integer position) {
+        position --;
+        return position;
     }
 }

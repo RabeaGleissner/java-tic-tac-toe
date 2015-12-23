@@ -29,7 +29,6 @@ public class Game {
 
     private Integer usersPosition(Board board) {
         Integer position = userInterface.returnPlayersChosenPosition(board);
-        position --;
         return getValidPosition(position, board);
     }
 
