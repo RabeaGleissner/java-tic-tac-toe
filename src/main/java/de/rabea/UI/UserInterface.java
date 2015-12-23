@@ -19,24 +19,24 @@ public class UserInterface {
     private String enterANumber = "Please enter a number between 1 and 9.";
 
     public void displayBoard(Cell[] cells) {
-        String boardPrinter = "";
+        String boardImage= "";
         int i = 0;
         for (Enum cell : cells) {
             i ++;
 
             if (cell == Cell.EMPTY) {
-                boardPrinter += i;
+                boardImage += i;
             } else {
-                boardPrinter += cell.toString();
+                boardImage += cell.toString();
             }
             
-            boardPrinter += " ";
+            boardImage += " ";
 
             if (i%3 == 0) {
-                boardPrinter += "\n";
+                boardImage += "\n";
             }
         }
-        console.print(boardPrinter);
+        console.print(boardImage);
     }
 
     public Integer returnPlayersChosenPosition(Board board) {
