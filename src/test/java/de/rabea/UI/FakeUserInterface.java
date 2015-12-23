@@ -12,7 +12,7 @@ public class FakeUserInterface extends UserInterface {
     public boolean greetUserWasCalled = false;
     public boolean askForPositionWasCalled = false;
     private List<String> moves = new LinkedList<String>();
-    private int countAnnounceWinnerCalls = 0;
+    private int countAnnounceGameEndCalls = 0;
 
     public FakeUserInterface() {
         super(new FakeConsole());
@@ -26,7 +26,6 @@ public class FakeUserInterface extends UserInterface {
     @Override
     public Integer returnPlayersChosenPosition(Board board) {
         askForPositionWasCalled = true;
-        UserInterface userInterface = new UserInterface(new FakeConsole());
         int position = Integer.parseInt(moves.remove(0));
         position --;
         return position;
@@ -34,7 +33,7 @@ public class FakeUserInterface extends UserInterface {
 
     @Override
     public void announceGameEnd(Cell lastPlayedMark, boolean winner) {
-        countAnnounceWinnerCalls ++;
+        countAnnounceGameEndCalls++;
     }
 
     @Override
@@ -55,6 +54,6 @@ public class FakeUserInterface extends UserInterface {
     }
 
     public int announceWinnerCalled() {
-        return countAnnounceWinnerCalls;
+        return countAnnounceGameEndCalls;
     }
 }
