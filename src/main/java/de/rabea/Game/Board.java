@@ -38,7 +38,7 @@ public class Board {
     }
 
     public boolean isPositionAvailable(int position) {
-        return position >= 0 && position <= cells.length &&
+        return position >= 0 && position < cells.length &&
                 !(cells[position] == Cell.X || cells[position] == Cell.O);
     }
 

@@ -1,4 +1,5 @@
 package de.rabea.game;
+import de.rabea.ui.FakeConsole;
 import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 
 public class BoardTest {
@@ -80,6 +82,11 @@ public class BoardTest {
         fakeUserInterface.provideConsoleInput("3");
         board.ensurePositionIsValid(1, fakeUserInterface, new Game(fakeUserInterface));
         assertTrue(fakeUserInterface.askForPositionWasCalled);
+    }
+
+    @Test
+    public void checkIf9IsAnAvailablePosition() {
+        assertFalse(board.isPositionAvailable(9));
     }
 
     private void fillUpBoard() {
