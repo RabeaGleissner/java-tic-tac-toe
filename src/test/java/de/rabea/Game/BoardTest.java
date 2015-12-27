@@ -1,15 +1,11 @@
 package de.rabea.game;
-import de.rabea.ui.FakeConsole;
 import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
 import static de.rabea.game.Cell.*;
 import static junit.framework.TestCase.assertTrue;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 
 public class BoardTest {
@@ -34,18 +30,18 @@ public class BoardTest {
         Cell[] cells = {EMPTY, X, EMPTY,
                         EMPTY, EMPTY, EMPTY,
                         EMPTY, EMPTY, EMPTY};
-        assertThat(board.placeMark(1, X)).isEqualTo(cells);
+        assertArrayEquals(cells, board.placeMark(1, X));
     }
 
     @Test
     public void boardIsEmpty() {
-        assertThat(board.isFull()).isFalse();
+        assertFalse(board.isFull());
     }
 
     @Test
     public void boardIsFull() {
         fillUpBoard();
-        assertThat(board.isFull()).isTrue();
+        assertTrue(board.isFull());
     }
 
     @Test
