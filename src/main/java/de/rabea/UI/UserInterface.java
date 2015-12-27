@@ -17,6 +17,7 @@ public class UserInterface {
     private String drawAnnouncement = "Game over! It's a draw.";
     private String unavailablePosition = "Sorry, this position is not available!";
     private String enterANumber = "Please enter a number between 1 and 9.";
+    private InputFormatter inputFormatter = new InputFormatter();
 
     public void displayBoard(Cell[] cells) {
         String boardImage= "";
@@ -56,12 +57,12 @@ public class UserInterface {
 
     private Integer getUsersPosition(Board board) {
         String userInput = console.readUserInput();
-        if (!(isInteger(userInput)) ) {
+        if (!(inputFormatter.isInteger(userInput)) ) {
             notANumberWarning();
             return returnPlayersChosenPosition(board);
         } else {
             Integer position = Integer.parseInt(userInput);
-            return subtractOneToMatchArrayIndex(position);
+            return inputFormatter.subtractOneToMatchArrayIndex(position);
         }
     }
 
@@ -71,42 +72,17 @@ public class UserInterface {
     }
 
     private boolean userReplayChoice(String userChoice) {
-        if (formatUserInputForReplayOption(userChoice) == Replay.YES) {
+        if (inputFormatter.formatForReplayOption(userChoice) == Replay.YES) {
             return true;
-        } else if (formatUserInputForReplayOption(userChoice) == Replay.NO) {
+        } else if (inputFormatter.formatForReplayOption(userChoice) == Replay.NO) {
             return false;
         } else {
             return playAgain();
         }
     }
 
-    private Replay formatUserInputForReplayOption(String userInput) {
-        String formatted = userInput.trim().toLowerCase();
-        if (formatted.equals("y")) {
-            return Replay.YES;
-        } else if (formatted.equals("n")) {
-            return Replay.NO;
-        } else {
-            return null;
-        }
-    }
-
     public void positionUnavailableWarning() {
         console.print(unavailablePosition);
-    }
-
-    private boolean isInteger(String userEntry) {
-        try {
-            Integer.parseInt(userEntry);
-            return true;
-        } catch( NumberFormatException e ){
-            return false;
-        }
-    }
-
-    private Integer subtractOneToMatchArrayIndex(Integer position) {
-        position --;
-        return position;
     }
 
     private void askForPosition() {
