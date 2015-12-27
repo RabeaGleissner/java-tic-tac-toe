@@ -9,10 +9,10 @@ public class Board {
     private Cell[] cells;
 
     public Board() {
-        Cell emptySlot = EMPTY;
-        this.cells = new Cell[] {emptySlot, emptySlot, emptySlot,
-                emptySlot, emptySlot, emptySlot,
-                emptySlot, emptySlot, emptySlot};
+        Cell empty = EMPTY;
+        this.cells = new Cell[] {empty, empty, empty,
+                                 empty, empty, empty,
+                                 empty, empty, empty};
     }
 
     public Cell[] returnCells() {
@@ -24,7 +24,7 @@ public class Board {
         return cells;
     }
 
-    public Integer getValidPosition(Integer position, UserInterface userInterface, Game game) {
+    public Integer ensurePositionIsValid(Integer position, UserInterface userInterface, Game game) {
         if (isPositionAvailable(position)) {
             return position;
         } else {

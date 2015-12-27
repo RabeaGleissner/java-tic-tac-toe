@@ -70,7 +70,7 @@ public class BoardTest {
     @Test
     public void returnsThePositionIfItIsValid() {
         FakeUserInterface fakeUserInterface = new FakeUserInterface();
-        assertEquals((Integer) 1, board.getValidPosition(1, fakeUserInterface, new Game(fakeUserInterface)));
+        assertEquals((Integer) 1, board.ensurePositionIsValid(1, fakeUserInterface, new Game(fakeUserInterface)));
     }
 
     @Test
@@ -78,7 +78,7 @@ public class BoardTest {
         board.placeMark(1,X);
         FakeUserInterface fakeUserInterface = new FakeUserInterface();
         fakeUserInterface.provideConsoleInput("3");
-        board.getValidPosition(1, fakeUserInterface, new Game(fakeUserInterface));
+        board.ensurePositionIsValid(1, fakeUserInterface, new Game(fakeUserInterface));
         assertTrue(fakeUserInterface.askForPositionWasCalled);
     }
 

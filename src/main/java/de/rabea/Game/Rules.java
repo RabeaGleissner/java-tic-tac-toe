@@ -15,10 +15,10 @@ public class Rules {
 
     public boolean hasWinner() {
         Cell[] gameState = gameState();
-        for (int[] combos : WINNING_COMBINATIONS) {
-            if (gameState[combos[0]] == gameState[combos[1]] &&
-                    gameState[combos[1]] == gameState[combos[2]] &&
-                    gameState[combos[2]] != Cell.EMPTY) {
+        for (int[] combo : WINNING_COMBINATIONS) {
+            if (gameState[combo[0]] == gameState[combo[1]] &&
+                    gameState[combo[1]] == gameState[combo[2]] &&
+                    gameState[combo[2]] != Cell.EMPTY) {
                 return true;
             }
         }

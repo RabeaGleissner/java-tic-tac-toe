@@ -61,7 +61,7 @@ public class UserInterface {
             return returnPlayersChosenPosition(board);
         } else {
             Integer position = Integer.parseInt(userInput);
-            return subtractOneToMatchArrayIndeces(position);
+            return subtractOneToMatchArrayIndex(position);
         }
     }
 
@@ -104,7 +104,7 @@ public class UserInterface {
         }
     }
 
-    private Integer subtractOneToMatchArrayIndeces(Integer position) {
+    private Integer subtractOneToMatchArrayIndex(Integer position) {
         position --;
         return position;
     }
