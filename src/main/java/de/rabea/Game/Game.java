@@ -16,12 +16,10 @@ public class Game {
         Board board = new Board();
         Rules rules = new Rules(board);
         while (!rules.gameOver()){
-            userInterface.displayBoard(board.cells());
-            board.placeMark(usersPosition(board), mark);
+            playOneRound(mark, board);
             mark = board.switchMark(mark);
         }
-        userInterface.displayBoard(board.cells());
-        userInterface.announceGameEnd(board.switchMark(mark), rules.hasWinner());
+        finishGame(mark, board, rules);
         if (userInterface.playAgain()) {
             play();
         }
@@ -30,5 +28,15 @@ public class Game {
     public Integer usersPosition(Board board) {
         Integer position = userInterface.returnPlayersChosenPosition(board);
         return board.ensurePositionIsValid(position, userInterface, this);
+    }
+
+    private void playOneRound(Cell mark, Board board) {
+        userInterface.displayBoard(board.cells());
+        board.placeMark(usersPosition(board), mark);
+    }
+
+    private void finishGame(Cell mark, Board board, Rules rules) {
+        userInterface.displayBoard(board.cells());
+        userInterface.announceGameEnd(board.switchMark(mark), rules.hasWinner());
     }
 }
