@@ -22,7 +22,7 @@ public class BoardTest {
         Cell[] emptyBoard = {EMPTY, EMPTY, EMPTY,
                              EMPTY, EMPTY, EMPTY,
                              EMPTY, EMPTY, EMPTY};
-        assertArrayEquals(emptyBoard, board.returnCells());
+        assertArrayEquals(emptyBoard, board.cells());
     }
 
     @Test

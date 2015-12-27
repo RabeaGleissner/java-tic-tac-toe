@@ -42,6 +42,6 @@ public class Rules {
     }
 
     private Cell[] gameState() {
-        return board.returnCells();
+        return board.cells();
     }
 }

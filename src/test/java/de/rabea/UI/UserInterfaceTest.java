@@ -26,7 +26,7 @@ public class UserInterfaceTest {
     @Test
     public void displaysEmptyBoard() {
         Board board = new Board();
-        userInterface.displayBoard(board.returnCells());
+        userInterface.displayBoard(board.cells());
         assertThat(fakeConsole.messagePrinted()).isEqualTo("1 2 3 \n4 5 6 \n7 8 9 \n");
     }
 
@@ -35,7 +35,7 @@ public class UserInterfaceTest {
         Board board = new Board();
         board.placeMark(1, Cell.X);
         board.placeMark(3, Cell.O);
-        userInterface.displayBoard(board.returnCells());
+        userInterface.displayBoard(board.cells());
         assertThat(fakeConsole.messagePrinted()).isEqualTo("1 X 3 \nO 5 6 \n7 8 9 \n");
     }
 

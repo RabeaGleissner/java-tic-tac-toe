@@ -16,11 +16,11 @@ public class Game {
         Board board = new Board();
         Rules rules = new Rules(board);
         while (!rules.gameOver()){
-            userInterface.displayBoard(board.returnCells());
+            userInterface.displayBoard(board.cells());
             board.placeMark(usersPosition(board), mark);
             mark = board.switchMark(mark);
         }
-        userInterface.displayBoard(board.returnCells());
+        userInterface.displayBoard(board.cells());
         userInterface.announceGameEnd(board.switchMark(mark), rules.hasWinner());
         if (userInterface.playAgain()) {
             play();

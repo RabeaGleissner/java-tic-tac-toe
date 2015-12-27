@@ -18,7 +18,7 @@ public class Board {
        this.cells = cells;
     }
 
-    public Cell[] returnCells() {
+    public Cell[] cells() {
         return cells;
     }
 
