@@ -50,63 +50,36 @@ public class RulesTest {
     }
 
     public class DiagonalWinningBoard extends Board {
-        private Cell[] cells;
         public DiagonalWinningBoard() {
-            this.cells = new Cell[]{X, X, O,
+            super(new Cell[]{X, X, O,
                                 EMPTY, X, EMPTY,
-                                EMPTY, O, X};
-        }
-        @Override
-        public Cell[] returnCells() {
-            return cells;
+                                EMPTY, O, X});
         }
     }
 
     public class HorizontalWinningBoard extends Board {
-        private Cell[] cells;
         public HorizontalWinningBoard() {
-            this.cells = new Cell[]{X, X, X,
-                                EMPTY, EMPTY, EMPTY,
-                                    EMPTY, O, O};
-        }
-        @Override
-        public Cell[] returnCells() {
-            return cells;
+            super(new Cell[]{X, X, X,
+                            EMPTY, EMPTY, EMPTY,
+                            EMPTY, O, O});
         }
     }
 
     public class FullBoardNoWinner extends Board {
-        private Cell[] cells;
 
         public FullBoardNoWinner() {
-            this.cells = new Cell[]{X, X, O,
-                                    O, O, X,
-                                    X, O, X};
+            super(new Cell[]{X, X, O,
+                             O, O, X,
+                             X, O, X});
         }
-        @Override
-        public Cell[] returnCells() {
-            return cells;
-        }
-        @Override
-        public boolean isFull() {
-            return true;
-        }
-
     }
 
     public class VerticalWinningBoard extends Board {
-        private Cell[] cells;
 
         public VerticalWinningBoard() {
-            this.cells = new Cell[]{X, X, O,
-                                    X, O, O,
-                                    X, O, X};
+            super(new Cell[]{X, X, O,
+                             X, O, O,
+                             X, O, X});
         }
-
-        @Override
-        public Cell[] returnCells() {
-            return cells;
-        }
-
     }
 }
