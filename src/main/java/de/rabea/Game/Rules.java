@@ -16,13 +16,29 @@ public class Rules {
     public boolean hasWinner() {
         Cell[] gameState = gameState();
         for (int[] combo : WINNING_COMBINATIONS) {
-            if (gameState[combo[0]] == gameState[combo[1]] &&
-                    gameState[combo[1]] == gameState[combo[2]] &&
-                    gameState[combo[2]] != Cell.EMPTY) {
+            if (anyLineMatchesAWinningCombination(gameState, combo)) {
                 return true;
             }
         }
         return false;
+    }
+
+    private boolean anyLineMatchesAWinningCombination(Cell[] gameState, int[] combo) {
+        return positionIsNotEmpty(gameState, combo) &&
+                sameMarkInFirstAndSecondPosition(gameState, combo) &&
+                sameMarkInSecondAndThirdPosition(gameState, combo);
+    }
+
+    private boolean positionIsNotEmpty(Cell[] gameState, int[] combo) {
+        return gameState[combo[0]]!= Cell.EMPTY;
+    }
+
+    private boolean sameMarkInFirstAndSecondPosition(Cell[] gameState, int[] combo) {
+        return gameState[combo[0]] == gameState[combo[1]];
+    }
+
+    private boolean sameMarkInSecondAndThirdPosition(Cell[] gameState, int[] combo) {
+        return gameState[combo[1]] == gameState[combo[2]];
     }
 
     private Cell[] gameState() {
