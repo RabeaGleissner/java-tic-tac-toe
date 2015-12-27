@@ -9,10 +9,13 @@ public class Board {
     private Cell[] cells;
 
     public Board() {
-        Cell empty = EMPTY;
-        this.cells = new Cell[] {empty, empty, empty,
-                                 empty, empty, empty,
-                                 empty, empty, empty};
+       this(new Cell[] {EMPTY, EMPTY, EMPTY,
+                EMPTY, EMPTY, EMPTY,
+                EMPTY, EMPTY, EMPTY});
+    }
+
+    public Board(Cell[] cells) {
+       this.cells = cells;
     }
 
     public Cell[] returnCells() {
