@@ -45,9 +45,9 @@ public class UserInterfaceTest {
         userInterface.displayBoard(board.cells());
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
                 "\n" +
-                "| 1 | X | 3 | \n" +
+                "| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
                 " -----------\n" +
-                "| O | 5 | 6 | \n" +
+                "| \u001B[31mO\u001B[0m | 5 | 6 | \n" +
                 " -----------\n" +
                 "| 7 | 8 | 9 |\n"
         );

@@ -7,6 +7,7 @@ import de.rabea.game.Replay;
 
 public class UserInterface {
     private final Console console;
+
     public UserInterface(Console console) {
         this.console = console;
     }
@@ -18,6 +19,9 @@ public class UserInterface {
     private String unavailablePosition = "Sorry, this position is not available!";
     private String enterANumber = "Please enter a number between 1 and 9.";
     private InputFormatter inputFormatter = new InputFormatter();
+    private String blueColourForX = "\u001B[34m";
+    private String redColourForO = "\u001B[31m";
+    private String colourReset = "\u001B[0m";
 
     public void displayBoard(Cell[] cells) {
         String boardImage= "";
@@ -28,8 +32,10 @@ public class UserInterface {
 
             if (cell == Cell.EMPTY) {
                 boardImage += "| " + i;
+            } else if (cell == Cell.X) {
+                boardImage += "| " + blueColourForX + cell.toString() + colourReset;
             } else {
-                boardImage += "| " + cell.toString();
+                boardImage += "| " + redColourForO + cell.toString() + colourReset;
             }
             boardImage += " ";
 
