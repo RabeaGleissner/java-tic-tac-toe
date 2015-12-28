@@ -22,18 +22,23 @@ public class UserInterface {
     public void displayBoard(Cell[] cells) {
         String boardImage= "";
         int i = 0;
+        boardImage += "\n";
         for (Enum cell : cells) {
             i ++;
 
             if (cell == Cell.EMPTY) {
-                boardImage += i;
+                boardImage += "| " + i;
             } else {
-                boardImage += cell.toString();
+                boardImage += "| " + cell.toString();
             }
             boardImage += " ";
 
-            if (i%3 == 0) {
-                boardImage += "\n";
+            if (i == 3 || i == 6) {
+                boardImage += "| \n -----------\n";
+
+            }
+            if (i == 9) {
+                boardImage += "|\n";
             }
         }
         console.print(boardImage);
