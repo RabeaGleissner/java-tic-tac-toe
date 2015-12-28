@@ -1,8 +1,6 @@
 package de.rabea.game;
 
-import de.rabea.ui.UserInterface;
-
-import static de.rabea.game.Cell.*;
+import static de.rabea.game.Cell.EMPTY;
 
 public class Board {
 
@@ -25,15 +23,6 @@ public class Board {
     public Cell[] placeMark(int position, Cell mark) {
         cells[position] = mark;
         return cells;
-    }
-
-    public Integer ensurePositionIsValid(Integer position, UserInterface userInterface, Game game) {
-        if (isPositionAvailable(position)) {
-            return position;
-        } else {
-            userInterface.positionUnavailableWarning();
-            return game.usersPosition(this);
-        }
     }
 
     public boolean isFull() {

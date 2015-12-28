@@ -11,6 +11,7 @@ public class FakeUserInterface extends UserInterface {
 
     public boolean greetUserWasCalled = false;
     public boolean askForPositionWasCalled = false;
+    private boolean positionUnavailableWarningWasCalled = false;
     private List<String> moves = new LinkedList<String>();
     private int countAnnounceGameEndCalls = 0;
 
@@ -24,7 +25,7 @@ public class FakeUserInterface extends UserInterface {
     }
 
     @Override
-    public Integer returnPlayersChosenPosition(Board board) {
+    public Integer playersChosenPosition(Board board) {
         askForPositionWasCalled = true;
         int position = Integer.parseInt(moves.remove(0));
         position --;
@@ -41,6 +42,10 @@ public class FakeUserInterface extends UserInterface {
         return moves.remove(0).equals("y");
     }
 
+    @Override
+    public void positionUnavailableWarning() {
+        positionUnavailableWarningWasCalled = true;
+    }
     public void provideConsoleInput(String... userChoices) {
         moves.addAll(Arrays.asList(userChoices));
     }
@@ -55,5 +60,9 @@ public class FakeUserInterface extends UserInterface {
 
     public int announceWinnerCalled() {
         return countAnnounceGameEndCalls;
+    }
+
+    public boolean wasPositionUnavailableWarningCalled() {
+        return positionUnavailableWarningWasCalled;
     }
 }

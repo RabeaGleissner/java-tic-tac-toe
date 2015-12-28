@@ -26,8 +26,8 @@ public class Game {
     }
 
     public Integer usersPosition(Board board) {
-        Integer position = userInterface.returnPlayersChosenPosition(board);
-        return board.ensurePositionIsValid(position, userInterface, this);
+        Integer position = userInterface.playersChosenPosition(board);
+        return validPosition(position, board);
     }
 
     private void playOneRound(Cell mark, Board board) {
@@ -38,5 +38,18 @@ public class Game {
     private void finishGame(Cell mark, Board board, Rules rules) {
         userInterface.displayBoard(board.cells());
         userInterface.announceGameEnd(board.switchMark(mark), rules.hasWinner());
+    }
+
+    private Integer validPosition(Integer position, Board board) {
+        if (board.isPositionAvailable(position)) {
+            return position;
+        } else {
+            return askUserAgainForPosition(board);
+        }
+    }
+
+    private Integer askUserAgainForPosition(Board board) {
+        userInterface.positionUnavailableWarning();
+        return usersPosition(board);
     }
 }

@@ -1,5 +1,4 @@
 package de.rabea.game;
-import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -63,21 +62,6 @@ public class BoardTest {
     @Test
     public void switchesMarkOToX() {
         assertEquals(Cell.X, board.switchMark(Cell.O));
-    }
-
-    @Test
-    public void returnsThePositionIfItIsValid() {
-        FakeUserInterface fakeUserInterface = new FakeUserInterface();
-        assertEquals((Integer) 1, board.ensurePositionIsValid(1, fakeUserInterface, new Game(fakeUserInterface)));
-    }
-
-    @Test
-    public void asksUserAgainForPositionIfInvalid() {
-        board.placeMark(1,X);
-        FakeUserInterface fakeUserInterface = new FakeUserInterface();
-        fakeUserInterface.provideConsoleInput("3");
-        board.ensurePositionIsValid(1, fakeUserInterface, new Game(fakeUserInterface));
-        assertTrue(fakeUserInterface.askForPositionWasCalled);
     }
 
     @Test
