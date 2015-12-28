@@ -50,7 +50,7 @@ public class UserInterface {
             console.print(drawAnnouncement);
         }
     }
-    public Integer returnPlayersChosenPosition(Board board) {
+    public Integer playersChosenPosition(Board board) {
         askForPosition();
         return getUsersPosition(board);
     }
@@ -59,7 +59,7 @@ public class UserInterface {
         String userInput = console.readUserInput();
         if (!(inputFormatter.isInteger(userInput)) ) {
             notANumberWarning();
-            return returnPlayersChosenPosition(board);
+            return playersChosenPosition(board);
         } else {
             Integer position = Integer.parseInt(userInput);
             return inputFormatter.subtractOneToMatchArrayIndex(position);
