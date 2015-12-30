@@ -6,7 +6,7 @@ import de.rabea.ui.UserInterface;
 
 public class App {
     public static void main( String[] args ) {
-        Game game = new Game(new UserInterface(new RealConsole()));
+        Game game = new Game(new UserInterface(new RealConsole(System.in, System.out)));
         game.play();
     }
 }
