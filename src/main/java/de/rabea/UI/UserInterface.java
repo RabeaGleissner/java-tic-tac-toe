@@ -19,35 +19,11 @@ public class UserInterface {
     private String unavailablePosition = "Sorry, this position is not available!";
     private String enterANumber = "Please enter a number between 1 and 9.";
     private InputFormatter inputFormatter = new InputFormatter();
-    private String blueColourForX = "\u001B[34m";
-    private String redColourForO = "\u001B[31m";
-    private String colourReset = "\u001B[0m";
+
 
     public void displayBoard(Cell[] cells) {
-        String boardImage= "";
-        int i = 0;
-        boardImage += "\n";
-        for (Enum cell : cells) {
-            i ++;
-
-            if (cell == Cell.EMPTY) {
-                boardImage += "| " + i;
-            } else if (cell == Cell.X) {
-                boardImage += "| " + blueColourForX + cell.toString() + colourReset;
-            } else {
-                boardImage += "| " + redColourForO + cell.toString() + colourReset;
-            }
-            boardImage += " ";
-
-            if (i == 3 || i == 6) {
-                boardImage += "| \n -----------\n";
-
-            }
-            if (i == 9) {
-                boardImage += "|\n";
-            }
-        }
-        console.print(boardImage);
+        BoardPainter boardPainter = new BoardPainter();
+        console.print(boardPainter.drawBoard(cells));
     }
 
     public void greet() {
