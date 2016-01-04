@@ -3,7 +3,6 @@ package de.rabea.ui;
 import de.rabea.game.Console;
 
 import java.io.*;
-import java.util.Scanner;
 
 public class RealConsole implements Console {
     BufferedReader userInput;
