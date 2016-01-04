@@ -30,8 +30,20 @@ public class UserInterface {
         console.print(greeting);
     }
 
-    public void chooseGameMode() {
+    public GameMode chooseGameMode() {
         console.print(gameOptions);
+        return gameMode();
+    }
+
+    public GameMode gameMode() {
+        String userChoice = console.readUserInput();
+        if (userChoice.equals("1")) {
+            return GameMode.HvC;
+        } else if (userChoice.equals("2")){
+            return GameMode.HvH;
+        } else {
+            return chooseGameMode();
+        }
     }
 
     public void announceGameEnd(Cell lastPlayedMark, boolean winner) {
