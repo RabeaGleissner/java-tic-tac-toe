@@ -120,13 +120,13 @@ public class UserInterfaceTest {
 
     @Test
     public void tellsTheUserThatFirstPlayerIsXAndSecondIsO() {
-        userInterface.markDistributionForHvH();
+        userInterface.announceMarkDistribution(GameMode.HvH);
         assertEquals("The first user to play is X. The second player is O.", fakeConsole.messagePrinted());
     }
 
     @Test
     public void tellsTheUserThatHumanIsXAndComputerIsO() {
-        userInterface.markDistributionsHvC();
+        userInterface.announceMarkDistribution(GameMode.HvC);
         assertEquals("The human player is X. The computer player is O.", fakeConsole.messagePrinted());
     }
 

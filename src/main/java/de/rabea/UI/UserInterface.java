@@ -46,6 +46,14 @@ public class UserInterface {
         }
     }
 
+    public void announceMarkDistribution(GameMode gameMode) {
+        if (gameMode == GameMode.HvC) {
+            markDistributionForHvC();
+        } else {
+            markDistributionForHvH();
+        }
+    }
+
     public void announceGameEnd(Cell lastPlayedMark, boolean winner) {
         if (winner) {
             console.print(winnerAnnouncement + lastPlayedMark.toString());
@@ -100,19 +108,12 @@ public class UserInterface {
         console.print(enterANumber);
     }
 
-    public void markDistributionForHvH() {
+    private void markDistributionForHvH() {
         console.print(markDistributionHvH);
     }
 
-    public void markDistributionsHvC() {
+    private void markDistributionForHvC() {
         console.print(markDistributionHvC);
     }
 
-    public void announceMarkDistribution(GameMode gameMode) {
-        if (gameMode == GameMode.HvC) {
-            markDistributionsHvC();
-        } else {
-            markDistributionForHvH();
-        }
-    }
 }
