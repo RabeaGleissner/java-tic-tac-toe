@@ -1,7 +1,7 @@
 package de.rabea.game;
 
 public class RandomNumberCalc {
-    public int randomPosition(int numberOfCells) {
-        return (int) (Math.random() * numberOfCells);
+    public int randomNumber(int numberOfEmptyCells) {
+        return (int) Math.random() * numberOfEmptyCells;
     }
 }
