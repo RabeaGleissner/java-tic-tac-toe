@@ -5,9 +5,11 @@ import de.rabea.ui.UserInterface;
 public class Game {
 
     private final UserInterface userInterface;
+    private final ComputerPlayer computerPlayer;
 
-    public Game(UserInterface userInterface) {
+    public Game(UserInterface userInterface, ComputerPlayer computerPlayer) {
         this.userInterface = userInterface;
+        this.computerPlayer = computerPlayer;
     }
 
     public void play() {
@@ -23,7 +25,7 @@ public class Game {
             mark = board.switchMark(mark);
 
             if (humanVsComputerMode(gameMode) && gameIsNotOver(rules)) {
-                playOneComputerRound(board, mark, rules);
+                playOneComputerRound(board, mark);
                 mark = board.switchMark(mark);
             }
         }
@@ -40,9 +42,8 @@ public class Game {
         return validPosition(position, board);
     }
 
-    public void playOneComputerRound(Board board, Cell mark, Rules rules) {
-        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc(), board);
-        board.placeMark(computerPlayer.getPosition(), mark);
+    public void playOneComputerRound(Board board, Cell mark) {
+        board.placeMark(computerPlayer.getPosition(board), mark);
     }
 
 
