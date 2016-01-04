@@ -12,14 +12,24 @@ public class Game {
 
     public void play() {
         userInterface.greet();
+        GameMode gameMode = userInterface.chooseGameMode();
+
         Cell mark = Cell.X;
         Board board = new Board();
         Rules rules = new Rules(board);
-        while (!rules.gameOver()){
-            playOneRound(mark, board);
+
+        while (gameIsNotOver(rules)){
+            playOneHumanRound(mark, board);
             mark = board.switchMark(mark);
+
+            if (humanVsComputerMode(gameMode) && gameIsNotOver(rules)) {
+                playOneComputerRound(board, mark, rules);
+                mark = board.switchMark(mark);
+            }
         }
+
         finishGame(mark, board, rules);
+
         if (userInterface.playAgain()) {
             play();
         }
@@ -30,13 +40,13 @@ public class Game {
         return validPosition(position, board);
     }
 
-    public void computerPlay(Board board, Cell mark) {
+    public void playOneComputerRound(Board board, Cell mark, Rules rules) {
         ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc(), board);
         board.placeMark(computerPlayer.getPosition(), mark);
     }
 
 
-    private void playOneRound(Cell mark, Board board) {
+    private void playOneHumanRound(Cell mark, Board board) {
         userInterface.displayBoard(board.cells());
         board.placeMark(usersPosition(board), mark);
     }
@@ -57,5 +67,13 @@ public class Game {
     private Integer askUserAgainForPosition(Board board) {
         userInterface.positionUnavailableWarning();
         return usersPosition(board);
+    }
+
+    private boolean humanVsComputerMode(GameMode gameMode) {
+        return gameMode == GameMode.HvC;
+    }
+
+    private boolean gameIsNotOver(Rules rules) {
+       return !rules.gameOver();
     }
 }

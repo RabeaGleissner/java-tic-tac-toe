@@ -2,6 +2,7 @@ package de.rabea.ui;
 
 import de.rabea.game.Board;
 import de.rabea.game.Cell;
+import de.rabea.game.GameMode;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -46,6 +47,17 @@ public class FakeUserInterface extends UserInterface {
     public void positionUnavailableWarning() {
         positionUnavailableWarningWasCalled = true;
     }
+
+    @Override
+    public GameMode chooseGameMode() {
+        if (moves.remove(0).equals("1")) {
+            return GameMode.HvC;
+        } else {
+            return GameMode.HvH;
+        }
+
+    }
+
     public void provideConsoleInput(String... userChoices) {
         moves.addAll(Arrays.asList(userChoices));
     }

@@ -27,7 +27,7 @@ public class GameTest {
 
     @Test
     public void playsTheGameOnce() {
-        fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
+        fakeUserInterface.provideConsoleInput("2", "1", "7", "3", "4", "2", "n");
         game.play();
         assertTrue(fakeUserInterface.wasGreetUserCalled());
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
@@ -36,7 +36,7 @@ public class GameTest {
 
     @Test
     public void playsTheGameTwice() {
-        fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "y", "1", "2", "5", "9", "7", "3", "6", "4", "8", "n");
+        fakeUserInterface.provideConsoleInput("2", "1", "7", "3", "4", "2", "y", "1", "2", "5", "9", "7", "3", "6", "4", "8", "n");
         game.play();
         assertTrue(fakeUserInterface.wasGreetUserCalled());
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
@@ -62,7 +62,7 @@ public class GameTest {
         board.placeMark(5, X);
         board.placeMark(6, O);
         board.placeMark(7, X);
-        game.computerPlay(board, O);
+        game.playOneComputerRound(board, O, rules);
         assertFalse(fakeUserInterface.wasAskForPositionCalled());
         Cell cells[] = {X,X,O,X,O,X,O,X,O};
         assertArrayEquals(cells, board.cells());
