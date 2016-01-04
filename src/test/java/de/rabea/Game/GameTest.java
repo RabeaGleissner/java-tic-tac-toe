@@ -4,15 +4,17 @@ import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Cell.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static de.rabea.game.Cell.O;
+import static de.rabea.game.Cell.X;
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.*;
 
 public class GameTest {
     FakeUserInterface fakeUserInterface;
     Game game;
     Board board;
     Rules rules;
+    ComputerPlayer computerPlayer;
 
     @Before
     public void setup() {
@@ -20,6 +22,7 @@ public class GameTest {
         board = new Board();
         rules = new Rules(board);
         game = new Game(fakeUserInterface);
+        computerPlayer = new ComputerPlayer(new RandomNumberCalc(), board);
     }
 
     @Test
@@ -47,5 +50,21 @@ public class GameTest {
         game.usersPosition(board);
         assertTrue(fakeUserInterface.wasPositionUnavailableWarningCalled());
 
+    }
+
+    @Test
+    public void computerPlaysItsTurn() {
+        board.placeMark(0, X);
+        board.placeMark(1, X);
+        board.placeMark(2, O);
+        board.placeMark(3, X);
+        board.placeMark(4, O);
+        board.placeMark(5, X);
+        board.placeMark(6, O);
+        board.placeMark(7, X);
+        game.computerPlay(board, O);
+        assertFalse(fakeUserInterface.wasAskForPositionCalled());
+        Cell cells[] = {X,X,O,X,O,X,O,X,O};
+        assertArrayEquals(cells, board.cells());
     }
 }

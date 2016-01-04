@@ -30,6 +30,12 @@ public class Game {
         return validPosition(position, board);
     }
 
+    public void computerPlay(Board board, Cell mark) {
+        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc(), board);
+        board.placeMark(computerPlayer.getPosition(), mark);
+    }
+
+
     private void playOneRound(Cell mark, Board board) {
         userInterface.displayBoard(board.cells());
         board.placeMark(usersPosition(board), mark);
