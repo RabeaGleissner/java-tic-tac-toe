@@ -4,10 +4,9 @@ import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Cell.O;
 import static de.rabea.game.Cell.X;
-import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class GameTest {
     FakeUserInterface fakeUserInterface;
@@ -63,7 +62,7 @@ public class GameTest {
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, fakeComputerPlayer);
         fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "y", "1", "2", "5", "8", "n");
         fakeRandomNumberCalc.giveNumbers(1, 2, 2, 3 );
-//        TODO: figure out why this doesn't work'
+//        TODO: figure out why this doesn't work
 //        fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "y", "1", "3", "6", "2", "n");
 //        fakeRandomNumberCalc.giveNumbers(1, 2, 0, 3, 6);
         gameWithFakeComputerPlayer.play();
@@ -76,21 +75,5 @@ public class GameTest {
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
         game.usersPosition(board);
         assertTrue(fakeUserInterface.wasPositionUnavailableWarningCalled());
-    }
-
-    @Test
-    public void computerPlaysItsTurn() {
-        board.placeMark(0, X);
-        board.placeMark(1, X);
-        board.placeMark(2, O);
-        board.placeMark(3, X);
-        board.placeMark(4, O);
-        board.placeMark(5, X);
-        board.placeMark(6, O);
-        board.placeMark(7, X);
-        game.playOneComputerRound(board, O);
-        assertFalse(fakeUserInterface.wasAskForPositionCalled());
-        Cell cells[] = {X,X,O,X,O,X,O,X,O};
-        assertArrayEquals(cells, board.cells());
     }
 }

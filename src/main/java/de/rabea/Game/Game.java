@@ -43,7 +43,7 @@ public class Game {
         return validPosition(position, board);
     }
 
-    public void playOneComputerRound(Board board, Cell mark) {
+    private void playOneComputerRound(Board board, Cell mark) {
         board.placeMark(computerPlayer.getPosition(board), mark);
     }
 
