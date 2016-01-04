@@ -1,9 +1,6 @@
 package de.rabea.ui;
 
-import de.rabea.game.Board;
-import de.rabea.game.Cell;
-import de.rabea.game.Console;
-import de.rabea.game.Replay;
+import de.rabea.game.*;
 
 public class UserInterface {
     private final Console console;
@@ -13,7 +10,10 @@ public class UserInterface {
     }
     private String askUserForPosition = "Please select a position for your mark.";
     private String wantToPlayAgain = "Do you want to play again? y/n";
-    private String greeting = "Welcome to Tic Tac Toe. The first user to play is X. The second player is O.";
+    private String greeting = "Welcome to Tic Tac Toe.\n ";
+    private String gameOptions = "Please enter 1 if you want to play against the computer and 2 if you want to play against another human player.\n";
+    private String markDistributionHvH = "The first user to play is X. The second player is O.";
+    private String markDistributionHvC = "The human player is X. The computer player is O.";
     private String winnerAnnouncement = "Game over! The winner is: ";
     private String drawAnnouncement = "Game over! It's a draw.";
     private String unavailablePosition = "Sorry, this position is not available!";
@@ -28,6 +28,10 @@ public class UserInterface {
 
     public void greet() {
         console.print(greeting);
+    }
+
+    public void chooseGameMode() {
+        console.print(gameOptions);
     }
 
     public void announceGameEnd(Cell lastPlayedMark, boolean winner) {
@@ -82,5 +86,13 @@ public class UserInterface {
 
     private void notANumberWarning() {
         console.print(enterANumber);
+    }
+
+    public void markDistributionForHvH() {
+        console.print(markDistributionHvH);
+    }
+
+    public void markDistributionsHvC() {
+        console.print(markDistributionHvC);
     }
 }

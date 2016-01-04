@@ -88,7 +88,26 @@ public class UserInterfaceTest {
     @Test
     public void greetsUserAndExplainsGame() {
         userInterface.greet();
-        assertEquals("Welcome to Tic Tac Toe. The first user to play is X. The second player is O.", fakeConsole.messagePrinted());
+        assertEquals("Welcome to Tic Tac Toe.\n ", fakeConsole.messagePrinted());
+    }
+
+    @Test
+    public void asksWhichGameModeUserWantsToPlay() {
+        fakeConsole.userInput("1");
+        userInterface.chooseGameMode();
+        assertEquals("Please enter 1 if you want to play against the computer and 2 if you want to play against another human player.\n", fakeConsole.messagePrinted());
+    }
+
+    @Test
+    public void tellsTheUserThatFirstPlayerIsXAndSecondIsO() {
+        userInterface.markDistributionForHvH();
+        assertEquals("The first user to play is X. The second player is O.", fakeConsole.messagePrinted());
+    }
+
+    @Test
+    public void tellsTheUserThatHumanIsXAndComputerIsO() {
+        userInterface.markDistributionsHvC();
+        assertEquals("The human player is X. The computer player is O.", fakeConsole.messagePrinted());
     }
 
     @Test
