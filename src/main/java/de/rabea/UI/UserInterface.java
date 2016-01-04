@@ -107,4 +107,12 @@ public class UserInterface {
     public void markDistributionsHvC() {
         console.print(markDistributionHvC);
     }
+
+    public void announceMarkDistribution(GameMode gameMode) {
+        if (gameMode == GameMode.HvC) {
+            markDistributionsHvC();
+        } else {
+            markDistributionForHvH();
+        }
+    }
 }
