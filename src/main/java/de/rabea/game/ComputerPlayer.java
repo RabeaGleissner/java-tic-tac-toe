@@ -8,7 +8,7 @@ public class ComputerPlayer {
     }
 
     public int getPosition(Board board) {
-        int index = randomNumberCalc.randomNumber(board.cells().length);
+        int index = randomNumberCalc.randomNumber(board.emptyCells().size());
         return board.emptyCells().get(index);
     }
 }

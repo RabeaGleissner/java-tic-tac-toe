@@ -15,6 +15,7 @@ public class Game {
     public void play() {
         userInterface.greet();
         GameMode gameMode = userInterface.chooseGameMode();
+        userInterface.announceMarkDistribution(gameMode);
 
         Cell mark = Cell.X;
         Board board = new Board();
@@ -45,7 +46,6 @@ public class Game {
     public void playOneComputerRound(Board board, Cell mark) {
         board.placeMark(computerPlayer.getPosition(board), mark);
     }
-
 
     private void playOneHumanRound(Cell mark, Board board) {
         userInterface.displayBoard(board.cells());
