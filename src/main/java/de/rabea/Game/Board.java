@@ -1,5 +1,8 @@
 package de.rabea.game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static de.rabea.game.Cell.EMPTY;
 
 public class Board {
@@ -51,5 +54,17 @@ public class Board {
         } else {
             return Cell.X;
         }
+    }
+
+    public List<Integer> emptyCells() {
+        List<Integer> emptyCells = new ArrayList<Integer>();
+        int i = 0;
+        for (Cell cell : cells) {
+            if (cell == EMPTY) {
+               emptyCells.add(i);
+            }
+            i++;
+        }
+        return emptyCells;
     }
 }

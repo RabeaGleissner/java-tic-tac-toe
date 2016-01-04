@@ -2,6 +2,10 @@ package de.rabea.game;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static de.rabea.game.Cell.*;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
@@ -50,23 +54,33 @@ public class BoardTest {
 
     @Test
     public void isNotAValidUserChoice() {
-        board.placeMark(1, Cell.X);
+        board.placeMark(1, X);
         assertEquals(false, board.isPositionAvailable(1));
     }
 
     @Test
     public void switchesMarkXtoO() {
-        assertEquals(Cell.O, board.switchMark(Cell.X));
+        assertEquals(O, board.switchMark(X));
     }
 
     @Test
     public void switchesMarkOToX() {
-        assertEquals(Cell.X, board.switchMark(Cell.O));
+        assertEquals(X, board.switchMark(O));
     }
 
     @Test
     public void checkIf9IsAnAvailablePosition() {
         assertFalse(board.isPositionAvailable(9));
+    }
+
+    @Test
+    public void returnsAnArrayOfAllEmptyPosition() {
+        board.placeMark(1, X);
+        board.placeMark(2, O);
+        board.placeMark(3, X);
+        board.placeMark(6, O);
+        List<Integer> emptyCells = new ArrayList<Integer>(Arrays.asList(0,4,5,7,8));
+        assertEquals(emptyCells, board.emptyCells());
     }
 
     private void fillUpBoard() {
