@@ -10,14 +10,16 @@ public class ComputerPlayerTest {
 
     @Test
     public void returnsARandomPosition() {
-        ComputerPlayer computerPlayer = new ComputerPlayer(new FakeRandomNumberCalc(), new Board());
-        assertEquals(2, computerPlayer.getPosition());
+        FakeRandomNumberCalc fakeRandomNumberCalc = new FakeRandomNumberCalc();
+        ComputerPlayer computerPlayer = new ComputerPlayer(fakeRandomNumberCalc);
+        fakeRandomNumberCalc.giveNumbers(2);
+        assertEquals(2, computerPlayer.getPosition(new Board()));
     }
 
     @Test
     public void returnsTheOnlyAvailablePosition() {
         Board board = new Board();
-        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc(), board);
+        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc());
         board.placeMark(0, X);
         board.placeMark(1, X);
         board.placeMark(2, O);
@@ -26,13 +28,6 @@ public class ComputerPlayerTest {
         board.placeMark(5, X);
         board.placeMark(6, O);
         board.placeMark(7, X);
-        assertEquals(8, computerPlayer.getPosition());
-    }
-
-    private class FakeRandomNumberCalc extends RandomNumberCalc {
-        @Override
-        public int randomNumber(int number) {
-            return 2;
-        }
+        assertEquals(8, computerPlayer.getPosition(board));
     }
 }

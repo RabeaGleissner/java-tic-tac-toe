@@ -2,16 +2,13 @@ package de.rabea.game;
 
 public class ComputerPlayer {
     private final RandomNumberCalc randomNumberCalc;
-    private Board board;
 
-    public ComputerPlayer(RandomNumberCalc randomNumberCalc, Board board) {
+    public ComputerPlayer(RandomNumberCalc randomNumberCalc) {
         this.randomNumberCalc = randomNumberCalc;
-        this.board = board;
     }
 
-    public int getPosition() {
+    public int getPosition(Board board) {
         int index = randomNumberCalc.randomNumber(board.cells().length);
-        int position = board.emptyCells().get(index);
-        return position;
+        return board.emptyCells().get(index);
     }
 }
