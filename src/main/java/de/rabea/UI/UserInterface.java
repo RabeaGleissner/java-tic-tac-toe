@@ -35,7 +35,7 @@ public class UserInterface {
         return gameMode();
     }
 
-    public GameMode gameMode() {
+    private GameMode gameMode() {
         String userChoice = console.readUserInput();
         if (userChoice.equals("1")) {
             return GameMode.HvC;

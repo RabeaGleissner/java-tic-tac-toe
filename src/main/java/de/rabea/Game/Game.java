@@ -13,29 +13,29 @@ public class Game {
     }
 
     public void play() {
-        userInterface.greet();
-        GameMode gameMode = userInterface.chooseGameMode();
-        userInterface.announceMarkDistribution(gameMode);
-
+        GameMode game = gameSetup();
         Cell mark = Cell.X;
         Board board = new Board();
         Rules rules = new Rules(board);
-
         while (gameIsNotOver(rules)){
             playOneHumanRound(mark, board);
             mark = board.switchMark(mark);
-
-            if (humanVsComputerMode(gameMode) && gameIsNotOver(rules)) {
+            if (humanVsComputerMode(game) && gameIsNotOver(rules)) {
                 playOneComputerRound(board, mark);
                 mark = board.switchMark(mark);
             }
         }
-
         finishGame(mark, board, rules);
-
         if (userInterface.playAgain()) {
             play();
         }
+    }
+
+    private GameMode gameSetup() {
+        userInterface.greet();
+        GameMode gameMode = userInterface.chooseGameMode();
+        userInterface.announceMarkDistribution(gameMode);
+        return gameMode;
     }
 
     public Integer usersPosition(Board board) {

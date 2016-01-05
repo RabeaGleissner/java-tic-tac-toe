@@ -36,6 +36,7 @@ public class GameTest {
     }
 
     @Test
+    //TODO: this test fails sometimes - why?
     public void playsTheHumanGameTwice() {
         fakeUserInterface.provideConsoleInput("2", "1", "7", "3", "4", "2", "y", "1", "2", "5", "9", "7", "3", "6", "4", "8", "n");
         game.play();
