@@ -36,7 +36,6 @@ public class GameTest {
     }
 
     @Test
-    //TODO: this test fails sometimes - why?
     public void playsTheHumanGameTwice() {
         fakeUserInterface.provideConsoleInput("2", "1", "7", "3", "4", "2", "y", "1", "2", "5", "9", "7", "3", "6", "4", "8", "n");
         game.play();
@@ -47,25 +46,20 @@ public class GameTest {
 
     @Test
     public void playsTheHumanVsComputerGameOnce() {
-        FakeRandomNumberCalc fakeRandomNumberCalc = new FakeRandomNumberCalc();
-        ComputerPlayer fakeComputerPlayer = new ComputerPlayer(fakeRandomNumberCalc);
+        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalc);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, fakeComputerPlayer);
         fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "n");
-        fakeRandomNumberCalc.giveNumbers(1, 2);
+        fakeComputerPlayer.giveNumbers(1, 2);
         gameWithFakeComputerPlayer.play();
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
     }
 
     @Test
     public void playsTheHumanVsComputerGameTwice() {
-        FakeRandomNumberCalc fakeRandomNumberCalc = new FakeRandomNumberCalc();
-        ComputerPlayer fakeComputerPlayer = new ComputerPlayer(fakeRandomNumberCalc);
+        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalc);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, fakeComputerPlayer);
-        fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "y", "1", "2", "5", "8", "n");
-        fakeRandomNumberCalc.giveNumbers(1, 2, 2, 3 );
-//        TODO: figure out why this doesn't work
-//        fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "y", "1", "3", "6", "2", "n");
-//        fakeRandomNumberCalc.giveNumbers(1, 2, 0, 3, 6);
+        fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "y", "1", "3", "6", "2", "n");
+        fakeComputerPlayer.giveNumbers(1, 2, 0, 3, 6);
         gameWithFakeComputerPlayer.play();
         assertEquals(2, fakeUserInterface.announceWinnerCalled());
     }

@@ -4,22 +4,21 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FakeRandomNumberCalc extends RandomNumberCalc {
+public class FakeComputerPlayer extends ComputerPlayer {
 
     private List<Integer> listOfNumbers;
 
-    public FakeRandomNumberCalc() {
+    public FakeComputerPlayer(RandomNumberCalc randomNumberCalc) {
+        super(randomNumberCalc);
         listOfNumbers = new LinkedList<Integer>();
     }
 
     @Override
-    public int randomNumber(int unusedNumber) {
-        int number = listOfNumbers.remove(0);
-        return number;
+    public int getPosition(Board board) {
+        return listOfNumbers.remove(0);
     }
 
     public void giveNumbers(Integer ... num) {
         listOfNumbers.addAll(Arrays.asList(num));
     }
-
 }
