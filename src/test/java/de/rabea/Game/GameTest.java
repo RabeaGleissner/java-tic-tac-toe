@@ -37,7 +37,7 @@ public class GameTest {
 
     @Test
     public void playsTheHumanGameTwice() {
-        fakeUserInterface.provideConsoleInput("2", "1", "7", "3", "4", "2", "y", "1", "2", "5", "9", "7", "3", "6", "4", "8", "n");
+        fakeUserInterface.provideConsoleInput("2", "1", "7", "3", "4", "2", "y", "2", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
         game.play();
         assertTrue(fakeUserInterface.wasGreetUserCalled());
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
