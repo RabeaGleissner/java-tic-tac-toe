@@ -22,7 +22,7 @@ public class UserInterface {
 
 
     public void displayBoard(Cell[] cells) {
-        BoardPainter boardPainter = new BoardPainter();
+        BoardPainter boardPainter = new BoardPainter(new Board());
         console.print(boardPainter.drawBoard(cells));
     }
 

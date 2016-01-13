@@ -1,5 +1,6 @@
 package de.rabea.ui;
 
+import de.rabea.game.Board;
 import de.rabea.game.Cell;
 
 import static de.rabea.game.Cell.*;
@@ -8,6 +9,11 @@ public class BoardPainter {
     private String blueColourForX = "\u001B[34m";
     private String redColourForO = "\u001B[31m";
     private String colourReset = "\u001B[0m";
+    private Board board;
+
+    public BoardPainter(Board board) {
+        this.board = board;
+    }
 
     public String drawBoard(Cell[] cells) {
         int i = 0;
@@ -34,25 +40,17 @@ public class BoardPainter {
     }
 
     private String printHorizontalLines(int i, String boardImage) {
-        if (endOfFirstOrSecondRow(i)) {
+        if (board.isEndOfFirstOrSecondRow(i-1)) {
             boardImage += horizontalLine();
         }
         return boardImage;
     }
 
     private String printLastPipe(int i, String boardImage) {
-        if (endOfLastRow(i)) {
+        if (board.isLastCell(i-1)) {
             boardImage += lastPipe();
         }
         return boardImage;
-    }
-
-    private boolean endOfLastRow(int i) {
-        return i == 9;
-    }
-
-    private boolean endOfFirstOrSecondRow(int i) {
-        return i == 3 || i == 6;
     }
 
     private String colouredO(Enum cell) {
