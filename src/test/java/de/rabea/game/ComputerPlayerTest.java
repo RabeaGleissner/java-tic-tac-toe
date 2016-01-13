@@ -1,5 +1,6 @@
 package de.rabea.game;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static de.rabea.game.Cell.O;
@@ -7,6 +8,12 @@ import static de.rabea.game.Cell.X;
 import static org.junit.Assert.assertEquals;
 
 public class ComputerPlayerTest {
+    Board board;
+
+    @Before
+    public void setup() {
+        board = new Board();
+    }
 
     @Test
     public void returnsARandomPosition() {
@@ -18,7 +25,6 @@ public class ComputerPlayerTest {
 
     @Test
     public void returnsTheOnlyAvailablePosition() {
-        Board board = new Board();
         ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc());
         board.placeMark(0, X);
         board.placeMark(1, X);
@@ -29,5 +35,13 @@ public class ComputerPlayerTest {
         board.placeMark(6, O);
         board.placeMark(7, X);
         assertEquals(8, computerPlayer.getPosition(board));
+    }
+
+    @Test
+    public void thereIsOneLessEmptyPositionAfterTheComputerMadeItsRandomMove() {
+        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc());
+        int computerPosition = computerPlayer.getPosition(board);
+        board.placeMark(computerPosition, O);
+        assertEquals(8, board.emptyCells().size());
     }
 }
