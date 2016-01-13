@@ -82,4 +82,8 @@ public class Board {
         double squareRoot = Math.sqrt(length);
         return (int) squareRoot;
     }
+
+    public int indexOfLastCell() {
+        return cells().length - 1;
+    }
 }

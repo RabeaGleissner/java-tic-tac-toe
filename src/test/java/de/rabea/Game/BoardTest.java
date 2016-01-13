@@ -89,6 +89,14 @@ public class BoardTest {
         assertEquals(cells, board.indexOfLastCellPerRow());
     }
 
+    @Test
+    public void indexOfLastCellOfBoard() {
+        Cell[] cells = {EMPTY, X, EMPTY,
+                EMPTY, EMPTY, EMPTY,
+                EMPTY, EMPTY, EMPTY};
+        assertEquals(8, board.indexOfLastCell());
+    }
+
     private void fillUpBoard() {
         board.placeMark(0,X);
         board.placeMark(1,X);
