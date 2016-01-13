@@ -109,6 +109,69 @@ public class BoardTest {
         assertFalse(board.isEndOfFirstOrSecondRow(8));
     }
 
+    @Test
+    public void gameOverWithoutWinner() {
+        board = new FullBoardNoWinner();
+        assertTrue(board.gameOver());
+        assertFalse(board.hasWinner());
+    }
+
+    @Test
+    public void gameOverWithWinner() {
+        board = new HorizontalWinningBoard();
+        assertTrue(board.gameOver());
+    }
+
+    @Test
+    public void verticalWinningCombination() {
+        board = new VerticalWinningBoard();
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void horizontalWinningCombination() {
+        board = new HorizontalWinningBoard();
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void diagonalWinningBoard() {
+        board = new DiagonalWinningBoard();
+        assertTrue(board.hasWinner());
+    }
+
+    public class DiagonalWinningBoard extends Board {
+        public DiagonalWinningBoard() {
+            super(new Cell[]{X, X, O,
+                    EMPTY, X, EMPTY,
+                    EMPTY, O, X});
+        }
+    }
+
+    public class HorizontalWinningBoard extends Board {
+        public HorizontalWinningBoard() {
+            super(new Cell[]{X, X, X,
+                    EMPTY, EMPTY, EMPTY,
+                    EMPTY, O, O});
+        }
+    }
+
+    public class FullBoardNoWinner extends Board {
+        public FullBoardNoWinner() {
+            super(new Cell[]{X, X, O,
+                    O, O, X,
+                    X, O, X});
+        }
+    }
+
+    public class VerticalWinningBoard extends Board {
+        public VerticalWinningBoard() {
+            super(new Cell[]{X, X, O,
+                    X, O, O,
+                    X, O, X});
+        }
+    }
+
     private void fillUpBoard() {
         board.placeMark(0,X);
         board.placeMark(1,X);

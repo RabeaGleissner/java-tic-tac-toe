@@ -12,7 +12,6 @@ public class GameTest {
     FakeUserInterface fakeUserInterface;
     Game game;
     Board board;
-    Rules rules;
     ComputerPlayer computerPlayer;
     RandomNumberCalc randomNumberCalc;
 
@@ -21,7 +20,6 @@ public class GameTest {
         fakeUserInterface = new FakeUserInterface();
         randomNumberCalc = new RandomNumberCalc();
         board = new Board();
-        rules = new Rules(board);
         computerPlayer = new ComputerPlayer(randomNumberCalc);
         game = new Game(fakeUserInterface, computerPlayer);
     }

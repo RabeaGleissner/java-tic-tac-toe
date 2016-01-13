@@ -8,6 +8,7 @@ import static de.rabea.game.Cell.EMPTY;
 public class Board {
 
     private Cell[] cells;
+    private final int[][] WINNING_COMBINATIONS = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
 
     public Board() {
        this(new Cell[] {EMPTY, EMPTY, EMPTY,
@@ -28,6 +29,19 @@ public class Board {
         return cells;
     }
 
+    public boolean gameOver() {
+        return isFull() || hasWinner();
+    }
+
+    public boolean hasWinner() {
+        for (int[] combo : WINNING_COMBINATIONS) {
+            if (anyLineMatchesAWinningCombination(cells(), combo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isFull() {
         return emptyCellsCount() == 0;
     }
@@ -35,17 +49,6 @@ public class Board {
     public boolean isPositionAvailable(int position) {
         return position >= 0 && position < cells.length &&
                 !(cells[position] == Cell.X || cells[position] == Cell.O);
-    }
-
-    private int emptyCellsCount() {
-        int count = 0;
-
-        for (Cell cell : cells) {
-            if (cell == EMPTY) {
-                count++;
-            }
-        }
-        return count;
     }
 
     public Cell switchMark(Cell mark) {
@@ -61,11 +64,22 @@ public class Board {
         int i = 0;
         for (Cell cell : cells) {
             if (cell == EMPTY) {
-               emptyCells.add(i);
+                emptyCells.add(i);
             }
             i++;
         }
         return emptyCells;
+    }
+
+    private int emptyCellsCount() {
+        int count = 0;
+
+        for (Cell cell : cells) {
+            if (cell == EMPTY) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public List<Integer> indexOfLastCellPerRow() {
@@ -98,5 +112,23 @@ public class Board {
             }
         }
         return false;
+    }
+
+    private boolean anyLineMatchesAWinningCombination(Cell[] gameState, int[] combo) {
+        return positionIsNotEmpty(gameState, combo) &&
+                sameMarkInFirstAndSecondPosition(gameState, combo) &&
+                sameMarkInSecondAndThirdPosition(gameState, combo);
+    }
+
+    private boolean positionIsNotEmpty(Cell[] gameState, int[] combo) {
+        return gameState[combo[0]]!= Cell.EMPTY;
+    }
+
+    private boolean sameMarkInFirstAndSecondPosition(Cell[] gameState, int[] combo) {
+        return gameState[combo[0]] == gameState[combo[1]];
+    }
+
+    private boolean sameMarkInSecondAndThirdPosition(Cell[] gameState, int[] combo) {
+        return gameState[combo[1]] == gameState[combo[2]];
     }
 }

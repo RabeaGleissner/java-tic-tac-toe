@@ -16,16 +16,15 @@ public class Game {
         GameMode game = gameSetup();
         Cell mark = Cell.X;
         Board board = new Board();
-        Rules rules = new Rules(board);
-        while (gameIsNotOver(rules)){
+        while (gameIsNotOver(board)){
             playOneHumanRound(mark, board);
             mark = board.switchMark(mark);
-            if (humanVsComputerMode(game) && gameIsNotOver(rules)) {
+            if (humanVsComputerMode(game) && gameIsNotOver(board)) {
                 playOneComputerRound(board, mark);
                 mark = board.switchMark(mark);
             }
         }
-        finishGame(mark, board, rules);
+        finishGame(mark, board);
         if (userInterface.playAgain()) {
             play();
         }
@@ -52,9 +51,9 @@ public class Game {
         board.placeMark(usersPosition(board), mark);
     }
 
-    private void finishGame(Cell mark, Board board, Rules rules) {
+    private void finishGame(Cell mark, Board board) {
         userInterface.displayBoard(board.cells());
-        userInterface.announceGameEnd(board.switchMark(mark), rules.hasWinner());
+        userInterface.announceGameEnd(board.switchMark(mark), board.hasWinner());
     }
 
     private Integer validPosition(Integer position, Board board) {
@@ -74,7 +73,7 @@ public class Game {
         return gameMode == GameMode.HvC;
     }
 
-    private boolean gameIsNotOver(Rules rules) {
-       return !rules.gameOver();
+    private boolean gameIsNotOver(Board board) {
+       return !board.gameOver();
     }
 }
