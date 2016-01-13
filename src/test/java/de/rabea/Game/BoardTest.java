@@ -96,6 +96,23 @@ public class BoardTest {
     }
 
     @Test
+    public void itKnowsTheWidthOfTheBoard() {
+        assertEquals(3, board.getDimension());
+    }
+
+    @Test
+    public void itGetsAllRowsOfTheBoard() {
+        List<List<Integer>> rows = new ArrayList<List<Integer>>();
+        List<Integer> row1 = new ArrayList<Integer>(Arrays.asList(0,1,2));
+        List<Integer> row2 = new ArrayList<Integer>(Arrays.asList(3,4,5));
+        List<Integer> row3 = new ArrayList<Integer>(Arrays.asList(6,7,8));
+        rows.add(row1);
+        rows.add(row2);
+        rows.add(row3);
+        assertEquals(rows, board.getRows());
+    }
+
+    @Test
     public void isEndOfLastRow() {
         assertTrue(board.isLastCell(8));
         assertFalse(board.isLastCell(7));

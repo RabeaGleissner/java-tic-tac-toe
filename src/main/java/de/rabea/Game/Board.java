@@ -83,7 +83,7 @@ public class Board {
     }
 
     public List<Integer> indexOfLastCellPerRow() {
-        int length = getLengthOfRow();
+        int length = getDimension();
         List<Integer> lastCellsPerRow = new ArrayList<Integer>();
         for (int i = 1; i <= length; i ++) {
             lastCellsPerRow.add(length * i - 1);
@@ -91,7 +91,7 @@ public class Board {
         return lastCellsPerRow;
     }
 
-    private int getLengthOfRow() {
+    public int getDimension() {
         double length = (double) cells().length;
         double squareRoot = Math.sqrt(length);
         return (int) squareRoot;
@@ -131,4 +131,26 @@ public class Board {
     private boolean sameMarkInSecondAndThirdPosition(Cell[] gameState, int[] combo) {
         return gameState[combo[1]] == gameState[combo[2]];
     }
+
+    public List<List<Integer>> getRows() {
+        List<List<Integer>> rows = new ArrayList<List<Integer>>();
+
+        for (int i = 0; i < getDimension(); i++) {
+           rows.add(getRow(i));
+        }
+
+        return rows;
+
+    }
+
+    private List<Integer> getRow(int index) {
+        List<Integer> row = new ArrayList<Integer>();
+        int start = index * getDimension();
+        int end = start + getDimension();
+        for (int i= start; i < end; i++) {
+           row.add(i);
+        }
+        return row;
+    }
+
 }
