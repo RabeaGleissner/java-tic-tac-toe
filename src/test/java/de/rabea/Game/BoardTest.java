@@ -113,6 +113,28 @@ public class BoardTest {
     }
 
     @Test
+    public void itGetsAllColumnsOfTheBoard() {
+        List<List<Integer>> columns = new ArrayList<List<Integer>>();
+        List<Integer> column1 = new ArrayList<Integer>(Arrays.asList(0,3,6));
+        List<Integer> column2 = new ArrayList<Integer>(Arrays.asList(1,4,7));
+        List<Integer> column3 = new ArrayList<Integer>(Arrays.asList(2,5,8));
+        columns.add(column1);
+        columns.add(column2);
+        columns.add(column3);
+        assertEquals(columns, board.getColumns());
+    }
+
+    @Test
+    public void itGetsTheDiagonals() {
+       List<List<Integer>> diagonals = new ArrayList<List<Integer>>();
+        List<Integer> diagonal1 = new ArrayList<Integer>(Arrays.asList(0,4,8));
+        List<Integer> diagonal2 = new ArrayList<Integer>(Arrays.asList(2,4,6));
+        diagonals.add(diagonal1);
+        diagonals.add(diagonal2);
+        assertEquals(diagonals, board.getDiagonals());
+    }
+
+    @Test
     public void isEndOfLastRow() {
         assertTrue(board.isLastCell(8));
         assertFalse(board.isLastCell(7));

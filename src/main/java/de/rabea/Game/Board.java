@@ -138,9 +138,31 @@ public class Board {
         for (int i = 0; i < getDimension(); i++) {
            rows.add(getRow(i));
         }
-
         return rows;
+    }
 
+    public List<List<Integer>> getColumns() {
+        List<List<Integer>> columns = new ArrayList<List<Integer>>();
+        for (int i = 0; i < getDimension(); i++) {
+            columns.add(getColumn(i));
+        }
+        return columns;
+    }
+
+    public List<List<Integer>> getDiagonals() {
+        List<List<Integer>> diagonals = new ArrayList<List<Integer>>();
+        List<Integer> forwardDiagonal = new ArrayList<Integer>();
+        List<Integer> backwardDiagonal = new ArrayList<Integer>();
+
+        List<List<Integer>> rows = getRows();
+        for (int i = 0; i < getDimension(); i++) {
+            forwardDiagonal.add(rows.get(i).get(i));
+            backwardDiagonal.add(rows.get(i).get((getDimension() - 1)-i));
+        }
+        diagonals.add(forwardDiagonal);
+        diagonals.add(backwardDiagonal);
+
+        return diagonals;
     }
 
     private List<Integer> getRow(int index) {
@@ -151,6 +173,14 @@ public class Board {
            row.add(i);
         }
         return row;
+    }
+
+    private List<Integer> getColumn(int index) {
+        List<Integer> column = new ArrayList<Integer>();
+        for (List<Integer> row : getRows()) {
+            column.add(row.get(index));
+        }
+        return column;
     }
 
 }
