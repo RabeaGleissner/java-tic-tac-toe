@@ -83,6 +83,12 @@ public class BoardTest {
         assertEquals(emptyCells, board.emptyCells());
     }
 
+    @Test
+    public void indexOfLastCellInEachRow() {
+        List<Integer> cells = new ArrayList<Integer>(Arrays.asList(2,5,8));
+        assertEquals(cells, board.indexOfLastCellPerRow());
+    }
+
     private void fillUpBoard() {
         board.placeMark(0,X);
         board.placeMark(1,X);

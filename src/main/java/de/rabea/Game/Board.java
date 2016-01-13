@@ -67,4 +67,19 @@ public class Board {
         }
         return emptyCells;
     }
+
+    public List<Integer> indexOfLastCellPerRow() {
+        int length = getLengthOfRow();
+        List<Integer> lastCellsPerRow = new ArrayList<Integer>();
+        for (int i = 1; i <= length; i ++) {
+            lastCellsPerRow.add(length * i - 1);
+        }
+        return lastCellsPerRow;
+    }
+
+    private int getLengthOfRow() {
+        double length = (double) cells().length;
+        double squareRoot = Math.sqrt(length);
+        return (int) squareRoot;
+    }
 }
