@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static de.rabea.game.Cell.*;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
@@ -91,10 +92,21 @@ public class BoardTest {
 
     @Test
     public void indexOfLastCellOfBoard() {
-        Cell[] cells = {EMPTY, X, EMPTY,
-                EMPTY, EMPTY, EMPTY,
-                EMPTY, EMPTY, EMPTY};
         assertEquals(8, board.indexOfLastCell());
+    }
+
+    @Test
+    public void isEndOfLastRow() {
+        assertTrue(board.isLastCell(8));
+        assertFalse(board.isLastCell(7));
+    }
+
+    @Test
+    public void isEndOfFirstOrSecondRow() {
+        assertTrue(board.isEndOfFirstOrSecondRow(2));
+        assertTrue(board.isEndOfFirstOrSecondRow(5));
+        assertFalse(board.isEndOfFirstOrSecondRow(1));
+        assertFalse(board.isEndOfFirstOrSecondRow(8));
     }
 
     private void fillUpBoard() {

@@ -86,4 +86,17 @@ public class Board {
     public int indexOfLastCell() {
         return cells().length - 1;
     }
+
+    public boolean isLastCell(int cell) {
+        return cell == indexOfLastCell();
+    }
+
+    public boolean isEndOfFirstOrSecondRow(int cell) {
+        for (int cellIndex : indexOfLastCellPerRow()) {
+            if (cell == cellIndex && !(isLastCell(cell))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
