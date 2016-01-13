@@ -9,7 +9,8 @@ import java.util.List;
 import static de.rabea.game.Cell.*;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertFalse;
 
 
 public class BoardTest {
@@ -177,6 +178,28 @@ public class BoardTest {
     public void diagonalWinningBoard() {
         board = new DiagonalWinningBoard();
         assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void itKnowsAllLinesOnTheBoard() {
+        List<List<Integer>> allLines = new ArrayList<List<Integer>>();
+        List<Integer> line1 = new ArrayList<Integer>(Arrays.asList(0,1,2));
+        List<Integer> line2 = new ArrayList<Integer>(Arrays.asList(3,4,5));
+        List<Integer> line3 = new ArrayList<Integer>(Arrays.asList(6,7,8));
+        List<Integer> line4 = new ArrayList<Integer>(Arrays.asList(0,3,6));
+        List<Integer> line5 = new ArrayList<Integer>(Arrays.asList(1,4,7));
+        List<Integer> line6 = new ArrayList<Integer>(Arrays.asList(2,5,8));
+        List<Integer> line7 = new ArrayList<Integer>(Arrays.asList(0,4,8));
+        List<Integer> line8 = new ArrayList<Integer>(Arrays.asList(2,4,6));
+        allLines.add(line1);
+        allLines.add(line2);
+        allLines.add(line3);
+        allLines.add(line4);
+        allLines.add(line5);
+        allLines.add(line6);
+        allLines.add(line7);
+        allLines.add(line8);
+        assertEquals(allLines, board.getAllLines());
     }
 
     public class DiagonalWinningBoard extends Board {

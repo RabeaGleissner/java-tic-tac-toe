@@ -8,7 +8,6 @@ import static de.rabea.game.Cell.EMPTY;
 public class Board {
 
     private Cell[] cells;
-    private final int[][] WINNING_COMBINATIONS = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
 
     public Board() {
        this(new Cell[] {EMPTY, EMPTY, EMPTY,
@@ -34,8 +33,9 @@ public class Board {
     }
 
     public boolean hasWinner() {
-        for (int[] combo : WINNING_COMBINATIONS) {
-            if (anyLineMatchesAWinningCombination(cells(), combo)) {
+        List<List<Integer>> winningCombinations = getAllLines();
+        for (List<Integer> combination : winningCombinations) {
+            if (anyLineMatchesAWinningCombination(cells(), combination)) {
                 return true;
             }
         }
@@ -114,22 +114,36 @@ public class Board {
         return false;
     }
 
-    private boolean anyLineMatchesAWinningCombination(Cell[] gameState, int[] combo) {
+    private boolean anyLineMatchesAWinningCombination(Cell[] gameState, List<Integer> combo) {
         return positionIsNotEmpty(gameState, combo) &&
                 sameMarkInFirstAndSecondPosition(gameState, combo) &&
                 sameMarkInSecondAndThirdPosition(gameState, combo);
     }
 
-    private boolean positionIsNotEmpty(Cell[] gameState, int[] combo) {
-        return gameState[combo[0]]!= Cell.EMPTY;
+    private boolean positionIsNotEmpty(Cell[] gameState, List<Integer> combo) {
+        return gameState[combo.get(0)]!= Cell.EMPTY;
     }
 
-    private boolean sameMarkInFirstAndSecondPosition(Cell[] gameState, int[] combo) {
-        return gameState[combo[0]] == gameState[combo[1]];
+    private boolean sameMarkInFirstAndSecondPosition(Cell[] gameState, List<Integer> combo) {
+        return gameState[combo.get(0)] == gameState[combo.get(1)];
     }
 
-    private boolean sameMarkInSecondAndThirdPosition(Cell[] gameState, int[] combo) {
-        return gameState[combo[1]] == gameState[combo[2]];
+    private boolean sameMarkInSecondAndThirdPosition(Cell[] gameState, List<Integer> combo) {
+        return gameState[combo.get(1)] == gameState[combo.get(2)];
+    }
+
+    public List<List<Integer>> getAllLines() {
+        List<List<Integer>> allLines = new ArrayList<List<Integer>>();
+        for (List<Integer> row : getRows()) {
+            allLines.add(row);
+        }
+        for (List<Integer> column : getColumns()) {
+            allLines.add(column);
+        }
+        for (List<Integer> diagonal : getDiagonals()) {
+            allLines.add(diagonal);
+        }
+        return allLines;
     }
 
     public List<List<Integer>> getRows() {
@@ -157,7 +171,7 @@ public class Board {
         List<List<Integer>> rows = getRows();
         for (int i = 0; i < getDimension(); i++) {
             forwardDiagonal.add(rows.get(i).get(i));
-            backwardDiagonal.add(rows.get(i).get((getDimension() - 1)-i));
+            backwardDiagonal.add(rows.get(i).get((getDimension() - 1) -i));
         }
         diagonals.add(forwardDiagonal);
         diagonals.add(backwardDiagonal);
@@ -182,5 +196,4 @@ public class Board {
         }
         return column;
     }
-
 }
