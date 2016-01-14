@@ -1,6 +1,6 @@
 package de.rabea.game;
 
-public class ComputerPlayer {
+public class ComputerPlayer implements Player {
     private final RandomNumberCalc randomNumberCalc;
 
     public ComputerPlayer(RandomNumberCalc randomNumberCalc) {

@@ -26,11 +26,22 @@ public class FakeUserInterface extends UserInterface {
     }
 
     @Override
-    public int playersChosenPosition(Board board) {
+    public String readUserInput() {
         askForPositionWasCalled = true;
-        int position = Integer.parseInt(moves.remove(0));
+        String userInput = moves.remove(0);
+        return userInput;
+    }
+
+    @Override
+    public int getFormattedUserPosition(String userInput) {
+        int position = Integer.parseInt(userInput);
         position --;
         return position;
+    }
+
+    @Override
+    public void askForPosition() {
+        askForPositionWasCalled = true;
     }
 
     @Override

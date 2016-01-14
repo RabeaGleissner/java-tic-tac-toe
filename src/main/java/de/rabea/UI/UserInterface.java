@@ -8,6 +8,7 @@ public class UserInterface {
     public UserInterface(Console console) {
         this.console = console;
     }
+
     private String askUserForPosition = "Please select a position for your mark.";
     private String wantToPlayAgain = "Do you want to play again? y/n";
     private String greeting = "Welcome to Tic Tac Toe.\n ";
@@ -61,20 +62,19 @@ public class UserInterface {
             console.print(drawAnnouncement);
         }
     }
-    public int playersChosenPosition(Board board) {
-        askForPosition();
-        return getUsersPosition(board);
+
+    public boolean isUserInputInvalid(String userInput) {
+       return !(inputFormatter.isInteger(userInput));
     }
 
-    private int getUsersPosition(Board board) {
-        String userInput = console.readUserInput();
-        if (!(inputFormatter.isInteger(userInput)) ) {
-            notANumberWarning();
-            return playersChosenPosition(board);
-        } else {
-            Integer position = Integer.parseInt(userInput);
-            return inputFormatter.subtractOneToMatchArrayIndex(position);
-        }
+    public int getFormattedUserPosition(String userInput) {
+        int position = Integer.parseInt(userInput);
+        return inputFormatter.subtractOneToMatchArrayIndex(position);
+    }
+
+
+    public String readUserInput() {
+        return console.readUserInput();
     }
 
     public boolean playAgain() {
@@ -96,7 +96,7 @@ public class UserInterface {
         console.print(unavailablePosition);
     }
 
-    private void askForPosition() {
+    public void askForPosition() {
         console.print(askUserForPosition);
     }
 
@@ -104,7 +104,7 @@ public class UserInterface {
         console.print(wantToPlayAgain);
     }
 
-    private void notANumberWarning() {
+    public void notANumberWarning() {
         console.print(enterANumber);
     }
 

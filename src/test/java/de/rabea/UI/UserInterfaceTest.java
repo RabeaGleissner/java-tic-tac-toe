@@ -55,19 +55,6 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void itConvertsTheUserPositionIntoAnIntegerForTheProgrammeToUse() {
-        fakeConsole.userInput("2");
-        assertEquals( 1, userInterface.playersChosenPosition(board));
-    }
-
-    @Test
-    public void itGivesAWarningWhenUserEntryIsNotANumber() {
-        fakeConsole.userInput("NaN", "8");
-        userInterface.playersChosenPosition(board);
-        assertEquals("Please select a position for your mark.", fakeConsole.messagePrinted());
-    }
-
-    @Test
     public void userWantsToPlayAgain() {
         fakeConsole.userInput("y");
         assertTrue(userInterface.playAgain());

@@ -6,10 +6,12 @@ public class Game {
 
     private final UserInterface userInterface;
     private final ComputerPlayer computerPlayer;
+    private HumanPlayer humanPlayer;
 
-    public Game(UserInterface userInterface, ComputerPlayer computerPlayer) {
+    public Game(UserInterface userInterface, ComputerPlayer computerPlayer, HumanPlayer humanPlayer) {
         this.userInterface = userInterface;
         this.computerPlayer = computerPlayer;
+        this.humanPlayer = humanPlayer;
     }
 
     public void play() {
@@ -38,7 +40,7 @@ public class Game {
     }
 
     public int usersPosition(Board board) {
-        int position = userInterface.playersChosenPosition(board);
+        int position = humanPlayer.getPosition(board);
         return validPosition(position, board);
     }
 

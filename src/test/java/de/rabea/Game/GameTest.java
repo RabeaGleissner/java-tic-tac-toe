@@ -14,14 +14,16 @@ public class GameTest {
     Board board;
     ComputerPlayer computerPlayer;
     RandomNumberCalc randomNumberCalc;
+    HumanPlayer humanPlayer;
 
     @Before
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
         randomNumberCalc = new RandomNumberCalc();
+        humanPlayer = new HumanPlayer(fakeUserInterface);
         board = new Board();
         computerPlayer = new ComputerPlayer(randomNumberCalc);
-        game = new Game(fakeUserInterface, computerPlayer);
+        game = new Game(fakeUserInterface, computerPlayer, humanPlayer);
     }
 
     @Test
@@ -45,7 +47,7 @@ public class GameTest {
     @Test
     public void playsTheHumanVsComputerGameOnce() {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalc);
-        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, fakeComputerPlayer);
+        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, fakeComputerPlayer, new HumanPlayer(fakeUserInterface));
         fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
         gameWithFakeComputerPlayer.play();
@@ -55,7 +57,7 @@ public class GameTest {
     @Test
     public void playsTheHumanVsComputerGameTwice() {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalc);
-        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, fakeComputerPlayer);
+        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, fakeComputerPlayer, new HumanPlayer(fakeUserInterface));
         fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "y", "1", "3", "6", "2", "n");
         fakeComputerPlayer.giveNumbers(1, 2, 0, 3, 6);
         gameWithFakeComputerPlayer.play();
