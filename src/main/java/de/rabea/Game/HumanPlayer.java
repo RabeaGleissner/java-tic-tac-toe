@@ -3,11 +3,16 @@ package de.rabea.game;
 import de.rabea.ui.UserInterface;
 
 public class HumanPlayer implements Player {
-
     UserInterface userInterface;
+    Mark mark;
 
-    public HumanPlayer(UserInterface userInterface) {
+    public HumanPlayer(UserInterface userInterface, Mark mark) {
         this.userInterface = userInterface;
+        this.mark = mark;
+    }
+
+    public Mark mark() {
+        return mark;
     }
 
     public int getPosition(Board board) {

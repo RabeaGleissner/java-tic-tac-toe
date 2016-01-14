@@ -4,7 +4,6 @@ import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Cell.X;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -20,9 +19,9 @@ public class GameTest {
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
         randomNumberCalc = new RandomNumberCalc();
-        humanPlayer = new HumanPlayer(fakeUserInterface);
+        humanPlayer = new HumanPlayer(fakeUserInterface, Mark.X);
         board = new Board();
-        computerPlayer = new ComputerPlayer(randomNumberCalc);
+        computerPlayer = new ComputerPlayer(randomNumberCalc, Mark.O);
         game = new Game(fakeUserInterface, computerPlayer, humanPlayer);
     }
 
@@ -46,8 +45,8 @@ public class GameTest {
 
     @Test
     public void playsTheHumanVsComputerGameOnce() {
-        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalc);
-        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, fakeComputerPlayer, new HumanPlayer(fakeUserInterface));
+        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalc, Mark.O);
+        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, fakeComputerPlayer, new HumanPlayer(fakeUserInterface, Mark.X));
         fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
         gameWithFakeComputerPlayer.play();
@@ -56,8 +55,8 @@ public class GameTest {
 
     @Test
     public void playsTheHumanVsComputerGameTwice() {
-        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalc);
-        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, fakeComputerPlayer, new HumanPlayer(fakeUserInterface));
+        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalc, Mark.O);
+        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, fakeComputerPlayer, new HumanPlayer(fakeUserInterface, Mark.X));
         fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "y", "1", "3", "6", "2", "n");
         fakeComputerPlayer.giveNumbers(1, 2, 0, 3, 6);
         gameWithFakeComputerPlayer.play();

@@ -15,7 +15,7 @@ public class HumanPlayerTest {
     @Before
     public void setup() {
         fakeConsole = new FakeConsole();
-        humanPlayer = new HumanPlayer(new UserInterface(fakeConsole));
+        humanPlayer = new HumanPlayer(new UserInterface(fakeConsole), Mark.X);
         board = new Board();
     }
 
@@ -30,5 +30,11 @@ public class HumanPlayerTest {
         fakeConsole.userInput("NaN", "8");
         humanPlayer.getPosition(board);
         assertEquals("Please select a position for your mark.", fakeConsole.messagePrinted());
+    }
+
+    @Test
+    public void itReturnsThePlayersMark() {
+        assertEquals(Mark.X, humanPlayer.mark());
+
     }
 }

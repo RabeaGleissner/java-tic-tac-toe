@@ -3,8 +3,6 @@ package de.rabea.game;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Cell.O;
-import static de.rabea.game.Cell.X;
 import static org.junit.Assert.assertEquals;
 
 public class ComputerPlayerTest {
@@ -18,14 +16,14 @@ public class ComputerPlayerTest {
     @Test
     public void returnsARandomPosition() {
         FakeRandomNumberCalc fakeRandomNumberCalc = new FakeRandomNumberCalc();
-        ComputerPlayer computerPlayer = new ComputerPlayer(fakeRandomNumberCalc);
+        ComputerPlayer computerPlayer = new ComputerPlayer(fakeRandomNumberCalc, Mark.O);
         fakeRandomNumberCalc.giveNumbers(2);
         assertEquals(2, computerPlayer.getPosition(new Board()));
     }
 
     @Test
     public void returnsTheOnlyAvailablePosition() {
-        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc());
+        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc(), Mark.O);
         board.placeMark(0, Mark.X);
         board.placeMark(1, Mark.X);
         board.placeMark(2, Mark.O);
@@ -39,9 +37,16 @@ public class ComputerPlayerTest {
 
     @Test
     public void thereIsOneLessEmptyPositionAfterTheComputerMadeItsRandomMove() {
-        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc());
+        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc(), Mark.O);
         int computerPosition = computerPlayer.getPosition(board);
         board.placeMark(computerPosition, Mark.O);
         assertEquals(8, board.emptyCells().size());
+    }
+
+    @Test
+    public void itReturnsThePlayersMark() {
+        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc(), Mark.O);
+        assertEquals(Mark.O, computerPlayer.mark());
+
     }
 }
