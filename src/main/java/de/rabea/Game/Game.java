@@ -37,8 +37,8 @@ public class Game {
         return gameMode;
     }
 
-    public Integer usersPosition(Board board) {
-        Integer position = userInterface.playersChosenPosition(board);
+    public int usersPosition(Board board) {
+        int position = userInterface.playersChosenPosition(board);
         return validPosition(position, board);
     }
 
@@ -56,7 +56,7 @@ public class Game {
         userInterface.announceGameEnd(board.switchMark(mark), board.hasWinner());
     }
 
-    private Integer validPosition(Integer position, Board board) {
+    private int validPosition(Integer position, Board board) {
         if (board.isPositionAvailable(position)) {
             return position;
         } else {
@@ -64,7 +64,7 @@ public class Game {
         }
     }
 
-    private Integer askUserAgainForPosition(Board board) {
+    private int askUserAgainForPosition(Board board) {
         userInterface.positionUnavailableWarning();
         return usersPosition(board);
     }

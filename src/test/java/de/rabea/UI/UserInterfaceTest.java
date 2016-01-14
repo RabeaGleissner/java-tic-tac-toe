@@ -57,7 +57,7 @@ public class UserInterfaceTest {
     @Test
     public void itConvertsTheUserPositionIntoAnIntegerForTheProgrammeToUse() {
         fakeConsole.userInput("2");
-        assertEquals((Integer) 1, userInterface.playersChosenPosition(board));
+        assertEquals( 1, userInterface.playersChosenPosition(board));
     }
 
     @Test

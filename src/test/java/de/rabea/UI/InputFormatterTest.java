@@ -42,6 +42,6 @@ public class InputFormatterTest {
 
     @Test
     public void itSubtractsOneFromAGivenInteger() {
-        assertEquals((Integer) 4, inputFormatter.subtractOneToMatchArrayIndex(5));
+        assertEquals(4, inputFormatter.subtractOneToMatchArrayIndex(5));
     }
 }

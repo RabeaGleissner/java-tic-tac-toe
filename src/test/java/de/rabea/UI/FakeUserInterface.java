@@ -26,7 +26,7 @@ public class FakeUserInterface extends UserInterface {
     }
 
     @Override
-    public Integer playersChosenPosition(Board board) {
+    public int playersChosenPosition(Board board) {
         askForPositionWasCalled = true;
         int position = Integer.parseInt(moves.remove(0));
         position --;

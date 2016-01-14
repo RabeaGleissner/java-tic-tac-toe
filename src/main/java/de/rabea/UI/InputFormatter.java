@@ -23,7 +23,7 @@ public class InputFormatter {
         }
     }
 
-    public Integer subtractOneToMatchArrayIndex(Integer position) {
+    public int subtractOneToMatchArrayIndex(int position) {
         position --;
         return position;
     }

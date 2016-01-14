@@ -61,12 +61,12 @@ public class UserInterface {
             console.print(drawAnnouncement);
         }
     }
-    public Integer playersChosenPosition(Board board) {
+    public int playersChosenPosition(Board board) {
         askForPosition();
         return getUsersPosition(board);
     }
 
-    private Integer getUsersPosition(Board board) {
+    private int getUsersPosition(Board board) {
         String userInput = console.readUserInput();
         if (!(inputFormatter.isInteger(userInput)) ) {
             notANumberWarning();
