@@ -66,7 +66,7 @@ public class GameTest {
 
     @Test
     public void asksUserAgainIfPositionIsInvalid() {
-        board.placeMark(0, X);
+        board.placeMark(0, Mark.X);
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
         game.usersPosition(board);
         assertTrue(fakeUserInterface.wasPositionUnavailableWarningCalled());

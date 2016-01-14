@@ -35,7 +35,7 @@ public class BoardTest {
         Cell[] cells = {EMPTY, X, EMPTY,
                         EMPTY, EMPTY, EMPTY,
                         EMPTY, EMPTY, EMPTY};
-        assertArrayEquals(cells, board.placeMark(1, X));
+        assertArrayEquals(cells, board.placeMark(1, Mark.X));
     }
 
     @Test
@@ -56,18 +56,18 @@ public class BoardTest {
 
     @Test
     public void isNotAValidUserChoice() {
-        board.placeMark(1, X);
+        board.placeMark(1, Mark.X);
         assertEquals(false, board.isPositionAvailable(1));
     }
 
     @Test
     public void switchesMarkXtoO() {
-        assertEquals(O, board.switchMark(X));
+        assertEquals(Mark.O, board.switchMark(Mark.X));
     }
 
     @Test
     public void switchesMarkOToX() {
-        assertEquals(X, board.switchMark(O));
+        assertEquals(Mark.X, board.switchMark(Mark.O));
     }
 
     @Test
@@ -77,10 +77,10 @@ public class BoardTest {
 
     @Test
     public void returnsAnArrayOfAllEmptyPosition() {
-        board.placeMark(1, X);
-        board.placeMark(2, O);
-        board.placeMark(3, X);
-        board.placeMark(6, O);
+        board.placeMark(1, Mark.X);
+        board.placeMark(2, Mark.O);
+        board.placeMark(3, Mark.X);
+        board.placeMark(6, Mark.O);
         List<Integer> emptyCells = new ArrayList<Integer>(Arrays.asList(0,4,5,7,8));
         assertEquals(emptyCells, board.emptyCells());
     }
@@ -235,14 +235,14 @@ public class BoardTest {
     }
 
     private void fillUpBoard() {
-        board.placeMark(0,X);
-        board.placeMark(1,X);
-        board.placeMark(2,O);
-        board.placeMark(3,X);
-        board.placeMark(4,X);
-        board.placeMark(5,O);
-        board.placeMark(6,X);
-        board.placeMark(7,O);
-        board.placeMark(8,O);
+        board.placeMark(0,Mark.X);
+        board.placeMark(1,Mark.X);
+        board.placeMark(2,Mark.O);
+        board.placeMark(3,Mark.X);
+        board.placeMark(4,Mark.X);
+        board.placeMark(5,Mark.O);
+        board.placeMark(6,Mark.X);
+        board.placeMark(7,Mark.O);
+        board.placeMark(8,Mark.O);
     }
 }

@@ -3,6 +3,7 @@ package de.rabea.ui;
 import de.rabea.game.Board;
 import de.rabea.game.Cell;
 import de.rabea.game.GameMode;
+import de.rabea.game.Mark;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -45,7 +46,7 @@ public class FakeUserInterface extends UserInterface {
     }
 
     @Override
-    public void announceGameEnd(Cell lastPlayedMark, boolean winner) {
+    public void announceGameEnd(Mark lastPlayedMark, boolean winner) {
         countAnnounceGameEndCalls++;
     }
 

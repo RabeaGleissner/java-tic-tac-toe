@@ -16,7 +16,7 @@ public class Game {
 
     public void play() {
         GameMode game = gameSetup();
-        Cell mark = Cell.X;
+        Mark mark = Mark.X;
         Board board = new Board();
         while (gameIsNotOver(board)){
             playOneHumanRound(mark, board);
@@ -44,16 +44,16 @@ public class Game {
         return validPosition(position, board);
     }
 
-    private void playOneComputerRound(Board board, Cell mark) {
+    private void playOneComputerRound(Board board, Mark mark) {
         board.placeMark(computerPlayer.getPosition(board), mark);
     }
 
-    private void playOneHumanRound(Cell mark, Board board) {
+    private void playOneHumanRound(Mark mark, Board board) {
         userInterface.displayBoard(board.cells());
         board.placeMark(usersPosition(board), mark);
     }
 
-    private void finishGame(Cell mark, Board board) {
+    private void finishGame(Mark mark, Board board) {
         userInterface.displayBoard(board.cells());
         userInterface.announceGameEnd(board.switchMark(mark), board.hasWinner());
     }

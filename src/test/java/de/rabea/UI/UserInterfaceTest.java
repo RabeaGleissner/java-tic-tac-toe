@@ -3,6 +3,7 @@ package de.rabea.ui;
 import de.rabea.game.Board;
 import de.rabea.game.Cell;
 import de.rabea.game.GameMode;
+import de.rabea.game.Mark;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,8 +42,8 @@ public class UserInterfaceTest {
     @Test
     public void displaysBoardWithMarks() {
         Board board = new Board();
-        board.placeMark(1, Cell.X);
-        board.placeMark(3, Cell.O);
+        board.placeMark(1, Mark.X);
+        board.placeMark(3, Mark.O);
         userInterface.displayBoard(board.cells());
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
                 "\n" +
@@ -119,13 +120,13 @@ public class UserInterfaceTest {
 
     @Test
     public void announceWinner() {
-        userInterface.announceGameEnd(Cell.X, true);
+        userInterface.announceGameEnd(Mark.X, true);
         assertEquals("Game over! The winner is: X", fakeConsole.messagePrinted());
     }
 
     @Test
     public void announceDraw() {
-        userInterface.announceGameEnd(Cell.X, false);
+        userInterface.announceGameEnd(Mark.X, false);
         assertEquals("Game over! It's a draw.", fakeConsole.messagePrinted());
     }
 

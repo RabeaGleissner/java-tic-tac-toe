@@ -3,7 +3,8 @@ package de.rabea.ui;
 import de.rabea.game.Board;
 import de.rabea.game.Cell;
 
-import static de.rabea.game.Cell.*;
+import static de.rabea.game.Cell.EMPTY;
+import static de.rabea.game.Cell.X;
 
 public class BoardPainter {
     private String blueColourForX = "\u001B[34m";

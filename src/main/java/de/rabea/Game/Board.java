@@ -23,8 +23,8 @@ public class Board {
         return cells;
     }
 
-    public Cell[] placeMark(int position, Cell mark) {
-        cells[position] = mark;
+    public Cell[] placeMark(int position, Mark mark) {
+        cells[position] = mark.convertToCell();
         return cells;
     }
 
@@ -51,11 +51,11 @@ public class Board {
                 !(cells[position] == Cell.X || cells[position] == Cell.O);
     }
 
-    public Cell switchMark(Cell mark) {
-        if (mark == Cell.X) {
-            return Cell.O;
+    public Mark switchMark(Mark mark) {
+        if (mark == Mark.X) {
+            return Mark.O;
         } else {
-            return Cell.X;
+            return Mark.X;
         }
     }
 

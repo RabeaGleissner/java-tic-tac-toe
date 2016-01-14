@@ -55,7 +55,7 @@ public class UserInterface {
         }
     }
 
-    public void announceGameEnd(Cell lastPlayedMark, boolean winner) {
+    public void announceGameEnd(Mark lastPlayedMark, boolean winner) {
         if (winner) {
             console.print(winnerAnnouncement + lastPlayedMark.toString());
         } else {
