@@ -1,7 +1,5 @@
 package de.rabea.ui;
 
-import de.rabea.game.Board;
-import de.rabea.game.Cell;
 import de.rabea.game.GameMode;
 import de.rabea.game.Mark;
 
