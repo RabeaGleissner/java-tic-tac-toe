@@ -21,4 +21,8 @@ public class FakeComputerPlayer extends ComputerPlayer {
     public void giveNumbers(Integer ... num) {
         listOfNumbers.addAll(Arrays.asList(num));
     }
+
+    public boolean wereAllComputerPositionsUsedUp(){
+        return listOfNumbers.size() == 0;
+    }
 }
