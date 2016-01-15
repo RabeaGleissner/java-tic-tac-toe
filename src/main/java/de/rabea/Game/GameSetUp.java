@@ -20,12 +20,24 @@ public class GameSetUp {
         userInterface.announceMarkDistribution(gameMode);
 
         if (gameMode == GameMode.HvC) {
-            Game game = new Game(userInterface, new HumanPlayer(userInterface, Mark.X), new ComputerPlayer(new RandomNumberCalc(), Mark.O), this);
+            Game game = new Game(userInterface, createNewHumanPlayer(), createNewComputerPlayer(), this);
             game.play();
         } else {
-            Game game = new Game(userInterface, new HumanPlayer(userInterface, Mark.X), new HumanPlayer(userInterface, Mark.O), this);
+            Game game = new Game(userInterface, createNewHumanPlayer(), createNewHumanOpponent(), this);
             game.play();
         }
 
+    }
+
+    public Player createNewHumanPlayer() {
+        return new HumanPlayer(userInterface, Mark.X);
+    }
+
+    public Player createNewHumanOpponent() {
+        return new HumanPlayer(userInterface, Mark.O);
+    }
+
+    public ComputerPlayer createNewComputerPlayer() {
+        return new ComputerPlayer(new RandomNumberCalc(), Mark.O);
     }
 }
