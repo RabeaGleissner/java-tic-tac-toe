@@ -15,7 +15,7 @@ public class ComputerPlayerTest {
 
     @Test
     public void returnsARandomPosition() {
-        FakeRandomNumberCalc fakeRandomNumberCalc = new FakeRandomNumberCalc();
+        FakeRandomNumberCalculator fakeRandomNumberCalc = new FakeRandomNumberCalculator();
         ComputerPlayer computerPlayer = new ComputerPlayer(fakeRandomNumberCalc, Mark.O);
         fakeRandomNumberCalc.giveNumbers(2);
         assertEquals(2, computerPlayer.getPosition(new Board()));
@@ -23,7 +23,7 @@ public class ComputerPlayerTest {
 
     @Test
     public void returnsTheOnlyAvailablePosition() {
-        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc(), Mark.O);
+        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalculator(), Mark.O);
         board.placeMark(0, Mark.X);
         board.placeMark(1, Mark.X);
         board.placeMark(2, Mark.O);
@@ -37,7 +37,7 @@ public class ComputerPlayerTest {
 
     @Test
     public void thereIsOneLessEmptyPositionAfterTheComputerMadeItsRandomMove() {
-        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc(), Mark.O);
+        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalculator(), Mark.O);
         int computerPosition = computerPlayer.getPosition(board);
         board.placeMark(computerPosition, Mark.O);
         assertEquals(8, board.emptyCells().size());
@@ -45,7 +45,7 @@ public class ComputerPlayerTest {
 
     @Test
     public void itReturnsThePlayersMark() {
-        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalc(), Mark.O);
+        ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalculator(), Mark.O);
         assertEquals(Mark.O, computerPlayer.mark());
 
     }

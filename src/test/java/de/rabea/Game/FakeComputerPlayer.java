@@ -8,8 +8,8 @@ public class FakeComputerPlayer extends ComputerPlayer {
 
     private List<Integer> listOfNumbers;
 
-    public FakeComputerPlayer(RandomNumberCalc randomNumberCalc, Mark mark) {
-        super(randomNumberCalc, mark);
+    public FakeComputerPlayer(RandomNumberCalculator randomNumberCalculator, Mark mark) {
+        super(randomNumberCalculator, mark);
         listOfNumbers = new LinkedList<Integer>();
     }
 

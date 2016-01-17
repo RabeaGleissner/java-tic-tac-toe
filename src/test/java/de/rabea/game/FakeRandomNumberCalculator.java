@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FakeRandomNumberCalc extends RandomNumberCalc {
+public class FakeRandomNumberCalculator extends RandomNumberCalculator {
 
     private List<Integer> listOfNumbers;
 
-    public FakeRandomNumberCalc() {
+    public FakeRandomNumberCalculator() {
         listOfNumbers = new LinkedList<Integer>();
     }
 

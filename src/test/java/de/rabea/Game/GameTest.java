@@ -12,18 +12,18 @@ public class GameTest {
     Game game;
     Board board;
     ComputerPlayer computerPlayer;
-    RandomNumberCalc randomNumberCalc;
+    RandomNumberCalculator randomNumberCalculator;
     HumanPlayer humanPlayer;
     HumanPlayer humanOpponent;
 
     @Before
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
-        randomNumberCalc = new RandomNumberCalc();
+        randomNumberCalculator = new RandomNumberCalculator();
         humanPlayer = new HumanPlayer(fakeUserInterface, Mark.X);
         humanOpponent = new HumanPlayer(fakeUserInterface, Mark.O);
         board = new Board();
-        computerPlayer = new ComputerPlayer(randomNumberCalc, Mark.O);
+        computerPlayer = new ComputerPlayer(randomNumberCalculator, Mark.O);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class GameTest {
 
     @Test
     public void playsTheHumanVsComputerGameOnce() {
-        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalc, Mark.O);
+        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalculator, Mark.O);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, humanPlayer, fakeComputerPlayer, new GameSetUp(fakeUserInterface));
         fakeUserInterface.provideConsoleInput( "1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
@@ -56,7 +56,7 @@ public class GameTest {
 
     @Test
     public void playsTheHumanVsComputerGameTwice() {
-        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalc, Mark.O);
+        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalculator, Mark.O);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, humanPlayer, fakeComputerPlayer,
                 new GameSetUpWithFakeComputerPlayer());
         fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "y", "1", "3", "6", "2", "n");
@@ -73,7 +73,7 @@ public class GameTest {
 
         @Override
         public ComputerPlayer createNewComputerPlayer() {
-            FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalc, Mark.O);
+            FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalculator, Mark.O);
             fakeComputerPlayer.giveNumbers(0,3,6);
             return fakeComputerPlayer;
         }

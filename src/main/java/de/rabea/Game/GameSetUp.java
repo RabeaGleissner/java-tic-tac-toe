@@ -29,15 +29,15 @@ public class GameSetUp {
 
     }
 
-    public Player createNewHumanPlayer() {
+    public HumanPlayer createNewHumanPlayer() {
         return new HumanPlayer(userInterface, Mark.X);
     }
 
-    public Player createNewHumanOpponent() {
+    public HumanPlayer createNewHumanOpponent() {
         return new HumanPlayer(userInterface, Mark.O);
     }
 
     public ComputerPlayer createNewComputerPlayer() {
-        return new ComputerPlayer(new RandomNumberCalc(), Mark.O);
+        return new ComputerPlayer(new RandomNumberCalculator(), Mark.O);
     }
 }
