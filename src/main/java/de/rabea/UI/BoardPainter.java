@@ -10,6 +10,7 @@ public class BoardPainter {
     private String blueColourForX = "\u001B[34m";
     private String redColourForO = "\u001B[31m";
     private String colourReset = "\u001B[0m";
+    private String clearScreen= "[H [2J";
     private Board board;
 
     public BoardPainter(Board board) {
@@ -18,7 +19,7 @@ public class BoardPainter {
 
     public String drawBoard(Cell[] cells) {
         int i = 0;
-        String boardImage= "\n";
+        String boardImage= clearScreen() + "\n";
         for (Enum cell : cells) {
             i ++;
             boardImage = printSymbolInCell(i, boardImage, cell);
@@ -76,5 +77,9 @@ public class BoardPainter {
 
     private String lastPipe() {
         return "|\n";
+    }
+
+    public String clearScreen() {
+        return clearScreen;
     }
 }
