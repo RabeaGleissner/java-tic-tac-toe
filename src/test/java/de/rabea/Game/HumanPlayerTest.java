@@ -1,6 +1,7 @@
 package de.rabea.game;
 
 import de.rabea.ui.FakeConsole;
+import de.rabea.ui.FakeUserInterface;
 import de.rabea.ui.UserInterface;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,6 +36,15 @@ public class HumanPlayerTest {
     @Test
     public void itReturnsThePlayersMark() {
         assertEquals(Mark.X, humanPlayer.mark());
+    }
 
+    @Test
+    public void asksUserAgainIfPositionIsOccupied() {
+        FakeUserInterface fakeUserInterface = new FakeUserInterface();
+        HumanPlayer humanPlayer = new HumanPlayer(fakeUserInterface, Mark.X);
+        board.placeMark(0, Mark.X);
+        fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
+        humanPlayer.getPosition(board);
+        assertTrue(fakeUserInterface.wasPositionUnavailableWarningCalled());
     }
 }
