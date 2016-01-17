@@ -17,28 +17,28 @@ public class HumanPlayer implements Player {
 
     public int getPosition(Board board) {
         userInterface.askForPosition();
-        return returnUsersPositionOrAskAgain(board);
+        return returnUsersPosition(board);
     }
 
-    public int returnUsersPositionOrAskAgain(Board board) {
+    public int returnUsersPosition(Board board) {
         String userInput = userInterface.readUserInput();
         if (userInterface.isUserInputInvalid(userInput)) {
-            return askAgainIfInputIsBad(board);
+            return getDifferentUserInputIfInputIsBad(board);
         } else {
             int usersChosenPosition = userInterface.getFormattedUserPosition(userInput);
             if (!board.isPositionAvailable(usersChosenPosition)) {
-                return askAgainIfPositionUnavailable(board);
+                return getDifferentUserInputIfPositionUnavailable(board);
             }
             return usersChosenPosition;
         }
     }
 
-    private int askAgainIfInputIsBad(Board board) {
+    private int getDifferentUserInputIfInputIsBad(Board board) {
         userInterface.notANumberWarning();
         return getPosition(board);
     }
 
-    private int askAgainIfPositionUnavailable(Board board) {
+    private int getDifferentUserInputIfPositionUnavailable(Board board) {
         userInterface.positionUnavailableWarning();
         return getPosition(board);
     }
