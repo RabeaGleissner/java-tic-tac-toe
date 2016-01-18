@@ -27,10 +27,9 @@ public class UserInterfaceTest {
 
     @Test
     public void displaysEmptyBoard() {
-        Board board = new Board();
         userInterface.displayBoard(board.cells());
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\n" +
+                "\033[H\033[2J\n" +
                 "| 1 | 2 | 3 | \n" +
                 " -----------\n" +
                 "| 4 | 5 | 6 | \n" +
@@ -41,12 +40,11 @@ public class UserInterfaceTest {
 
     @Test
     public void displaysBoardWithMarks() {
-        Board board = new Board();
         board.placeMark(1, Mark.X);
         board.placeMark(3, Mark.O);
         userInterface.displayBoard(board.cells());
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\n" +
+                "\033[H\033[2J\n" +
                 "| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
                 " -----------\n" +
                 "| \u001B[31mO\u001B[0m | 5 | 6 | \n" +

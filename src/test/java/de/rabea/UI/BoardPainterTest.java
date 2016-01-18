@@ -22,7 +22,7 @@ public class BoardPainterTest {
         Cell [] cells = {EMPTY, X, EMPTY, O, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY};
         BoardPainter boardPainter = new BoardPainter(board);
         assertEquals(
-                  "[H [2J\n| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
+                  "\033[H\033[2J\n| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
                   " -----------\n" +
                   "| \u001B[31mO\u001B[0m | 5 | 6 | \n" +
                   " -----------\n" +
@@ -31,5 +31,4 @@ public class BoardPainterTest {
                 boardPainter.drawBoard(cells)
         );
     }
-
 }
