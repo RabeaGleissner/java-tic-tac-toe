@@ -19,7 +19,7 @@ public class GameSetUp {
         GameMode gameMode = userInterface.chooseGameMode();
         userInterface.announceMarkDistribution(gameMode);
 
-        if (gameMode == GameMode.HvC) {
+        if (isHumanVsComputer(gameMode)) {
             Game game = new Game(userInterface, createNewHumanPlayer(), createNewComputerPlayer(), this);
             game.play();
         } else {
@@ -27,6 +27,10 @@ public class GameSetUp {
             game.play();
         }
 
+    }
+
+    private boolean isHumanVsComputer(GameMode gameMode) {
+        return gameMode == GameMode.HvC;
     }
 
     private HumanPlayer createNewHumanPlayer() {

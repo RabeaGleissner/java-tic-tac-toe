@@ -7,8 +7,8 @@ import de.rabea.game.Mark;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
@@ -29,7 +29,7 @@ public class UserInterfaceTest {
     public void displaysEmptyBoard() {
         userInterface.displayBoard(board.cells());
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\033[H\033[2J\n" +
+                clearScreen() + "\n" +
                 "| 1 | 2 | 3 | \n" +
                 " -----------\n" +
                 "| 4 | 5 | 6 | \n" +
@@ -38,13 +38,14 @@ public class UserInterfaceTest {
         );
     }
 
+
     @Test
     public void displaysBoardWithMarks() {
         board.placeMark(1, Mark.X);
         board.placeMark(3, Mark.O);
         userInterface.displayBoard(board.cells());
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\033[H\033[2J\n" +
+                clearScreen() + "\n" +
                 "| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
                 " -----------\n" +
                 "| \u001B[31mO\u001B[0m | 5 | 6 | \n" +
@@ -132,5 +133,9 @@ public class UserInterfaceTest {
     public void communicatesThatPositionIsUnavailable() {
         userInterface.positionUnavailableWarning();
         assertEquals("Sorry, this position is not available!", fakeConsole.messagePrinted());
+    }
+
+    private String clearScreen() {
+        return "\033[H\033[2J";
     }
 }
