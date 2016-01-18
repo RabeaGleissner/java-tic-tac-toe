@@ -1,8 +1,7 @@
 package de.rabea.ui;
 
-import de.rabea.game.Board;
-import de.rabea.game.Cell;
 import de.rabea.game.GameMode;
+import de.rabea.game.Mark;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -26,15 +25,26 @@ public class FakeUserInterface extends UserInterface {
     }
 
     @Override
-    public Integer playersChosenPosition(Board board) {
+    public String readUserInput() {
         askForPositionWasCalled = true;
-        int position = Integer.parseInt(moves.remove(0));
+        String userInput = moves.remove(0);
+        return userInput;
+    }
+
+    @Override
+    public int getFormattedUserPosition(String userInput) {
+        int position = Integer.parseInt(userInput);
         position --;
         return position;
     }
 
     @Override
-    public void announceGameEnd(Cell lastPlayedMark, boolean winner) {
+    public void askForPosition() {
+        askForPositionWasCalled = true;
+    }
+
+    @Override
+    public void announceGameEnd(Mark lastPlayedMark, boolean winner) {
         countAnnounceGameEndCalls++;
     }
 

@@ -3,6 +3,7 @@ package de.rabea.ui;
 import de.rabea.game.Board;
 import de.rabea.game.Cell;
 import de.rabea.game.GameMode;
+import de.rabea.game.Mark;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,10 +27,9 @@ public class UserInterfaceTest {
 
     @Test
     public void displaysEmptyBoard() {
-        Board board = new Board();
         userInterface.displayBoard(board.cells());
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\n" +
+                "\033[H\033[2J\n" +
                 "| 1 | 2 | 3 | \n" +
                 " -----------\n" +
                 "| 4 | 5 | 6 | \n" +
@@ -40,31 +40,17 @@ public class UserInterfaceTest {
 
     @Test
     public void displaysBoardWithMarks() {
-        Board board = new Board();
-        board.placeMark(1, Cell.X);
-        board.placeMark(3, Cell.O);
+        board.placeMark(1, Mark.X);
+        board.placeMark(3, Mark.O);
         userInterface.displayBoard(board.cells());
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\n" +
+                "\033[H\033[2J\n" +
                 "| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
                 " -----------\n" +
                 "| \u001B[31mO\u001B[0m | 5 | 6 | \n" +
                 " -----------\n" +
                 "| 7 | 8 | 9 |\n"
         );
-    }
-
-    @Test
-    public void itConvertsTheUserPositionIntoAnIntegerForTheProgrammeToUse() {
-        fakeConsole.userInput("2");
-        assertEquals((Integer) 1, userInterface.playersChosenPosition(board));
-    }
-
-    @Test
-    public void itGivesAWarningWhenUserEntryIsNotANumber() {
-        fakeConsole.userInput("NaN", "8");
-        userInterface.playersChosenPosition(board);
-        assertEquals("Please select a position for your mark.", fakeConsole.messagePrinted());
     }
 
     @Test
@@ -132,13 +118,13 @@ public class UserInterfaceTest {
 
     @Test
     public void announceWinner() {
-        userInterface.announceGameEnd(Cell.X, true);
+        userInterface.announceGameEnd(Mark.X, true);
         assertEquals("Game over! The winner is: X", fakeConsole.messagePrinted());
     }
 
     @Test
     public void announceDraw() {
-        userInterface.announceGameEnd(Cell.X, false);
+        userInterface.announceGameEnd(Mark.X, false);
         assertEquals("Game over! It's a draw.", fakeConsole.messagePrinted());
     }
 

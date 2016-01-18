@@ -5,76 +5,49 @@ import de.rabea.ui.UserInterface;
 public class Game {
 
     private final UserInterface userInterface;
-    private final ComputerPlayer computerPlayer;
+    private final Player player;
+    private final Player opponent ;
+    private final GameSetUp gameSetUp;
 
-    public Game(UserInterface userInterface, ComputerPlayer computerPlayer) {
+    public Game(UserInterface userInterface, Player player, Player opponent, GameSetUp gameSetUp) {
         this.userInterface = userInterface;
-        this.computerPlayer = computerPlayer;
+        this.player = player;
+        this.opponent = opponent;
+        this.gameSetUp = gameSetUp;
     }
 
     public void play() {
-        GameMode game = gameSetup();
-        Cell mark = Cell.X;
         Board board = new Board();
-        Rules rules = new Rules(board);
-        while (gameIsNotOver(rules)){
-            playOneHumanRound(mark, board);
-            mark = board.switchMark(mark);
-            if (humanVsComputerMode(game) && gameIsNotOver(rules)) {
-                playOneComputerRound(board, mark);
-                mark = board.switchMark(mark);
-            }
+        Player currentPlayer = player;
+        while (gameIsNotOver(board)){
+            playOneRound(currentPlayer, board);
+            currentPlayer = switchPlayer(currentPlayer);
         }
-        finishGame(mark, board, rules);
+        finishGame(currentPlayer.mark(), board);
         if (userInterface.playAgain()) {
-            play();
+            gameSetUp.setUpGame();
         }
     }
 
-    private GameMode gameSetup() {
-        userInterface.greet();
-        GameMode gameMode = userInterface.chooseGameMode();
-        userInterface.announceMarkDistribution(gameMode);
-        return gameMode;
-    }
-
-    public Integer usersPosition(Board board) {
-        Integer position = userInterface.playersChosenPosition(board);
-        return validPosition(position, board);
-    }
-
-    private void playOneComputerRound(Board board, Cell mark) {
-        board.placeMark(computerPlayer.getPosition(board), mark);
-    }
-
-    private void playOneHumanRound(Cell mark, Board board) {
-        userInterface.displayBoard(board.cells());
-        board.placeMark(usersPosition(board), mark);
-    }
-
-    private void finishGame(Cell mark, Board board, Rules rules) {
-        userInterface.displayBoard(board.cells());
-        userInterface.announceGameEnd(board.switchMark(mark), rules.hasWinner());
-    }
-
-    private Integer validPosition(Integer position, Board board) {
-        if (board.isPositionAvailable(position)) {
-            return position;
+    public Player switchPlayer(Player currentPlayer) {
+        if (currentPlayer == player) {
+            return opponent;
         } else {
-            return askUserAgainForPosition(board);
+            return player;
         }
     }
 
-    private Integer askUserAgainForPosition(Board board) {
-        userInterface.positionUnavailableWarning();
-        return usersPosition(board);
+    private void playOneRound(Player player, Board board) {
+        userInterface.displayBoard(board.cells());
+        board.placeMark(player.getPosition(board), player.mark());
     }
 
-    private boolean humanVsComputerMode(GameMode gameMode) {
-        return gameMode == GameMode.HvC;
+    private void finishGame(Mark mark, Board board) {
+        userInterface.displayBoard(board.cells());
+        userInterface.announceGameEnd(board.switchMark(mark), board.hasWinner());
     }
 
-    private boolean gameIsNotOver(Rules rules) {
-       return !rules.gameOver();
+    private boolean gameIsNotOver(Board board) {
+       return !board.gameOver();
     }
 }

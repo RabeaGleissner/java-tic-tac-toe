@@ -8,8 +8,8 @@ public class FakeComputerPlayer extends ComputerPlayer {
 
     private List<Integer> listOfNumbers;
 
-    public FakeComputerPlayer(RandomNumberCalc randomNumberCalc) {
-        super(randomNumberCalc);
+    public FakeComputerPlayer(RandomNumberCalculator randomNumberCalculator, Mark mark) {
+        super(randomNumberCalculator, mark);
         listOfNumbers = new LinkedList<Integer>();
     }
 
@@ -20,5 +20,9 @@ public class FakeComputerPlayer extends ComputerPlayer {
 
     public void giveNumbers(Integer ... num) {
         listOfNumbers.addAll(Arrays.asList(num));
+    }
+
+    public boolean wereAllComputerPositionsUsedUp(){
+        return listOfNumbers.size() == 0;
     }
 }
