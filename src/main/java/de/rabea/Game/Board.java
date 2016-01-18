@@ -23,9 +23,8 @@ public class Board {
         return cells;
     }
 
-    public Cell[] placeMark(int position, Mark mark) {
+    public void placeMark(int position, Mark mark) {
         cells[position] = mark.convertToCell();
-        return cells;
     }
 
     public boolean gameOver() {
@@ -33,9 +32,8 @@ public class Board {
     }
 
     public boolean hasWinner() {
-        List<List<Integer>> winningCombinations = getAllLines();
-        for (List<Integer> combination : winningCombinations) {
-            if (anyLineMatchesAWinningCombination(cells(), combination)) {
+        for (List<Integer> line : getAllLines()) {
+            if (anyLineMatchesAWinningCombination(cells(), line)) {
                 return true;
             }
         }
@@ -47,8 +45,15 @@ public class Board {
     }
 
     public boolean isPositionAvailable(int position) {
-        return position >= 0 && position < cells.length &&
-                !(cells[position] == Cell.X || cells[position] == Cell.O);
+        return isValidPosition(position) && positionIsEmpty(cells[position]);
+    }
+
+    private boolean positionIsEmpty(Cell cell) {
+        return cell != Cell.X && cell != Cell.O;
+    }
+
+    private boolean isValidPosition(int position) {
+        return position >= 0 && position < cells.length;
     }
 
     public Mark switchMark(Mark mark) {
@@ -61,12 +66,11 @@ public class Board {
 
     public List<Integer> emptyCells() {
         List<Integer> emptyCells = new ArrayList<Integer>();
-        int i = 0;
-        for (Cell cell : cells) {
+        for (int i=0; i < cells.length; i++) {
+            Cell cell  = cells[i];
             if (cell == EMPTY) {
                 emptyCells.add(i);
             }
-            i++;
         }
         return emptyCells;
     }
@@ -83,10 +87,10 @@ public class Board {
     }
 
     public List<Integer> indexOfLastCellPerRow() {
-        int length = getDimension();
+        int dimension = getDimension();
         List<Integer> lastCellsPerRow = new ArrayList<Integer>();
-        for (int i = 1; i <= length; i ++) {
-            lastCellsPerRow.add(length * i - 1);
+        for (int i = 1; i <= dimension; i++) {
+            lastCellsPerRow.add(dimension * i - 1);
         }
         return lastCellsPerRow;
     }
@@ -134,16 +138,28 @@ public class Board {
 
     public List<List<Integer>> getAllLines() {
         List<List<Integer>> allLines = new ArrayList<List<Integer>>();
-        for (List<Integer> row : getRows()) {
-            allLines.add(row);
-        }
-        for (List<Integer> column : getColumns()) {
-            allLines.add(column);
-        }
+        getRows(allLines);
+        getColumns(allLines);
+        getDiagonals(allLines);
+        return allLines;
+    }
+
+    private void getDiagonals(List<List<Integer>> allLines) {
         for (List<Integer> diagonal : getDiagonals()) {
             allLines.add(diagonal);
         }
-        return allLines;
+    }
+
+    private void getColumns(List<List<Integer>> allLines) {
+        for (List<Integer> column : getColumns()) {
+            allLines.add(column);
+        }
+    }
+
+    private void getRows(List<List<Integer>> allLines) {
+        for (List<Integer> row : getRows()) {
+            allLines.add(row);
+        }
     }
 
     public List<List<Integer>> getRows() {
