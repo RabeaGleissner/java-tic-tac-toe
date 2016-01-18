@@ -29,11 +29,11 @@ public class GameSetUp {
 
     }
 
-    public HumanPlayer createNewHumanPlayer() {
+    private HumanPlayer createNewHumanPlayer() {
         return new HumanPlayer(userInterface, Mark.X);
     }
 
-    public HumanPlayer createNewHumanOpponent() {
+    private HumanPlayer createNewHumanOpponent() {
         return new HumanPlayer(userInterface, Mark.O);
     }
 
