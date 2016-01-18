@@ -64,7 +64,11 @@ public class UserInterface {
     }
 
     public boolean isUserInputInvalid(String userInput) {
-       return !(inputFormatter.isInteger(userInput));
+       return userInputIsNotANumber(userInput);
+    }
+
+    private boolean userInputIsNotANumber(String userInput) {
+        return !(inputFormatter.isInteger(userInput));
     }
 
     public int getFormattedUserPosition(String userInput) {

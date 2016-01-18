@@ -111,11 +111,15 @@ public class Board {
 
     public boolean isEndOfFirstOrSecondRow(int cell) {
         for (int cellIndex : indexOfLastCellPerRow()) {
-            if (cell == cellIndex && !(isLastCell(cell))) {
+            if (cell == cellIndex && isNotTheLastCell(cell)) {
                 return true;
             }
         }
         return false;
+    }
+
+    private boolean isNotTheLastCell(int cell) {
+        return !(isLastCell(cell));
     }
 
     private boolean anyLineMatchesAWinningCombination(Cell[] gameState, List<Integer> combo) {
