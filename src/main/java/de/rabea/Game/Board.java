@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static de.rabea.game.Mark.*;
 import static de.rabea.game.Mark.EMPTY;
 
 public class Board {
@@ -46,7 +47,7 @@ public class Board {
     }
 
     private boolean positionIsEmpty(Mark cell) {
-        return cell != Mark.X && cell != Mark.O;
+        return cell != X && cell != O;
     }
 
     private boolean isValidPosition(int position) {
@@ -57,7 +58,7 @@ public class Board {
         List<Integer> emptyCells = new ArrayList<>();
         for (int i=0; i < cells.length; i++) {
             Mark cell  = cells[i];
-            if (cell == Mark.EMPTY) {
+            if (cell == EMPTY) {
                 emptyCells.add(i);
             }
         }
@@ -68,7 +69,7 @@ public class Board {
         int count = 0;
 
         for (Mark cell : cells) {
-            if (cell == Mark.EMPTY) {
+            if (cell == EMPTY) {
                 count++;
             }
         }

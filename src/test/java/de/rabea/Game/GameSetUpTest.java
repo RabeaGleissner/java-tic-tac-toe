@@ -4,6 +4,7 @@ import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
+import static de.rabea.game.Mark.*;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -16,7 +17,7 @@ public class GameSetUpTest {
     @Before
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
-        fakeComputerPlayer = new FakeComputerPlayer(new FakeRandomNumberCalculator(), Mark.O);
+        fakeComputerPlayer = new FakeComputerPlayer(new FakeRandomNumberCalculator(), O);
         gameSetUp = new GameSetUp(fakeUserInterface);
     }
 
@@ -51,7 +52,7 @@ public class GameSetUpTest {
 
         @Override
         public ComputerPlayer createNewComputerPlayer() {
-            FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(new RandomNumberCalculator(), Mark.O);
+            FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(new RandomNumberCalculator(), O);
             fakeComputerPlayer.giveNumbers(0, 3, 6);
             return fakeComputerPlayer;
         }

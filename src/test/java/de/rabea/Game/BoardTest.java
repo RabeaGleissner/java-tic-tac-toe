@@ -35,7 +35,7 @@ public class BoardTest {
         Mark[] cells = {EMPTY, X, EMPTY,
                         EMPTY, EMPTY, EMPTY,
                         EMPTY, EMPTY, EMPTY};
-        board.placeMark(1, Mark.X);
+        board.placeMark(1, X);
         assertArrayEquals(cells, board.cells());
     }
 
@@ -57,20 +57,20 @@ public class BoardTest {
 
     @Test
     public void isNotAValidUserChoice() {
-        board.placeMark(1, Mark.X);
+        board.placeMark(1, X);
         assertEquals(false, board.isPositionAvailable(1));
     }
 
     @Test
     public void switchesMarkXtoO() {
-        Mark mark = Mark.O;
-        assertEquals(mark, mark.switchMark(Mark.X));
+        Mark mark = O;
+        assertEquals(mark, mark.switchMark(X));
     }
 
     @Test
     public void switchesMarkOToX() {
-        Mark mark = Mark.X;
-        assertEquals(mark, mark.switchMark(Mark.O));
+        Mark mark = X;
+        assertEquals(mark, mark.switchMark(O));
     }
 
     @Test
@@ -80,10 +80,10 @@ public class BoardTest {
 
     @Test
     public void returnsAnArrayOfAllEmptyPosition() {
-        board.placeMark(1, Mark.X);
-        board.placeMark(2, Mark.O);
-        board.placeMark(3, Mark.X);
-        board.placeMark(6, Mark.O);
+        board.placeMark(1, X);
+        board.placeMark(2, O);
+        board.placeMark(3, X);
+        board.placeMark(6, O);
         List<Integer> emptyCells = new ArrayList<Integer>(Arrays.asList(0,4,5,7,8));
         assertEquals(emptyCells, board.emptyCells());
     }

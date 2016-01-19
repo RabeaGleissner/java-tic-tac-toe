@@ -4,6 +4,7 @@ import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
+import static de.rabea.game.Mark.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -20,10 +21,10 @@ public class GameTest {
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
         randomNumberCalculator = new RandomNumberCalculator();
-        humanPlayer = new HumanPlayer(fakeUserInterface, Mark.X);
-        humanOpponent = new HumanPlayer(fakeUserInterface, Mark.O);
+        humanPlayer = new HumanPlayer(fakeUserInterface, X);
+        humanOpponent = new HumanPlayer(fakeUserInterface, O);
         board = new Board();
-        computerPlayer = new ComputerPlayer(randomNumberCalculator, Mark.O);
+        computerPlayer = new ComputerPlayer(randomNumberCalculator, O);
     }
 
     @Test
@@ -37,7 +38,7 @@ public class GameTest {
 
     @Test
     public void playsTheHumanVsComputerGameOnce() {
-        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalculator, Mark.O);
+        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalculator, O);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, humanPlayer, fakeComputerPlayer, new GameSetUp(fakeUserInterface));
         fakeUserInterface.provideConsoleInput( "1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
@@ -56,7 +57,7 @@ public class GameTest {
 
     @Test
     public void playsTheHumanVsComputerGameTwice() {
-        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalculator, Mark.O);
+        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalculator, O);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, humanPlayer, fakeComputerPlayer,
                 new GameSetUpWithFakeComputerPlayer());
         fakeUserInterface.provideConsoleInput("1", "1", "4", "7", "y", "1", "3", "6", "2", "n");
@@ -73,7 +74,7 @@ public class GameTest {
 
         @Override
         public ComputerPlayer createNewComputerPlayer() {
-            FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalculator, Mark.O);
+            FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(randomNumberCalculator, O);
             fakeComputerPlayer.giveNumbers(0,3,6);
             return fakeComputerPlayer;
         }

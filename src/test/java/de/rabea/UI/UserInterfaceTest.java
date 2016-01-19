@@ -6,6 +6,7 @@ import de.rabea.game.Mark;
 import org.junit.Before;
 import org.junit.Test;
 
+import static de.rabea.game.Mark.*;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,8 +41,8 @@ public class UserInterfaceTest {
 
     @Test
     public void displaysBoardWithMarks() {
-        board.placeMark(1, Mark.X);
-        board.placeMark(3, Mark.O);
+        board.placeMark(1, X);
+        board.placeMark(3, O);
         userInterface.displayBoard(board);
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
                 clearScreen() + "\n" +
@@ -118,13 +119,13 @@ public class UserInterfaceTest {
 
     @Test
     public void announceWinner() {
-        userInterface.announceGameEnd(Mark.X, true);
+        userInterface.announceGameEnd(X, true);
         assertEquals("Game over! The winner is: X", fakeConsole.messagePrinted());
     }
 
     @Test
     public void announceDraw() {
-        userInterface.announceGameEnd(Mark.X, false);
+        userInterface.announceGameEnd(X, false);
         assertEquals("Game over! It's a draw.", fakeConsole.messagePrinted());
     }
 

@@ -6,10 +6,10 @@ public enum Mark {
     EMPTY;
 
     public Mark switchMark(Mark mark) {
-        if (mark == Mark.X) {
-            return Mark.O;
+        if (mark == X) {
+            return O;
         } else {
-            return Mark.X;
+            return X;
         }
     }
 }

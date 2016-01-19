@@ -3,6 +3,8 @@ package de.rabea.game;
 import de.rabea.ui.RealConsole;
 import de.rabea.ui.UserInterface;
 
+import static de.rabea.game.Mark.*;
+
 public class GameSetUp {
     UserInterface userInterface = new UserInterface(new RealConsole(System.in, System.out));
 
@@ -34,14 +36,14 @@ public class GameSetUp {
     }
 
     private HumanPlayer createNewHumanPlayer() {
-        return new HumanPlayer(userInterface, Mark.X);
+        return new HumanPlayer(userInterface, X);
     }
 
     private HumanPlayer createNewHumanOpponent() {
-        return new HumanPlayer(userInterface, Mark.O);
+        return new HumanPlayer(userInterface, O);
     }
 
     public ComputerPlayer createNewComputerPlayer() {
-        return new ComputerPlayer(new RandomNumberCalculator(), Mark.O);
+        return new ComputerPlayer(new RandomNumberCalculator(), O);
     }
 }
