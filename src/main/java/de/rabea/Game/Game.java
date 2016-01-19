@@ -44,7 +44,7 @@ public class Game {
 
     private void finishGame(Mark mark, Board board) {
         userInterface.displayBoard(board.cells());
-        userInterface.announceGameEnd(board.switchMark(mark), board.hasWinner());
+        userInterface.announceGameEnd(mark.switchMark(mark), board.hasWinner());
     }
 
     private boolean gameIsNotOver(Board board) {

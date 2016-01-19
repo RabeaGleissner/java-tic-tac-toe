@@ -4,29 +4,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static de.rabea.game.Cell.EMPTY;
+import static de.rabea.game.Mark.EMPTY;
 
 public class Board {
 
-    private Cell[] cells;
+    private Mark[] cells;
 
 
     public Board() {
-       this(new Cell[] {EMPTY, EMPTY, EMPTY,
+       this(new Mark[] {EMPTY, EMPTY, EMPTY,
                 EMPTY, EMPTY, EMPTY,
                 EMPTY, EMPTY, EMPTY});
     }
 
-    public Board(Cell[] cells) {
+    public Board(Mark[] cells) {
        this.cells = cells;
     }
 
-    public Cell[] cells() {
+    public Mark[] cells() {
         return cells;
     }
 
     public void placeMark(int position, Mark mark) {
-        cells[position] = mark.convertToCell();
+        cells[position] = mark;
     }
 
     public boolean gameOver() {
@@ -45,27 +45,19 @@ public class Board {
         return isValidPosition(position) && positionIsEmpty(cells[position]);
     }
 
-    private boolean positionIsEmpty(Cell cell) {
-        return cell != Cell.X && cell != Cell.O;
+    private boolean positionIsEmpty(Mark cell) {
+        return cell != Mark.X && cell != Mark.O;
     }
 
     private boolean isValidPosition(int position) {
         return position >= 0 && position < cells.length;
     }
 
-    public Mark switchMark(Mark mark) {
-        if (mark == Mark.X) {
-            return Mark.O;
-        } else {
-            return Mark.X;
-        }
-    }
-
     public List<Integer> emptyCells() {
         List<Integer> emptyCells = new ArrayList<>();
         for (int i=0; i < cells.length; i++) {
-            Cell cell  = cells[i];
-            if (cell == EMPTY) {
+            Mark cell  = cells[i];
+            if (cell == Mark.EMPTY) {
                 emptyCells.add(i);
             }
         }
@@ -75,8 +67,8 @@ public class Board {
     private int emptyCellsCount() {
         int count = 0;
 
-        for (Cell cell : cells) {
-            if (cell == EMPTY) {
+        for (Mark cell : cells) {
+            if (cell == Mark.EMPTY) {
                 count++;
             }
         }

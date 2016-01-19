@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static de.rabea.game.Cell.*;
+import static de.rabea.game.Mark.*;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertArrayEquals;
@@ -24,7 +24,7 @@ public class BoardTest {
 
     @Test
     public void initiatesAnEmptyBoard() {
-        Cell[] emptyBoard = {EMPTY, EMPTY, EMPTY,
+        Mark[] emptyBoard = {EMPTY, EMPTY, EMPTY,
                              EMPTY, EMPTY, EMPTY,
                              EMPTY, EMPTY, EMPTY};
         assertArrayEquals(emptyBoard, board.cells());
@@ -32,7 +32,7 @@ public class BoardTest {
 
     @Test
     public void placesAMark() {
-        Cell[] cells = {EMPTY, X, EMPTY,
+        Mark[] cells = {EMPTY, X, EMPTY,
                         EMPTY, EMPTY, EMPTY,
                         EMPTY, EMPTY, EMPTY};
         board.placeMark(1, Mark.X);
@@ -63,12 +63,14 @@ public class BoardTest {
 
     @Test
     public void switchesMarkXtoO() {
-        assertEquals(Mark.O, board.switchMark(Mark.X));
+        Mark mark = Mark.O;
+        assertEquals(mark, mark.switchMark(Mark.X));
     }
 
     @Test
     public void switchesMarkOToX() {
-        assertEquals(Mark.X, board.switchMark(Mark.O));
+        Mark mark = Mark.X;
+        assertEquals(mark, mark.switchMark(Mark.O));
     }
 
     @Test
@@ -149,21 +151,21 @@ public class BoardTest {
 
     private Board fullBoardNoWinner() {
         return new Board(
-                new Cell[]{X, X, O,
+                new Mark[]{X, X, O,
                            O, O, X,
                            X, O, X}
         );
     }
     private Board horizontalsWinningBoard() {
         return new Board(
-                new Cell[]{X,     X,     X,
+                new Mark[]{X,     X,     X,
                            EMPTY, EMPTY, EMPTY,
                            EMPTY, O,     O}
         );
     }
     private Board verticalsWinningBoard() {
         return new Board(
-                new Cell[]{X, X, O,
+                new Mark[]{X, X, O,
                            X, O, O,
                            X, O, X}
         );
@@ -171,7 +173,7 @@ public class BoardTest {
 
     private Board diagonalsWinningBoard() {
         return new Board(
-                new Cell[]{X,     X, O,
+                new Mark[]{X,     X, O,
                            EMPTY, X, EMPTY,
                            EMPTY, O, X}
         );

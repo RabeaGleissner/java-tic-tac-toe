@@ -1,13 +1,13 @@
 package de.rabea.game;
 
-import static de.rabea.game.Cell.EMPTY;
+import static de.rabea.game.Mark.EMPTY;
 
 public class Line {
-    private final Cell first;
-    private final Cell second;
-    private final Cell third;
+    private final Mark first;
+    private final Mark second;
+    private final Mark third;
 
-    public Line(Cell first, Cell second, Cell third) {
+    public Line(Mark first, Mark second, Mark third) {
         this.first = first;
         this.second = second;
         this.third = third;

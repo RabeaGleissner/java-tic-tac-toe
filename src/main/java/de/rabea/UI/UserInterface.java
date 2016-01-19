@@ -22,7 +22,7 @@ public class UserInterface {
     private InputFormatter inputFormatter = new InputFormatter();
 
 
-    public void displayBoard(Cell[] cells) {
+    public void displayBoard(Mark[] cells) {
         BoardPainter boardPainter = new BoardPainter(new Board());
         console.print(boardPainter.drawBoard(cells));
     }

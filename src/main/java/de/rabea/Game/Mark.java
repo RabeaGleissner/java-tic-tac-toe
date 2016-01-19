@@ -2,15 +2,14 @@ package de.rabea.game;
 
 public enum Mark {
     X,
-    O;
+    O,
+    EMPTY;
 
-    public Cell convertToCell() {
-        Cell cell;
-        if (this == Mark.X) {
-            cell = Cell.X;
+    public Mark switchMark(Mark mark) {
+        if (mark == Mark.X) {
+            return Mark.O;
         } else {
-            cell = Cell.O;
+            return Mark.X;
         }
-        return cell;
     }
 }

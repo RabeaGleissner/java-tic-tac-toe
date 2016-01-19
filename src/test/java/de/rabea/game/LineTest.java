@@ -2,8 +2,8 @@ package de.rabea.game;
 
 import org.junit.Test;
 
-import static de.rabea.game.Cell.EMPTY;
-import static de.rabea.game.Cell.X;
+import static de.rabea.game.Mark.EMPTY;
+import static de.rabea.game.Mark.X;
 import static org.junit.Assert.*;
 
 public class LineTest {
@@ -23,7 +23,7 @@ public class LineTest {
 
     @Test
     public void mixedCellsAreNotAWinner() {
-        Line line = new Line(X, X, Cell.O);
+        Line line = new Line(X, X, Mark.O);
         assertFalse(line.hasWinner());
     }
 }
