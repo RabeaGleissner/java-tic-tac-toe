@@ -1,6 +1,7 @@
 package de.rabea.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static de.rabea.game.Cell.EMPTY;
@@ -8,6 +9,7 @@ import static de.rabea.game.Cell.EMPTY;
 public class Board {
 
     private Cell[] cells;
+
 
     public Board() {
        this(new Cell[] {EMPTY, EMPTY, EMPTY,
@@ -32,12 +34,7 @@ public class Board {
     }
 
     public boolean hasWinner() {
-        for (List<Integer> line : getAllLines()) {
-            if (anyLineMatchesAWinningCombination(cells(), line)) {
-                return true;
-            }
-        }
-        return false;
+        return getAllLines().stream().anyMatch(line -> line.hasWinner());
     }
 
     public boolean isFull() {
@@ -65,7 +62,7 @@ public class Board {
     }
 
     public List<Integer> emptyCells() {
-        List<Integer> emptyCells = new ArrayList<Integer>();
+        List<Integer> emptyCells = new ArrayList<>();
         for (int i=0; i < cells.length; i++) {
             Cell cell  = cells[i];
             if (cell == EMPTY) {
@@ -88,7 +85,7 @@ public class Board {
 
     public List<Integer> indexOfLastCellPerRow() {
         int dimension = getDimension();
-        List<Integer> lastCellsPerRow = new ArrayList<Integer>();
+        List<Integer> lastCellsPerRow = new ArrayList<>();
         for (int i = 1; i <= dimension; i++) {
             lastCellsPerRow.add(dimension * i - 1);
         }
@@ -122,52 +119,16 @@ public class Board {
         return !(isLastCell(cell));
     }
 
-    private boolean anyLineMatchesAWinningCombination(Cell[] gameState, List<Integer> combo) {
-        return positionIsNotEmpty(gameState, combo) &&
-                sameMarkInFirstAndSecondPosition(gameState, combo) &&
-                sameMarkInSecondAndThirdPosition(gameState, combo);
-    }
-
-    private boolean positionIsNotEmpty(Cell[] gameState, List<Integer> combo) {
-        return gameState[combo.get(0)]!= Cell.EMPTY;
-    }
-
-    private boolean sameMarkInFirstAndSecondPosition(Cell[] gameState, List<Integer> combo) {
-        return gameState[combo.get(0)] == gameState[combo.get(1)];
-    }
-
-    private boolean sameMarkInSecondAndThirdPosition(Cell[] gameState, List<Integer> combo) {
-        return gameState[combo.get(1)] == gameState[combo.get(2)];
-    }
-
-    public List<List<Integer>> getAllLines() {
-        List<List<Integer>> allLines = new ArrayList<List<Integer>>();
-        getRows(allLines);
-        getColumns(allLines);
-        getDiagonals(allLines);
+    public List<Line> getAllLines() {
+        List<Line> allLines = new ArrayList<>();
+        allLines.addAll(getRows());
+        allLines.addAll(getColumns());
+        allLines.addAll(getDiagonals());
         return allLines;
     }
 
-    private void getDiagonals(List<List<Integer>> allLines) {
-        for (List<Integer> diagonal : getDiagonals()) {
-            allLines.add(diagonal);
-        }
-    }
-
-    private void getColumns(List<List<Integer>> allLines) {
-        for (List<Integer> column : getColumns()) {
-            allLines.add(column);
-        }
-    }
-
-    private void getRows(List<List<Integer>> allLines) {
-        for (List<Integer> row : getRows()) {
-            allLines.add(row);
-        }
-    }
-
-    public List<List<Integer>> getRows() {
-        List<List<Integer>> rows = new ArrayList<List<Integer>>();
+    public List<Line> getRows() {
+        List<Line> rows = new ArrayList<>();
 
         for (int i = 0; i < getDimension(); i++) {
            rows.add(getRow(i));
@@ -175,45 +136,26 @@ public class Board {
         return rows;
     }
 
-    public List<List<Integer>> getColumns() {
-        List<List<Integer>> columns = new ArrayList<List<Integer>>();
+    private Line getRow(int index) {
+        int start = index * 3;
+        return new Line(cells[start], cells[start+1], cells[start+2]);
+    }
+
+    public List<Line> getColumns() {
+        List<Line> columns = new ArrayList<>();
         for (int i = 0; i < getDimension(); i++) {
             columns.add(getColumn(i));
         }
         return columns;
     }
 
-    public List<List<Integer>> getDiagonals() {
-        List<List<Integer>> diagonals = new ArrayList<List<Integer>>();
-        List<Integer> forwardDiagonal = new ArrayList<Integer>();
-        List<Integer> backwardDiagonal = new ArrayList<Integer>();
-
-        List<List<Integer>> rows = getRows();
-        for (int i = 0; i < getDimension(); i++) {
-            forwardDiagonal.add(rows.get(i).get(i));
-            backwardDiagonal.add(rows.get(i).get((getDimension() - 1) -i));
-        }
-        diagonals.add(forwardDiagonal);
-        diagonals.add(backwardDiagonal);
-
-        return diagonals;
+    private Line getColumn(int index) {
+        return new Line(cells[index], cells[index+3], cells[index+6]);
     }
 
-    private List<Integer> getRow(int index) {
-        List<Integer> row = new ArrayList<Integer>();
-        int start = index * getDimension();
-        int end = start + getDimension();
-        for (int i= start; i < end; i++) {
-           row.add(i);
-        }
-        return row;
-    }
-
-    private List<Integer> getColumn(int index) {
-        List<Integer> column = new ArrayList<Integer>();
-        for (List<Integer> row : getRows()) {
-            column.add(row.get(index));
-        }
-        return column;
+    public List<Line> getDiagonals() {
+        Line firstDiagonal = new Line(cells[0], cells[4], cells[8]);
+        Line secondDiagonal = new Line(cells[2], cells[4], cells[6]);
+        return Arrays.asList(firstDiagonal, secondDiagonal);
     }
 }

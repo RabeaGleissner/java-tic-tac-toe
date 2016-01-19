@@ -103,40 +103,6 @@ public class BoardTest {
     }
 
     @Test
-    public void itGetsAllRowsOfTheBoard() {
-        List<List<Integer>> rows = new ArrayList<List<Integer>>();
-        List<Integer> row1 = new ArrayList<Integer>(Arrays.asList(0,1,2));
-        List<Integer> row2 = new ArrayList<Integer>(Arrays.asList(3,4,5));
-        List<Integer> row3 = new ArrayList<Integer>(Arrays.asList(6,7,8));
-        rows.add(row1);
-        rows.add(row2);
-        rows.add(row3);
-        assertEquals(rows, board.getRows());
-    }
-
-    @Test
-    public void itGetsAllColumnsOfTheBoard() {
-        List<List<Integer>> columns = new ArrayList<List<Integer>>();
-        List<Integer> column1 = new ArrayList<Integer>(Arrays.asList(0,3,6));
-        List<Integer> column2 = new ArrayList<Integer>(Arrays.asList(1,4,7));
-        List<Integer> column3 = new ArrayList<Integer>(Arrays.asList(2,5,8));
-        columns.add(column1);
-        columns.add(column2);
-        columns.add(column3);
-        assertEquals(columns, board.getColumns());
-    }
-
-    @Test
-    public void itGetsTheDiagonals() {
-       List<List<Integer>> diagonals = new ArrayList<List<Integer>>();
-        List<Integer> diagonal1 = new ArrayList<Integer>(Arrays.asList(0,4,8));
-        List<Integer> diagonal2 = new ArrayList<Integer>(Arrays.asList(2,4,6));
-        diagonals.add(diagonal1);
-        diagonals.add(diagonal2);
-        assertEquals(diagonals, board.getDiagonals());
-    }
-
-    @Test
     public void isEndOfLastRow() {
         assertTrue(board.isLastCell(8));
         assertFalse(board.isLastCell(7));
@@ -179,28 +145,6 @@ public class BoardTest {
     public void diagonalWinningBoard() {
         board = diagonalsWinningBoard();
         assertTrue(board.hasWinner());
-    }
-
-    @Test
-    public void itKnowsAllLinesOnTheBoard() {
-        List<List<Integer>> allLines = new ArrayList<List<Integer>>();
-        List<Integer> line1 = new ArrayList<Integer>(Arrays.asList(0,1,2));
-        List<Integer> line2 = new ArrayList<Integer>(Arrays.asList(3,4,5));
-        List<Integer> line3 = new ArrayList<Integer>(Arrays.asList(6,7,8));
-        List<Integer> line4 = new ArrayList<Integer>(Arrays.asList(0,3,6));
-        List<Integer> line5 = new ArrayList<Integer>(Arrays.asList(1,4,7));
-        List<Integer> line6 = new ArrayList<Integer>(Arrays.asList(2,5,8));
-        List<Integer> line7 = new ArrayList<Integer>(Arrays.asList(0,4,8));
-        List<Integer> line8 = new ArrayList<Integer>(Arrays.asList(2,4,6));
-        allLines.add(line1);
-        allLines.add(line2);
-        allLines.add(line3);
-        allLines.add(line4);
-        allLines.add(line5);
-        allLines.add(line6);
-        allLines.add(line7);
-        allLines.add(line8);
-        assertEquals(allLines, board.getAllLines());
     }
 
     private Board fullBoardNoWinner() {
