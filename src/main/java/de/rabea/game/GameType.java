@@ -1,34 +1,27 @@
 package de.rabea.game;
 
-import de.rabea.ui.RealConsole;
 import de.rabea.ui.UserInterface;
+import static de.rabea.game.Mark.O;
+import static de.rabea.game.Mark.X;
 
-import static de.rabea.game.Mark.*;
+public class GameType {
+    private UserInterface userInterface;
+    private GameManager gameManager;
 
-public class GameSetUp {
-    UserInterface userInterface = new UserInterface(new RealConsole(System.in, System.out));
-
-    public GameSetUp(UserInterface userInterface) {
+    public GameType(UserInterface userInterface, GameManager gameManager) {
         this.userInterface = userInterface;
+        this.gameManager = gameManager;
     }
 
-    public void setUpFirstGame() {
-        userInterface.greet();
-        setUpGame();
-    }
-
-    public void setUpGame() {
+    public Game createGame() {
         GameMode gameMode = userInterface.chooseGameMode();
         userInterface.announceMarkDistribution(gameMode);
 
         if (isHumanVsComputer(gameMode)) {
-            Game game = new Game(userInterface, createNewHumanPlayer(), createNewComputerPlayer(), this);
-            game.play();
+            return new Game(userInterface, createNewHumanPlayer(), createNewComputerPlayer(), gameManager);
         } else {
-            Game game = new Game(userInterface, createNewHumanPlayer(), createNewHumanOpponent(), this);
-            game.play();
+            return new Game(userInterface, createNewHumanPlayer(), createNewHumanOpponent(), gameManager);
         }
-
     }
 
     private boolean isHumanVsComputer(GameMode gameMode) {

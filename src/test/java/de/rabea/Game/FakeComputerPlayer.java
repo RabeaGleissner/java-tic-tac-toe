@@ -8,9 +8,9 @@ public class FakeComputerPlayer extends ComputerPlayer {
 
     private List<Integer> listOfNumbers;
 
-    public FakeComputerPlayer(RandomNumberCalculator randomNumberCalculator, Mark mark) {
-        super(randomNumberCalculator, mark);
-        listOfNumbers = new LinkedList<Integer>();
+    public FakeComputerPlayer(Mark mark) {
+        super(null, mark);
+        listOfNumbers = new LinkedList<>();
     }
 
     @Override
