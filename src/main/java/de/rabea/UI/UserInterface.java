@@ -22,9 +22,9 @@ public class UserInterface {
     private InputFormatter inputFormatter = new InputFormatter();
 
 
-    public void displayBoard(Mark[] cells) {
-        BoardPainter boardPainter = new BoardPainter(new Board());
-        console.print(boardPainter.drawBoard(cells));
+    public void displayBoard(Board board) {
+        BoardPainter boardPainter = new BoardPainter(board);
+        console.print(boardPainter.drawBoard());
     }
 
     public void greet() {

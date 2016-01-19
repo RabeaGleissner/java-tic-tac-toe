@@ -38,12 +38,12 @@ public class Game {
     }
 
     private void playOneRound(Player player, Board board) {
-        userInterface.displayBoard(board.cells());
+        userInterface.displayBoard(board);
         board.placeMark(player.getPosition(board), player.mark());
     }
 
     private void finishGame(Mark mark, Board board) {
-        userInterface.displayBoard(board.cells());
+        userInterface.displayBoard(board);
         userInterface.announceGameEnd(mark.switchMark(mark), board.hasWinner());
     }
 

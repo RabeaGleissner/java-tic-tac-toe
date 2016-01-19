@@ -1,11 +1,11 @@
 package de.rabea.ui;
 
 import de.rabea.game.Board;
-import de.rabea.game.Mark;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Mark.*;
+import static de.rabea.game.Mark.O;
+import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
 
 public class BoardPainterTest {
@@ -19,7 +19,8 @@ public class BoardPainterTest {
 
     @Test
     public void displaysBoardWithMarks() {
-        Mark[] cells = {EMPTY, X, EMPTY, O, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY};
+        board.placeMark(1, X);
+        board.placeMark(3, O);
         BoardPainter boardPainter = new BoardPainter(board);
         assertEquals(
                   clearScreen() +
@@ -29,7 +30,7 @@ public class BoardPainterTest {
                   " -----------\n" +
                   "| 7 | 8 | 9 |\n",
 
-                boardPainter.drawBoard(cells)
+                boardPainter.drawBoard()
         );
     }
 

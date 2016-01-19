@@ -1,7 +1,6 @@
 package de.rabea.ui;
 
 import de.rabea.game.Board;
-import de.rabea.game.Mark;
 
 import static de.rabea.game.Mark.EMPTY;
 import static de.rabea.game.Mark.X;
@@ -17,10 +16,10 @@ public class BoardPainter {
         this.board = board;
     }
 
-    public String drawBoard(Mark[] cells) {
+    public String drawBoard() {
         int i = 0;
         String boardImage= clearScreen() + "\n";
-        for (Enum cell : cells) {
+        for (Enum cell : board.cells()) {
             i ++;
             boardImage = printSymbolInCell(i, boardImage, cell);
             boardImage = printHorizontalLines(i, boardImage);
