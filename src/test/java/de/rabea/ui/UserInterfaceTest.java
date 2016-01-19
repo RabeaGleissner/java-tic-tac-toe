@@ -2,11 +2,11 @@ package de.rabea.ui;
 
 import de.rabea.game.Board;
 import de.rabea.game.GameMode;
-import de.rabea.game.Mark;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Mark.*;
+import static de.rabea.game.Mark.O;
+import static de.rabea.game.Mark.X;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,6 +1,6 @@
 package de.rabea;
 
-import de.rabea.game.*;
+import de.rabea.game.GameManager;
 import de.rabea.ui.RealConsole;
 import de.rabea.ui.UserInterface;
 

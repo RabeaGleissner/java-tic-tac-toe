@@ -1,4 +1,7 @@
-package de.rabea.game;
+package de.rabea.player;
+
+import de.rabea.game.Board;
+import de.rabea.game.Mark;
 
 import java.util.Arrays;
 import java.util.LinkedList;

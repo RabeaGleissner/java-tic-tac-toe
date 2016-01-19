@@ -1,10 +1,15 @@
 package de.rabea.game;
 
+import de.rabea.player.ComputerPlayer;
+import de.rabea.player.FakeComputerPlayer;
+import de.rabea.player.HumanPlayer;
+import de.rabea.player.RandomNumberCalculator;
 import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Mark.*;
+import static de.rabea.game.Mark.O;
+import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

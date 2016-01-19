@@ -1,13 +1,15 @@
-package de.rabea.game;
+package de.rabea.player;
 
+import de.rabea.game.Board;
 import de.rabea.ui.FakeConsole;
 import de.rabea.ui.FakeUserInterface;
 import de.rabea.ui.UserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Mark.*;
-import static org.junit.Assert.*;
+import static de.rabea.game.Mark.X;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class HumanPlayerTest {
     FakeConsole fakeConsole;

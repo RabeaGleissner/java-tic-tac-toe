@@ -1,6 +1,10 @@
 package de.rabea.game;
 
+import de.rabea.player.ComputerPlayer;
+import de.rabea.player.HumanPlayer;
+import de.rabea.player.RandomNumberCalculator;
 import de.rabea.ui.UserInterface;
+
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 

@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static de.rabea.game.Mark.*;
-import static de.rabea.game.Mark.EMPTY;
 
 public class Board {
 
