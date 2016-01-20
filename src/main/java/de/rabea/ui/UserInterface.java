@@ -12,7 +12,7 @@ public class UserInterface {
     private String askUserForPosition = "Please select a position for your mark.";
     private String wantToPlayAgain = "Do you want to play again? y/n";
     private String greeting = "Welcome to Tic Tac Toe.\n ";
-    private String gameOptions = "Please enter 1 if you want to play against the computer and 2 if you want to play against another human player.\n";
+    private String gameOptions = "Please choose the game mode. \n 1 - Human vs Computer\n 2 - Human vs Human";
     private String markDistributionHvH = "The first user to play is X. The second player is O.";
     private String markDistributionHvC = "The human player is X. The computer player is O.";
     private String winnerAnnouncement = "Game over! The winner is: ";
