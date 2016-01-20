@@ -1,6 +1,7 @@
 package de.rabea.ui;
 
 import de.rabea.game.Board;
+import de.rabea.game.Mark;
 
 import static de.rabea.game.Mark.EMPTY;
 import static de.rabea.game.Mark.X;
@@ -19,8 +20,8 @@ public class BoardPainter {
     public String drawBoard() {
         int i = 0;
         String boardImage= clearScreen() + "\n";
-        for (Enum cell : board.cells()) {
-            i ++;
+        for (Mark cell : board.cells()) {
+            i++;
             boardImage = printSymbolInCell(i, boardImage, cell);
             boardImage = printHorizontalLines(i, boardImage);
             boardImage = printLastPipe(i, boardImage);
@@ -28,7 +29,7 @@ public class BoardPainter {
         return boardImage;
     }
 
-    private String printSymbolInCell(int i, String boardImage, Enum cell) {
+    private String printSymbolInCell(int i, String boardImage, Mark cell) {
         if (cell == EMPTY) {
             boardImage += pipe() + i;
         } else if (cell == X) {
@@ -54,11 +55,11 @@ public class BoardPainter {
         return boardImage;
     }
 
-    private String colouredO(Enum cell) {
+    private String colouredO(Mark cell) {
         return redColourForO + cell.toString() + colourReset;
     }
 
-    private String colouredX(Enum cell) {
+    private String colouredX(Mark cell) {
         return blueColourForX + cell.toString() + colourReset;
     }
 

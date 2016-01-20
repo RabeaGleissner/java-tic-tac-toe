@@ -41,13 +41,14 @@ public class BoardTest {
 
     @Test
     public void boardIsEmpty() {
-        assertFalse(board.isFull());
+        Board emptyBoard = new Board();
+        assertFalse(emptyBoard.isFull());
     }
 
     @Test
     public void boardIsFull() {
-        board = fullBoardNoWinner();
-        assertTrue(board.isFull());
+        Board fullBoard = fullBoardNoWinner();
+        assertTrue(fullBoard.isFull());
     }
 
     @Test
@@ -56,35 +57,24 @@ public class BoardTest {
     }
 
     @Test
-    public void isNotAValidUserChoice() {
+    public void markedPositionIsNoLongerAvailable() {
         board.placeMark(1, X);
         assertEquals(false, board.isPositionAvailable(1));
     }
 
     @Test
-    public void switchesMarkXtoO() {
-        Mark mark = O;
-        assertEquals(mark, mark.switchMark(X));
+    public void itKnowsWhenAPositionIsUnavailable() {
+        int positionNotOnTheBoard = 9;
+        assertFalse(board.isPositionAvailable(positionNotOnTheBoard));
     }
 
     @Test
-    public void switchesMarkOToX() {
-        Mark mark = X;
-        assertEquals(mark, mark.switchMark(O));
-    }
-
-    @Test
-    public void checkIf9IsAnAvailablePosition() {
-        assertFalse(board.isPositionAvailable(9));
-    }
-
-    @Test
-    public void returnsAnArrayOfAllEmptyPosition() {
+    public void returnsAllEmptyPositions() {
         board.placeMark(1, X);
         board.placeMark(2, O);
         board.placeMark(3, X);
         board.placeMark(6, O);
-        List<Integer> emptyCells = new ArrayList<Integer>(Arrays.asList(0,4,5,7,8));
+        List<Integer> emptyCells = Arrays.asList(0, 4, 5, 7, 8);
         assertEquals(emptyCells, board.emptyCells());
     }
 

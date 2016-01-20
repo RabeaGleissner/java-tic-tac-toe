@@ -42,15 +42,7 @@ public class Board {
     }
 
     public boolean isPositionAvailable(int position) {
-        return isValidPosition(position) && positionIsEmpty(cells[position]);
-    }
-
-    private boolean positionIsEmpty(Mark cell) {
-        return cell != X && cell != O;
-    }
-
-    private boolean isValidPosition(int position) {
-        return position >= 0 && position < cells.length;
+        return emptyCells().contains(position);
     }
 
     public List<Integer> emptyCells() {
