@@ -82,26 +82,26 @@ public class UserInterfaceTest {
     @Test
     public void asksWhichGameModeUserWantsToPlay() {
         fakeConsole.userInput("1");
-        userInterface.chooseGameMode();
+        userInterface.getGameModeFromUser();
         assertEquals("Please enter 1 if you want to play against the computer and 2 if you want to play against another human player.\n", fakeConsole.messagePrinted());
     }
 
     @Test
     public void returnsHvCGameModeWhenUserEnters1() {
         fakeConsole.userInput("1");
-        assertEquals(GameMode.HvC, userInterface.chooseGameMode());
+        assertEquals(GameMode.HvC, userInterface.getGameModeFromUser());
     }
 
     @Test
     public void returnsHvHGameModeWhenUserEnters1() {
         fakeConsole.userInput("2");
-        assertEquals(GameMode.HvH, userInterface.chooseGameMode());
+        assertEquals(GameMode.HvH, userInterface.getGameModeFromUser());
     }
 
     @Test
     public void asksTheUserAgainForGameModeIfBadInputIsEntered() {
         fakeConsole.userInput("hello", "1");
-        userInterface.chooseGameMode();
+        userInterface.getGameModeFromUser();
         assertEquals("Please enter 1 if you want to play against the computer and 2 if you want to play against another human player.\n", fakeConsole.messagePrinted());
     }
 

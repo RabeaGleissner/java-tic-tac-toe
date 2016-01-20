@@ -31,7 +31,7 @@ public class UserInterface {
         console.print(greeting);
     }
 
-    public GameMode chooseGameMode() {
+    public GameMode getGameModeFromUser() {
         console.print(gameOptions);
         return gameMode();
     }
@@ -43,7 +43,7 @@ public class UserInterface {
         } else if (userChoice.equals("2")){
             return GameMode.HvH;
         } else {
-            return chooseGameMode();
+            return getGameModeFromUser();
         }
     }
 

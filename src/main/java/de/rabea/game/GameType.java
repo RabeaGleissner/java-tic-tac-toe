@@ -18,14 +18,22 @@ public class GameType {
     }
 
     public Game createGame() {
-        GameMode gameMode = userInterface.chooseGameMode();
+        GameMode gameMode = userInterface.getGameModeFromUser();
         userInterface.announceMarkDistribution(gameMode);
 
         if (isHumanVsComputer(gameMode)) {
-            return new Game(userInterface, createNewHumanPlayer(), createNewComputerPlayer(), gameManager);
+            return humanVsComputerGame();
         } else {
-            return new Game(userInterface, createNewHumanPlayer(), createNewHumanOpponent(), gameManager);
+            return createHumanVsHumanGame();
         }
+    }
+
+    private Game createHumanVsHumanGame() {
+        return new Game(userInterface, createNewHumanPlayer(), createNewHumanOpponent(), gameManager);
+    }
+
+    private Game humanVsComputerGame() {
+        return new Game(userInterface, createNewHumanPlayer(), createNewComputerPlayer(), gameManager);
     }
 
     private boolean isHumanVsComputer(GameMode gameMode) {
@@ -40,7 +48,7 @@ public class GameType {
         return new HumanPlayer(userInterface, O);
     }
 
-    public ComputerPlayer createNewComputerPlayer() {
+    private ComputerPlayer createNewComputerPlayer() {
         return new ComputerPlayer(new RandomNumberCalculator(), O);
     }
 }
