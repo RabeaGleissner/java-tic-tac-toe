@@ -1,5 +1,6 @@
 package de.rabea.ui;
 
+import de.rabea.game.Board;
 import de.rabea.game.GameMode;
 import de.rabea.game.Mark;
 
@@ -54,7 +55,7 @@ public class FakeUserInterface extends UserInterface {
     }
 
     @Override
-    public void positionUnavailableWarning() {
+    public void positionUnavailableWarning(Board board) {
         positionUnavailableWarningWasCalled = true;
     }
 

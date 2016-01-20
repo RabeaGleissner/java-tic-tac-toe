@@ -12,7 +12,7 @@ public class UserInterface {
     private String askUserForPosition = "Please select a position for your mark.";
     private String wantToPlayAgain = "Do you want to play again? y/n";
     private String greeting = "Welcome to Tic Tac Toe.\n ";
-    private String gameOptions = "Please enter 1 if you want to play against the computer and 2 if you want to play against another human player.\n";
+    private String gameOptions = "Please choose the game mode. \n 1 - Human vs Computer\n 2 - Human vs Human";
     private String markDistributionHvH = "The first user to play is X. The second player is O.";
     private String markDistributionHvC = "The human player is X. The computer player is O.";
     private String winnerAnnouncement = "Game over! The winner is: ";
@@ -20,14 +20,21 @@ public class UserInterface {
     private String unavailablePosition = "Sorry, this position is not available!";
     private String enterANumber = "Please enter a number between 1 and 9.";
     private InputFormatter inputFormatter = new InputFormatter();
+    private String clearScreen= "\033[H\033[2J";
 
 
     public void displayBoard(Board board) {
+        clearTheScreen();
         BoardPainter boardPainter = new BoardPainter(board);
         console.print(boardPainter.drawBoard());
     }
 
+    private void clearTheScreen() {
+        console.print(clearScreenCharacters());
+    }
+
     public void greet() {
+        clearTheScreen();
         console.print(greeting);
     }
 
@@ -88,6 +95,7 @@ public class UserInterface {
 
     private boolean userReplayChoice(String userChoice) {
         if (inputFormatter.formatForReplayOption(userChoice) == Replay.YES) {
+            clearTheScreen();
             return true;
         } else if (inputFormatter.formatForReplayOption(userChoice) == Replay.NO) {
             return false;
@@ -96,7 +104,9 @@ public class UserInterface {
         }
     }
 
-    public void positionUnavailableWarning() {
+    public void positionUnavailableWarning(Board board) {
+        clearTheScreen();
+        displayBoard(board);
         console.print(unavailablePosition);
     }
 
@@ -108,7 +118,9 @@ public class UserInterface {
         console.print(wantToPlayAgain);
     }
 
-    public void notANumberWarning() {
+    public void notANumberWarning(Board board) {
+        clearTheScreen();
+        displayBoard(board);
         console.print(enterANumber);
     }
 
@@ -119,5 +131,7 @@ public class UserInterface {
     private void markDistributionForHvC() {
         console.print(markDistributionHvC);
     }
-
+    public String clearScreenCharacters() {
+        return clearScreen;
+    }
 }
