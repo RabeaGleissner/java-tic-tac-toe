@@ -29,7 +29,7 @@ public class UserInterfaceTest {
     public void displaysEmptyBoard() {
         userInterface.displayBoard(board);
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                clearScreen() + "\n" +
+                "\n" +
                 "| 1 | 2 | 3 | \n" +
                 " -----------\n" +
                 "| 4 | 5 | 6 | \n" +
@@ -45,7 +45,7 @@ public class UserInterfaceTest {
         board.placeMark(3, O);
         userInterface.displayBoard(board);
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                clearScreen() + "\n" +
+                "\n" +
                 "| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
                 " -----------\n" +
                 "| \u001B[31mO\u001B[0m | 5 | 6 | \n" +
@@ -83,7 +83,7 @@ public class UserInterfaceTest {
     public void asksWhichGameModeUserWantsToPlay() {
         fakeConsole.userInput("1");
         userInterface.chooseGameMode();
-        assertEquals("Please enter 1 if you want to play against the computer and 2 if you want to play against another human player.\n", fakeConsole.messagePrinted());
+        assertEquals("Please choose the game mode. \n 1 - Human vs Computer\n 2 - Human vs Human", fakeConsole.messagePrinted());
     }
 
     @Test
@@ -102,7 +102,7 @@ public class UserInterfaceTest {
     public void asksTheUserAgainForGameModeIfBadInputIsEntered() {
         fakeConsole.userInput("hello", "1");
         userInterface.chooseGameMode();
-        assertEquals("Please enter 1 if you want to play against the computer and 2 if you want to play against another human player.\n", fakeConsole.messagePrinted());
+        assertEquals("Please choose the game mode. \n 1 - Human vs Computer\n 2 - Human vs Human", fakeConsole.messagePrinted());
     }
 
     @Test
@@ -131,11 +131,7 @@ public class UserInterfaceTest {
 
     @Test
     public void communicatesThatPositionIsUnavailable() {
-        userInterface.positionUnavailableWarning();
+        userInterface.positionUnavailableWarning(board);
         assertEquals("Sorry, this position is not available!", fakeConsole.messagePrinted());
-    }
-
-    private String clearScreen() {
-        return "\033[H\033[2J";
     }
 }

@@ -37,12 +37,12 @@ public class HumanPlayer implements Player {
     }
 
     private int getDifferentUserInputIfInputIsBad(Board board) {
-        userInterface.notANumberWarning();
+        userInterface.notANumberWarning(board);
         return getPosition(board);
     }
 
     private int getDifferentUserInputIfPositionUnavailable(Board board) {
-        userInterface.positionUnavailableWarning();
+        userInterface.positionUnavailableWarning(board);
         return getPosition(board);
     }
 }
