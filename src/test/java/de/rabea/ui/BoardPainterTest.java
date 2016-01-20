@@ -23,7 +23,6 @@ public class BoardPainterTest {
         board.placeMark(3, O);
         BoardPainter boardPainter = new BoardPainter(board);
         assertEquals(
-                  clearScreen() +
                   "\n| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
                   " -----------\n" +
                   "| \u001B[31mO\u001B[0m | 5 | 6 | \n" +
@@ -32,9 +31,5 @@ public class BoardPainterTest {
 
                 boardPainter.drawBoard()
         );
-    }
-
-    private String clearScreen() {
-        return "\033[H\033[2J";
     }
 }
