@@ -17,6 +17,10 @@ public class Line {
         return allSame() && first != EMPTY;
     }
 
+    public Mark firstMarkInLine() {
+        return first;
+    }
+
     private boolean allSame() {
         return first == second && second == third;
     }

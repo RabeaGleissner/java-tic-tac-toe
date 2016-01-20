@@ -139,6 +139,13 @@ public class BoardTest {
         assertTrue(board.hasWinner());
     }
 
+    @Test
+    public void playerXIsWinner() {
+        Board boardWithWinnerX = verticalsWinningBoard();
+        assertEquals(X, boardWithWinnerX.winningPlayerMark());
+
+    }
+
     private Board fullBoardNoWinner() {
         return new Board(
                 new Mark[]{X, X, O,

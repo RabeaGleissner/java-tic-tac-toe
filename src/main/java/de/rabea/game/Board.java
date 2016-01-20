@@ -142,4 +142,14 @@ public class Board {
         Line secondDiagonal = new Line(cells[2], cells[4], cells[6]);
         return Arrays.asList(firstDiagonal, secondDiagonal);
     }
+
+    public Mark winningPlayerMark() {
+        Mark winnerMark = null;
+        for (Line line : getAllLines()) {
+            if (line.hasWinner()) {
+                winnerMark = line.firstMarkInLine();
+            }
+        }
+        return winnerMark;
+    }
 }
