@@ -1,4 +1,5 @@
 package de.rabea.game;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -144,6 +145,12 @@ public class BoardTest {
         Board boardWithWinnerX = verticalsWinningBoard();
         assertEquals(X, boardWithWinnerX.winningPlayerMark());
 
+    }
+
+    @Test
+    public void gameIsDrawn() {
+        Board drawnGameBoard = fullBoardNoWinner();
+        assertTrue(drawnGameBoard.isDrawn());
     }
 
     private Board fullBoardNoWinner() {

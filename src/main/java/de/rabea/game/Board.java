@@ -33,6 +33,10 @@ public class Board {
         return isFull() || hasWinner();
     }
 
+    public boolean isDrawn() {
+        return isFull() == true && hasWinner() != true;
+    }
+
     public boolean hasWinner() {
         return getAllLines().stream().anyMatch(line -> line.hasWinner());
     }
@@ -152,4 +156,5 @@ public class Board {
         }
         return winnerMark;
     }
+
 }
