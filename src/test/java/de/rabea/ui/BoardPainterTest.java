@@ -1,11 +1,11 @@
 package de.rabea.ui;
 
 import de.rabea.game.Board;
-import de.rabea.game.Cell;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Cell.*;
+import static de.rabea.game.Mark.O;
+import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
 
 public class BoardPainterTest {
@@ -19,16 +19,22 @@ public class BoardPainterTest {
 
     @Test
     public void displaysBoardWithMarks() {
-        Cell [] cells = {EMPTY, X, EMPTY, O, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY};
+        board.placeMark(1, X);
+        board.placeMark(3, O);
         BoardPainter boardPainter = new BoardPainter(board);
         assertEquals(
-                  "\033[H\033[2J\n| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
+                  clearScreen() +
+                  "\n| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
                   " -----------\n" +
                   "| \u001B[31mO\u001B[0m | 5 | 6 | \n" +
                   " -----------\n" +
                   "| 7 | 8 | 9 |\n",
 
-                boardPainter.drawBoard(cells)
+                boardPainter.drawBoard()
         );
+    }
+
+    private String clearScreen() {
+        return "\033[H\033[2J";
     }
 }

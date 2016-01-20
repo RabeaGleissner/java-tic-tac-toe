@@ -1,4 +1,4 @@
-package de.rabea.game;
+package de.rabea.player;
 
 import java.util.Random;
 

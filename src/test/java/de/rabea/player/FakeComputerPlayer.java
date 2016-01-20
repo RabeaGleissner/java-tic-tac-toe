@@ -1,4 +1,7 @@
-package de.rabea.game;
+package de.rabea.player;
+
+import de.rabea.game.Board;
+import de.rabea.game.Mark;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -8,9 +11,9 @@ public class FakeComputerPlayer extends ComputerPlayer {
 
     private List<Integer> listOfNumbers;
 
-    public FakeComputerPlayer(RandomNumberCalculator randomNumberCalculator, Mark mark) {
-        super(randomNumberCalculator, mark);
-        listOfNumbers = new LinkedList<Integer>();
+    public FakeComputerPlayer(Mark mark) {
+        super(null, mark);
+        listOfNumbers = new LinkedList<>();
     }
 
     @Override

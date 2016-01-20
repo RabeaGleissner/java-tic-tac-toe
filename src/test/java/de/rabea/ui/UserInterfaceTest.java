@@ -1,14 +1,14 @@
 package de.rabea.ui;
 
 import de.rabea.game.Board;
-import de.rabea.game.Cell;
 import de.rabea.game.GameMode;
-import de.rabea.game.Mark;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertTrue;
+import static de.rabea.game.Mark.O;
+import static de.rabea.game.Mark.X;
 import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
@@ -27,9 +27,9 @@ public class UserInterfaceTest {
 
     @Test
     public void displaysEmptyBoard() {
-        userInterface.displayBoard(board.cells());
+        userInterface.displayBoard(board);
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\033[H\033[2J\n" +
+                clearScreen() + "\n" +
                 "| 1 | 2 | 3 | \n" +
                 " -----------\n" +
                 "| 4 | 5 | 6 | \n" +
@@ -38,13 +38,14 @@ public class UserInterfaceTest {
         );
     }
 
+
     @Test
     public void displaysBoardWithMarks() {
-        board.placeMark(1, Mark.X);
-        board.placeMark(3, Mark.O);
-        userInterface.displayBoard(board.cells());
+        board.placeMark(1, X);
+        board.placeMark(3, O);
+        userInterface.displayBoard(board);
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\033[H\033[2J\n" +
+                clearScreen() + "\n" +
                 "| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
                 " -----------\n" +
                 "| \u001B[31mO\u001B[0m | 5 | 6 | \n" +
@@ -118,13 +119,13 @@ public class UserInterfaceTest {
 
     @Test
     public void announceWinner() {
-        userInterface.announceGameEnd(Mark.X, true);
+        userInterface.announceGameEnd(X, true);
         assertEquals("Game over! The winner is: X", fakeConsole.messagePrinted());
     }
 
     @Test
     public void announceDraw() {
-        userInterface.announceGameEnd(Mark.X, false);
+        userInterface.announceGameEnd(X, false);
         assertEquals("Game over! It's a draw.", fakeConsole.messagePrinted());
     }
 
@@ -132,5 +133,9 @@ public class UserInterfaceTest {
     public void communicatesThatPositionIsUnavailable() {
         userInterface.positionUnavailableWarning();
         assertEquals("Sorry, this position is not available!", fakeConsole.messagePrinted());
+    }
+
+    private String clearScreen() {
+        return "\033[H\033[2J";
     }
 }

@@ -1,4 +1,4 @@
-package de.rabea.game;
+package de.rabea.player;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -9,7 +9,7 @@ public class FakeRandomNumberCalculator extends RandomNumberCalculator {
     private List<Integer> listOfNumbers;
 
     public FakeRandomNumberCalculator() {
-        listOfNumbers = new LinkedList<Integer>();
+        listOfNumbers = new LinkedList<>();
     }
 
     @Override

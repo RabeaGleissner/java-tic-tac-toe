@@ -12,7 +12,7 @@ public class FakeConsole implements Console {
     private String consoleOutput;
 
     public FakeConsole() {
-        userInput = new LinkedList<String>();
+        userInput = new LinkedList<>();
         consoleOutput = "";
     }
 

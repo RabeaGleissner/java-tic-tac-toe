@@ -1,4 +1,8 @@
-package de.rabea.game;
+package de.rabea.player;
+
+import de.rabea.game.Board;
+import de.rabea.game.Mark;
+import de.rabea.game.Player;
 
 public class ComputerPlayer implements Player {
     private final RandomNumberCalculator randomNumberCalculator;

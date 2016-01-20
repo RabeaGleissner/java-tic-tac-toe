@@ -22,9 +22,9 @@ public class UserInterface {
     private InputFormatter inputFormatter = new InputFormatter();
 
 
-    public void displayBoard(Cell[] cells) {
-        BoardPainter boardPainter = new BoardPainter(new Board());
-        console.print(boardPainter.drawBoard(cells));
+    public void displayBoard(Board board) {
+        BoardPainter boardPainter = new BoardPainter(board);
+        console.print(boardPainter.drawBoard());
     }
 
     public void greet() {
@@ -64,7 +64,11 @@ public class UserInterface {
     }
 
     public boolean isUserInputInvalid(String userInput) {
-       return !(inputFormatter.isInteger(userInput));
+       return userInputIsNotANumber(userInput);
+    }
+
+    private boolean userInputIsNotANumber(String userInput) {
+        return !(inputFormatter.isInteger(userInput));
     }
 
     public int getFormattedUserPosition(String userInput) {
