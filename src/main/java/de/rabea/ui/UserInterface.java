@@ -24,23 +24,28 @@ public class UserInterface {
 
 
     public void displayBoard(Board board) {
-        clearTheScreen();
+        clearScreen();
         BoardPainter boardPainter = new BoardPainter(board);
         console.print(boardPainter.drawBoard());
     }
 
-    private void clearTheScreen() {
+    private void clearScreen() {
         console.print(clearScreenCharacters());
     }
 
     public void greet() {
-        clearTheScreen();
+        clearScreen();
         console.print(greeting);
     }
 
     public GameMode getGameModeFromUser() {
-        console.print(gameOptions);
+        presentGameOptions();
         return gameMode();
+    }
+
+    private void presentGameOptions() {
+        clearScreen();
+        console.print(gameOptions);
     }
 
     private GameMode gameMode() {
@@ -83,7 +88,6 @@ public class UserInterface {
         return inputFormatter.subtractOneToMatchArrayIndex(position);
     }
 
-
     public String readUserInput() {
         return console.readUserInput();
     }
@@ -95,7 +99,6 @@ public class UserInterface {
 
     private boolean userReplayChoice(String userChoice) {
         if (inputFormatter.formatForReplayOption(userChoice) == Replay.YES) {
-            clearTheScreen();
             return true;
         } else if (inputFormatter.formatForReplayOption(userChoice) == Replay.NO) {
             return false;
@@ -105,7 +108,6 @@ public class UserInterface {
     }
 
     public void positionUnavailableWarning(Board board) {
-        clearTheScreen();
         displayBoard(board);
         console.print(unavailablePosition);
     }
@@ -119,7 +121,7 @@ public class UserInterface {
     }
 
     public void notANumberWarning(Board board) {
-        clearTheScreen();
+        clearScreen();
         displayBoard(board);
         console.print(enterANumber);
     }

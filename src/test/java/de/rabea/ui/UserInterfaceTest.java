@@ -80,13 +80,6 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void asksWhichGameModeUserWantsToPlay() {
-        fakeConsole.userInput("1");
-        userInterface.getGameModeFromUser();
-        assertEquals("Please choose the game mode. \n 1 - Human vs Computer\n 2 - Human vs Human", fakeConsole.messagePrinted());
-    }
-
-    @Test
     public void returnsHvCGameModeWhenUserEnters1() {
         fakeConsole.userInput("1");
         assertEquals(GameMode.HvC, userInterface.getGameModeFromUser());
