@@ -157,4 +157,7 @@ public class Board {
         return winnerMark;
     }
 
+    public Board copy() {
+        return new Board(cells());
+    }
 }
