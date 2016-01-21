@@ -82,4 +82,61 @@ public class UnbeatableComputerPlayerTest {
         assertEquals(6, unbeatableComputerPlayer.getPosition(board));
     }
 
+    @Test
+    public void itBlocksAnOpponentsWinningMove() {
+        board.placeMark(2, X);
+        board.placeMark(0, O);
+        board.placeMark(3, X);
+        board.placeMark(6, O);
+        board.placeMark(4, X);
+        assertEquals(5, unbeatableComputerPlayer.getPosition(board));
+    }
+
+    @Test
+    public void itCreatesATrapWhenPossible() {
+        board.placeMark(0, X);
+        board.placeMark(1, O);
+        board.placeMark(3, X);
+        board.placeMark(6, O);
+        board.placeMark(8, X);
+        assertEquals(4, unbeatableComputerPlayer.getPosition(board));
+    }
+
+    @Test
+    public void itBlocksAnOpponentsWinningMoveEarlyInTheGame() {
+        board.placeMark(4, X);
+        board.placeMark(8, O);
+        board.placeMark(2, X);
+        assertEquals(6, unbeatableComputerPlayer.getPosition(board));
+    }
+
+    @Test
+    public void itPlacesAMarkToWinInTheNextRound() {
+        board.placeMark(4, X);
+        board.placeMark(0, O);
+        board.placeMark(1, X);
+        board.placeMark(7, O);
+        board.placeMark(8, X);
+        assertEquals(6, unbeatableComputerPlayer.getPosition(board));
+    }
+
+    @Test
+    public void itBlocksTheOpponentsAttemptToSetATrap() {
+        board.placeMark(0, X);
+        board.placeMark(4, O);
+        board.placeMark(8, X);
+        assertEquals(5, unbeatableComputerPlayer.getPosition(board));
+    }
+
+    @Test
+    public void itBlocksAnOpponentsWinningMoveWithTwoMovesLeft() {
+        board.placeMark(0, O);
+        board.placeMark(1, X);
+        board.placeMark(2, X);
+        board.placeMark(3, X);
+        board.placeMark(4, X);
+        board.placeMark(5, O);
+        board.placeMark(6, O);
+        assertEquals(7, unbeatableComputerPlayer.getPosition(board));
+    }
 }
