@@ -44,5 +44,42 @@ public class UnbeatableComputerPlayerTest {
         assertEquals(0, unbeatableComputerPlayer.score(board));
     }
 
+    @Test
+    public void itReturns8AsTheOnlyAvailablePosition() {
+        board.placeMark(0, X);
+        board.placeMark(1, O);
+        board.placeMark(2, X);
+        board.placeMark(3, O);
+        board.placeMark(4, X);
+        board.placeMark(5, O);
+        board.placeMark(6, O);
+        board.placeMark(7, X);
+        assertEquals(8, unbeatableComputerPlayer.getPosition(board));
+    }
+
+    @Test
+    public void itReturns4AsTheOnlyAvailablePosition() {
+        board.placeMark(0, X);
+        board.placeMark(1, O);
+        board.placeMark(2, X);
+        board.placeMark(3, O);
+        board.placeMark(8, X);
+        board.placeMark(5, O);
+        board.placeMark(6, O);
+        board.placeMark(7, X);
+        assertEquals(4, unbeatableComputerPlayer.getPosition(board));
+    }
+
+    @Test
+    public void returnsWinningMoveIfThereIsOne() {
+        board.placeMark(1,X);
+        board.placeMark(0,O);
+        board.placeMark(2,X);
+        board.placeMark(3,O);
+        board.placeMark(4,X);
+        board.placeMark(5,O);
+        board.placeMark(7,X);
+        assertEquals(6, unbeatableComputerPlayer.getPosition(board));
+    }
 
 }
