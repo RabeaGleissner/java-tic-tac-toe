@@ -158,6 +158,7 @@ public class Board {
     }
 
     public Board copy() {
-        return new Board(cells());
+        Mark[] cellsCopy = cells().clone();
+        return new Board(cellsCopy);
     }
 }
