@@ -17,7 +17,7 @@ public class UnbeatableComputerPlayerTest {
         board = new Board(new Mark[] {EMPTY, EMPTY, EMPTY,
                                       EMPTY, EMPTY, EMPTY,
                                       EMPTY, EMPTY, EMPTY});
-        unbeatableComputerPlayer = new UnbeatableComputerPlayer();
+        unbeatableComputerPlayer = new UnbeatableComputerPlayer(O);
     }
 
     @Test
@@ -111,13 +111,25 @@ public class UnbeatableComputerPlayerTest {
     }
 
     @Test
-    public void itPlacesAMarkToWinInTheNextRound() {
+    public void itPlacesAMarkToWinInTheNextRoundI() {
         board.placeMark(4, X);
         board.placeMark(0, O);
         board.placeMark(1, X);
         board.placeMark(7, O);
         board.placeMark(8, X);
         assertEquals(6, unbeatableComputerPlayer.getPosition(board));
+        //or 3
+    }
+
+    @Test
+    public void itPlacesAMarkToWinInTheNextRoundII() {
+        board.placeMark(0, X);
+        board.placeMark(1, O);
+        board.placeMark(2, X);
+        board.placeMark(4, O);
+        board.placeMark(7, X);
+        assertEquals(3, unbeatableComputerPlayer.getPosition(board));
+        //or 5
     }
 
     @Test
