@@ -6,42 +6,54 @@ import de.rabea.game.Player;
 
 import java.util.List;
 
-import static de.rabea.game.Mark.*;
-
 public class UnbeatableComputerPlayer implements Player {
 
-    private final Mark computerMark = O;
+    private final Mark computerMark;
+
+    public UnbeatableComputerPlayer(Mark computerMark) {
+        this.computerMark = computerMark;
+    }
 
     @Override
     public Mark mark() {
-        return null;
+        return computerMark;
     }
 
     @Override
     public int getPosition(Board board) {
-
         Board boardCopy = board.copy();
-        return minimax(boardCopy, computerMark);
+        return minimax(boardCopy, computerMark).getMove();
     }
 
-    private int minimax(Board boardCopy, Mark mark) {
-        List<Integer> availablePositons = boardCopy.emptyCells();
-        ScoredMove bestSoFar = new ScoredMove(-2, -2);
+    private ScoredMove minimax(Board boardCopy, Mark currentMark) {
 
-        for (Integer position : availablePositons) {
-            boardCopy.placeMark(position, mark);
+        ScoredMove bestSoFar = resetScoredMove(currentMark);
+
+        List<Integer> availablePositions = boardCopy.emptyCells();
+
+        for (Integer position : availablePositions) {
+
+            boardCopy.placeMark(position, currentMark);
 
             if (boardCopy.gameOver()) {
                 int score = score(boardCopy);
-                if (score > bestSoFar.getScore()) {
-                    bestSoFar.setScore(score);
-                    bestSoFar.setMove(position);
-                }
+                updateScoreIfNewScoreIsBetter(currentMark, bestSoFar, position, score);
             } else {
-                return minimax(boardCopy, mark.switchMark(mark));
+                return minimax(boardCopy, currentMark.switchMark(currentMark));
             }
         }
-        return bestSoFar.getMove();
+        return bestSoFar;
+    }
+
+    private void updateScoreIfNewScoreIsBetter(Mark currentMark, ScoredMove bestSoFar, Integer position, int score) {
+        if (currentMark == computerMark && score > bestSoFar.getScore()) {
+            bestSoFar.setScore(score);
+            bestSoFar.setMove(position);
+        }
+        if (currentMark != computerMark && score < bestSoFar.getScore()) {
+            bestSoFar.setScore(score);
+            bestSoFar.setMove(position);
+        }
     }
 
     public int score(Board board) {
@@ -54,7 +66,15 @@ public class UnbeatableComputerPlayer implements Player {
         return -1;
     }
 
-    public class ScoredMove {
+    private ScoredMove resetScoredMove(Mark currentMark) {
+        if (currentMark == computerMark) {
+            return new ScoredMove(-100, -100);
+        } else {
+            return new ScoredMove(100, 100);
+        }
+    }
+
+    private class ScoredMove {
         private int score;
         private int move;
 
@@ -80,3 +100,33 @@ public class UnbeatableComputerPlayer implements Player {
         }
     }
 }
+//   Following pseudo-code in this doc: http://web.eecs.umich.edu/~akamil/teaching/sp03/minimax.pdf
+//    private ScoredMove minimax(Board boardCopy, Mark currentMark) {
+//        List<Integer> availablePositions = boardCopy.emptyCells();
+//        ScoredMove bestSoFar = resetScoredMove(currentMark);
+//        ScoredMove result;
+//
+//        if (boardCopy.gameOver()) {
+//            int score = score(boardCopy);
+//            bestSoFar = new ScoredMove(-100, score);
+//        }
+//
+//
+//        for (Integer position : availablePositions) {
+//
+//            boardCopy.placeMark(position, currentMark);
+//            result = minimax(boardCopy, currentMark.switchMark(currentMark));
+//
+//            if (currentMark == computerMark && result.getScore() > bestSoFar.getScore()) {
+//                bestSoFar.setScore(result.getScore());
+//                bestSoFar.setMove(result.getMove());
+//                //problem: position is not the first played move but one further down the line
+//            }
+//
+//            if (currentMark != computerMark && result.getScore() < bestSoFar.getScore()) {
+//                bestSoFar.setScore(result.getScore());
+//                bestSoFar.setMove(result.getMove());
+//            }
+//        }
+//        return bestSoFar;
+//    }
