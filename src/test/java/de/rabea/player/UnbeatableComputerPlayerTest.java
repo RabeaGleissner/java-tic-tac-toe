@@ -117,7 +117,7 @@ public class UnbeatableComputerPlayerTest {
                                       EMPTY,O,    EMPTY,
                                       EMPTY,EMPTY,X});
         assertEquals(5, unbeatableComputerPlayer.getPosition(board));
-        //5 or 1
+        //5 or 1 or 7
     }
 
     @Test

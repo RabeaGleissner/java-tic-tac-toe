@@ -29,6 +29,13 @@ public class Board {
         cells[position] = mark;
     }
 
+    public Board placeMarkOnNewBoard(int position, Mark mark, Board board) {
+
+        Board newBoard = board.copy();
+        newBoard.cells()[position] = mark;
+        return newBoard;
+    }
+
     public boolean gameOver() {
         return isFull() || hasWinner();
     }

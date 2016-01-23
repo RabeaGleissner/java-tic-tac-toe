@@ -10,6 +10,7 @@ public class UnbeatableComputerPlayer implements Player {
 
     private final Mark computerMark;
     private int scoringCount = 0;
+    private int depth = 0;
 
     public UnbeatableComputerPlayer(Mark computerMark) {
         this.computerMark = computerMark;
@@ -22,41 +23,29 @@ public class UnbeatableComputerPlayer implements Player {
 
     @Override
     public int getPosition(Board board) {
-        Board boardCopy = board.copy();
-        return minimax(boardCopy, computerMark, board).getMove();
+        depth = board.emptyCells().size();
+        return minimax(depth, board, computerMark).getMove();
     }
 
-    private ScoredMove minimax(Board boardCopy, Mark currentMark, Board board) {
+    private ScoredMove minimax(int depth, Board currentBoard, Mark currentMark) {
+        int bestScore = -10;
+        int bestMove = -1;
 
-        ScoredMove bestSoFar = resetScoredMove(currentMark);
-        List<Integer> availablePositions = boardCopy.emptyCells();
+        List<Integer> availablePositions = currentBoard.emptyCells();
+        if (currentBoard.gameOver() || depth == 0 || availablePositions.size() == 0) {
+            return new ScoredMove(score(currentBoard), -1);
+        }
 
         for (Integer position : availablePositions) {
-            boardCopy.placeMark(position, currentMark);
-            if (boardCopy.gameOver()) {
-                int score = score(boardCopy);
-                updateScoreIfNewScoreIsBetter(currentMark, bestSoFar, position, score, board);
-            } else {
-                Board secondBoardCopy = boardCopy.copy();
-                return minimax(secondBoardCopy, currentMark.switchMark(currentMark), board);
+            Board currentBoardState = currentBoard.placeMarkOnNewBoard(position, currentMark, currentBoard);
+            int score = minimax(depth -1, currentBoardState, currentMark.switchMark(currentMark)).getScore();
+
+            if (currentMark == computerMark && score >= bestScore || currentMark != computerMark && score <= bestScore) {
+                bestScore = score;
+                bestMove = position;
             }
         }
-        return bestSoFar;
-    }
-
-    private void updateScoreIfNewScoreIsBetter(Mark currentMark, ScoredMove bestSoFar, Integer position, int score, Board board) {
-        System.out.println("scoringCount" + scoringCount);
-       List<Integer> positions = board.emptyCells();
-        System.out.println("positions = " + positions.toString());
-        if (currentMark == computerMark && score > bestSoFar.getScore()) {
-            bestSoFar.setScore(score);
-            bestSoFar.setMove(positions.get(scoringCount));
-        }
-        if (currentMark != computerMark && score < bestSoFar.getScore()) {
-            bestSoFar.setScore(score);
-            bestSoFar.setMove(positions.get(scoringCount));
-        }
-        scoringCount++;
+        return new ScoredMove(bestScore, bestMove);
     }
 
     public int score(Board board) {
@@ -67,14 +56,6 @@ public class UnbeatableComputerPlayer implements Player {
             return 0;
         }
         return -1;
-    }
-
-    private ScoredMove resetScoredMove(Mark currentMark) {
-        if (currentMark == computerMark) {
-            return new ScoredMove(-100, -100);
-        } else {
-            return new ScoredMove(100, 100);
-        }
     }
 
     private class ScoredMove {
@@ -103,33 +84,3 @@ public class UnbeatableComputerPlayer implements Player {
         }
     }
 }
-//   Following pseudo-code in this doc: http://web.eecs.umich.edu/~akamil/teaching/sp03/minimax.pdf
-//    private ScoredMove minimax(Board boardCopy, Mark currentMark) {
-//        List<Integer> availablePositions = boardCopy.emptyCells();
-//        ScoredMove bestSoFar = resetScoredMove(currentMark);
-//        ScoredMove result;
-//
-//        if (boardCopy.gameOver()) {
-//            int score = score(boardCopy);
-//            bestSoFar = new ScoredMove(-100, score);
-//        }
-//
-//
-//        for (Integer position : availablePositions) {
-//
-//            boardCopy.placeMark(position, currentMark);
-//            result = minimax(boardCopy, currentMark.switchMark(currentMark));
-//
-//            if (currentMark == computerMark && result.getScore() > bestSoFar.getScore()) {
-//                bestSoFar.setScore(result.getScore());
-//                bestSoFar.setMove(result.getMove());
-//                //problem: position is not the first played move but one further down the line
-//            }
-//
-//            if (currentMark != computerMark && result.getScore() < bestSoFar.getScore()) {
-//                bestSoFar.setScore(result.getScore());
-//                bestSoFar.setMove(result.getMove());
-//            }
-//        }
-//        return bestSoFar;
-//    }
