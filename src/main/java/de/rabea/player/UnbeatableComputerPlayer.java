@@ -9,6 +9,7 @@ import java.util.List;
 public class UnbeatableComputerPlayer implements Player {
 
     private final Mark computerMark;
+    private int scoringCount = 0;
 
     public UnbeatableComputerPlayer(Mark computerMark) {
         this.computerMark = computerMark;
@@ -22,38 +23,40 @@ public class UnbeatableComputerPlayer implements Player {
     @Override
     public int getPosition(Board board) {
         Board boardCopy = board.copy();
-        return minimax(boardCopy, computerMark).getMove();
+        return minimax(boardCopy, computerMark, board).getMove();
     }
 
-    private ScoredMove minimax(Board boardCopy, Mark currentMark) {
+    private ScoredMove minimax(Board boardCopy, Mark currentMark, Board board) {
 
         ScoredMove bestSoFar = resetScoredMove(currentMark);
-
         List<Integer> availablePositions = boardCopy.emptyCells();
 
         for (Integer position : availablePositions) {
-
             boardCopy.placeMark(position, currentMark);
-
             if (boardCopy.gameOver()) {
                 int score = score(boardCopy);
-                updateScoreIfNewScoreIsBetter(currentMark, bestSoFar, position, score);
+                updateScoreIfNewScoreIsBetter(currentMark, bestSoFar, position, score, board);
             } else {
-                return minimax(boardCopy, currentMark.switchMark(currentMark));
+                Board secondBoardCopy = boardCopy.copy();
+                return minimax(secondBoardCopy, currentMark.switchMark(currentMark), board);
             }
         }
         return bestSoFar;
     }
 
-    private void updateScoreIfNewScoreIsBetter(Mark currentMark, ScoredMove bestSoFar, Integer position, int score) {
+    private void updateScoreIfNewScoreIsBetter(Mark currentMark, ScoredMove bestSoFar, Integer position, int score, Board board) {
+        System.out.println("scoringCount" + scoringCount);
+       List<Integer> positions = board.emptyCells();
+        System.out.println("positions = " + positions.toString());
         if (currentMark == computerMark && score > bestSoFar.getScore()) {
             bestSoFar.setScore(score);
-            bestSoFar.setMove(position);
+            bestSoFar.setMove(positions.get(scoringCount));
         }
         if (currentMark != computerMark && score < bestSoFar.getScore()) {
             bestSoFar.setScore(score);
-            bestSoFar.setMove(position);
+            bestSoFar.setMove(positions.get(scoringCount));
         }
+        scoringCount++;
     }
 
     public int score(Board board) {
