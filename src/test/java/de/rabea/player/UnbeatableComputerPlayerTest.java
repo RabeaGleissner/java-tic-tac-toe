@@ -62,10 +62,10 @@ public class UnbeatableComputerPlayerTest {
 
     @Test
     public void returnsWinningMoveIfThereIsOne() {
-        board = new Board(new Mark[] {O,    X,X,
-                                      O,    X,O,
-                                      EMPTY,X,EMPTY});
-        assertEquals(6, unbeatableComputerPlayer.getPosition(board));
+        board = new Board(new Mark[] {O,    X,EMPTY,
+                                      EMPTY,X,O,
+                                      EMPTY,EMPTY,EMPTY});
+        assertEquals(7, unbeatableComputerPlayer.getPosition(board));
     }
 
     @Test
