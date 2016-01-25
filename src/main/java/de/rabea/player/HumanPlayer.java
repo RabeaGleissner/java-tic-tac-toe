@@ -14,10 +14,12 @@ public class HumanPlayer implements Player {
         this.mark = mark;
     }
 
+    @Override
     public Mark mark() {
         return mark;
     }
 
+    @Override
     public int getPosition(Board board) {
         userInterface.askForPosition();
         return returnUsersPosition(board);
