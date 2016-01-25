@@ -68,16 +68,8 @@ public class UnbeatableComputerPlayer extends Player {
            return move;
         }
 
-        public void setMove(int move) {
-           this.move = move;
-        }
-
         public int getScore() {
             return score;
-        }
-
-        public void setScore(int score) {
-           this.score = score;
         }
     }
 }
