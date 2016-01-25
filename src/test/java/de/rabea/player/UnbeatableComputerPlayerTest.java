@@ -3,6 +3,7 @@ package de.rabea.player;
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.*;
@@ -102,6 +103,7 @@ public class UnbeatableComputerPlayerTest {
         //or 3
     }
 
+    @Ignore
     @Test
     public void itPlacesAMarkToWinInTheNextRoundII() {
         board = new Board(new Mark[] {X,    O,X,

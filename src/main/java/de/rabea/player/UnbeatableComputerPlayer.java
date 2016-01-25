@@ -6,18 +6,12 @@ import de.rabea.game.Player;
 
 import java.util.List;
 
-public class UnbeatableComputerPlayer implements Player {
+public class UnbeatableComputerPlayer extends Player {
 
-    private final Mark mark;
     private int depth = 0;
 
     public UnbeatableComputerPlayer(Mark mark) {
-        this.mark = mark;
-    }
-
-    @Override
-    public Mark mark() {
-        return mark;
+        super(mark);
     }
 
     @Override
