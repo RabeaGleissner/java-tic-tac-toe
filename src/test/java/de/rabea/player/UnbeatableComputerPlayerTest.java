@@ -81,7 +81,7 @@ public class UnbeatableComputerPlayerTest {
         board = new Board(new Mark[] {X,O,    EMPTY,
                                       X,EMPTY,EMPTY,
                                       O,EMPTY,X});
-        assertEquals(2, unbeatableComputerPlayer.getPosition(board));
+        assertEquals(4, unbeatableComputerPlayer.getPosition(board));
         //2 or 4
     }
 
@@ -116,7 +116,7 @@ public class UnbeatableComputerPlayerTest {
         board = new Board(new Mark[] {X,    EMPTY,EMPTY,
                                       EMPTY,O,    EMPTY,
                                       EMPTY,EMPTY,X});
-        assertEquals(5, unbeatableComputerPlayer.getPosition(board));
+        assertEquals(7, unbeatableComputerPlayer.getPosition(board));
         //5 or 1 or 7
     }
 

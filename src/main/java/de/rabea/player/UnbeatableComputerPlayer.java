@@ -9,7 +9,6 @@ import java.util.List;
 public class UnbeatableComputerPlayer implements Player {
 
     private final Mark computerMark;
-    private int scoringCount = 0;
     private int depth = 0;
 
     public UnbeatableComputerPlayer(Mark computerMark) {
@@ -28,7 +27,7 @@ public class UnbeatableComputerPlayer implements Player {
     }
 
     private ScoredMove minimax(int depth, Board currentBoard, Mark currentMark) {
-        int bestScore = -10;
+        int bestScore = resetBestScore(currentMark);
         int bestMove = -1;
 
         List<Integer> availablePositions = currentBoard.emptyCells();
@@ -46,6 +45,10 @@ public class UnbeatableComputerPlayer implements Player {
             }
         }
         return new ScoredMove(bestScore, bestMove);
+    }
+
+    private int resetBestScore(Mark currentMark) {
+        return currentMark == computerMark ? -1000 : 1000;
     }
 
     public int score(Board board) {
