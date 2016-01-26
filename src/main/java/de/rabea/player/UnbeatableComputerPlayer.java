@@ -4,8 +4,6 @@ import de.rabea.game.Board;
 import de.rabea.game.Mark;
 import de.rabea.game.Player;
 
-import java.util.List;
-
 public class UnbeatableComputerPlayer extends Player {
 
     public UnbeatableComputerPlayer(Mark mark) {
@@ -21,46 +19,46 @@ public class UnbeatableComputerPlayer extends Player {
     private ScoredMove minimax(int remainingMovesCount, Board currentBoard, Mark currentMark) {
         int BEST_MOVE_PLACEHOLDER = -1;
 
-        int bestScore = resetBestScore(currentMark);
+        int currentBestScore = resetBestScore(currentMark);
         int bestMove = BEST_MOVE_PLACEHOLDER;
 
-        List<Integer> freePositions = currentBoard.emptyCells();
         if (currentBoard.gameOver()) {
             return new ScoredMove(score(currentBoard, remainingMovesCount), bestMove);
         }
 
-        for (Integer position : freePositions) {
+        for (int position : currentBoard.emptyCells()) {
             Board nextBoardState = currentBoard.placeMarkOnNewBoard(position, currentMark, currentBoard);
-            int score = minimax(remainingMovesCount - 1, nextBoardState, currentMark.switchMark(currentMark)).getScore();
+            ScoredMove score = minimax(remainingMovesCount - 1, nextBoardState, currentMark.switchMark(currentMark));
 
-            if (betterScoreForCurrentPlayer(currentMark, bestScore, score)) {
-                bestScore = score;
+            if (score.isBetterThan(currentBestScore, currentMark)) {
+                currentBestScore = score.getScore();
                 bestMove = position;
             }
         }
-        return new ScoredMove(bestScore, bestMove);
+        return new ScoredMove(currentBestScore, bestMove);
     }
 
     private int score(Board board, int remainingPositions) {
-        int MAXIMISING_SCORE = 100;
-        int MINIMISING_SCORE = -100;
+        int maximisingScore = 100;
+        int minimisingScore = -100;
 
-        if (board.winningPlayerMark() == mark) {
-            return MAXIMISING_SCORE - remainingPositions;
+        if (isCurrentPlayerWinner(board)) {
+            return maximisingScore - remainingPositions;
         }
         if (board.isDrawn()){
             return 0;
         }
-        return MINIMISING_SCORE - remainingPositions;
+        return minimisingScore - remainingPositions;
     }
 
-    private boolean betterScoreForCurrentPlayer(Mark currentMark, int bestScore, int score) {
-        return (currentMark == mark && score > bestScore) || (currentMark != mark && score < bestScore);
+    private boolean isCurrentPlayerWinner(Board board) {
+        return board.winningPlayerMark() == mark;
     }
 
     private int resetBestScore(Mark currentMark) {
         return currentMark == mark ? -1000 : 1000;
     }
+
     private class ScoredMove {
         private int score;
         private int move;
@@ -76,6 +74,9 @@ public class UnbeatableComputerPlayer extends Player {
 
         public int getScore() {
             return score;
+        }
+        private boolean isBetterThan(int currentBestScore, Mark currentMark) {
+            return (currentMark == mark && score > currentBestScore) || (currentMark != mark && score < currentBestScore);
         }
     }
 }
