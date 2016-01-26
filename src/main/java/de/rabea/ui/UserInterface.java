@@ -50,16 +50,17 @@ public class UserInterface {
 
     private GameMode gameMode() {
         String userChoice = console.readUserInput();
-        if (userChoice.equals("1")) {
-            return GameMode.HvH;
-        } else if (userChoice.equals("2")){
-            return GameMode.HvC;
-        } else if (userChoice.equals("3")) {
-            return GameMode.CvH;
-        } else if (userChoice.equals("4")) {
-            return GameMode.CvC;
-        } else {
-            return getGameModeFromUser();
+        switch (userChoice) {
+            case "1":
+                return GameMode.HvH;
+            case "2":
+                return GameMode.HvC;
+            case "3":
+                return GameMode.CvH;
+            case "4":
+                return GameMode.CvC;
+            default:
+                return getGameModeFromUser();
         }
     }
 
