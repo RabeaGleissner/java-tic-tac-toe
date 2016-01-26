@@ -17,13 +17,9 @@ public class UnbeatableComputerPlayer extends Player {
     }
 
     private ScoredMove minimax(int remainingMovesCount, Board currentBoard, Mark currentMark) {
-        int BEST_MOVE_PLACEHOLDER = -1;
-
-        int currentBestScore = resetBestScore(currentMark);
-        int bestMove = BEST_MOVE_PLACEHOLDER;
-
+        ScoredMove currentBestScore = resetBestScore(currentMark);
         if (currentBoard.gameOver()) {
-            return new ScoredMove(score(currentBoard, remainingMovesCount), bestMove);
+            return new ScoredMove(score(currentBoard, remainingMovesCount), currentBestScore.getScore());
         }
 
         for (int position : currentBoard.emptyCells()) {
@@ -31,32 +27,36 @@ public class UnbeatableComputerPlayer extends Player {
             ScoredMove score = minimax(remainingMovesCount - 1, nextBoardState, currentMark.switchMark(currentMark));
 
             if (score.isBetterThan(currentBestScore, currentMark)) {
-                currentBestScore = score.getScore();
-                bestMove = position;
+                currentBestScore = new ScoredMove(score.getScore(), position);
             }
         }
-        return new ScoredMove(currentBestScore, bestMove);
+        return currentBestScore;
     }
 
-    private int score(Board board, int remainingPositions) {
+    private int score(Board board, int remainingMovesCount) {
         int maximisingScore = 100;
         int minimisingScore = -100;
 
         if (isCurrentPlayerWinner(board)) {
-            return maximisingScore - remainingPositions;
+            return maximisingScore - remainingMovesCount;
         }
         if (board.isDrawn()){
             return 0;
         }
-        return minimisingScore - remainingPositions;
+        return minimisingScore - remainingMovesCount;
     }
 
     private boolean isCurrentPlayerWinner(Board board) {
         return board.winningPlayerMark() == mark;
     }
 
-    private int resetBestScore(Mark currentMark) {
-        return currentMark == mark ? -1000 : 1000;
+    private ScoredMove resetBestScore(Mark currentMark) {
+        int bestMovePlaceholder = -1;
+        if (currentMark == mark) {
+            return new ScoredMove(-1000, bestMovePlaceholder);
+        } else {
+            return new ScoredMove(1000, bestMovePlaceholder);
+        }
     }
 
     private class ScoredMove {
@@ -75,8 +75,8 @@ public class UnbeatableComputerPlayer extends Player {
         public int getScore() {
             return score;
         }
-        private boolean isBetterThan(int currentBestScore, Mark currentMark) {
-            return (currentMark == mark && score > currentBestScore) || (currentMark != mark && score < currentBestScore);
+        private boolean isBetterThan(ScoredMove scoredMove, Mark currentMark) {
+            return (currentMark == mark && score > scoredMove.getScore()) || (currentMark != mark && score < scoredMove.getScore());
         }
     }
 }
