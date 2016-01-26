@@ -3,6 +3,7 @@ package de.rabea.game;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static de.rabea.game.Mark.*;
 
@@ -29,8 +30,18 @@ public class Board {
         cells[position] = mark;
     }
 
+    public Board placeMarkOnNewBoard(int position, Mark mark, Board board) {
+        Mark[] gameStateCopy = board.cells().clone();
+        gameStateCopy[position] = mark;
+        return new Board(gameStateCopy);
+    }
+
     public boolean gameOver() {
         return isFull() || hasWinner();
+    }
+
+    public boolean isDrawn() {
+        return isFull() && !hasWinner();
     }
 
     public boolean hasWinner() {
@@ -141,5 +152,13 @@ public class Board {
         Line firstDiagonal = new Line(cells[0], cells[4], cells[8]);
         Line secondDiagonal = new Line(cells[2], cells[4], cells[6]);
         return Arrays.asList(firstDiagonal, secondDiagonal);
+    }
+
+    public Mark winningPlayerMark() {
+        Optional<Line> winningLine = getAllLines().stream().filter(Line::hasWinner).findFirst();
+        if (winningLine.isPresent()) {
+            return winningLine.get().firstMarkInLine();
+        }
+        return null;
     }
 }

@@ -5,19 +5,15 @@ import de.rabea.game.Mark;
 import de.rabea.game.Player;
 import de.rabea.ui.UserInterface;
 
-public class HumanPlayer implements Player {
-    UserInterface userInterface;
-    Mark mark;
+public class HumanPlayer extends Player {
+    private UserInterface userInterface;
 
     public HumanPlayer(UserInterface userInterface, Mark mark) {
+        super(mark);
         this.userInterface = userInterface;
-        this.mark = mark;
     }
 
-    public Mark mark() {
-        return mark;
-    }
-
+    @Override
     public int getPosition(Board board) {
         userInterface.askForPosition();
         return returnUsersPosition(board);

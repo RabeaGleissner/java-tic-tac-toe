@@ -4,19 +4,15 @@ import de.rabea.game.Board;
 import de.rabea.game.Mark;
 import de.rabea.game.Player;
 
-public class ComputerPlayer implements Player {
+public class ComputerPlayer extends Player {
     private final RandomNumberCalculator randomNumberCalculator;
-    private Mark mark;
 
     public ComputerPlayer(RandomNumberCalculator randomNumberCalculator, Mark mark) {
+        super(mark);
         this.randomNumberCalculator = randomNumberCalculator;
-        this.mark = mark;
     }
 
-    public Mark mark() {
-        return mark;
-    }
-
+    @Override
     public int getPosition(Board board) {
         int index = randomNumberCalculator.randomNumber(board.emptyCells().size());
         return board.emptyCells().get(index);

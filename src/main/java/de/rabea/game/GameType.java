@@ -1,8 +1,7 @@
 package de.rabea.game;
 
-import de.rabea.player.ComputerPlayer;
 import de.rabea.player.HumanPlayer;
-import de.rabea.player.RandomNumberCalculator;
+import de.rabea.player.UnbeatableComputerPlayer;
 import de.rabea.ui.UserInterface;
 
 import static de.rabea.game.Mark.O;
@@ -48,7 +47,8 @@ public class GameType {
         return new HumanPlayer(userInterface, O);
     }
 
-    private ComputerPlayer createNewComputerPlayer() {
-        return new ComputerPlayer(new RandomNumberCalculator(), O);
+    private UnbeatableComputerPlayer createNewComputerPlayer() {
+//        return new ComputerPlayer(new RandomNumberCalculator(), O);
+        return new UnbeatableComputerPlayer(O);
     }
 }
