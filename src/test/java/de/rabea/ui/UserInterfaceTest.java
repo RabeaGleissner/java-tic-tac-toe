@@ -80,22 +80,34 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void returnsHvCGameModeWhenUserEnters1() {
+    public void returnsHvHGameModeWhenUserEnters1() {
         fakeConsole.userInput("1");
+        assertEquals(GameMode.HvH, userInterface.getGameModeFromUser());
+    }
+
+    @Test
+    public void returnsHvCGameModeWhenUserEnters2() {
+        fakeConsole.userInput("2");
         assertEquals(GameMode.HvC, userInterface.getGameModeFromUser());
     }
 
     @Test
-    public void returnsHvHGameModeWhenUserEnters1() {
-        fakeConsole.userInput("2");
-        assertEquals(GameMode.HvH, userInterface.getGameModeFromUser());
+    public void returnsCvHGameModeWhenUserEnters3() {
+        fakeConsole.userInput("3");
+        assertEquals(GameMode.CvH, userInterface.getGameModeFromUser());
+    }
+    
+    @Test
+    public void returnsCvCGameModeWhenUserEnters1() {
+        fakeConsole.userInput("4");
+        assertEquals(GameMode.CvC, userInterface.getGameModeFromUser());
     }
 
     @Test
     public void asksTheUserAgainForGameModeIfBadInputIsEntered() {
         fakeConsole.userInput("hello", "1");
         userInterface.getGameModeFromUser();
-        assertEquals("Please choose the game mode. \n 1 - Human vs Computer\n 2 - Human vs Human", fakeConsole.messagePrinted());
+        assertEquals("Please choose the game mode. \n 1 - Human vs Human\n 2 - Human vs Computer\n 3 - Computer vs Human\n 4 - Computer vs Computer", fakeConsole.messagePrinted());
     }
 
     @Test
