@@ -2,5 +2,7 @@ package de.rabea.game;
 
 public enum GameMode {
     HvH,
-    HvC
+    HvC,
+    CvH,
+    CvC
 }
