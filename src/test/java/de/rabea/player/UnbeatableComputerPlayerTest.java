@@ -26,7 +26,7 @@ public class UnbeatableComputerPlayerTest {
         board = new Board(new Mark[] {X,EMPTY,X,
                                       O,O,    O,
                                       X,X,    EMPTY});
-        assertEquals(1, unbeatableComputerPlayer.score(board));
+        assertEquals(98, unbeatableComputerPlayer.score(board, 2));
     }
 
     @Test
@@ -34,7 +34,7 @@ public class UnbeatableComputerPlayerTest {
         board = new Board(new Mark[] {X,X,X,
                                       O,O,EMPTY,
                                       O,X,EMPTY});
-        assertEquals(-1, unbeatableComputerPlayer.score(board));
+        assertEquals(-98, unbeatableComputerPlayer.score(board, 2));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class UnbeatableComputerPlayerTest {
         board = new Board(new Mark[] {X,O,O,
                                       O,X,X,
                                       X,X,O});
-        assertEquals(0, unbeatableComputerPlayer.score(board));
+        assertEquals(0, unbeatableComputerPlayer.score(board, 0));
     }
 
     @Test
