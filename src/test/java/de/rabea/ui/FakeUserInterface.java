@@ -62,9 +62,9 @@ public class FakeUserInterface extends UserInterface {
     @Override
     public GameMode getGameModeFromUser() {
         if (moves.remove(0).equals("1")) {
-            return GameMode.HvC;
+            return GameMode.HumanVsComputer;
         } else {
-            return GameMode.HvH;
+            return GameMode.HumanVsHuman;
         }
 
     }

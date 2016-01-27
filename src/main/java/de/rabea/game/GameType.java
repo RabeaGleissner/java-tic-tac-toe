@@ -4,6 +4,7 @@ import de.rabea.player.HumanPlayer;
 import de.rabea.player.UnbeatableComputerPlayer;
 import de.rabea.ui.UserInterface;
 
+import static de.rabea.game.GameMode.*;
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 
@@ -20,35 +21,22 @@ public class GameType {
         GameMode gameMode = userInterface.getGameModeFromUser();
         userInterface.announceMarkDistribution(gameMode);
 
-        if (isHumanVsComputer(gameMode)) {
-            return humanVsComputerGame();
+        return new Game(userInterface, createPlayer(gameMode), createOpponent(gameMode), gameManager);
+    }
+
+    private Player createPlayer(GameMode gameMode) {
+        if (gameMode == HumanVsHuman || gameMode == HumanVsComputer) {
+           return new HumanPlayer(userInterface, X);
         } else {
-            return createHumanVsHumanGame();
+           return new UnbeatableComputerPlayer(X);
         }
     }
 
-    private Game createHumanVsHumanGame() {
-        return new Game(userInterface, createNewHumanPlayer(), createNewHumanOpponent(), gameManager);
-    }
-
-    private Game humanVsComputerGame() {
-        return new Game(userInterface, createNewHumanPlayer(), createNewComputerPlayer(), gameManager);
-    }
-
-    private boolean isHumanVsComputer(GameMode gameMode) {
-        return gameMode == GameMode.HvC;
-    }
-
-    private HumanPlayer createNewHumanPlayer() {
-        return new HumanPlayer(userInterface, X);
-    }
-
-    private HumanPlayer createNewHumanOpponent() {
-        return new HumanPlayer(userInterface, O);
-    }
-
-    private UnbeatableComputerPlayer createNewComputerPlayer() {
-//        return new ComputerPlayer(new RandomNumberCalculator(), O);
-        return new UnbeatableComputerPlayer(O);
+    private Player createOpponent(GameMode gameMode) {
+        if (gameMode == HumanVsComputer || gameMode == ComputerVsComputer) {
+            return new UnbeatableComputerPlayer(O);
+        } else {
+            return new HumanPlayer(userInterface, O);
+        }
     }
 }

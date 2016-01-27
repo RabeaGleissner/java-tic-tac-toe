@@ -12,7 +12,7 @@ public class UserInterface {
     private String askUserForPosition = "Please select a position for your mark.";
     private String wantToPlayAgain = "Do you want to play again? y/n";
     private String greeting = "Welcome to Tic Tac Toe.\n ";
-    private String gameOptions = "Please choose the game mode. \n 1 - Human vs Computer\n 2 - Human vs Human";
+    private String gameOptions = "Please choose the game mode. \n 1 - Human vs Human\n 2 - Human vs Computer\n 3 - Computer vs Human\n 4 - Computer vs Computer";
     private String markDistributionHvH = "The first user to play is X. The second player is O.";
     private String markDistributionHvC = "The human player is X. The computer player is O.";
     private String winnerAnnouncement = "Game over! The winner is: ";
@@ -50,17 +50,22 @@ public class UserInterface {
 
     private GameMode gameMode() {
         String userChoice = console.readUserInput();
-        if (userChoice.equals("1")) {
-            return GameMode.HvC;
-        } else if (userChoice.equals("2")){
-            return GameMode.HvH;
-        } else {
-            return getGameModeFromUser();
+        switch (userChoice) {
+            case "1":
+                return GameMode.HumanVsHuman;
+            case "2":
+                return GameMode.HumanVsComputer;
+            case "3":
+                return GameMode.ComputerVsHuman;
+            case "4":
+                return GameMode.ComputerVsComputer;
+            default:
+                return getGameModeFromUser();
         }
     }
 
     public void announceMarkDistribution(GameMode gameMode) {
-        if (gameMode == GameMode.HvC) {
+        if (gameMode == GameMode.HumanVsComputer) {
             markDistributionForHvC();
         } else {
             markDistributionForHvH();

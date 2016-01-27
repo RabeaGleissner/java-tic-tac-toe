@@ -1,6 +1,8 @@
 package de.rabea.game;
 
 public enum GameMode {
-    HvH,
-    HvC
+    HumanVsHuman,
+    HumanVsComputer,
+    ComputerVsHuman,
+    ComputerVsComputer
 }
