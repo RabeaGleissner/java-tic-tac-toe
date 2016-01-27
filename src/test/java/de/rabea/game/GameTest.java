@@ -1,9 +1,6 @@
 package de.rabea.game;
 
-import de.rabea.player.ComputerPlayer;
-import de.rabea.player.FakeComputerPlayer;
-import de.rabea.player.HumanPlayer;
-import de.rabea.player.RandomNumberCalculator;
+import de.rabea.player.*;
 import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +19,7 @@ public class GameTest {
     HumanPlayer humanPlayer;
     HumanPlayer humanOpponent;
     Setup setup;
-    GameType gameType;
+    PlayerFactory playerFactory;
 
     @Before
     public void setup() {
@@ -31,9 +28,9 @@ public class GameTest {
         humanPlayer = new HumanPlayer(fakeUserInterface, X);
         humanOpponent = new HumanPlayer(fakeUserInterface, O);
         board = new Board();
+        playerFactory = new PlayerFactory(fakeUserInterface);
         computerPlayer = new ComputerPlayer(randomNumberCalculator, O);
-        setup = new Setup(fakeUserInterface);
-        gameType = new GameType(fakeUserInterface, setup);
+        setup = new Setup(fakeUserInterface, playerFactory);
     }
 
     @Test
@@ -57,7 +54,7 @@ public class GameTest {
 
     @Test
     public void playsTheHumanGameTwice() {
-        Setup setup = new Setup(fakeUserInterface);
+        Setup setup = new Setup(fakeUserInterface, playerFactory);
         game = new Game(fakeUserInterface, humanPlayer, humanOpponent, setup);
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "y", "2", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
         game.play();

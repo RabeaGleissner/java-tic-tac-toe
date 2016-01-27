@@ -1,5 +1,6 @@
 package de.rabea.game;
 
+import de.rabea.player.PlayerFactory;
 import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,11 +12,13 @@ public class SetupTest {
 
     private FakeUserInterface fakeUserInterface;
     private Setup setup;
+    private PlayerFactory playerFactory;
 
     @Before
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
-        setup = new Setup(fakeUserInterface);
+        playerFactory = new PlayerFactory(fakeUserInterface);
+        setup = new Setup(fakeUserInterface, playerFactory);
     }
 
 
