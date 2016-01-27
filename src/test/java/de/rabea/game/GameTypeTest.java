@@ -56,7 +56,7 @@ public class GameTypeTest {
 
         @Override
         public GameMode getGameModeFromUser() {
-            return GameMode.HvH;
+            return GameMode.HumanVsHuman;
         }
     }
 
@@ -67,7 +67,7 @@ public class GameTypeTest {
 
         @Override
         public GameMode getGameModeFromUser() {
-            return GameMode.HvC;
+            return GameMode.HumanVsComputer;
         }
     }
 
@@ -78,7 +78,7 @@ public class GameTypeTest {
 
         @Override
         public GameMode getGameModeFromUser() {
-            return GameMode.CvH;
+            return GameMode.ComputerVsHuman;
         }
     }
 
@@ -89,7 +89,7 @@ public class GameTypeTest {
 
         @Override
         public GameMode getGameModeFromUser() {
-            return GameMode.CvC;
+            return GameMode.ComputerVsComputer;
         }
     }
 }

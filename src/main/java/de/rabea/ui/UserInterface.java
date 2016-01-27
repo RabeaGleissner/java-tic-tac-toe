@@ -52,20 +52,20 @@ public class UserInterface {
         String userChoice = console.readUserInput();
         switch (userChoice) {
             case "1":
-                return GameMode.HvH;
+                return GameMode.HumanVsHuman;
             case "2":
-                return GameMode.HvC;
+                return GameMode.HumanVsComputer;
             case "3":
-                return GameMode.CvH;
+                return GameMode.ComputerVsHuman;
             case "4":
-                return GameMode.CvC;
+                return GameMode.ComputerVsComputer;
             default:
                 return getGameModeFromUser();
         }
     }
 
     public void announceMarkDistribution(GameMode gameMode) {
-        if (gameMode == GameMode.HvC) {
+        if (gameMode == GameMode.HumanVsComputer) {
             markDistributionForHvC();
         } else {
             markDistributionForHvH();

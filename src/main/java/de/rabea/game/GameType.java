@@ -25,7 +25,7 @@ public class GameType {
     }
 
     private Player createPlayer(GameMode gameMode) {
-        if (gameMode == HvH || gameMode == HvC) {
+        if (gameMode == HumanVsHuman || gameMode == HumanVsComputer) {
            return new HumanPlayer(userInterface, X);
         } else {
            return new UnbeatableComputerPlayer(X);
@@ -33,7 +33,7 @@ public class GameType {
     }
 
     private Player createOpponent(GameMode gameMode) {
-        if (gameMode == HvC || gameMode == CvC) {
+        if (gameMode == HumanVsComputer || gameMode == ComputerVsComputer) {
             return new UnbeatableComputerPlayer(O);
         } else {
             return new HumanPlayer(userInterface, O);

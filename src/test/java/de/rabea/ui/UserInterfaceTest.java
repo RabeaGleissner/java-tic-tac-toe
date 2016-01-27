@@ -82,25 +82,25 @@ public class UserInterfaceTest {
     @Test
     public void returnsHvHGameModeWhenUserEnters1() {
         fakeConsole.userInput("1");
-        assertEquals(GameMode.HvH, userInterface.getGameModeFromUser());
+        assertEquals(GameMode.HumanVsHuman, userInterface.getGameModeFromUser());
     }
 
     @Test
     public void returnsHvCGameModeWhenUserEnters2() {
         fakeConsole.userInput("2");
-        assertEquals(GameMode.HvC, userInterface.getGameModeFromUser());
+        assertEquals(GameMode.HumanVsComputer, userInterface.getGameModeFromUser());
     }
 
     @Test
     public void returnsCvHGameModeWhenUserEnters3() {
         fakeConsole.userInput("3");
-        assertEquals(GameMode.CvH, userInterface.getGameModeFromUser());
+        assertEquals(GameMode.ComputerVsHuman, userInterface.getGameModeFromUser());
     }
     
     @Test
     public void returnsCvCGameModeWhenUserEnters1() {
         fakeConsole.userInput("4");
-        assertEquals(GameMode.CvC, userInterface.getGameModeFromUser());
+        assertEquals(GameMode.ComputerVsComputer, userInterface.getGameModeFromUser());
     }
 
     @Test
@@ -112,13 +112,13 @@ public class UserInterfaceTest {
 
     @Test
     public void tellsTheUserThatFirstPlayerIsXAndSecondIsO() {
-        userInterface.announceMarkDistribution(GameMode.HvH);
+        userInterface.announceMarkDistribution(GameMode.HumanVsHuman);
         assertEquals("The first user to play is X. The second player is O.", fakeConsole.messagePrinted());
     }
 
     @Test
     public void tellsTheUserThatHumanIsXAndComputerIsO() {
-        userInterface.announceMarkDistribution(GameMode.HvC);
+        userInterface.announceMarkDistribution(GameMode.HumanVsComputer);
         assertEquals("The human player is X. The computer player is O.", fakeConsole.messagePrinted());
     }
 
