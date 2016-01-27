@@ -2,10 +2,10 @@ package de.rabea.game;
 
 import de.rabea.ui.UserInterface;
 
-public class GameManager {
+public class Setup {
     private UserInterface userInterface;
 
-    public GameManager(UserInterface userInterface) {
+    public Setup(UserInterface userInterface) {
         this.userInterface = userInterface;
     }
 

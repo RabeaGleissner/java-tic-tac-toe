@@ -14,38 +14,38 @@ public class GameTypeTest {
 
     FakeUserInterface fakeUserInterface;
     FakeComputerPlayer fakeComputerPlayer;
-    GameManager gameManager;
+    Setup setup;
     Console fakeConsole;
 
     @Before
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
         fakeComputerPlayer = new FakeComputerPlayer(O);
-        gameManager = new GameManager(fakeUserInterface);
+        setup = new Setup(fakeUserInterface);
         fakeConsole = new FakeConsole();
     }
 
     @Test
     public void createsAHumanVsHumanGame() {
-        GameType gameType = new GameType(new UIReturningHvH(fakeConsole), gameManager);
+        GameType gameType = new GameType(new UIReturningHvH(fakeConsole), setup);
         assertTrue(gameType.createGame() != null);
     }
 
     @Test
     public void createsAHumanVsComputerGame() {
-        GameType gameType = new GameType(new UIReturningHvC(fakeConsole), gameManager);
+        GameType gameType = new GameType(new UIReturningHvC(fakeConsole), setup);
         assertTrue(gameType.createGame() != null);
     }
 
     @Test
     public void createsAComputerVsHumanGame() {
-        GameType gameType = new GameType(new UIReturningCvH(fakeConsole), gameManager);
+        GameType gameType = new GameType(new UIReturningCvH(fakeConsole), setup);
         assertTrue(gameType.createGame() != null);
     }
 
     @Test
     public void createsAComputerVsComputerGame() {
-        GameType gameType = new GameType(new UIReturningCvC(fakeConsole), gameManager);
+        GameType gameType = new GameType(new UIReturningCvC(fakeConsole), setup);
         assertTrue(gameType.createGame() != null);
     }
 

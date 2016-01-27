@@ -21,7 +21,7 @@ public class GameTest {
     RandomNumberCalculator randomNumberCalculator;
     HumanPlayer humanPlayer;
     HumanPlayer humanOpponent;
-    GameManager gameManager;
+    Setup setup;
     GameType gameType;
 
     @Before
@@ -32,13 +32,13 @@ public class GameTest {
         humanOpponent = new HumanPlayer(fakeUserInterface, O);
         board = new Board();
         computerPlayer = new ComputerPlayer(randomNumberCalculator, O);
-        gameManager = new GameManager(fakeUserInterface);
-        gameType = new GameType(fakeUserInterface, gameManager);
+        setup = new Setup(fakeUserInterface);
+        gameType = new GameType(fakeUserInterface, setup);
     }
 
     @Test
     public void playsTheHumanGameOnce() {
-        game = new Game(fakeUserInterface, humanPlayer, humanOpponent, gameManager);
+        game = new Game(fakeUserInterface, humanPlayer, humanOpponent, setup);
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
         game.play();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
@@ -48,7 +48,7 @@ public class GameTest {
     @Test
     public void playsTheHumanVsComputerGameOnce() {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
-        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, humanPlayer, fakeComputerPlayer, gameManager);
+        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, humanPlayer, fakeComputerPlayer, setup);
         fakeUserInterface.provideConsoleInput( "1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
         gameWithFakeComputerPlayer.play();
@@ -57,8 +57,8 @@ public class GameTest {
 
     @Test
     public void playsTheHumanGameTwice() {
-        GameManager gameManager = new GameManager(fakeUserInterface);
-        game = new Game(fakeUserInterface, humanPlayer, humanOpponent, gameManager);
+        Setup setup = new Setup(fakeUserInterface);
+        game = new Game(fakeUserInterface, humanPlayer, humanOpponent, setup);
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "y", "2", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
         game.play();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());

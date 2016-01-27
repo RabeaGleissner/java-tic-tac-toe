@@ -10,18 +10,18 @@ import static de.rabea.game.Mark.X;
 
 public class GameType {
     private UserInterface userInterface;
-    private GameManager gameManager;
+    private Setup setup;
 
-    public GameType(UserInterface userInterface, GameManager gameManager) {
+    public GameType(UserInterface userInterface, Setup setup) {
         this.userInterface = userInterface;
-        this.gameManager = gameManager;
+        this.setup = setup;
     }
 
     public Game createGame() {
         GameMode gameMode = userInterface.getGameModeFromUser();
         userInterface.announceMarkDistribution(gameMode);
 
-        return new Game(userInterface, createPlayer(gameMode), createOpponent(gameMode), gameManager);
+        return new Game(userInterface, createPlayer(gameMode), createOpponent(gameMode), setup);
     }
 
     private Player createPlayer(GameMode gameMode) {
