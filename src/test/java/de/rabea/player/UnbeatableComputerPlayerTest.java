@@ -2,11 +2,11 @@ package de.rabea.player;
 
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
-import org.junit.Before;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class UnbeatableComputerPlayerTest {
     UnbeatableComputerPlayer unbeatableComputerPlayer = new UnbeatableComputerPlayer(O);
@@ -87,5 +87,22 @@ public class UnbeatableComputerPlayerTest {
                                             O,     EMPTY,X,
                                             EMPTY, EMPTY,O});
         assertEquals(1, unbeatableComputerPlayer.getPosition(board));
+    }
+
+    @Test
+    public void measureSpeedOfFirstMove() {
+        UnbeatableComputerPlayer computer = new UnbeatableComputerPlayer(X);
+        Board board;
+        long startTime = System.nanoTime();
+        for (int i = 0; i <= 10; i++) {
+            board = new Board(new Mark[] {EMPTY,EMPTY,EMPTY,
+                    EMPTY,EMPTY,EMPTY,
+                    EMPTY, EMPTY,EMPTY});
+            computer.getPosition(board);
+        }
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime)/1000000;
+        System.out.println("duration in milliseconds= " + duration);
+        assertTrue(true);
     }
 }
