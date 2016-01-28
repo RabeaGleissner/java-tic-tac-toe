@@ -2,6 +2,7 @@ package de.rabea.player;
 
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.*;
@@ -20,7 +21,7 @@ public class UnbeatableComputerPlayerTest {
     }
 
     @Test
-    public void playsWinningMove() {
+    public void playsBlockingMove() {
         Board board = new Board(new Mark[] {O,    X,EMPTY,
                                             EMPTY,X,O,
                                             EMPTY,EMPTY,EMPTY});
@@ -89,6 +90,7 @@ public class UnbeatableComputerPlayerTest {
         assertEquals(1, unbeatableComputerPlayer.getPosition(board));
     }
 
+    @Ignore
     @Test
     public void measureSpeedOfFirstMove() {
         UnbeatableComputerPlayer computer = new UnbeatableComputerPlayer(X);
