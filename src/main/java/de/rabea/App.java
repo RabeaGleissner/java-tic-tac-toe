@@ -9,7 +9,6 @@ public class App {
     public static void main( String[] args ) {
         UserInterface userInterface = new UserInterface(new RealConsole(System.in, System.out));
         PlayerFactory playerFactory = new PlayerFactory(userInterface);
-        Game game = new Game(userInterface, playerFactory, playerFactory.createDefaultPlayer(), playerFactory.createDefaultPlayer());
-        game.startApplication();
+        new Game(userInterface, playerFactory).startApplication();
     }
 }

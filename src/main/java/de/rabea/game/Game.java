@@ -6,8 +6,8 @@ import de.rabea.ui.UserInterface;
 public class Game {
 
     private final UserInterface userInterface;
-    private final Player player;
-    private final Player opponent ;
+    private Player player;
+    private Player opponent ;
     private final PlayerFactory playerFactory;
 
     public Game(UserInterface userInterface, PlayerFactory playerFactory, Player player, Player opponent) {
@@ -15,6 +15,10 @@ public class Game {
         this.player = player;
         this.opponent = opponent;
         this.playerFactory = playerFactory;
+    }
+
+    public Game(UserInterface userInterface, PlayerFactory playerFactory) {
+       this(userInterface, playerFactory, playerFactory.createDefaultPlayer(), playerFactory.createDefaultPlayer());
     }
 
     public void startApplication() {
@@ -25,9 +29,9 @@ public class Game {
     public void setUpNewGame() {
         GameMode gameMode = userInterface.getGameModeFromUser();
         userInterface.announceMarkDistribution(gameMode);
-
-        Game game = new Game(userInterface, playerFactory, playerFactory.createPlayer(gameMode), playerFactory.createOpponent(gameMode));
-        game.play();
+        this.player = playerFactory.createPlayer(gameMode);
+        this.opponent = playerFactory.createOpponent(gameMode);
+        play();
     }
 
     public void play() {

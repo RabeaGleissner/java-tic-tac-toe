@@ -44,7 +44,7 @@ public class GameTest {
     public void playsHumanVsComputerGameOnce() {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, playerFactory, humanPlayer, fakeComputerPlayer);
-        fakeUserInterface.provideConsoleInput( "1", "4", "7", "n");
+        fakeUserInterface.provideConsoleInput("1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
         gameWithFakeComputerPlayer.play();
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
@@ -61,7 +61,8 @@ public class GameTest {
 
     @Test
     public void setsUpHumanVsHumanGame() {
-        Game game = new Game(fakeUserInterface, playerFactory, playerFactory.createDefaultPlayer(), playerFactory.createDefaultPlayer());
+        PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
+        Game game = new Game(fakeUserInterface, playerFactory);
         fakeUserInterface.provideConsoleInput("1", "1", "7", "2", "4", "3", "n");
         game.setUpNewGame();
         assertTrue(game.getPlayer() instanceof HumanPlayer);
@@ -72,7 +73,7 @@ public class GameTest {
     public void startsApplication() {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
         FakePlayerFactory fakePlayerFactory = new FakePlayerFactory(fakeUserInterface, fakeComputerPlayer);
-        Game game = new Game(fakeUserInterface, fakePlayerFactory, playerFactory.createDefaultPlayer(), playerFactory.createDefaultPlayer());
+        Game game = new Game(fakeUserInterface, fakePlayerFactory);
         fakeUserInterface.provideConsoleInput("2", "1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
         game.startApplication();
