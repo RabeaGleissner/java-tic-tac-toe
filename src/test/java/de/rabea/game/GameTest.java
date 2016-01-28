@@ -58,5 +58,44 @@ public class GameTest {
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(2, fakeUserInterface.announceWinnerCalled());
     }
+
+    @Test
+    public void setsUpHumanVsHumanGame() {
+        Game game = new Game(fakeUserInterface, playerFactory, playerFactory.createDefaultPlayer(), playerFactory.createDefaultPlayer());
+        fakeUserInterface.provideConsoleInput("1", "1", "7", "2", "4", "3", "n");
+        game.setUpNewGame();
+        assertTrue(game.getPlayer() instanceof HumanPlayer);
+        assertTrue(game.getOpponent() instanceof HumanPlayer);
+    }
+
+    @Test
+    public void startsApplication() {
+        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
+        FakePlayerFactory fakePlayerFactory = new FakePlayerFactory(fakeUserInterface, fakeComputerPlayer);
+        Game game = new Game(fakeUserInterface, fakePlayerFactory, playerFactory.createDefaultPlayer(), playerFactory.createDefaultPlayer());
+        fakeUserInterface.provideConsoleInput("2", "1", "4", "7", "n");
+        fakeComputerPlayer.giveNumbers(1, 2);
+        game.startApplication();
+        assertTrue(fakeUserInterface.wasGreetUserCalled());
+    }
+
+    private class FakePlayerFactory extends PlayerFactory {
+        private FakeComputerPlayer fakeComputerPlayer;
+
+        public FakePlayerFactory(UserInterface userInterface, FakeComputerPlayer fakeComputerPlayer) {
+            super(userInterface);
+            this.fakeComputerPlayer = fakeComputerPlayer;
+        }
+
+        @Override
+        public Player createPlayer(GameMode gameMode) {
+            return new HumanPlayer(fakeUserInterface, X);
+        }
+
+        @Override
+        public Player createOpponent(GameMode gameMode) {
+            return fakeComputerPlayer;
+        }
+    }
 }
 
