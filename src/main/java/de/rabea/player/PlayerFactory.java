@@ -30,4 +30,8 @@ public class PlayerFactory {
             return new HumanPlayer(userInterface, O);
         }
     }
+
+    public Player createDefaultPlayer() {
+        return new HumanPlayer(userInterface, X);
+    }
 }

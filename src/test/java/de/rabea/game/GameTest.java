@@ -2,6 +2,7 @@ package de.rabea.game;
 
 import de.rabea.player.*;
 import de.rabea.ui.FakeUserInterface;
+import de.rabea.ui.UserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,13 +13,11 @@ import static org.junit.Assert.assertTrue;
 
 public class GameTest {
     FakeUserInterface fakeUserInterface;
-    Game game;
     Board board;
     ComputerPlayer computerPlayer;
     RandomNumberCalculator randomNumberCalculator;
     HumanPlayer humanPlayer;
     HumanPlayer humanOpponent;
-    Setup setup;
     PlayerFactory playerFactory;
 
     @Before
@@ -30,12 +29,11 @@ public class GameTest {
         board = new Board();
         playerFactory = new PlayerFactory(fakeUserInterface);
         computerPlayer = new ComputerPlayer(randomNumberCalculator, O);
-        setup = new Setup(fakeUserInterface, playerFactory);
     }
 
     @Test
-    public void playsTheHumanGameOnce() {
-        game = new Game(fakeUserInterface, humanPlayer, humanOpponent, setup);
+    public void playsHumanGameOnce() {
+        Game game = new Game(fakeUserInterface, playerFactory, humanPlayer, humanOpponent);
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
         game.play();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
@@ -43,9 +41,9 @@ public class GameTest {
     }
 
     @Test
-    public void playsTheHumanVsComputerGameOnce() {
+    public void playsHumanVsComputerGameOnce() {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
-        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, humanPlayer, fakeComputerPlayer, setup);
+        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, playerFactory, humanPlayer, fakeComputerPlayer);
         fakeUserInterface.provideConsoleInput( "1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
         gameWithFakeComputerPlayer.play();
@@ -53,9 +51,8 @@ public class GameTest {
     }
 
     @Test
-    public void playsTheHumanGameTwice() {
-        Setup setup = new Setup(fakeUserInterface, playerFactory);
-        game = new Game(fakeUserInterface, humanPlayer, humanOpponent, setup);
+    public void playsHumanGameTwice() {
+        Game game = new Game(fakeUserInterface, playerFactory, humanPlayer, humanOpponent);
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "y", "2", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
         game.play();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
