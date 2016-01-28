@@ -4,6 +4,8 @@ import de.rabea.game.Board;
 import de.rabea.game.Mark;
 import de.rabea.game.Player;
 
+import static java.lang.Math.*;
+
 public class UnbeatableComputerPlayer extends Player {
 
     public UnbeatableComputerPlayer(Mark mark) {
@@ -13,21 +15,40 @@ public class UnbeatableComputerPlayer extends Player {
     @Override
     public int getPosition(Board board) {
         int remainingMovesCount = board.emptyCells().size();
-        return minimax(remainingMovesCount, board, mark).getMove();
+        return minimax(remainingMovesCount, Integer.MIN_VALUE, Integer.MAX_VALUE, board, mark).getMove();
     }
 
-    private ScoredMove minimax(int remainingMovesCount, Board currentBoard, Mark currentMark) {
+    private ScoredMove minimax(int remainingMovesCount, int alpha, int beta, Board currentBoard, Mark currentMark) {
         ScoredMove currentBestScore = resetBestScore(currentMark);
-        if (currentBoard.gameOver()) {
+        if (currentBoard.gameOver() || remainingMovesCount == 0) {
             return new ScoredMove(score(currentBoard, remainingMovesCount), currentBestScore.getScore());
         }
 
         for (int position : currentBoard.emptyCells()) {
             Board nextBoardState = currentBoard.placeMarkOnNewBoard(position, currentMark, currentBoard);
-            ScoredMove score = minimax(remainingMovesCount - 1, nextBoardState, currentMark.switchMark(currentMark));
 
-            if (score.isBetterThan(currentBestScore, currentMark)) {
-                currentBestScore = new ScoredMove(score.getScore(), position);
+            if (currentMark == mark) {
+                ScoredMove score = minimax(remainingMovesCount - 1, alpha, beta, nextBoardState, currentMark.switchMark(currentMark));
+                if (score.isBetterThan(currentBestScore, currentMark)) {
+                    currentBestScore = new ScoredMove(score.getScore(), position);
+//                System.out.println("currentBestScore = " + currentBestScore.getScore());
+                }
+                if (currentBestScore.getScore() > alpha) {
+                    alpha = currentBestScore.getScore();
+                }
+            } else {
+                ScoredMove score = minimax(remainingMovesCount -1, alpha, beta, nextBoardState, currentMark.switchMark(currentMark));
+                if (score.isBetterThan(currentBestScore, currentMark)) {
+                    currentBestScore = new ScoredMove(score.getScore(), position);
+//                System.out.println("currentBestScore = " + currentBestScore.getScore());
+                }
+                if (currentBestScore.getScore() < beta) {
+                    beta = currentBestScore.getScore();
+                }
+            }
+            if (alpha >= beta) {
+//                System.out.println("*****************it breaks************************");
+                break;
             }
         }
         return currentBestScore;
