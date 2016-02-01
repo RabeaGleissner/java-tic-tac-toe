@@ -6,12 +6,10 @@ import java.io.*;
 
 public class RealConsole implements Console {
     BufferedReader bufferedReader;
-    BufferedReader userInput;
     PrintStream output;
 
-    public RealConsole(BufferedReader bufferedReader, InputStream userInput, PrintStream output) {
+    public RealConsole(BufferedReader bufferedReader, PrintStream output) {
         this.bufferedReader= bufferedReader;
-//        this.userInput= new BufferedReader(new InputStreamReader(userInput));
         this.output = output;
     }
 
