@@ -16,9 +16,8 @@ public class PrettyBoardPainterTest {
         board = new Board();
     }
 
-
     @Test
-    public void displaysBoardWithMarks() {
+    public void displaysBoardWithMarksInDifferentColoursAndDashedLines() {
         board.placeMark(1, X);
         board.placeMark(3, O);
         PrettyBoardPainter prettyBoardPainter = new PrettyBoardPainter();

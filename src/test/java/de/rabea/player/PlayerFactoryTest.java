@@ -25,25 +25,25 @@ public class PlayerFactoryTest {
     }
 
     @Test
-    public void createsAHumanPlayerForAHumanVsComputerGame() {
+    public void createsHumanPlayerForAHumanVsComputerGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
         assertTrue(playerFactory.createPlayer(GameMode.HumanVsComputer) instanceof HumanPlayer);
     }
 
     @Test
-    public void createsAComputerPlayerForAHumanVsComputerGame() {
+    public void createsComputerPlayerForAHumanVsComputerGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
         assertTrue(playerFactory.createOpponent(GameMode.HumanVsComputer) instanceof UnbeatableComputerPlayer);
     }
 
     @Test
-    public void createsAComputerPlayerForAComputerVsHumanGame() {
+    public void createsComputerPlayerForAComputerVsHumanGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
         assertTrue(playerFactory.createPlayer(GameMode.ComputerVsHuman) instanceof UnbeatableComputerPlayer);
     }
 
     @Test
-    public void createsAHumanPlayerForAComputerVsHumanGame() {
+    public void createsHumanPlayerForAComputerVsHumanGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
         assertTrue(playerFactory.createOpponent(GameMode.ComputerVsHuman) instanceof HumanPlayer);
     }

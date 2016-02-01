@@ -25,25 +25,25 @@ public class HumanPlayerTest {
     }
 
     @Test
-    public void itConvertsTheUserPositionIntoAnIntegerForTheProgrammeToUse() {
+    public void convertsUserPositionIntoInteger() {
         fakeConsole.userInput("2");
-        assertEquals( 1, humanPlayer.getPosition(board));
+        assertEquals(1, humanPlayer.getPosition(board));
     }
 
     @Test
-    public void itGivesAWarningWhenUserEntryIsNotANumber() {
+    public void givesWarningWhenUserEntryIsNotANumber() {
         fakeConsole.userInput("NaN", "8");
         humanPlayer.getPosition(board);
         assertEquals("Please select a position for your mark.", fakeConsole.messagePrinted());
     }
 
     @Test
-    public void itReturnsThePlayersMark() {
+    public void returnsPlayersMark() {
         assertEquals(X, humanPlayer.mark());
     }
 
     @Test
-    public void asksUserAgainIfPositionIsOccupied() {
+    public void asksUserAgainWhenPositionIsOccupied() {
         FakeUserInterface fakeUserInterface = new FakeUserInterface();
         HumanPlayer humanPlayer = new HumanPlayer(fakeUserInterface, X);
         board.placeMark(0, X);

@@ -17,7 +17,7 @@ public class ComputerPlayerTest {
     }
 
     @Test
-    public void returnsARandomPosition() {
+    public void returnsAFakeRandomPosition() {
         FakeRandomNumberCalculator fakeRandomNumberCalc = new FakeRandomNumberCalculator();
         ComputerPlayer computerPlayer = new ComputerPlayer(fakeRandomNumberCalc, O);
         fakeRandomNumberCalc.giveNumbers(2);
@@ -39,7 +39,7 @@ public class ComputerPlayerTest {
     }
 
     @Test
-    public void thereIsOneLessEmptyPositionAfterTheComputerMadeItsRandomMove() {
+    public void thereIsOneFewerEmptyPositionAfterTheComputerMadeItsRandomMove() {
         ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalculator(), O);
         int computerPosition = computerPlayer.getPosition(board);
         board.placeMark(computerPosition, O);
@@ -50,6 +50,5 @@ public class ComputerPlayerTest {
     public void itReturnsThePlayersMark() {
         ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalculator(), O);
         assertEquals(O, computerPlayer.mark());
-
     }
 }
