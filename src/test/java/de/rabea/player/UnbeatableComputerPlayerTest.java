@@ -91,7 +91,7 @@ public class UnbeatableComputerPlayerTest {
     }
 
     @Ignore
-    @Test
+    @Test(timeout=3200)
     public void measureSpeedOfFirstMove() {
         UnbeatableComputerPlayer computer = new UnbeatableComputerPlayer(X);
         Board board;
