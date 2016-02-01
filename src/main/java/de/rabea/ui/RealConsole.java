@@ -5,11 +5,13 @@ import de.rabea.game.Console;
 import java.io.*;
 
 public class RealConsole implements Console {
+    BufferedReader bufferedReader;
     BufferedReader userInput;
     PrintStream output;
 
-    public RealConsole(InputStream userInput, PrintStream output) {
-        this.userInput= new BufferedReader(new InputStreamReader(userInput));
+    public RealConsole(BufferedReader bufferedReader, InputStream userInput, PrintStream output) {
+        this.bufferedReader= bufferedReader;
+//        this.userInput= new BufferedReader(new InputStreamReader(userInput));
         this.output = output;
     }
 
@@ -19,9 +21,9 @@ public class RealConsole implements Console {
 
     public String readUserInput() {
         try {
-            return userInput.readLine();
+            return bufferedReader.readLine();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new UncheckedIOException(e);
         }
     }
 }
