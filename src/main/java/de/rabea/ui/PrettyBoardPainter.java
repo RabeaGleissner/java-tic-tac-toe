@@ -10,21 +10,16 @@ public class PrettyBoardPainter implements BoardPainter {
     private final String BLUE_COLOUR_FOR_X = "\u001B[34m";
     private final String RED_COLOUR_FOR_O = "\u001B[31m";
     private final String COLOUR_RESET = "\u001B[0m";
-    private Board board;
-
-    public PrettyBoardPainter(Board board) {
-        this.board = board;
-    }
 
     @Override
-    public String drawBoard() {
+    public String drawBoard(Board board) {
         int i = 0;
         String boardImage = "\n";
         for (Mark cell : board.cells()) {
             i ++;
             boardImage = printSymbolInCell(i, boardImage, cell);
-            boardImage = printHorizontalLines(i, boardImage);
-            boardImage = printLastPipe(i, boardImage);
+            boardImage = printHorizontalLines(i, boardImage, board);
+            boardImage = printLastPipe(i, boardImage, board);
         }
         return boardImage;
     }
@@ -41,14 +36,14 @@ public class PrettyBoardPainter implements BoardPainter {
         return boardImage;
     }
 
-    private String printHorizontalLines(int i, String boardImage) {
+    private String printHorizontalLines(int i, String boardImage, Board board) {
         if (board.isIndexOfEndOfFirstOrSecondRow(i-1)) {
             boardImage += horizontalLine();
         }
         return boardImage;
     }
 
-    private String printLastPipe(int i, String boardImage) {
+    private String printLastPipe(int i, String boardImage, Board board) {
         if (board.isIndexOfLastCell(i-1)) {
             boardImage += lastPipe();
         }

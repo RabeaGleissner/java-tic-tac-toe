@@ -21,7 +21,7 @@ public class PrettyBoardPainterTest {
     public void displaysBoardWithMarks() {
         board.placeMark(1, X);
         board.placeMark(3, O);
-        PrettyBoardPainter prettyBoardPainter = new PrettyBoardPainter(board);
+        PrettyBoardPainter prettyBoardPainter = new PrettyBoardPainter();
         assertEquals(
                   "\n| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
                   " -----------\n" +
@@ -29,7 +29,8 @@ public class PrettyBoardPainterTest {
                   " -----------\n" +
                   "| 7 | 8 | 9 |\n",
 
-                prettyBoardPainter.drawBoard()
+                prettyBoardPainter.drawBoard(board)
+
         );
     }
 }
