@@ -6,16 +6,17 @@ import de.rabea.game.Mark;
 import static de.rabea.game.Mark.EMPTY;
 import static de.rabea.game.Mark.X;
 
-public class BoardPainter {
+public class PrettyBoardPainter implements BoardPainter {
     private final String BLUE_COLOUR_FOR_X = "\u001B[34m";
     private final String RED_COLOUR_FOR_O = "\u001B[31m";
     private final String COLOUR_RESET = "\u001B[0m";
     private Board board;
 
-    public BoardPainter(Board board) {
+    public PrettyBoardPainter(Board board) {
         this.board = board;
     }
 
+    @Override
     public String drawBoard() {
         int i = 0;
         String boardImage = "\n";

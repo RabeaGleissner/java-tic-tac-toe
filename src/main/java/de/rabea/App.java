@@ -2,6 +2,7 @@ package de.rabea;
 
 import de.rabea.game.Game;
 import de.rabea.player.PlayerFactory;
+import de.rabea.ui.PrettyBoardPainter;
 import de.rabea.ui.RealConsole;
 import de.rabea.ui.UserInterface;
 

@@ -8,7 +8,7 @@ import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
 
-public class BoardPainterTest {
+public class PrettyBoardPainterTest {
     private Board board;
 
     @Before
@@ -21,7 +21,7 @@ public class BoardPainterTest {
     public void displaysBoardWithMarks() {
         board.placeMark(1, X);
         board.placeMark(3, O);
-        BoardPainter boardPainter = new BoardPainter(board);
+        PrettyBoardPainter prettyBoardPainter = new PrettyBoardPainter(board);
         assertEquals(
                   "\n| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
                   " -----------\n" +
@@ -29,7 +29,7 @@ public class BoardPainterTest {
                   " -----------\n" +
                   "| 7 | 8 | 9 |\n",
 
-                boardPainter.drawBoard()
+                prettyBoardPainter.drawBoard()
         );
     }
 }
