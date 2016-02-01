@@ -1,5 +1,4 @@
 package de.rabea.game;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,23 +15,13 @@ import static org.junit.Assert.assertFalse;
 
 public class BoardTest {
 
-    private Board board;
-
     @Before
     public void setup() {
-        board = new Board();
-    }
-
-    @Test
-    public void initiatesAnEmptyBoard() {
-        Mark[] emptyBoard = {EMPTY, EMPTY, EMPTY,
-                             EMPTY, EMPTY, EMPTY,
-                             EMPTY, EMPTY, EMPTY};
-        assertArrayEquals(emptyBoard, board.cells());
     }
 
     @Test
     public void placesAMark() {
+        Board board = new Board();
         Mark[] cells = {EMPTY, X, EMPTY,
                         EMPTY, EMPTY, EMPTY,
                         EMPTY, EMPTY, EMPTY};
@@ -54,23 +43,27 @@ public class BoardTest {
 
     @Test
     public void isChosenPositionStillFree() {
-        assertEquals(true, board.isPositionAvailable(1));
+        Board emptyBoard = new Board();
+        assertEquals(true, emptyBoard.isPositionAvailable(1));
     }
 
     @Test
     public void markedPositionIsNoLongerAvailable() {
+        Board board = new Board();
         board.placeMark(1, X);
         assertEquals(false, board.isPositionAvailable(1));
     }
 
     @Test
     public void itKnowsWhenAPositionIsUnavailable() {
-        int positionNotOnTheBoard = 9;
-        assertFalse(board.isPositionAvailable(positionNotOnTheBoard));
+        Board board = new Board();
+        int positionNotOnBoard = 9;
+        assertFalse(board.isPositionAvailable(positionNotOnBoard));
     }
 
     @Test
     public void returnsAllEmptyPositions() {
+        Board board = new Board();
         board.placeMark(1, X);
         board.placeMark(2, O);
         board.placeMark(3, X);
@@ -81,28 +74,33 @@ public class BoardTest {
 
     @Test
     public void indexOfLastCellInEachRow() {
-        List<Integer> cells = new ArrayList<Integer>(Arrays.asList(2,5,8));
+        Board board = new Board();
+        List<Integer> cells = new ArrayList<>(Arrays.asList(2, 5, 8));
         assertEquals(cells, board.indexOfLastCellPerRow());
     }
 
     @Test
     public void indexOfLastCellOfBoard() {
+        Board board = new Board();
         assertEquals(8, board.indexOfLastCell());
     }
 
     @Test
-    public void itKnowsTheWidthOfTheBoard() {
+    public void widthAndHeightOfTheBoard() {
+        Board board = new Board();
         assertEquals(3, board.getDimension());
     }
 
     @Test
     public void isEndOfLastRow() {
+        Board board = new Board();
         assertTrue(board.isLastCell(8));
         assertFalse(board.isLastCell(7));
     }
 
     @Test
     public void isEndOfFirstOrSecondRow() {
+        Board board = new Board();
         assertTrue(board.isEndOfFirstOrSecondRow(2));
         assertTrue(board.isEndOfFirstOrSecondRow(5));
         assertFalse(board.isEndOfFirstOrSecondRow(1));
@@ -111,32 +109,32 @@ public class BoardTest {
 
     @Test
     public void gameOverWithoutWinner() {
-        board = fullBoardNoWinner();
+        Board board = fullBoardNoWinner();
         assertTrue(board.gameOver());
         assertFalse(board.hasWinner());
     }
 
     @Test
     public void gameOverWithWinner() {
-        board = horizontalsWinningBoard();
+        Board board = horizontalsWinningBoard();
         assertTrue(board.gameOver());
     }
 
     @Test
     public void verticalWinningCombination() {
-        board = verticalsWinningBoard();
+        Board board = verticalsWinningBoard();
         assertTrue(board.hasWinner());
     }
 
     @Test
     public void horizontalWinningCombination() {
-        board = horizontalsWinningBoard();
+        Board board = horizontalsWinningBoard();
         assertTrue(board.hasWinner());
     }
 
     @Test
     public void diagonalWinningBoard() {
-        board = diagonalsWinningBoard();
+        Board board = diagonalsWinningBoard();
         assertTrue(board.hasWinner());
     }
 
@@ -144,13 +142,25 @@ public class BoardTest {
     public void playerXIsWinner() {
         Board boardWithWinnerX = verticalsWinningBoard();
         assertEquals(X, boardWithWinnerX.winningPlayerMark());
-
     }
 
     @Test
     public void gameIsDrawn() {
         Board drawnGameBoard = fullBoardNoWinner();
         assertTrue(drawnGameBoard.isDrawn());
+    }
+
+    @Test
+    public void nullWhenNoWinner() {
+        Board fullBoardNoWinner = fullBoardNoWinner();
+        assertEquals(null, fullBoardNoWinner.winningPlayerMark());
+    }
+
+    @Test
+    public void placesMarkOnNewBoard() {
+        Board board = new Board();
+        board.placeMarkOnNewBoard(1, X, board);
+        assertFalse(board.isFull());
     }
 
     private Board fullBoardNoWinner() {
