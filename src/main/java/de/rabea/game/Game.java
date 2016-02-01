@@ -39,7 +39,9 @@ public class Game {
         Player currentPlayer = player;
         while (gameIsNotOver(board)){
             playOneRound(currentPlayer, board);
-            currentPlayer = switchPlayer(currentPlayer);
+            if (gameIsNotOver(board)) {
+                currentPlayer = switchPlayer(currentPlayer);
+            }
         }
         finishGame(currentPlayer.mark(), board);
         if (userInterface.playAgain()) {
@@ -62,7 +64,7 @@ public class Game {
 
     private void finishGame(Mark mark, Board board) {
         userInterface.displayBoard(board);
-        userInterface.announceGameEnd(mark.switchMark(mark), board.hasWinner());
+        userInterface.announceGameEnd(mark, board.hasWinner());
     }
 
     private boolean gameIsNotOver(Board board) {
