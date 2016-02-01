@@ -34,16 +34,13 @@ public class UnbeatableComputerPlayer extends Player {
     }
 
     private int score(Board board, int remainingMovesCount) {
-        int maximisingScore = 100;
-        int minimisingScore = -100;
-
         if (isCurrentPlayerWinner(board)) {
-            return maximisingScore - remainingMovesCount;
+            return remainingMovesCount;
         }
         if (board.isDrawn()){
             return 0;
         }
-        return minimisingScore - remainingMovesCount;
+        return -remainingMovesCount;
     }
 
     private boolean isCurrentPlayerWinner(Board board) {
