@@ -8,7 +8,7 @@ import de.rabea.ui.UserInterface;
 
 public class App {
     public static void main( String[] args ) {
-        UserInterface userInterface = new UserInterface(new RealConsole(System.in, System.out));
+        UserInterface userInterface = new UserInterface(new RealConsole(System.in, System.out), new PrettyBoardPainter());
         PlayerFactory playerFactory = new PlayerFactory(userInterface);
         new Game(userInterface, playerFactory).startApplication();
     }

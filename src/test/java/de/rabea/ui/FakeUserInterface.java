@@ -17,7 +17,7 @@ public class FakeUserInterface extends UserInterface {
     private int countAnnounceGameEndCalls = 0;
 
     public FakeUserInterface() {
-        super(new FakeConsole());
+        super(new FakeConsole(), new StandardBoardPainter());
     }
 
     @Override

@@ -4,9 +4,11 @@ import de.rabea.game.*;
 
 public class UserInterface {
     private final Console console;
+    private BoardPainter boardPainter;
 
-    public UserInterface(Console console) {
+    public UserInterface(Console console, BoardPainter boardPainter) {
         this.console = console;
+        this.boardPainter = boardPainter;
     }
 
     private final String ASK_FOR_POSITION = "Please select a position for your mark.";
@@ -25,8 +27,7 @@ public class UserInterface {
 
     public void displayBoard(Board board) {
         clearScreen();
-        BoardPainter boardPainter = new BoardPainter(board);
-        console.print(boardPainter.drawBoard());
+        console.print(boardPainter.drawBoard(board));
     }
 
     private void clearScreen() {

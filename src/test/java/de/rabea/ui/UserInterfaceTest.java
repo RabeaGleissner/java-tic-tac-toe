@@ -17,12 +17,14 @@ public class UserInterfaceTest {
     private UserInterface userInterface;
     private FakeConsole fakeConsole;
     private Board board;
+    private StandardBoardPainter standardBoardPainter;
 
     @Before
     public void setup() {
-        fakeConsole = new FakeConsole();
-        userInterface = new UserInterface(fakeConsole);
         board = new Board();
+        fakeConsole = new FakeConsole();
+        standardBoardPainter = new StandardBoardPainter();
+        userInterface = new UserInterface(fakeConsole, standardBoardPainter);
     }
 
     @Test
@@ -30,11 +32,9 @@ public class UserInterfaceTest {
         userInterface.displayBoard(board);
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
                 "\n" +
-                "| 1 | 2 | 3 | \n" +
-                " -----------\n" +
-                "| 4 | 5 | 6 | \n" +
-                " -----------\n" +
-                "| 7 | 8 | 9 |\n"
+                "1 2 3 \n" +
+                "4 5 6 \n" +
+                "7 8 9 "
         );
     }
 
@@ -46,11 +46,9 @@ public class UserInterfaceTest {
         userInterface.displayBoard(board);
         assertThat(fakeConsole.messagePrinted()).isEqualTo(
                 "\n" +
-                "| 1 | \u001B[34mX\u001B[0m | 3 | \n" +
-                " -----------\n" +
-                "| \u001B[31mO\u001B[0m | 5 | 6 | \n" +
-                " -----------\n" +
-                "| 7 | 8 | 9 |\n"
+                "1 X 3 \n" +
+                "O 5 6 \n" +
+                "7 8 9 "
         );
     }
 
