@@ -7,9 +7,9 @@ import static de.rabea.game.Mark.EMPTY;
 import static de.rabea.game.Mark.X;
 
 public class BoardPainter {
-    private String blueColourForX = "\u001B[34m";
-    private String redColourForO = "\u001B[31m";
-    private String colourReset = "\u001B[0m";
+    private final String BLUE_COLOUR_FOR_X = "\u001B[34m";
+    private final String RED_COLOUR_FOR_O = "\u001B[31m";
+    private final String COLOUR_RESET = "\u001B[0m";
     private Board board;
 
     public BoardPainter(Board board) {
@@ -41,25 +41,25 @@ public class BoardPainter {
     }
 
     private String printHorizontalLines(int i, String boardImage) {
-        if (board.isEndOfFirstOrSecondRow(i-1)) {
+        if (board.isIndexOfEndOfFirstOrSecondRow(i-1)) {
             boardImage += horizontalLine();
         }
         return boardImage;
     }
 
     private String printLastPipe(int i, String boardImage) {
-        if (board.isLastCell(i-1)) {
+        if (board.isIndexOfLastCell(i-1)) {
             boardImage += lastPipe();
         }
         return boardImage;
     }
 
     private String colouredO(Mark cell) {
-        return redColourForO + cell.toString() + colourReset;
+        return RED_COLOUR_FOR_O + cell.toString() + COLOUR_RESET;
     }
 
     private String colouredX(Mark cell) {
-        return blueColourForX + cell.toString() + colourReset;
+        return BLUE_COLOUR_FOR_X + cell.toString() + COLOUR_RESET;
     }
 
     private String horizontalLine() {

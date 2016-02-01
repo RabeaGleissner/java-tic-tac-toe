@@ -97,21 +97,21 @@ public class Board {
         return cells().length - 1;
     }
 
-    public boolean isLastCell(int cell) {
+    public boolean isIndexOfLastCell(int cell) {
         return cell == indexOfLastCell();
     }
 
-    public boolean isEndOfFirstOrSecondRow(int cell) {
+    public boolean isIndexOfEndOfFirstOrSecondRow(int cell) {
         for (int cellIndex : indexOfLastCellPerRow()) {
-            if (cell == cellIndex && isNotTheLastCell(cell)) {
+            if (cell == cellIndex && isNotLastCellIndex(cell)) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isNotTheLastCell(int cell) {
-        return !(isLastCell(cell));
+    private boolean isNotLastCellIndex(int cell) {
+        return !(isIndexOfLastCell(cell));
     }
 
     public List<Line> getAllLines() {
@@ -131,9 +131,9 @@ public class Board {
         return rows;
     }
 
-    private Line getRow(int index) {
-        int start = index * 3;
-        return new Line(cells[start], cells[start+1], cells[start+2]);
+    private Line getRow(int currentIndex) {
+        int index = currentIndex * 3;
+        return new Line(cells[index], cells[index+1], cells[index+2]);
     }
 
     public List<Line> getColumns() {

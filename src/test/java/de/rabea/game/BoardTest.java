@@ -94,17 +94,17 @@ public class BoardTest {
     @Test
     public void isEndOfLastRow() {
         Board board = new Board();
-        assertTrue(board.isLastCell(8));
-        assertFalse(board.isLastCell(7));
+        assertTrue(board.isIndexOfLastCell(8));
+        assertFalse(board.isIndexOfLastCell(7));
     }
 
     @Test
     public void isEndOfFirstOrSecondRow() {
         Board board = new Board();
-        assertTrue(board.isEndOfFirstOrSecondRow(2));
-        assertTrue(board.isEndOfFirstOrSecondRow(5));
-        assertFalse(board.isEndOfFirstOrSecondRow(1));
-        assertFalse(board.isEndOfFirstOrSecondRow(8));
+        assertTrue(board.isIndexOfEndOfFirstOrSecondRow(2));
+        assertTrue(board.isIndexOfEndOfFirstOrSecondRow(5));
+        assertFalse(board.isIndexOfEndOfFirstOrSecondRow(1));
+        assertFalse(board.isIndexOfEndOfFirstOrSecondRow(8));
     }
 
     @Test
