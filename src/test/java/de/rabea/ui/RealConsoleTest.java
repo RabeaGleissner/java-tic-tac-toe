@@ -29,11 +29,16 @@ public class RealConsoleTest {
     }
 
     @Test(expected=UncheckedIOException.class)
-    public void throwsAnExceptionForBadInput() throws IOException {
-        InputStream input = new ByteArrayInputStream("hello\n".getBytes());
+    public void throwsAnExceptionWhenBufferedReaderIsClosed() throws IOException {
+        BufferedReader closedBufferedReader = closedBufferedReader();
+        RealConsole realConsole = new RealConsole(closedBufferedReader, null);
+        realConsole.readUserInput();
+    }
+
+    private BufferedReader closedBufferedReader() throws IOException {
+        InputStream input = new ByteArrayInputStream("\n".getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input));
         bufferedReader.close();
-        RealConsole realConsole = new RealConsole(bufferedReader, null);
-        realConsole.readUserInput();
+        return bufferedReader;
     }
 }
