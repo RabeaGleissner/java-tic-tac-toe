@@ -25,6 +25,10 @@ public class Line {
         return line[0];
     }
 
+    public Mark[] allMarks() {
+        return line;
+    }
+
     private boolean allX() {
         boolean allSame = true;
         for (Mark cell : line) {

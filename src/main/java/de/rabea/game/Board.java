@@ -141,8 +141,13 @@ public class Board {
     }
 
     private Line getRow(int currentIndex) {
-        int index = currentIndex * 3;
-        return new Line(cells[index], cells[index+1], cells[index+2]);
+        int index = currentIndex * getSize();
+        if (size == 3) {
+            return new Line(cells[index], cells[index+1], cells[index+2]);
+        } else {
+
+            return new Line(cells[index], cells[index+1], cells[index+2], cells[index+3]);
+        }
     }
 
     public List<Line> getColumns() {

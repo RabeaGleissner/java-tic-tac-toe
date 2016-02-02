@@ -160,6 +160,22 @@ public class BoardTest {
     }
 
     @Test
+    public void allRowsOfA4x4Game() {
+        Board board = new Board(4);
+        board.placeMark(1, X);
+        board.placeMark(8, O);
+        board.placeMark(9, X);
+        board.placeMark(11, O);
+        List<Line> rows = board.getRows();
+        assertEquals(4, rows.size());
+        assertEquals(4, rows.get(0).allMarks().length);
+        assertArrayEquals(rows.get(0).allMarks(), new Mark[]{EMPTY, X, EMPTY, EMPTY});
+        assertArrayEquals(rows.get(1).allMarks(), new Mark[]{EMPTY, EMPTY, EMPTY, EMPTY});
+        assertArrayEquals(rows.get(2).allMarks(), new Mark[]{O, X, EMPTY, O});
+        assertArrayEquals(rows.get(3).allMarks(), new Mark[]{EMPTY, EMPTY, EMPTY, EMPTY});
+    }
+
+    @Test
     public void gameOverWithoutWinner() {
         Board board = fullBoardNoWinner();
         assertTrue(board.gameOver());
@@ -239,4 +255,5 @@ public class BoardTest {
                 EMPTY, X, EMPTY,
                 EMPTY, O, X);
     }
+
 }
