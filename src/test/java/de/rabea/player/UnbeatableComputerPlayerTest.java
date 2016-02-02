@@ -2,6 +2,7 @@ package de.rabea.player;
 
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.*;
@@ -20,7 +21,7 @@ public class UnbeatableComputerPlayerTest {
     }
 
     @Test
-    public void playsWinningMove() {
+    public void playsBlockingMove() {
         Board board = new Board(new Mark[] {O,    X,EMPTY,
                                             EMPTY,X,O,
                                             EMPTY,EMPTY,EMPTY});
@@ -87,5 +88,23 @@ public class UnbeatableComputerPlayerTest {
                                             O,     EMPTY,X,
                                             EMPTY, EMPTY,O});
         assertEquals(1, unbeatableComputerPlayer.getPosition(board));
+    }
+
+    @Ignore
+    @Test(timeout=3200)
+    public void measureSpeedOfFirstMove() {
+        UnbeatableComputerPlayer computer = new UnbeatableComputerPlayer(X);
+        Board board;
+        long startTime = System.nanoTime();
+        for (int i = 0; i <= 10; i++) {
+            board = new Board(new Mark[] {EMPTY,EMPTY,EMPTY,
+                    EMPTY,EMPTY,EMPTY,
+                    EMPTY, EMPTY,EMPTY});
+            computer.getPosition(board);
+        }
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime)/1000000;
+        System.out.println("duration in milliseconds= " + duration);
+        assertTrue(true);
     }
 }
