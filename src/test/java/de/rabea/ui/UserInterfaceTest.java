@@ -118,7 +118,7 @@ public class UserInterfaceTest {
         assertEquals("Sorry, this position is not available!", fakeConsole.messagePrinted());
     }
 
-    private class FakeBoardPainter extends StandardBoardPainter {
+    private class FakeBoardPainter extends PrettyBoardPainter {
         @Override
         public String drawBoard(Board board) {
             return "board placeholder";
