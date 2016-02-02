@@ -22,6 +22,8 @@ public class UserInterface {
     private final String UNAVAILABLE_POSITION = "Sorry, this position is not available!";
     private final String ENTER_A_NUMBER = "Please enter a number between 1 and 9.";
     private final String CLEAR_SCREEN = "\033[H\033[2J";
+    private final String BOARD_SIZE_OPTIONS = "Choose a board size: \n 3 - 3x3 board \n 4 - 4x4 board" ;
+    private final String BOARD_SIZE_WARNING = "Please enter either 3 for a 3x3 Board and 4 for a 4x4 Board";
     private InputFormatter inputFormatter = new InputFormatter();
 
 
@@ -42,6 +44,29 @@ public class UserInterface {
     public GameMode getGameModeFromUser() {
         presentGameOptions();
         return gameMode();
+    }
+
+    public int getBoardSizeFromUser() {
+        presentAvailableSizes();
+        return selectedBoardSize();
+    }
+
+    private int selectedBoardSize() {
+        String userChoice = console.readUserInput();
+        switch (userChoice) {
+            case "3":
+                return 3;
+            case "4":
+                return 4;
+            default:
+                console.print(BOARD_SIZE_WARNING);
+                return getBoardSizeFromUser();
+        }
+    }
+
+    private void presentAvailableSizes() {
+        clearScreen();
+        console.print(BOARD_SIZE_OPTIONS);
     }
 
     private void presentGameOptions() {

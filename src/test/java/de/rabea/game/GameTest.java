@@ -35,7 +35,7 @@ public class GameTest {
     public void playsHumanGameOnce() {
         Game game = new Game(fakeUserInterface, playerFactory, humanPlayer, humanOpponent);
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
-        game.play();
+        game.play(3);
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
     }
@@ -46,15 +46,15 @@ public class GameTest {
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, playerFactory, humanPlayer, fakeComputerPlayer);
         fakeUserInterface.provideConsoleInput("1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
-        gameWithFakeComputerPlayer.play();
+        gameWithFakeComputerPlayer.play(3);
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
     }
 
     @Test
     public void playsHumanGameTwice() {
         Game game = new Game(fakeUserInterface, playerFactory, humanPlayer, humanOpponent);
-        fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "y", "2", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
-        game.play();
+        fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "y", "1", "3", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
+        game.play(3);
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(2, fakeUserInterface.announceWinnerCalled());
     }
@@ -63,7 +63,7 @@ public class GameTest {
     public void setsUpHumanVsHumanGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
         Game game = new Game(fakeUserInterface, playerFactory);
-        fakeUserInterface.provideConsoleInput("1", "1", "7", "2", "4", "3", "n");
+        fakeUserInterface.provideConsoleInput("1", "3", "1", "7", "2", "4", "3", "n");
         game.setUpNewGame();
         assertTrue(game.getPlayer() instanceof HumanPlayer);
         assertTrue(game.getOpponent() instanceof HumanPlayer);
@@ -74,7 +74,7 @@ public class GameTest {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
         FakePlayerFactory fakePlayerFactory = new FakePlayerFactory(fakeUserInterface, fakeComputerPlayer);
         Game game = new Game(fakeUserInterface, fakePlayerFactory);
-        fakeUserInterface.provideConsoleInput("2", "1", "4", "7", "n");
+        fakeUserInterface.provideConsoleInput("2", "3", "1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
         game.startApplication();
         assertTrue(fakeUserInterface.wasGreetUserCalled());

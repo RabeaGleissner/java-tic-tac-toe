@@ -89,6 +89,27 @@ public class UserInterfaceTest {
     }
 
     @Test
+    public void getsBoardSizeSelectionFromUser3x3() {
+        fakeConsole.userInput("3");
+        assertEquals(3, userInterface.getBoardSizeFromUser());
+    }
+
+    @Test
+    public void getsBoardSizeSelectionFromUser4x4() {
+        fakeConsole.userInput("4");
+        assertEquals(4, userInterface.getBoardSizeFromUser());
+    }
+
+    @Test
+    public void asksUserAgainForBoardSizeIfUserGivesBadInput() {
+        fakeConsole.userInput("something wrong", "3");
+        userInterface.getBoardSizeFromUser();
+        assertEquals("Choose a board size: \n" +
+                " 3 - 3x3 board \n" +
+                " 4 - 4x4 board", fakeConsole.messagePrinted());
+
+    }
+    @Test
     public void tellsTheUserThatFirstPlayerIsXAndSecondIsO() {
         userInterface.announceMarkDistribution(GameMode.HumanVsHuman);
         assertEquals("The first user to play is X. The second player is O.", fakeConsole.messagePrinted());

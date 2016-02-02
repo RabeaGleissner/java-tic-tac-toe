@@ -28,14 +28,15 @@ public class Game {
 
     public void setUpNewGame() {
         GameMode gameMode = userInterface.getGameModeFromUser();
+        int boardSize = userInterface.getBoardSizeFromUser();
         userInterface.announceMarkDistribution(gameMode);
         this.player = playerFactory.createPlayer(gameMode);
         this.opponent = playerFactory.createOpponent(gameMode);
-        play();
+        play(boardSize);
     }
 
-    public void play() {
-        Board board = new Board(3);
+    public void play(int boardSize) {
+        Board board = new Board(boardSize);
         Player currentPlayer = player;
         while (gameIsNotOver(board)){
             playOneRound(currentPlayer, board);
