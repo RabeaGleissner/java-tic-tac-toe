@@ -60,27 +60,52 @@ public class BoardTest {
     }
 
     @Test
-    public void markedPositionIsNoLongerAvailable() {
+    public void markedPositionIsNoLongerAvailableOn3x3Board() {
         Board board = new Board(3);
         board.placeMark(1, X);
         assertEquals(false, board.isPositionAvailable(1));
     }
 
     @Test
-    public void itKnowsWhenAPositionIsUnavailable() {
-        Board board = new Board();
+    public void markedPositionIsNoLongerAvailableOn4x4Board() {
+        Board board = new Board(4);
+        board.placeMark(1, X);
+        assertEquals(false, board.isPositionAvailable(1));
+    }
+
+    @Test
+    public void knowsWhenPositionIsUnavailableOn3x3Board() {
+        Board board = new Board(3);
         int positionNotOnBoard = 9;
         assertFalse(board.isPositionAvailable(positionNotOnBoard));
     }
 
     @Test
-    public void returnsAllEmptyPositions() {
+    public void knowsWhenPositionIsAvailableOn4x4Board() {
+        Board board = new Board(4);
+        int positionOnBoard = 9;
+        assertTrue(board.isPositionAvailable(positionOnBoard));
+    }
+
+    @Test
+    public void listsAllEmptyPositionsFor3x3Board() {
         Board board = new Board(3);
         board.placeMark(1, X);
         board.placeMark(2, O);
         board.placeMark(3, X);
         board.placeMark(6, O);
         List<Integer> emptyCells = Arrays.asList(0, 4, 5, 7, 8);
+        assertEquals(emptyCells, board.emptyCells());
+    }
+
+    @Test
+    public void listsAllEmptyPositionsFor4x4Board() {
+        Board board = new Board(4);
+        board.placeMark(1, X);
+        board.placeMark(2, O);
+        board.placeMark(3, X);
+        board.placeMark(6, O);
+        List<Integer> emptyCells = Arrays.asList(0, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15);
         assertEquals(emptyCells, board.emptyCells());
     }
 
@@ -104,19 +129,34 @@ public class BoardTest {
     }
 
     @Test
-    public void isEndOfLastRow() {
+    public void isEndOfLastRowFor3x3Board() {
         Board board = new Board(3);
         assertTrue(board.isIndexOfLastCell(8));
         assertFalse(board.isIndexOfLastCell(7));
     }
 
     @Test
-    public void isEndOfFirstOrSecondRow() {
+    public void isEndOfLastRowFor4x4Board() {
+        Board board = new Board(4);
+        assertTrue(board.isIndexOfLastCell(15));
+        assertFalse(board.isIndexOfLastCell(7));
+    }
+
+    @Test
+    public void isEndOfFirstOrSecondRowOn3x3Board() {
         Board board = new Board(3);
         assertTrue(board.isIndexOfEndOfFirstOrSecondRow(2));
         assertTrue(board.isIndexOfEndOfFirstOrSecondRow(5));
         assertFalse(board.isIndexOfEndOfFirstOrSecondRow(1));
         assertFalse(board.isIndexOfEndOfFirstOrSecondRow(8));
+    }
+
+    @Test
+    public void isEndOfFirstOrSecondRowOn4x4Board() {
+        Board board = new Board(4);
+        assertTrue(board.isIndexOfEndOfFirstOrSecondRow(3));
+        assertTrue(board.isIndexOfEndOfFirstOrSecondRow(7));
+        assertFalse(board.isIndexOfEndOfFirstOrSecondRow(15));
     }
 
     @Test
@@ -172,36 +212,31 @@ public class BoardTest {
     public void placesMarkOnNewBoard() {
         Board board = new Board(3);
         board.placeMarkOnNewBoard(1, X, board);
-        assertFalse(board.isFull());
+        assertEquals(9, board.emptyCells().size());
     }
 
     private Board fullBoardNoWinner() {
         return new Board(
-                new Mark[]{X, X, O,
-                           O, O, X,
-                           X, O, X}
-        );
+                X, X, O,
+                O, O, X,
+                X, O, X);
     }
     private Board horizontalsWinningBoard() {
         return new Board(
-                new Mark[]{X,     X,     X,
-                           EMPTY, EMPTY, EMPTY,
-                           EMPTY, O,     O}
-        );
+                X, X, X,
+                EMPTY, EMPTY, EMPTY,
+                EMPTY, O, O);
     }
     private Board verticalsWinningBoard() {
         return new Board(
-                new Mark[]{X, X, O,
-                           X, O, O,
-                           X, O, X}
-        );
+                X, X, O,
+                X, O, O,
+                X, O, X);
     }
-
     private Board diagonalsWinningBoard() {
         return new Board(
-                new Mark[]{X,     X, O,
-                           EMPTY, X, EMPTY,
-                           EMPTY, O, X}
-        );
+                X, X, O,
+                EMPTY, X, EMPTY,
+                EMPTY, O, X);
     }
 }
