@@ -13,7 +13,7 @@ public class PrettyBoardPainterTest {
 
     @Before
     public void setup() {
-        board = new Board();
+        board = new Board(3);
     }
 
     @Test

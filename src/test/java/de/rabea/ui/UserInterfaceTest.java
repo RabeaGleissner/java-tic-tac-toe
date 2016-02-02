@@ -21,7 +21,7 @@ public class UserInterfaceTest {
 
     @Before
     public void setup() {
-        board = new Board();
+        board = new Board(3);
         fakeConsole = new FakeConsole();
         standardBoardPainter = new StandardBoardPainter();
         userInterface = new UserInterface(fakeConsole, standardBoardPainter);

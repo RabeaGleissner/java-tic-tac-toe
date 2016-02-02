@@ -35,7 +35,7 @@ public class Game {
     }
 
     public void play() {
-        Board board = new Board();
+        Board board = new Board(3);
         Player currentPlayer = player;
         while (gameIsNotOver(board)){
             playOneRound(currentPlayer, board);

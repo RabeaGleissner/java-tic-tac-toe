@@ -26,7 +26,7 @@ public class GameTest {
         randomNumberCalculator = new RandomNumberCalculator();
         humanPlayer = new HumanPlayer(fakeUserInterface, X);
         humanOpponent = new HumanPlayer(fakeUserInterface, O);
-        board = new Board();
+        board = new Board(3);
         playerFactory = new PlayerFactory(fakeUserInterface);
         computerPlayer = new ComputerPlayer(randomNumberCalculator, O);
     }
