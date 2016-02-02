@@ -21,7 +21,7 @@ public class HumanPlayerTest {
     public void setup() {
         fakeConsole = new FakeConsole();
         humanPlayer = new HumanPlayer(new UserInterface(fakeConsole, new StandardBoardPainter()), X);
-        board = new Board();
+        board = new Board(3);
     }
 
     @Test

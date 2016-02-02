@@ -13,7 +13,7 @@ public class ComputerPlayerTest {
 
     @Before
     public void setup() {
-        board = new Board();
+        board = new Board(3);
     }
 
     @Test
@@ -21,7 +21,7 @@ public class ComputerPlayerTest {
         FakeRandomNumberCalculator fakeRandomNumberCalc = new FakeRandomNumberCalculator();
         ComputerPlayer computerPlayer = new ComputerPlayer(fakeRandomNumberCalc, O);
         fakeRandomNumberCalc.giveNumbers(2);
-        assertEquals(2, computerPlayer.getPosition(new Board()));
+        assertEquals(2, computerPlayer.getPosition(new Board(3)));
     }
 
     @Test
