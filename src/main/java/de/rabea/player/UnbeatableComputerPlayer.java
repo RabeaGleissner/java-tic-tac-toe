@@ -13,37 +13,61 @@ public class UnbeatableComputerPlayer extends Player {
     @Override
     public int getPosition(Board board) {
         int remainingMovesCount = board.emptyCells().size();
-        return minimax(remainingMovesCount, board, mark).getMove();
+        return minimax(remainingMovesCount, Integer.MIN_VALUE, Integer.MAX_VALUE, board, mark).getMove();
     }
 
-    private ScoredMove minimax(int remainingMovesCount, Board currentBoard, Mark currentMark) {
-        ScoredMove currentBestScore = resetBestScore(currentMark);
-        if (currentBoard.gameOver()) {
-            return new ScoredMove(score(currentBoard, remainingMovesCount), currentBestScore.getScore());
+    private ScoredMove minimax(int remainingMovesCount, int alpha, int beta, Board currentBoard, Mark currentMark) {
+        ScoredMove currentBestMove = resetBestScore(currentMark);
+        if (currentBoard.gameOver() || remainingMovesCount == 0) {
+            return new ScoredMove(score(currentBoard, remainingMovesCount), currentBestMove.getScore());
         }
-
         for (int position : currentBoard.emptyCells()) {
             Board nextBoardState = currentBoard.placeMarkOnNewBoard(position, currentMark, currentBoard);
-            ScoredMove score = minimax(remainingMovesCount - 1, nextBoardState, currentMark.switchMark(currentMark));
-
-            if (score.isBetterThan(currentBestScore, currentMark)) {
-                currentBestScore = new ScoredMove(score.getScore(), position);
+            ScoredMove score = minimax(remainingMovesCount - 1, alpha, beta, nextBoardState, currentMark.switchMark(currentMark));
+            currentBestMove = updateScore(currentMark, currentBestMove, position, score);
+            if (currentMark == mark) {
+                alpha = updateAlpha(alpha, currentBestMove);
+            } else {
+                beta = updateBeta(beta, currentBestMove);
+            }
+            if (alpha >= beta) {
+                break;
             }
         }
-        return currentBestScore;
+        return currentBestMove;
+    }
+
+    private ScoredMove updateScore(Mark currentMark, ScoredMove currentBestMove, int position, ScoredMove score) {
+        if (score.isBetterThan(currentBestMove, currentMark)) {
+            currentBestMove = new ScoredMove(score.getScore(), position);
+        }
+        return currentBestMove;
+    }
+
+    private int updateBeta(int beta, ScoredMove currentBestScore) {
+        int score = currentBestScore.getScore();
+        if (score < beta) {
+            beta = score;
+        }
+        return beta;
+    }
+
+    private int updateAlpha(int alpha, ScoredMove currentBestScore) {
+        int score = currentBestScore.getScore();
+        if (score > alpha) {
+            alpha = score;
+        }
+        return alpha;
     }
 
     private int score(Board board, int remainingMovesCount) {
-        int maximisingScore = 100;
-        int minimisingScore = -100;
-
         if (isCurrentPlayerWinner(board)) {
-            return maximisingScore - remainingMovesCount;
+            return remainingMovesCount;
         }
         if (board.isDrawn()){
             return 0;
         }
-        return minimisingScore - remainingMovesCount;
+        return -remainingMovesCount;
     }
 
     private boolean isCurrentPlayerWinner(Board board) {
@@ -75,6 +99,7 @@ public class UnbeatableComputerPlayer extends Player {
         public int getScore() {
             return score;
         }
+
         private boolean isBetterThan(ScoredMove scoredMove, Mark currentMark) {
             return (currentMark == mark && score > scoredMove.getScore()) || (currentMark != mark && score < scoredMove.getScore());
         }
