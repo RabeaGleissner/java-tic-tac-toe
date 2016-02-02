@@ -176,6 +176,20 @@ public class BoardTest {
     }
 
     @Test
+    public void allDiagonalsOfA4x4Game() {
+        Board board = new Board(4);
+        board.placeMark(1, X);
+        board.placeMark(8, O);
+        board.placeMark(9, X);
+        board.placeMark(11, O);
+        board.placeMark(14, X);
+        List<Line> diagonals = board.getDiagonals();
+        assertEquals(2, diagonals.size());
+        assertArrayEquals(diagonals.get(0).allMarks(), new Mark[]{EMPTY, EMPTY, EMPTY, EMPTY});
+        assertArrayEquals(diagonals.get(1).allMarks(), new Mark[]{EMPTY, EMPTY, X, EMPTY});
+    }
+
+    @Test
     public void gameOverWithoutWinner() {
         Board board = fullBoardNoWinner();
         assertTrue(board.gameOver());
