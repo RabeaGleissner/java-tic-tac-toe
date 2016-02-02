@@ -3,25 +3,33 @@ package de.rabea.game;
 import static de.rabea.game.Mark.EMPTY;
 
 public class Line {
-    private final Mark first;
-    private final Mark second;
-    private final Mark third;
+    private Mark[] line;
 
-    public Line(Mark first, Mark second, Mark third) {
-        this.first = first;
-        this.second = second;
-        this.third = third;
+    public Line(Mark... marks) {
+        line = marks;
     }
 
     public boolean hasWinner() {
-        return allSame() && first != EMPTY;
+        return (allX() || allO()) && line[0]!= EMPTY;
+    }
+
+    private boolean allO() {
+        boolean allSame = true;
+        for (Mark cell : line) {
+            allSame = allSame && (cell == Mark.O);
+        }
+        return allSame;
     }
 
     public Mark firstMarkInLine() {
-        return first;
+        return line[0];
     }
 
-    private boolean allSame() {
-        return first == second && second == third;
+    private boolean allX() {
+        boolean allSame = true;
+        for (Mark cell : line) {
+            allSame = allSame && (cell == Mark.X);
+        }
+        return allSame;
     }
 }
