@@ -99,9 +99,7 @@ public class Board {
     }
 
     public int getSize() {
-        double length = (double) cells().length;
-        double squareRoot = Math.sqrt(length);
-        return (int) squareRoot;
+        return size;
     }
 
     public int indexOfLastCell() {
