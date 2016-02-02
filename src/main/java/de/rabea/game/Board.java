@@ -10,16 +10,27 @@ import static de.rabea.game.Mark.*;
 public class Board {
 
     private Mark[] cells;
+    private int size;
+    private int numberOfCells;
 
-
-    public Board() {
-       this(new Mark[] {EMPTY, EMPTY, EMPTY,
-                EMPTY, EMPTY, EMPTY,
-                EMPTY, EMPTY, EMPTY});
+    public Board(Mark... initialGridLayout) {
+        this.size = (int) Math.sqrt(initialGridLayout.length);
+        this.numberOfCells = size * size;
+        this.cells = initialGridLayout;
     }
 
-    public Board(Mark[] cells) {
-       this.cells = cells;
+    public Board(int size) {
+        this.size = size;
+        this.numberOfCells = size * size;
+        this.cells = createCells();
+    }
+
+    private Mark[] createCells() {
+        Mark[] createCells = new Mark[numberOfCells];
+        for (int i = 0; i < numberOfCells; i++) {
+            createCells[i] = EMPTY;
+        }
+        return createCells;
     }
 
     public Mark[] cells() {
@@ -79,7 +90,7 @@ public class Board {
     }
 
     public List<Integer> indexOfLastCellPerRow() {
-        int dimension = getDimension();
+        int dimension = getSize();
         List<Integer> lastCellsPerRow = new ArrayList<>();
         for (int i = 1; i <= dimension; i++) {
             lastCellsPerRow.add(dimension * i - 1);
@@ -87,7 +98,7 @@ public class Board {
         return lastCellsPerRow;
     }
 
-    public int getDimension() {
+    public int getSize() {
         double length = (double) cells().length;
         double squareRoot = Math.sqrt(length);
         return (int) squareRoot;
@@ -125,7 +136,7 @@ public class Board {
     public List<Line> getRows() {
         List<Line> rows = new ArrayList<>();
 
-        for (int i = 0; i < getDimension(); i++) {
+        for (int i = 0; i < getSize(); i++) {
            rows.add(getRow(i));
         }
         return rows;
@@ -138,7 +149,7 @@ public class Board {
 
     public List<Line> getColumns() {
         List<Line> columns = new ArrayList<>();
-        for (int i = 0; i < getDimension(); i++) {
+        for (int i = 0; i < getSize(); i++) {
             columns.add(getColumn(i));
         }
         return columns;

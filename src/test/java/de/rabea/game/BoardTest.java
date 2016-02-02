@@ -20,8 +20,20 @@ public class BoardTest {
     }
 
     @Test
+    public void creates3x3Board() {
+        Board board = new Board(3);
+        assertEquals(9, board.cells().length);
+    }
+
+    @Test
+    public void creates4x4Board() {
+        Board board = new Board(4);
+        assertEquals(16, board.cells().length);
+    }
+
+    @Test
     public void placesAMark() {
-        Board board = new Board();
+        Board board = new Board(3);
         Mark[] cells = {EMPTY, X, EMPTY,
                         EMPTY, EMPTY, EMPTY,
                         EMPTY, EMPTY, EMPTY};
@@ -31,7 +43,7 @@ public class BoardTest {
 
     @Test
     public void boardIsEmpty() {
-        Board emptyBoard = new Board();
+        Board emptyBoard = new Board(3);
         assertFalse(emptyBoard.isFull());
     }
 
@@ -43,13 +55,13 @@ public class BoardTest {
 
     @Test
     public void isChosenPositionStillFree() {
-        Board emptyBoard = new Board();
+        Board emptyBoard = new Board(3);
         assertEquals(true, emptyBoard.isPositionAvailable(1));
     }
 
     @Test
     public void markedPositionIsNoLongerAvailable() {
-        Board board = new Board();
+        Board board = new Board(3);
         board.placeMark(1, X);
         assertEquals(false, board.isPositionAvailable(1));
     }
@@ -63,7 +75,7 @@ public class BoardTest {
 
     @Test
     public void returnsAllEmptyPositions() {
-        Board board = new Board();
+        Board board = new Board(3);
         board.placeMark(1, X);
         board.placeMark(2, O);
         board.placeMark(3, X);
@@ -74,33 +86,33 @@ public class BoardTest {
 
     @Test
     public void indexOfLastCellInEachRow() {
-        Board board = new Board();
+        Board board = new Board(3);
         List<Integer> cells = new ArrayList<>(Arrays.asList(2, 5, 8));
         assertEquals(cells, board.indexOfLastCellPerRow());
     }
 
     @Test
     public void indexOfLastCellOfBoard() {
-        Board board = new Board();
+        Board board = new Board(3);
         assertEquals(8, board.indexOfLastCell());
     }
 
     @Test
     public void widthAndHeightOfTheBoard() {
-        Board board = new Board();
-        assertEquals(3, board.getDimension());
+        Board board = new Board(3);
+        assertEquals(3, board.getSize());
     }
 
     @Test
     public void isEndOfLastRow() {
-        Board board = new Board();
+        Board board = new Board(3);
         assertTrue(board.isIndexOfLastCell(8));
         assertFalse(board.isIndexOfLastCell(7));
     }
 
     @Test
     public void isEndOfFirstOrSecondRow() {
-        Board board = new Board();
+        Board board = new Board(3);
         assertTrue(board.isIndexOfEndOfFirstOrSecondRow(2));
         assertTrue(board.isIndexOfEndOfFirstOrSecondRow(5));
         assertFalse(board.isIndexOfEndOfFirstOrSecondRow(1));
@@ -158,7 +170,7 @@ public class BoardTest {
 
     @Test
     public void placesMarkOnNewBoard() {
-        Board board = new Board();
+        Board board = new Board(3);
         board.placeMarkOnNewBoard(1, X, board);
         assertFalse(board.isFull());
     }
