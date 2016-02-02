@@ -61,8 +61,13 @@ public class FakeUserInterface extends UserInterface {
 
     @Override
     public GameMode getGameModeFromUser() {
-        if (moves.remove(0).equals("1")) {
+        String userChoice = moves.remove(0);
+        if (userChoice.equals("1")) {
+            return GameMode.HumanVsHuman;
+        } else if (userChoice.equals("2")) {
             return GameMode.HumanVsComputer;
+        } else if (userChoice.equals("3")) {
+            return GameMode.ComputerVsHuman;
         } else {
             return GameMode.HumanVsHuman;
         }
