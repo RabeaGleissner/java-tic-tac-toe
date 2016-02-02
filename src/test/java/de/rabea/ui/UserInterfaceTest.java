@@ -5,11 +5,9 @@ import de.rabea.game.GameMode;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 public class UserInterfaceTest {
@@ -17,39 +15,21 @@ public class UserInterfaceTest {
     private UserInterface userInterface;
     private FakeConsole fakeConsole;
     private Board board;
-    private StandardBoardPainter standardBoardPainter;
+    private FakeBoardPainter fakeBoardPainter;
 
     @Before
     public void setup() {
         board = new Board(3);
         fakeConsole = new FakeConsole();
-        standardBoardPainter = new StandardBoardPainter();
-        userInterface = new UserInterface(fakeConsole, standardBoardPainter);
+        fakeBoardPainter = new FakeBoardPainter();
+        userInterface = new UserInterface(fakeConsole, fakeBoardPainter);
     }
 
     @Test
-    public void displaysEmptyBoard() {
+    public void displaysBoard() {
+        Board board = new Board(3);
         userInterface.displayBoard(board);
-        assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\n" +
-                "1 2 3 \n" +
-                "4 5 6 \n" +
-                "7 8 9 "
-        );
-    }
-
-
-    @Test
-    public void displaysBoardWithMarks() {
-        board.placeMark(1, X);
-        board.placeMark(3, O);
-        userInterface.displayBoard(board);
-        assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\n" +
-                "1 X 3 \n" +
-                "O 5 6 \n" +
-                "7 8 9 "
-        );
+        assertEquals(fakeConsole.messagePrinted(), "board placeholder");
     }
 
     @Test
@@ -136,5 +116,12 @@ public class UserInterfaceTest {
     public void communicatesThatPositionIsUnavailable() {
         userInterface.positionUnavailableWarning(board);
         assertEquals("Sorry, this position is not available!", fakeConsole.messagePrinted());
+    }
+
+    private class FakeBoardPainter extends StandardBoardPainter {
+        @Override
+        public String drawBoard(Board board) {
+            return "board placeholder";
+        }
     }
 }
