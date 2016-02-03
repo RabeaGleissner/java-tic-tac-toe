@@ -173,7 +173,7 @@ public class Board {
             return Arrays.asList(firstDiagonal, secondDiagonal);
         } else {
             Line firstDiagonal = new Line(cells[0], cells[5], cells[10], cells[15]);
-            Line secondDiagonal = new Line(cells[3], cells[4], cells[9], cells[12]);
+            Line secondDiagonal = new Line(cells[3], cells[6], cells[9], cells[12]);
             return Arrays.asList(firstDiagonal, secondDiagonal);
         }
     }

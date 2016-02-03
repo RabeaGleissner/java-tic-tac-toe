@@ -189,16 +189,11 @@ public class BoardTest {
 
     @Test
     public void allDiagonalsOfA4x4Game() {
-        Board board = new Board(4);
-        board.placeMark(1, X);
-        board.placeMark(8, O);
-        board.placeMark(9, X);
-        board.placeMark(11, O);
-        board.placeMark(14, X);
+        Board board = backwardsDiagonalsWinning4x4Board();
         List<Line> diagonals = board.getDiagonals();
         assertEquals(2, diagonals.size());
-        assertArrayEquals(diagonals.get(0).allMarks(), new Mark[]{EMPTY, EMPTY, EMPTY, EMPTY});
-        assertArrayEquals(diagonals.get(1).allMarks(), new Mark[]{EMPTY, EMPTY, X, EMPTY});
+        assertArrayEquals(diagonals.get(0).allMarks(), new Mark[]{X, X, EMPTY, EMPTY});
+        assertArrayEquals(diagonals.get(1).allMarks(), new Mark[]{X, X, X, X});
     }
 
     @Test
@@ -287,6 +282,11 @@ public class BoardTest {
         board.placeMarkOnNewBoard(1, X, board);
         assertEquals(9, board.emptyCells().size());
     }
+    @Test
+    public void knowsThatThereIsAWinner() {
+        Board board = backwardsDiagonalsWinning4x4Board();
+        assertTrue(board.hasWinner());
+    }
 
     private Board full3x3BoardNoWinner() {
         return new Board(
@@ -338,6 +338,13 @@ public class BoardTest {
                 EMPTY, X,     EMPTY, O,
                 EMPTY, O,     X,     O,
                 EMPTY, EMPTY, EMPTY, X);
+    }
+    private Board backwardsDiagonalsWinning4x4Board() {
+        return new Board(
+                X, O, O, X,
+                O, X, X, O,
+                O, X, EMPTY, EMPTY,
+                X, EMPTY, EMPTY, EMPTY);
     }
 
 }
