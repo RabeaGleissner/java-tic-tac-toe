@@ -141,13 +141,12 @@ public class Board {
     }
 
     private Line getRow(int currentIndex) {
-        int index = currentIndex * getSize();
-        if (size == 3) {
-            return new Line(cells[index], cells[index+1], cells[index+2]);
-        } else {
-
-            return new Line(cells[index], cells[index+1], cells[index+2], cells[index+3]);
+        int index = currentIndex * size;
+        Mark[] row = new Mark[size];
+        for (int i = 0; i < size; i++) {
+            row[i] = cells[index + i];
         }
+        return new Line(row);
     }
 
     public List<Line> getColumns() {
@@ -159,23 +158,25 @@ public class Board {
     }
 
     private Line getColumn(int index) {
-        if (size == 3) {
-            return new Line(cells[index], cells[index+3], cells[index+6]);
-        } else {
-            return new Line(cells[index], cells[index+size], cells[index+(size*2)], cells[index+(size*3)]);
+        Mark[] column = new Mark[size];
+        for (int i = 0; i < size; i++) {
+            column[i] = cells[index + (size*i)];
         }
+        return new Line(column);
     }
 
     public List<Line> getDiagonals() {
-        if (size == 3) {
-            Line firstDiagonal = new Line(cells[0], cells[4], cells[8]);
-            Line secondDiagonal = new Line(cells[2], cells[4], cells[6]);
-            return Arrays.asList(firstDiagonal, secondDiagonal);
-        } else {
-            Line firstDiagonal = new Line(cells[0], cells[5], cells[10], cells[15]);
-            Line secondDiagonal = new Line(cells[3], cells[6], cells[9], cells[12]);
-            return Arrays.asList(firstDiagonal, secondDiagonal);
+        Mark[] first= new Mark[size];
+        Mark[] second = new Mark[size];
+        for (int i = 0; i < size; i++) {
+            first[i] = cells[(size * i) + i];
         }
+        int offset = size - 1;
+        for (int i = 0; i < size; i++) {
+            second[i] = cells[offset];
+            offset += size - 1;
+        }
+        return Arrays.asList(new Line(first), new Line(second));
     }
 
     public Mark winningPlayerMark() {
