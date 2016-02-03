@@ -20,75 +20,53 @@ public class BoardTest {
     }
 
     @Test
-    public void creates3x3Board() {
-        Board board = new Board(3);
-        assertEquals(9, board.cells().length);
-    }
-
-    @Test
-    public void creates4x4Board() {
-        Board board = new Board(4);
-        assertEquals(16, board.cells().length);
-    }
-
-    @Test
-    public void placesAMark() {
-        Board board = new Board(3);
-        Mark[] cells = {EMPTY, X, EMPTY,
-                        EMPTY, EMPTY, EMPTY,
-                        EMPTY, EMPTY, EMPTY};
-        board.placeMark(1, X);
-        assertArrayEquals(cells, board.cells());
-    }
-
-    @Test
-    public void boardIsEmpty() {
+    public void boardIsEmpty3x3() {
         Board emptyBoard = new Board(3);
         assertFalse(emptyBoard.isFull());
     }
 
     @Test
-    public void boardIsFull() {
+    public void boardIsFull3x3() {
         Board fullBoard = full3x3BoardNoWinner();
         assertTrue(fullBoard.isFull());
     }
 
     @Test
-    public void isChosenPositionStillFree() {
+    public void isChosenPositionStillFreeOn3x3() {
         Board emptyBoard = new Board(3);
         assertEquals(true, emptyBoard.isPositionAvailable(1));
     }
 
     @Test
-    public void markedPositionIsNoLongerAvailableOn3x3Board() {
+    public void markedPositionIsNoLongerAvailableOn3x3() {
         Board board = new Board(3);
         board.placeMark(1, X);
-        assertEquals(false, board.isPositionAvailable(1));
+        assertFalse(board.isPositionAvailable(1));
     }
 
     @Test
-    public void markedPositionIsNoLongerAvailableOn4x4Board() {
+    public void markedPositionIsNoLongerAvailableOn4x4() {
         Board board = new Board(4);
         board.placeMark(1, X);
-        assertEquals(false, board.isPositionAvailable(1));
+        assertFalse(board.isPositionAvailable(1));
     }
 
     @Test
-    public void knowsWhenPositionIsUnavailableOn3x3Board() {
+    public void knowsWhenPositionIsUnavailableOn3x3() {
         Board board = new Board(3);
         int positionNotOnBoard = 9;
         assertFalse(board.isPositionAvailable(positionNotOnBoard));
     }
 
     @Test
-    public void knowsWhenPositionIsAvailableOn4x4Board() {
+    public void knowsWhenPositionIsAvailableOn4x4() {
         Board board = new Board(4);
         int positionOnBoard = 9;
         assertTrue(board.isPositionAvailable(positionOnBoard));
     }
 
     @Test
-    public void listsAllEmptyPositionsFor3x3Board() {
+    public void listsAllEmptyPositionsFor3x3() {
         Board board = new Board(3);
         board.placeMark(1, X);
         board.placeMark(2, O);
@@ -99,7 +77,7 @@ public class BoardTest {
     }
 
     @Test
-    public void listsAllEmptyPositionsFor4x4Board() {
+    public void listsAllEmptyPositionsFor4x4() {
         Board board = new Board(4);
         board.placeMark(1, X);
         board.placeMark(2, O);
@@ -110,57 +88,58 @@ public class BoardTest {
     }
 
     @Test
-    public void indexOfLastCellInEachRow() {
+    public void indexOfLastCellInEachRowOn3x3() {
         Board board = new Board(3);
         List<Integer> cells = new ArrayList<>(Arrays.asList(2, 5, 8));
         assertEquals(cells, board.indexOfLastCellPerRow());
     }
 
     @Test
-    public void indexOfLastCellOfBoard() {
+    public void indexOfLastCellOfBoardOn3x3() {
         Board board = new Board(3);
         assertEquals(8, board.indexOfLastCell());
     }
 
     @Test
-    public void widthAndHeightOfTheBoard() {
+    public void widthAndHeightOf3x3() {
         Board board = new Board(3);
         assertEquals(3, board.getSize());
     }
 
     @Test
-    public void isEndOfLastRowFor3x3Board() {
+    public void isEndOfLastRowFor3x3() {
         Board board = new Board(3);
         assertTrue(board.isIndexOfLastCell(8));
         assertFalse(board.isIndexOfLastCell(7));
     }
 
     @Test
-    public void isEndOfLastRowFor4x4Board() {
+    public void isEndOfLastRowFor4x4() {
         Board board = new Board(4);
         assertTrue(board.isIndexOfLastCell(15));
         assertFalse(board.isIndexOfLastCell(7));
     }
 
     @Test
-    public void isEndOfFirstOrSecondRowOn3x3Board() {
+    public void isEndOfFirstOrSecondRowOn3x3() {
         Board board = new Board(3);
-        assertTrue(board.isIndexOfEndOfFirstOrSecondRow(2));
-        assertTrue(board.isIndexOfEndOfFirstOrSecondRow(5));
-        assertFalse(board.isIndexOfEndOfFirstOrSecondRow(1));
-        assertFalse(board.isIndexOfEndOfFirstOrSecondRow(8));
+        assertTrue(board.isIndexOfEndOfRowExceptLastRow(2));
+        assertTrue(board.isIndexOfEndOfRowExceptLastRow(5));
+        assertFalse(board.isIndexOfEndOfRowExceptLastRow(1));
+        assertFalse(board.isIndexOfEndOfRowExceptLastRow(8));
     }
 
     @Test
-    public void isEndOfFirstOrSecondRowOn4x4Board() {
+    public void isEndOfFirstOrSecondOrThirdRowOn4x4() {
         Board board = new Board(4);
-        assertTrue(board.isIndexOfEndOfFirstOrSecondRow(3));
-        assertTrue(board.isIndexOfEndOfFirstOrSecondRow(7));
-        assertFalse(board.isIndexOfEndOfFirstOrSecondRow(15));
+        assertTrue(board.isIndexOfEndOfRowExceptLastRow(3));
+        assertTrue(board.isIndexOfEndOfRowExceptLastRow(7));
+        assertTrue(board.isIndexOfEndOfRowExceptLastRow(11));
+        assertFalse(board.isIndexOfEndOfRowExceptLastRow(15));
     }
 
     @Test
-    public void allRowsOfA4x4Game() {
+    public void allRowsOfA4x4() {
         Board board = new Board(4);
         board.placeMark(1, X);
         board.placeMark(8, O);
@@ -176,7 +155,7 @@ public class BoardTest {
     }
 
     @Test
-    public void allVerticalsOfA4x4Game() {
+    public void allVerticalsOfA4x4() {
         Board board = verticalsWinning4x4Board();
         List<Line> verticals = board.getColumns();
         assertEquals(4, verticals.size());
@@ -188,7 +167,7 @@ public class BoardTest {
     }
 
     @Test
-    public void allDiagonalsOfA4x4Game() {
+    public void allDiagonalsOfA4x4() {
         Board board = backwardsDiagonalsWinning4x4Board();
         List<Line> diagonals = board.getDiagonals();
         assertEquals(2, diagonals.size());
@@ -265,25 +244,33 @@ public class BoardTest {
     }
 
     @Test
-    public void gameIsDrawn() {
+    public void gameIsDrawnOn3x3() {
         Board drawnGameBoard = full3x3BoardNoWinner();
         assertTrue(drawnGameBoard.isDrawn());
     }
 
     @Test
-    public void nullWhenNoWinner() {
+    public void nullWhenNoWinnerOn3x3() {
         Board fullBoardNoWinner = full3x3BoardNoWinner();
         assertEquals(null, fullBoardNoWinner.winningPlayerMark());
     }
 
     @Test
-    public void placesMarkOnNewBoard() {
+    public void placesMarkOnNew3x3Board() {
         Board board = new Board(3);
         board.placeMarkOnNewBoard(1, X, board);
         assertEquals(9, board.emptyCells().size());
     }
+
     @Test
-    public void knowsThatThereIsAWinner() {
+    public void placesMarkOnNew4x4Board() {
+        Board board = new Board(4);
+        board.placeMarkOnNewBoard(1, X, board);
+        assertEquals(16, board.emptyCells().size());
+    }
+
+    @Test
+    public void knowsThatThereIsAWinnerOn4x4() {
         Board board = backwardsDiagonalsWinning4x4Board();
         assertTrue(board.hasWinner());
     }
@@ -346,5 +333,4 @@ public class BoardTest {
                 O, X, EMPTY, EMPTY,
                 X, EMPTY, EMPTY, EMPTY);
     }
-
 }

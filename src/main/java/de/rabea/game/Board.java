@@ -110,7 +110,7 @@ public class Board {
         return cell == indexOfLastCell();
     }
 
-    public boolean isIndexOfEndOfFirstOrSecondRow(int cell) {
+    public boolean isIndexOfEndOfRowExceptLastRow(int cell) {
         for (int cellIndex : indexOfLastCellPerRow()) {
             if (cell == cellIndex && isNotLastCellIndex(cell)) {
                 return true;
