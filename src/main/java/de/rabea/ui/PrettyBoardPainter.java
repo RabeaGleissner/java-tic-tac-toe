@@ -7,8 +7,8 @@ import static de.rabea.game.Mark.EMPTY;
 import static de.rabea.game.Mark.X;
 
 public class PrettyBoardPainter implements BoardPainter {
-    private final String BLUE_COLOUR_FOR_X = "\u001B[34m";
-    private final String RED_COLOUR_FOR_O = "\u001B[31m";
+    private final String BLUE_COLOUR_FOR_X = " \u001B[34m";
+    private final String RED_COLOUR_FOR_O = " \u001B[31m";
     private final String COLOUR_RESET = "\u001B[0m";
 
     @Override
@@ -26,7 +26,7 @@ public class PrettyBoardPainter implements BoardPainter {
 
     private String printSymbolInCell(int i, String boardImage, Mark cell) {
         if (cell == EMPTY) {
-            boardImage += pipe() + i;
+            boardImage += pipe() + String.format("%2d", i);
         } else if (cell == X) {
             boardImage += pipe() + colouredX(cell);
         } else {
@@ -37,8 +37,10 @@ public class PrettyBoardPainter implements BoardPainter {
     }
 
     private String printHorizontalLines(int i, String boardImage, Board board) {
-        if (board.isIndexOfEndOfRowExceptLastRow(i-1)) {
-            boardImage += horizontalLine();
+        if (board.isIndexOfEndOfRowExceptLastRow(i-1) && board.is3x3()) {
+            boardImage += horizontalLineFor3x3();
+        } else if (board.isIndexOfEndOfRowExceptLastRow(i-1) && board.is4x4()) {
+            boardImage += horizontalLineFor4x4();
         }
         return boardImage;
     }
@@ -58,8 +60,12 @@ public class PrettyBoardPainter implements BoardPainter {
         return BLUE_COLOUR_FOR_X + cell.toString() + COLOUR_RESET;
     }
 
-    private String horizontalLine() {
-        return "| \n -----------\n";
+    private String horizontalLineFor3x3() {
+        return "| \n --------------\n";
+    }
+
+    private String horizontalLineFor4x4() {
+        return "| \n -------------------\n";
     }
 
     private String space() {

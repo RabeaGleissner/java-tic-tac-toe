@@ -102,6 +102,14 @@ public class Board {
         return size;
     }
 
+    public boolean is3x3() {
+        return size == 3;
+    }
+
+    public boolean is4x4() {
+        return size == 4;
+    }
+
     public int indexOfLastCell() {
         return cells().length - 1;
     }
