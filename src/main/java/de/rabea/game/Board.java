@@ -159,11 +159,15 @@ public class Board {
     }
 
     private Line getColumn(int index) {
-        return new Line(cells[index], cells[index+3], cells[index+6]);
+        if (size == 3) {
+            return new Line(cells[index], cells[index+3], cells[index+6]);
+        } else {
+            return new Line(cells[index], cells[index+size], cells[index+(size*2)], cells[index+(size*3)]);
+        }
     }
 
     public List<Line> getDiagonals() {
-        if (size ==3) {
+        if (size == 3) {
             Line firstDiagonal = new Line(cells[0], cells[4], cells[8]);
             Line secondDiagonal = new Line(cells[2], cells[4], cells[6]);
             return Arrays.asList(firstDiagonal, secondDiagonal);
