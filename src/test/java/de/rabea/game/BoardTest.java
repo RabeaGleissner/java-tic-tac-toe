@@ -49,7 +49,7 @@ public class BoardTest {
 
     @Test
     public void boardIsFull() {
-        Board fullBoard = fullBoardNoWinner();
+        Board fullBoard = full3x3BoardNoWinner();
         assertTrue(fullBoard.isFull());
     }
 
@@ -176,6 +176,18 @@ public class BoardTest {
     }
 
     @Test
+    public void allVerticalsOfA4x4Game() {
+        Board board = verticalsWinning4x4Board();
+        List<Line> verticals = board.getColumns();
+        assertEquals(4, verticals.size());
+        assertEquals(4, verticals.get(0).allMarks().length);
+        assertArrayEquals(verticals.get(0).allMarks(), new Mark[]{X, X, X, X});
+        assertArrayEquals(verticals.get(1).allMarks(), new Mark[]{X, O, O, EMPTY});
+        assertArrayEquals(verticals.get(2).allMarks(), new Mark[]{O, O, X, EMPTY});
+        assertArrayEquals(verticals.get(3).allMarks(), new Mark[]{EMPTY, EMPTY, O, EMPTY});
+    }
+
+    @Test
     public void allDiagonalsOfA4x4Game() {
         Board board = new Board(4);
         board.placeMark(1, X);
@@ -190,51 +202,82 @@ public class BoardTest {
     }
 
     @Test
-    public void gameOverWithoutWinner() {
-        Board board = fullBoardNoWinner();
+    public void gameOverWithoutWinnerOn3x3() {
+        Board board = full3x3BoardNoWinner();
         assertTrue(board.gameOver());
         assertFalse(board.hasWinner());
     }
 
     @Test
-    public void gameOverWithWinner() {
-        Board board = horizontalsWinningBoard();
+    public void gameOverWithoutWinnerOn4x4() {
+        Board board = full4x4BoardNoWinner();
+        assertTrue(board.gameOver());
+        assertFalse(board.hasWinner());
+    }
+
+    @Test
+    public void gameOverWithWinnerOn3x3() {
+        Board board = horizontalsWinning3x3Board();
         assertTrue(board.gameOver());
     }
 
     @Test
-    public void verticalWinningCombination() {
-        Board board = verticalsWinningBoard();
+    public void gameOverWithWinnerOn4x4() {
+        Board board = horizontalsWinning4x4Board();
+        assertTrue(board.gameOver());
+    }
+
+    @Test
+    public void verticalWinningCombinationOn3x3() {
+        Board board = verticalsWinning3x3Board();
         assertTrue(board.hasWinner());
     }
 
     @Test
-    public void horizontalWinningCombination() {
-        Board board = horizontalsWinningBoard();
+    public void verticalWinningCombinationOn4x4() {
+        Board board = verticalsWinning4x4Board();
         assertTrue(board.hasWinner());
     }
 
     @Test
-    public void diagonalWinningBoard() {
-        Board board = diagonalsWinningBoard();
+    public void horizontalWinningCombinationOn3x3() {
+        Board board = horizontalsWinning3x3Board();
         assertTrue(board.hasWinner());
     }
 
     @Test
-    public void playerXIsWinner() {
-        Board boardWithWinnerX = verticalsWinningBoard();
+    public void horizontalWinningCombinationOn4x4() {
+        Board board = horizontalsWinning4x4Board();
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void diagonalWinningCombinationOn3x3() {
+        Board board = diagonalsWinning3x3Board();
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void diagonalWinningCombinationOn4x4() {
+        Board board = diagonalsWinning4x4Board();
+        assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void playerXIsWinnerOn3x3() {
+        Board boardWithWinnerX = verticalsWinning3x3Board();
         assertEquals(X, boardWithWinnerX.winningPlayerMark());
     }
 
     @Test
     public void gameIsDrawn() {
-        Board drawnGameBoard = fullBoardNoWinner();
+        Board drawnGameBoard = full3x3BoardNoWinner();
         assertTrue(drawnGameBoard.isDrawn());
     }
 
     @Test
     public void nullWhenNoWinner() {
-        Board fullBoardNoWinner = fullBoardNoWinner();
+        Board fullBoardNoWinner = full3x3BoardNoWinner();
         assertEquals(null, fullBoardNoWinner.winningPlayerMark());
     }
 
@@ -245,29 +288,56 @@ public class BoardTest {
         assertEquals(9, board.emptyCells().size());
     }
 
-    private Board fullBoardNoWinner() {
+    private Board full3x3BoardNoWinner() {
         return new Board(
                 X, X, O,
                 O, O, X,
                 X, O, X);
     }
-    private Board horizontalsWinningBoard() {
+    private Board full4x4BoardNoWinner() {
+        return new Board(
+                X, X, O, O,
+                O, O, X, X,
+                X, O, X, O,
+                X, O, X, O);
+    }
+    private Board horizontalsWinning3x3Board() {
         return new Board(
                 X, X, X,
                 EMPTY, EMPTY, EMPTY,
                 EMPTY, O, O);
     }
-    private Board verticalsWinningBoard() {
+    private Board horizontalsWinning4x4Board() {
+        return new Board(
+                X, X, X, X,
+                EMPTY, EMPTY, EMPTY,O,
+                EMPTY, O, O, O,
+                X, O, X, O);
+    }
+    private Board verticalsWinning3x3Board() {
         return new Board(
                 X, X, O,
                 X, O, O,
                 X, O, X);
     }
-    private Board diagonalsWinningBoard() {
+    private Board verticalsWinning4x4Board(){
+        return new Board(X, X, O, EMPTY,
+                         X, O, O, EMPTY,
+                         X, O, X, O,
+                         X, EMPTY, EMPTY, EMPTY);
+    }
+    private Board diagonalsWinning3x3Board() {
         return new Board(
                 X, X, O,
                 EMPTY, X, EMPTY,
                 EMPTY, O, X);
+    }
+    private Board diagonalsWinning4x4Board() {
+        return new Board(
+                X,     X,     O,     O,
+                EMPTY, X,     EMPTY, O,
+                EMPTY, O,     X,     O,
+                EMPTY, EMPTY, EMPTY, X);
     }
 
 }
