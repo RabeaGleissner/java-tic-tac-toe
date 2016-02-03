@@ -116,6 +116,14 @@ public class UnbeatableComputerPlayerTest {
         assertEquals(3, unbeatableComputerPlayer.getPosition(board));
     }
 
+    @Test
+    public void placesMarkOn4x4() {
+        Board board = new Board(X, O, EMPTY, EMPTY,
+                EMPTY, EMPTY, EMPTY, EMPTY,
+                EMPTY, EMPTY, EMPTY, EMPTY,
+                EMPTY, EMPTY, EMPTY, EMPTY);
+        assertEquals(2, unbeatableComputerPlayer.getPosition(board));
+    }
 
     @Ignore
     @Test(timeout=3200)
@@ -134,7 +142,7 @@ public class UnbeatableComputerPlayerTest {
     }
 
     @Ignore
-    @Test
+    @Test(timeout=2999)
     public void measureSpeedOfFirstMoveOn4x4Board() {
         UnbeatableComputerPlayer computer = new UnbeatableComputerPlayer(X);
         Board board;

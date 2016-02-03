@@ -5,6 +5,7 @@ import de.rabea.game.Mark;
 import de.rabea.game.Player;
 
 public class UnbeatableComputerPlayer extends Player {
+    private final int MAXIMUM_DEPTH = 8;
 
     public UnbeatableComputerPlayer(Mark mark) {
         super(mark);
@@ -12,18 +13,17 @@ public class UnbeatableComputerPlayer extends Player {
 
     @Override
     public int getPosition(Board board) {
-        int remainingMovesCount = board.emptyCells().size();
-        return minimax(remainingMovesCount, Integer.MIN_VALUE, Integer.MAX_VALUE, board, mark).getMove();
+        return minimax(MAXIMUM_DEPTH, Integer.MIN_VALUE, Integer.MAX_VALUE, board, mark).getMove();
     }
 
-    private ScoredMove minimax(int remainingMovesCount, int alpha, int beta, Board currentBoard, Mark currentMark) {
+    private ScoredMove minimax(int remainingDepth, int alpha, int beta, Board currentBoard, Mark currentMark) {
         ScoredMove currentBestMove = resetBestScore(currentMark);
-        if (currentBoard.gameOver() || remainingMovesCount == 0) {
-            return new ScoredMove(score(currentBoard, remainingMovesCount), currentBestMove.getScore());
+        if (currentBoard.gameOver() || remainingDepth == 0) {
+            return new ScoredMove(score(currentBoard, remainingDepth), currentBestMove.getScore());
         }
         for (int position : currentBoard.emptyCells()) {
             Board nextBoardState = currentBoard.placeMarkOnNewBoard(position, currentMark, currentBoard);
-            ScoredMove score = minimax(remainingMovesCount - 1, alpha, beta, nextBoardState, currentMark.switchMark(currentMark));
+            ScoredMove score = minimax(remainingDepth - 1, alpha, beta, nextBoardState, currentMark.switchMark(currentMark));
             currentBestMove = updateScore(currentMark, currentBestMove, position, score);
             if (currentMark == mark) {
                 alpha = updateAlpha(alpha, currentBestMove);
