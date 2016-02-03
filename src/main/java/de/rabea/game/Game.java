@@ -72,11 +72,11 @@ public class Game {
        return !board.gameOver();
     }
 
-    public Player getPlayer() {
+    Player getPlayer() {
         return this.player;
     }
 
-    public Player getOpponent() {
+    Player getOpponent() {
         return this.opponent;
     }
 }
