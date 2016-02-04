@@ -32,7 +32,7 @@ public class GameTest {
     }
 
     @Test
-    public void playsHumanGameOnce() {
+    public void playsHuman3x3GameOnce() {
         Game game = new Game(fakeUserInterface, playerFactory, humanPlayer, humanOpponent);
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
         game.play(3);
@@ -41,7 +41,16 @@ public class GameTest {
     }
 
     @Test
-    public void playsHumanVsComputerGameOnce() {
+    public void playsHuman4x4GameOnce() {
+        Game game = new Game(fakeUserInterface, playerFactory, humanPlayer, humanOpponent);
+        fakeUserInterface.provideConsoleInput("1", "7", "2", "12", "3", "11", "4", "n");
+        game.play(4);
+        assertTrue(fakeUserInterface.wasAskForPositionCalled());
+        assertEquals(1, fakeUserInterface.announceWinnerCalled());
+    }
+
+    @Test
+    public void playsHumanVsComputer3x3GameOnce() {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, playerFactory, humanPlayer, fakeComputerPlayer);
         fakeUserInterface.provideConsoleInput("1", "4", "7", "n");
@@ -51,7 +60,17 @@ public class GameTest {
     }
 
     @Test
-    public void playsHumanGameTwice() {
+    public void playsHumanVsComputer4x4GameOnce() {
+        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
+        Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, playerFactory, humanPlayer, fakeComputerPlayer);
+        fakeUserInterface.provideConsoleInput("1", "5", "9", "13", "n");
+        fakeComputerPlayer.giveNumbers(5, 6, 7);
+        gameWithFakeComputerPlayer.play(4);
+        assertEquals(1, fakeUserInterface.announceWinnerCalled());
+    }
+
+    @Test
+    public void playsHuman3x3GameTwice() {
         Game game = new Game(fakeUserInterface, playerFactory, humanPlayer, humanOpponent);
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "y", "1", "3", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
         game.play(3);
