@@ -13,20 +13,20 @@ public class PrettyBoardPainter implements BoardPainter {
 
     @Override
     public String drawBoard(Board board) {
-        int i = 0;
+        int positionNumberToPrint = 0;
         String boardImage = "\n";
         for (Mark cell : board.cells()) {
-            i ++;
-            boardImage = printSymbolInCell(i, boardImage, cell);
-            boardImage = printHorizontalLines(i, boardImage, board);
-            boardImage = printLastPipe(i, boardImage, board);
+            positionNumberToPrint ++;
+            boardImage = printSymbolInCell(positionNumberToPrint, boardImage, cell);
+            boardImage = printHorizontalLines(positionNumberToPrint, boardImage, board);
+            boardImage = printLastPipe(positionNumberToPrint, boardImage, board);
         }
         return boardImage;
     }
 
-    private String printSymbolInCell(int i, String boardImage, Mark cell) {
+    private String printSymbolInCell(int positionNumberToPrint, String boardImage, Mark cell) {
         if (cell == EMPTY) {
-            boardImage += pipe() + String.format("%2d", i);
+            boardImage += pipe() + String.format("%2d", positionNumberToPrint);
         } else if (cell == X) {
             boardImage += pipe() + colouredX(cell);
         } else {
@@ -36,17 +36,17 @@ public class PrettyBoardPainter implements BoardPainter {
         return boardImage;
     }
 
-    private String printHorizontalLines(int i, String boardImage, Board board) {
-        if (board.isIndexOfEndOfRowExceptLastRow(i-1) && board.is3x3()) {
+    private String printHorizontalLines(int positionNumberToPrint, String boardImage, Board board) {
+        if (board.isIndexOfEndOfRowExceptLastRow(positionNumberToPrint-1) && board.is3x3()) {
             boardImage += horizontalLineFor3x3();
-        } else if (board.isIndexOfEndOfRowExceptLastRow(i-1) && board.is4x4()) {
+        } else if (board.isIndexOfEndOfRowExceptLastRow(positionNumberToPrint-1) && board.is4x4()) {
             boardImage += horizontalLineFor4x4();
         }
         return boardImage;
     }
 
-    private String printLastPipe(int i, String boardImage, Board board) {
-        if (board.isIndexOfLastCell(i-1)) {
+    private String printLastPipe(int positionNumberToPrint, String boardImage, Board board) {
+        if (board.isIndexOfLastCell(positionNumberToPrint-1)) {
             boardImage += lastPipe();
         }
         return boardImage;
