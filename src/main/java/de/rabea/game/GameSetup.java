@@ -24,7 +24,7 @@ public class GameSetup {
         userInterface.announceMarkDistribution(gameMode);
         Player player = playerFactory.createPlayer(gameMode);
         Player opponent = playerFactory.createOpponent(gameMode);
-        game = new Game(userInterface, playerFactory, player, opponent);
+        game = new Game(userInterface, player, opponent, this);
         game.play(boardDimension);
     }
 

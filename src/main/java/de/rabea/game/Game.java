@@ -1,6 +1,5 @@
 package de.rabea.game;
 
-import de.rabea.player.PlayerFactory;
 import de.rabea.ui.UserInterface;
 
 public class Game {
@@ -8,31 +7,13 @@ public class Game {
     private final UserInterface userInterface;
     private Player player;
     private Player opponent ;
-    private final PlayerFactory playerFactory;
+    private GameSetup gameSetup;
 
-    public Game(UserInterface userInterface, PlayerFactory playerFactory, Player player, Player opponent) {
+    public Game(UserInterface userInterface, Player player, Player opponent, GameSetup gameSetup) {
         this.userInterface = userInterface;
         this.player = player;
         this.opponent = opponent;
-        this.playerFactory = playerFactory;
-    }
-
-    public Game(UserInterface userInterface, PlayerFactory playerFactory) {
-       this(userInterface, playerFactory, playerFactory.createDefaultPlayer(), playerFactory.createDefaultPlayer());
-    }
-
-    public void startApplication() {
-        userInterface.greet();
-        setUpNewGame();
-    }
-
-    public void setUpNewGame() {
-        GameMode gameMode = userInterface.getGameModeFromUser();
-        int boardDimension = userInterface.getBoardDimensionFromUser();
-        userInterface.announceMarkDistribution(gameMode);
-        this.player = playerFactory.createPlayer(gameMode);
-        this.opponent = playerFactory.createOpponent(gameMode);
-        play(boardDimension);
+        this.gameSetup = gameSetup;
     }
 
     public void play(int boardDimension) {
@@ -46,7 +27,7 @@ public class Game {
         }
         finishGame(currentPlayer.mark(), board);
         if (userInterface.playAgain()) {
-            setUpNewGame();
+            gameSetup.setUpNewGame();
         }
     }
 
