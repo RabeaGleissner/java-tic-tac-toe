@@ -33,7 +33,7 @@ public class FakeUserInterface extends UserInterface {
     }
 
     @Override
-    public int getBoardSizeFromUser() {
+    public int getBoardDimensionFromUser() {
         String input = moves.remove(0);
         return Integer.parseInt(input);
     }

@@ -37,9 +37,9 @@ public class PrettyBoardPainter implements BoardPainter {
     }
 
     private String printHorizontalLines(int positionNumberToPrint, String boardImage, Board board) {
-        if (board.isIndexOfEndOfRowExceptLastRow(positionNumberToPrint-1) && board.is3x3()) {
+        if (board.isEndOfRowIndexExceptLastRow(positionNumberToPrint-1) && board.is3x3()) {
             boardImage += horizontalLineFor3x3();
-        } else if (board.isIndexOfEndOfRowExceptLastRow(positionNumberToPrint-1) && board.is4x4()) {
+        } else if (board.isEndOfRowIndexExceptLastRow(positionNumberToPrint-1) && board.is4x4()) {
             boardImage += horizontalLineFor4x4();
         }
         return boardImage;

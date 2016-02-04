@@ -12,8 +12,8 @@ public class PrettyBoardPainterTest {
     @Test
     public void displays3x3BoardWithMarksInDifferentColoursAndDashedLines() {
         Board board = new Board(3);
-        board.placeMark(1, X);
-        board.placeMark(3, O);
+        board.placeMarkOnExistingBoard(1, X);
+        board.placeMarkOnExistingBoard(3, O);
         PrettyBoardPainter prettyBoardPainter = new PrettyBoardPainter();
         assertEquals(
                   "\n|  1 |  \u001B[34mX\u001B[0m |  3 | \n" +
@@ -29,9 +29,9 @@ public class PrettyBoardPainterTest {
     @Test
     public void displays4x4BoardWithColourfulMarksAndDashedLines() {
         Board board = new Board(4);
-        board.placeMark(1, X);
-        board.placeMark(4, O);
-        board.placeMark(15,X);
+        board.placeMarkOnExistingBoard(1, X);
+        board.placeMarkOnExistingBoard(4, O);
+        board.placeMarkOnExistingBoard(15,X);
         PrettyBoardPainter prettyBoardPainter = new PrettyBoardPainter();
         assertEquals(
                 "\n|  1 |  \u001B[34mX\u001B[0m |  3 |  4 | \n" +

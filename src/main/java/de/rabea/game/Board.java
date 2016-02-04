@@ -10,34 +10,34 @@ import static de.rabea.game.Mark.*;
 public class Board {
 
     private Mark[] cells;
-    private int size;
+    private int dimension;
     private int numberOfCells;
 
-    public Board(Mark... initialGridLayout) {
-        this.size = (int) Math.sqrt(initialGridLayout.length);
-        this.numberOfCells = size * size;
-        this.cells = initialGridLayout;
+    public Board(Mark... gameState) {
+        this.dimension = (int) Math.sqrt(gameState.length);
+        this.numberOfCells = gameState.length;
+        this.cells = gameState;
     }
 
-    public Board(int size) {
-        this.size = size;
-        this.numberOfCells = size * size;
+    public Board(int dimension) {
+        this.dimension = dimension;
+        this.numberOfCells = dimension * dimension;
         this.cells = createCells();
     }
 
     private Mark[] createCells() {
-        Mark[] createCells = new Mark[numberOfCells];
+        Mark[] cells = new Mark[numberOfCells];
         for (int i = 0; i < numberOfCells; i++) {
-            createCells[i] = EMPTY;
+            cells[i] = EMPTY;
         }
-        return createCells;
+        return cells;
     }
 
     public Mark[] cells() {
         return cells;
     }
 
-    public void placeMark(int position, Mark mark) {
+    public void placeMarkOnExistingBoard(int position, Mark mark) {
         cells[position] = mark;
     }
 
@@ -69,7 +69,7 @@ public class Board {
 
     public List<Integer> emptyCells() {
         List<Integer> emptyCells = new ArrayList<>();
-        for (int i=0; i < cells.length; i++) {
+        for (int i = 0; i < cells.length; i++) {
             Mark cell  = cells[i];
             if (cell == EMPTY) {
                 emptyCells.add(i);
@@ -90,7 +90,7 @@ public class Board {
     }
 
     public List<Integer> indexOfLastCellPerRow() {
-        int dimension = getSize();
+        int dimension = getDimension();
         List<Integer> lastCellsPerRow = new ArrayList<>();
         for (int i = 1; i <= dimension; i++) {
             lastCellsPerRow.add(dimension * i - 1);
@@ -98,16 +98,16 @@ public class Board {
         return lastCellsPerRow;
     }
 
-    public int getSize() {
-        return size;
+    public int getDimension() {
+        return dimension;
     }
 
     public boolean is3x3() {
-        return size == 3;
+        return dimension == 3;
     }
 
     public boolean is4x4() {
-        return size == 4;
+        return dimension == 4;
     }
 
     public int indexOfLastCell() {
@@ -118,7 +118,7 @@ public class Board {
         return cell == indexOfLastCell();
     }
 
-    public boolean isIndexOfEndOfRowExceptLastRow(int cell) {
+    public boolean isEndOfRowIndexExceptLastRow(int cell) {
         for (int cellIndex : indexOfLastCellPerRow()) {
             if (cell == cellIndex && isNotLastCellIndex(cell)) {
                 return true;
@@ -139,50 +139,50 @@ public class Board {
         return allLines;
     }
 
-    public List<Line> getRows() {
+    private List<Line> getRows() {
         List<Line> rows = new ArrayList<>();
 
-        for (int i = 0; i < getSize(); i++) {
+        for (int i = 0; i < getDimension(); i++) {
            rows.add(getRow(i));
         }
         return rows;
     }
 
     private Line getRow(int currentIndex) {
-        int index = currentIndex * size;
-        Mark[] row = new Mark[size];
-        for (int i = 0; i < size; i++) {
+        int index = currentIndex * dimension;
+        Mark[] row = new Mark[dimension];
+        for (int i = 0; i < dimension; i++) {
             row[i] = cells[index + i];
         }
         return new Line(row);
     }
 
-    public List<Line> getColumns() {
+    private List<Line> getColumns() {
         List<Line> columns = new ArrayList<>();
-        for (int i = 0; i < getSize(); i++) {
+        for (int i = 0; i < getDimension(); i++) {
             columns.add(getColumn(i));
         }
         return columns;
     }
 
     private Line getColumn(int index) {
-        Mark[] column = new Mark[size];
-        for (int i = 0; i < size; i++) {
-            column[i] = cells[index + (size*i)];
+        Mark[] column = new Mark[dimension];
+        for (int i = 0; i < dimension; i++) {
+            column[i] = cells[index + (dimension *i)];
         }
         return new Line(column);
     }
 
-    public List<Line> getDiagonals() {
-        Mark[] first= new Mark[size];
-        Mark[] second = new Mark[size];
-        for (int i = 0; i < size; i++) {
-            first[i] = cells[(size * i) + i];
+    private List<Line> getDiagonals() {
+        Mark[] first= new Mark[dimension];
+        Mark[] second = new Mark[dimension];
+        for (int i = 0; i < dimension; i++) {
+            first[i] = cells[(dimension * i) + i];
         }
-        int offset = size - 1;
-        for (int i = 0; i < size; i++) {
+        int offset = dimension - 1;
+        for (int i = 0; i < dimension; i++) {
             second[i] = cells[offset];
-            offset += size - 1;
+            offset += dimension - 1;
         }
         return Arrays.asList(new Line(first), new Line(second));
     }

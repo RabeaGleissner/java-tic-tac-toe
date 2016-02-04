@@ -46,7 +46,7 @@ public class HumanPlayerTest {
     public void asksUserAgainWhenPositionIsOccupied() {
         FakeUserInterface fakeUserInterface = new FakeUserInterface();
         HumanPlayer humanPlayer = new HumanPlayer(fakeUserInterface, X);
-        board.placeMark(0, X);
+        board.placeMarkOnExistingBoard(0, X);
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
         humanPlayer.getPosition(board);
         assertTrue(fakeUserInterface.wasPositionUnavailableWarningCalled());

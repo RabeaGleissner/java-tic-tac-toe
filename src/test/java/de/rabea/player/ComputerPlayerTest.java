@@ -27,14 +27,14 @@ public class ComputerPlayerTest {
     @Test
     public void returnsTheOnlyAvailablePosition() {
         ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalculator(), O);
-        board.placeMark(0, X);
-        board.placeMark(1, X);
-        board.placeMark(2, O);
-        board.placeMark(3, X);
-        board.placeMark(4, O);
-        board.placeMark(5, X);
-        board.placeMark(6, O);
-        board.placeMark(7, X);
+        board.placeMarkOnExistingBoard(0, X);
+        board.placeMarkOnExistingBoard(1, X);
+        board.placeMarkOnExistingBoard(2, O);
+        board.placeMarkOnExistingBoard(3, X);
+        board.placeMarkOnExistingBoard(4, O);
+        board.placeMarkOnExistingBoard(5, X);
+        board.placeMarkOnExistingBoard(6, O);
+        board.placeMarkOnExistingBoard(7, X);
         assertEquals(8, computerPlayer.getPosition(board));
     }
 
@@ -42,7 +42,7 @@ public class ComputerPlayerTest {
     public void thereIsOneFewerEmptyPositionAfterTheComputerMadeItsRandomMove() {
         ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalculator(), O);
         int computerPosition = computerPlayer.getPosition(board);
-        board.placeMark(computerPosition, O);
+        board.placeMarkOnExistingBoard(computerPosition, O);
         assertEquals(8, board.emptyCells().size());
     }
 

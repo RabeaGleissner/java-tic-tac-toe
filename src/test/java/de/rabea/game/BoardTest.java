@@ -40,14 +40,14 @@ public class BoardTest {
     @Test
     public void markedPositionIsNoLongerAvailableOn3x3() {
         Board board = new Board(3);
-        board.placeMark(1, X);
+        board.placeMarkOnExistingBoard(1, X);
         assertFalse(board.isPositionAvailable(1));
     }
 
     @Test
     public void markedPositionIsNoLongerAvailableOn4x4() {
         Board board = new Board(4);
-        board.placeMark(1, X);
+        board.placeMarkOnExistingBoard(1, X);
         assertFalse(board.isPositionAvailable(1));
     }
 
@@ -68,10 +68,10 @@ public class BoardTest {
     @Test
     public void listsAllEmptyPositionsFor3x3() {
         Board board = new Board(3);
-        board.placeMark(1, X);
-        board.placeMark(2, O);
-        board.placeMark(3, X);
-        board.placeMark(6, O);
+        board.placeMarkOnExistingBoard(1, X);
+        board.placeMarkOnExistingBoard(2, O);
+        board.placeMarkOnExistingBoard(3, X);
+        board.placeMarkOnExistingBoard(6, O);
         List<Integer> emptyCells = Arrays.asList(0, 4, 5, 7, 8);
         assertEquals(emptyCells, board.emptyCells());
     }
@@ -79,10 +79,10 @@ public class BoardTest {
     @Test
     public void listsAllEmptyPositionsFor4x4() {
         Board board = new Board(4);
-        board.placeMark(1, X);
-        board.placeMark(2, O);
-        board.placeMark(3, X);
-        board.placeMark(6, O);
+        board.placeMarkOnExistingBoard(1, X);
+        board.placeMarkOnExistingBoard(2, O);
+        board.placeMarkOnExistingBoard(3, X);
+        board.placeMarkOnExistingBoard(6, O);
         List<Integer> emptyCells = Arrays.asList(0, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15);
         assertEquals(emptyCells, board.emptyCells());
     }
@@ -103,7 +103,7 @@ public class BoardTest {
     @Test
     public void widthAndHeightOf3x3() {
         Board board = new Board(3);
-        assertEquals(3, board.getSize());
+        assertEquals(3, board.getDimension());
     }
 
     @Test
@@ -123,56 +123,37 @@ public class BoardTest {
     @Test
     public void isEndOfFirstOrSecondRowOn3x3() {
         Board board = new Board(3);
-        assertTrue(board.isIndexOfEndOfRowExceptLastRow(2));
-        assertTrue(board.isIndexOfEndOfRowExceptLastRow(5));
-        assertFalse(board.isIndexOfEndOfRowExceptLastRow(1));
-        assertFalse(board.isIndexOfEndOfRowExceptLastRow(8));
+        assertTrue(board.isEndOfRowIndexExceptLastRow(2));
+        assertTrue(board.isEndOfRowIndexExceptLastRow(5));
+        assertFalse(board.isEndOfRowIndexExceptLastRow(1));
+        assertFalse(board.isEndOfRowIndexExceptLastRow(8));
     }
 
     @Test
     public void isEndOfFirstOrSecondOrThirdRowOn4x4() {
         Board board = new Board(4);
-        assertTrue(board.isIndexOfEndOfRowExceptLastRow(3));
-        assertTrue(board.isIndexOfEndOfRowExceptLastRow(7));
-        assertTrue(board.isIndexOfEndOfRowExceptLastRow(11));
-        assertFalse(board.isIndexOfEndOfRowExceptLastRow(15));
+        assertTrue(board.isEndOfRowIndexExceptLastRow(3));
+        assertTrue(board.isEndOfRowIndexExceptLastRow(7));
+        assertTrue(board.isEndOfRowIndexExceptLastRow(11));
+        assertFalse(board.isEndOfRowIndexExceptLastRow(15));
     }
 
     @Test
-    public void allRowsOfA4x4() {
-        Board board = new Board(4);
-        board.placeMark(1, X);
-        board.placeMark(8, O);
-        board.placeMark(9, X);
-        board.placeMark(11, O);
-        List<Line> rows = board.getRows();
-        assertEquals(4, rows.size());
-        assertEquals(4, rows.get(0).allMarks().length);
-        assertArrayEquals(rows.get(0).allMarks(), new Mark[]{EMPTY, X, EMPTY, EMPTY});
-        assertArrayEquals(rows.get(1).allMarks(), new Mark[]{EMPTY, EMPTY, EMPTY, EMPTY});
-        assertArrayEquals(rows.get(2).allMarks(), new Mark[]{O, X, EMPTY, O});
-        assertArrayEquals(rows.get(3).allMarks(), new Mark[]{EMPTY, EMPTY, EMPTY, EMPTY});
-    }
-
-    @Test
-    public void allVerticalsOfA4x4() {
+    public void getsAllLinesOf4x4() {
         Board board = verticalsWinning4x4Board();
-        List<Line> verticals = board.getColumns();
-        assertEquals(4, verticals.size());
-        assertEquals(4, verticals.get(0).allMarks().length);
-        assertArrayEquals(verticals.get(0).allMarks(), new Mark[]{X, X, X, X});
-        assertArrayEquals(verticals.get(1).allMarks(), new Mark[]{X, O, O, EMPTY});
-        assertArrayEquals(verticals.get(2).allMarks(), new Mark[]{O, O, X, EMPTY});
-        assertArrayEquals(verticals.get(3).allMarks(), new Mark[]{EMPTY, EMPTY, O, EMPTY});
-    }
-
-    @Test
-    public void allDiagonalsOfA4x4() {
-        Board board = backwardsDiagonalsWinning4x4Board();
-        List<Line> diagonals = board.getDiagonals();
-        assertEquals(2, diagonals.size());
-        assertArrayEquals(diagonals.get(0).allMarks(), new Mark[]{X, X, EMPTY, EMPTY});
-        assertArrayEquals(diagonals.get(1).allMarks(), new Mark[]{X, X, X, X});
+        List<Line> lines = board.getAllLines();
+        assertEquals(10, lines.size());
+        assertEquals(4, lines.get(0).allMarks().length);
+        assertArrayEquals(lines.get(0).allMarks(), new Mark[]{X, X, O, EMPTY});
+        assertArrayEquals(lines.get(1).allMarks(), new Mark[]{X, O, O, EMPTY});
+        assertArrayEquals(lines.get(2).allMarks(), new Mark[]{X, O, X, O});
+        assertArrayEquals(lines.get(3).allMarks(), new Mark[]{X, EMPTY, EMPTY, EMPTY});
+        assertArrayEquals(lines.get(4).allMarks(), new Mark[]{X, X, X, X});
+        assertArrayEquals(lines.get(5).allMarks(), new Mark[]{X, O, O, EMPTY});
+        assertArrayEquals(lines.get(6).allMarks(), new Mark[]{O, O, X, EMPTY});
+        assertArrayEquals(lines.get(7).allMarks(), new Mark[]{EMPTY, EMPTY, O, EMPTY});
+        assertArrayEquals(lines.get(8).allMarks(), new Mark[]{X, O, X, EMPTY});
+        assertArrayEquals(lines.get(9).allMarks(), new Mark[]{EMPTY, O, O, X});
     }
 
     @Test

@@ -46,8 +46,8 @@ public class UserInterface {
         return gameMode();
     }
 
-    public int getBoardSizeFromUser() {
-        presentAvailableSizes();
+    public int getBoardDimensionFromUser() {
+        presentAvailableDimensions();
         return selectedBoardSize();
     }
 
@@ -60,11 +60,11 @@ public class UserInterface {
                 return 4;
             default:
                 console.print(BOARD_SIZE_WARNING);
-                return getBoardSizeFromUser();
+                return getBoardDimensionFromUser();
         }
     }
 
-    private void presentAvailableSizes() {
+    private void presentAvailableDimensions() {
         clearScreen();
         console.print(BOARD_SIZE_OPTIONS);
     }

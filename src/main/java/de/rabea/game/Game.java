@@ -28,15 +28,15 @@ public class Game {
 
     public void setUpNewGame() {
         GameMode gameMode = userInterface.getGameModeFromUser();
-        int boardSize = userInterface.getBoardSizeFromUser();
+        int boardDimension = userInterface.getBoardDimensionFromUser();
         userInterface.announceMarkDistribution(gameMode);
         this.player = playerFactory.createPlayer(gameMode);
         this.opponent = playerFactory.createOpponent(gameMode);
-        play(boardSize);
+        play(boardDimension);
     }
 
-    public void play(int boardSize) {
-        Board board = new Board(boardSize);
+    public void play(int boardDimension) {
+        Board board = new Board(boardDimension);
         Player currentPlayer = player;
         while (gameIsNotOver(board)){
             playOneRound(currentPlayer, board);
@@ -60,7 +60,7 @@ public class Game {
 
     private void playOneRound(Player player, Board board) {
         userInterface.displayBoard(board);
-        board.placeMark(player.getPosition(board), player.mark());
+        board.placeMarkOnExistingBoard(player.getPosition(board), player.mark());
     }
 
     private void finishGame(Mark mark, Board board) {
