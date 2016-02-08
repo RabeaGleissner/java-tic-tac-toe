@@ -26,7 +26,7 @@ public class PrettyBoardPainter implements BoardPainter {
 
     private String printSymbolInCell(int positionNumberToPrint, String boardImage, Mark cell) {
         if (cell == EMPTY) {
-            boardImage += pipe() + String.format("%2d", positionNumberToPrint);
+            boardImage += pipe() + formatNumberAsTwoDigits(positionNumberToPrint);
         } else if (cell == X) {
             boardImage += pipe() + colouredX(cell);
         } else {
@@ -36,10 +36,14 @@ public class PrettyBoardPainter implements BoardPainter {
         return boardImage;
     }
 
+    private String formatNumberAsTwoDigits(int positionNumberToPrint) {
+        return String.format("%2d", positionNumberToPrint);
+    }
+
     private String printHorizontalLines(int positionNumberToPrint, String boardImage, Board board) {
-        if (board.isEndOfRowIndexExceptLastRow(positionNumberToPrint-1) && board.is3x3()) {
+        if (board.isEndOfRowIndexExceptLastRow(positionNumberToPrint-1) && board.hasDimensionOf(3)) {
             boardImage += horizontalLineFor3x3();
-        } else if (board.isEndOfRowIndexExceptLastRow(positionNumberToPrint-1) && board.is4x4()) {
+        } else if (board.isEndOfRowIndexExceptLastRow(positionNumberToPrint-1) && board.hasDimensionOf(4)) {
             boardImage += horizontalLineFor4x4();
         }
         return boardImage;

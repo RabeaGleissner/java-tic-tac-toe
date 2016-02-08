@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static de.rabea.game.Mark.*;
+import static java.util.Arrays.*;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertArrayEquals;
@@ -72,8 +73,7 @@ public class BoardTest {
         board.placeMarkOnExistingBoard(2, O);
         board.placeMarkOnExistingBoard(3, X);
         board.placeMarkOnExistingBoard(6, O);
-        List<Integer> emptyCells = Arrays.asList(0, 4, 5, 7, 8);
-        assertEquals(emptyCells, board.emptyCells());
+        assertEquals(asList(0, 4, 5, 7, 8), board.emptyCells());
     }
 
     @Test
@@ -83,14 +83,14 @@ public class BoardTest {
         board.placeMarkOnExistingBoard(2, O);
         board.placeMarkOnExistingBoard(3, X);
         board.placeMarkOnExistingBoard(6, O);
-        List<Integer> emptyCells = Arrays.asList(0, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+        List<Integer> emptyCells = asList(0, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15);
         assertEquals(emptyCells, board.emptyCells());
     }
 
     @Test
     public void indexOfLastCellInEachRowOn3x3() {
         Board board = new Board(3);
-        List<Integer> cells = new ArrayList<>(Arrays.asList(2, 5, 8));
+        List<Integer> cells = new ArrayList<>(asList(2, 5, 8));
         assertEquals(cells, board.indexOfLastCellPerRow());
     }
 
@@ -136,24 +136,6 @@ public class BoardTest {
         assertTrue(board.isEndOfRowIndexExceptLastRow(7));
         assertTrue(board.isEndOfRowIndexExceptLastRow(11));
         assertFalse(board.isEndOfRowIndexExceptLastRow(15));
-    }
-
-    @Test
-    public void getsAllLinesOf4x4() {
-        Board board = verticalsWinning4x4Board();
-        List<Line> lines = board.getAllLines();
-        assertEquals(10, lines.size());
-        assertEquals(4, lines.get(0).allMarks().length);
-        assertArrayEquals(lines.get(0).allMarks(), new Mark[]{X, X, O, EMPTY});
-        assertArrayEquals(lines.get(1).allMarks(), new Mark[]{X, O, O, EMPTY});
-        assertArrayEquals(lines.get(2).allMarks(), new Mark[]{X, O, X, O});
-        assertArrayEquals(lines.get(3).allMarks(), new Mark[]{X, EMPTY, EMPTY, EMPTY});
-        assertArrayEquals(lines.get(4).allMarks(), new Mark[]{X, X, X, X});
-        assertArrayEquals(lines.get(5).allMarks(), new Mark[]{X, O, O, EMPTY});
-        assertArrayEquals(lines.get(6).allMarks(), new Mark[]{O, O, X, EMPTY});
-        assertArrayEquals(lines.get(7).allMarks(), new Mark[]{EMPTY, EMPTY, O, EMPTY});
-        assertArrayEquals(lines.get(8).allMarks(), new Mark[]{X, O, X, EMPTY});
-        assertArrayEquals(lines.get(9).allMarks(), new Mark[]{EMPTY, O, O, X});
     }
 
     @Test
