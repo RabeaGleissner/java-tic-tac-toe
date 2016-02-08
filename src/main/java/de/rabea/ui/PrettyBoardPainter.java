@@ -41,12 +41,24 @@ public class PrettyBoardPainter implements BoardPainter {
     }
 
     private String printHorizontalLines(int positionNumberToPrint, String boardImage, Board board) {
-        if (board.isEndOfRowIndexExceptLastRow(positionNumberToPrint-1) && board.hasDimensionOf(3)) {
-            boardImage += horizontalLineFor3x3();
-        } else if (board.isEndOfRowIndexExceptLastRow(positionNumberToPrint-1) && board.hasDimensionOf(4)) {
-            boardImage += horizontalLineFor4x4();
+        int cellIndex = positionNumberToPrint-1;
+        if (isEndOfRowButNotLast(board, cellIndex)) {
+            boardImage += horizontalLine(board.getDimension());
         }
         return boardImage;
+    }
+
+    private String horizontalLine(int boardSize) {
+        if (boardSize == 3) {
+            return horizontalLineFor3x3();
+        } else {
+            return horizontalLineFor4x4();
+        }
+    }
+
+    private boolean isEndOfRowButNotLast(Board board, int cellIndex) {
+        return board.isEndOfRow(cellIndex) &&
+                board.isNotLastCellIndex(cellIndex);
     }
 
     private String printLastPipe(int positionNumberToPrint, String boardImage, Board board) {
