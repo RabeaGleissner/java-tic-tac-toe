@@ -14,8 +14,7 @@ public class Board {
     private int numberOfCells;
 
     public Board(Mark... gameState) {
-        this.dimension = (int) Math.sqrt(gameState.length);
-        this.numberOfCells = gameState.length;
+        this((int) Math.sqrt(gameState.length));
         this.cells = gameState;
     }
 
