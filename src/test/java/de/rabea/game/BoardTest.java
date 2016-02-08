@@ -1,24 +1,17 @@
 package de.rabea.game;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static de.rabea.game.Mark.*;
-import static java.util.Arrays.*;
+import static java.util.Arrays.asList;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertFalse;
 
 
 public class BoardTest {
-
-    @Before
-    public void setup() {
-    }
 
     @Test
     public void boardIsEmpty3x3() {
@@ -118,24 +111,6 @@ public class BoardTest {
         Board board = new Board(4);
         assertTrue(board.isIndexOfLastCell(15));
         assertFalse(board.isIndexOfLastCell(7));
-    }
-
-    @Test
-    public void isEndOfFirstOrSecondRowOn3x3() {
-        Board board = new Board(3);
-        assertTrue(board.isEndOfRowIndexExceptLastRow(2));
-        assertTrue(board.isEndOfRowIndexExceptLastRow(5));
-        assertFalse(board.isEndOfRowIndexExceptLastRow(1));
-        assertFalse(board.isEndOfRowIndexExceptLastRow(8));
-    }
-
-    @Test
-    public void isEndOfFirstOrSecondOrThirdRowOn4x4() {
-        Board board = new Board(4);
-        assertTrue(board.isEndOfRowIndexExceptLastRow(3));
-        assertTrue(board.isEndOfRowIndexExceptLastRow(7));
-        assertTrue(board.isEndOfRowIndexExceptLastRow(11));
-        assertFalse(board.isEndOfRowIndexExceptLastRow(15));
     }
 
     @Test
