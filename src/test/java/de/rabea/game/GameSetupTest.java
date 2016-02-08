@@ -34,14 +34,18 @@ public class GameSetupTest {
     @Test
     public void setsUpFirstHumanVsComputer3x3Game() {
         fakeUserInterface.provideConsoleInput("2", "3", "1", "2", "3", "n");
-        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
-        fakeComputerPlayer.giveNumbers(6, 7);
-        FakePlayerFactory fakePlayerFactory= new FakePlayerFactory(fakeUserInterface, fakeComputerPlayer);
-        GameSetup gameSetup = new GameSetup(fakeUserInterface, fakePlayerFactory);
+        GameSetup gameSetup = new GameSetup(fakeUserInterface,
+                new FakePlayerFactory(fakeUserInterface, createFakeComputerPlayerWithInput()));
         gameSetup.startApplication();
         assertTrue(fakeUserInterface.greetUserWasCalled);
         assertTrue(gameSetup.getPlayer() instanceof HumanPlayer);
         assertTrue(gameSetup.getOpponent() instanceof FakeComputerPlayer);
+    }
+
+    private FakeComputerPlayer createFakeComputerPlayerWithInput() {
+        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
+        fakeComputerPlayer.giveNumbers(6, 7);
+        return fakeComputerPlayer;
     }
 
     private class FakePlayerFactory extends PlayerFactory {
