@@ -13,13 +13,13 @@ public class PrettyBoardPainter implements BoardPainter {
 
     @Override
     public String drawBoard(Board board) {
-        int positionNumberToPrint = 0;
+        int positionNumberToPrint = 1;
         String boardImage = "\n";
         for (Mark cell : board.cells()) {
-            positionNumberToPrint ++;
             boardImage = printSymbolInCell(positionNumberToPrint, boardImage, cell);
             boardImage = printHorizontalLines(positionNumberToPrint, boardImage, board);
             boardImage = printLastPipe(positionNumberToPrint, boardImage, board);
+            positionNumberToPrint++;
         }
         return boardImage;
     }
