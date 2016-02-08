@@ -11,7 +11,6 @@ public class LineTest {
     @Test
     public void noWinnerWhenAllEmpty() {
         Line line = new Line(EMPTY, EMPTY, EMPTY);
-
         assertFalse(line.hasWinner());
     }
 
@@ -22,8 +21,20 @@ public class LineTest {
     }
 
     @Test
-    public void mixedCellsAreNotAWinner() {
+    public void hasAWinnerWhenAllFourCellsAreTheSameAndNotEmpty() {
+        Line line = new Line(X, X, X, X);
+        assertTrue(line.hasWinner());
+    }
+
+    @Test
+    public void threeMixedCellsAreNotAWinner() {
         Line line = new Line(X, X, O);
+        assertFalse(line.hasWinner());
+    }
+
+    @Test
+    public void fourMixedCellsAreNotAWinner() {
+        Line line = new Line(X, X, O, O);
         assertFalse(line.hasWinner());
     }
 }

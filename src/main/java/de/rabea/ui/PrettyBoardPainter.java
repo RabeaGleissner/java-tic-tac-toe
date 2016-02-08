@@ -7,26 +7,26 @@ import static de.rabea.game.Mark.EMPTY;
 import static de.rabea.game.Mark.X;
 
 public class PrettyBoardPainter implements BoardPainter {
-    private final String BLUE_COLOUR_FOR_X = "\u001B[34m";
-    private final String RED_COLOUR_FOR_O = "\u001B[31m";
+    private final String BLUE_COLOUR_FOR_X = " \u001B[34m";
+    private final String RED_COLOUR_FOR_O = " \u001B[31m";
     private final String COLOUR_RESET = "\u001B[0m";
 
     @Override
     public String drawBoard(Board board) {
-        int i = 0;
+        int positionNumberToPrint = 0;
         String boardImage = "\n";
         for (Mark cell : board.cells()) {
-            i ++;
-            boardImage = printSymbolInCell(i, boardImage, cell);
-            boardImage = printHorizontalLines(i, boardImage, board);
-            boardImage = printLastPipe(i, boardImage, board);
+            positionNumberToPrint ++;
+            boardImage = printSymbolInCell(positionNumberToPrint, boardImage, cell);
+            boardImage = printHorizontalLines(positionNumberToPrint, boardImage, board);
+            boardImage = printLastPipe(positionNumberToPrint, boardImage, board);
         }
         return boardImage;
     }
 
-    private String printSymbolInCell(int i, String boardImage, Mark cell) {
+    private String printSymbolInCell(int positionNumberToPrint, String boardImage, Mark cell) {
         if (cell == EMPTY) {
-            boardImage += pipe() + i;
+            boardImage += pipe() + formatNumberAsTwoDigits(positionNumberToPrint);
         } else if (cell == X) {
             boardImage += pipe() + colouredX(cell);
         } else {
@@ -36,15 +36,33 @@ public class PrettyBoardPainter implements BoardPainter {
         return boardImage;
     }
 
-    private String printHorizontalLines(int i, String boardImage, Board board) {
-        if (board.isIndexOfEndOfFirstOrSecondRow(i-1)) {
-            boardImage += horizontalLine();
+    private String formatNumberAsTwoDigits(int positionNumberToPrint) {
+        return String.format("%2d", positionNumberToPrint);
+    }
+
+    private String printHorizontalLines(int positionNumberToPrint, String boardImage, Board board) {
+        int cellIndex = positionNumberToPrint-1;
+        if (isEndOfRowButNotLast(board, cellIndex)) {
+            boardImage += horizontalLine(board.getDimension());
         }
         return boardImage;
     }
 
-    private String printLastPipe(int i, String boardImage, Board board) {
-        if (board.isIndexOfLastCell(i-1)) {
+    private String horizontalLine(int boardSize) {
+        if (boardSize == 3) {
+            return horizontalLineFor3x3();
+        } else {
+            return horizontalLineFor4x4();
+        }
+    }
+
+    private boolean isEndOfRowButNotLast(Board board, int cellIndex) {
+        return board.isEndOfRow(cellIndex) &&
+                board.isNotLastCellIndex(cellIndex);
+    }
+
+    private String printLastPipe(int positionNumberToPrint, String boardImage, Board board) {
+        if (board.isIndexOfLastCell(positionNumberToPrint-1)) {
             boardImage += lastPipe();
         }
         return boardImage;
@@ -58,8 +76,12 @@ public class PrettyBoardPainter implements BoardPainter {
         return BLUE_COLOUR_FOR_X + cell.toString() + COLOUR_RESET;
     }
 
-    private String horizontalLine() {
-        return "| \n -----------\n";
+    private String horizontalLineFor3x3() {
+        return "| \n --------------\n";
+    }
+
+    private String horizontalLineFor4x4() {
+        return "| \n -------------------\n";
     }
 
     private String space() {

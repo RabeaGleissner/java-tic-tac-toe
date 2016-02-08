@@ -10,23 +10,34 @@ import static de.rabea.game.Mark.*;
 public class Board {
 
     private Mark[] cells;
+    private int dimension;
+    private int numberOfCells;
 
-
-    public Board() {
-       this(new Mark[] {EMPTY, EMPTY, EMPTY,
-                EMPTY, EMPTY, EMPTY,
-                EMPTY, EMPTY, EMPTY});
+    public Board(Mark... gameState) {
+        this.dimension = (int) Math.sqrt(gameState.length);
+        this.numberOfCells = gameState.length;
+        this.cells = gameState;
     }
 
-    public Board(Mark[] cells) {
-       this.cells = cells;
+    public Board(int dimension) {
+        this.dimension = dimension;
+        this.numberOfCells = dimension * dimension;
+        this.cells = createCells();
+    }
+
+    private Mark[] createCells() {
+        Mark[] cells = new Mark[numberOfCells];
+        for (int i = 0; i < numberOfCells; i++) {
+            cells[i] = EMPTY;
+        }
+        return cells;
     }
 
     public Mark[] cells() {
         return cells;
     }
 
-    public void placeMark(int position, Mark mark) {
+    public void placeMarkOnExistingBoard(int position, Mark mark) {
         cells[position] = mark;
     }
 
@@ -58,7 +69,7 @@ public class Board {
 
     public List<Integer> emptyCells() {
         List<Integer> emptyCells = new ArrayList<>();
-        for (int i=0; i < cells.length; i++) {
+        for (int i = 0; i < cells.length; i++) {
             Mark cell  = cells[i];
             if (cell == EMPTY) {
                 emptyCells.add(i);
@@ -88,9 +99,7 @@ public class Board {
     }
 
     public int getDimension() {
-        double length = (double) cells().length;
-        double squareRoot = Math.sqrt(length);
-        return (int) squareRoot;
+        return dimension;
     }
 
     public int indexOfLastCell() {
@@ -101,16 +110,16 @@ public class Board {
         return cell == indexOfLastCell();
     }
 
-    public boolean isIndexOfEndOfFirstOrSecondRow(int cell) {
+    public boolean isEndOfRow(int cell) {
         for (int cellIndex : indexOfLastCellPerRow()) {
-            if (cell == cellIndex && isNotLastCellIndex(cell)) {
+            if (cell == cellIndex) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isNotLastCellIndex(int cell) {
+    public boolean isNotLastCellIndex(int cell) {
         return !(isIndexOfLastCell(cell));
     }
 
@@ -122,7 +131,7 @@ public class Board {
         return allLines;
     }
 
-    public List<Line> getRows() {
+    private List<Line> getRows() {
         List<Line> rows = new ArrayList<>();
 
         for (int i = 0; i < getDimension(); i++) {
@@ -132,11 +141,15 @@ public class Board {
     }
 
     private Line getRow(int currentIndex) {
-        int index = currentIndex * 3;
-        return new Line(cells[index], cells[index+1], cells[index+2]);
+        int index = currentIndex * dimension;
+        Mark[] row = new Mark[dimension];
+        for (int i = 0; i < dimension; i++) {
+            row[i] = cells[index + i];
+        }
+        return new Line(row);
     }
 
-    public List<Line> getColumns() {
+    private List<Line> getColumns() {
         List<Line> columns = new ArrayList<>();
         for (int i = 0; i < getDimension(); i++) {
             columns.add(getColumn(i));
@@ -145,13 +158,25 @@ public class Board {
     }
 
     private Line getColumn(int index) {
-        return new Line(cells[index], cells[index+3], cells[index+6]);
+        Mark[] column = new Mark[dimension];
+        for (int i = 0; i < dimension; i++) {
+            column[i] = cells[index + (dimension *i)];
+        }
+        return new Line(column);
     }
 
-    public List<Line> getDiagonals() {
-        Line firstDiagonal = new Line(cells[0], cells[4], cells[8]);
-        Line secondDiagonal = new Line(cells[2], cells[4], cells[6]);
-        return Arrays.asList(firstDiagonal, secondDiagonal);
+    private List<Line> getDiagonals() {
+        Mark[] first= new Mark[dimension];
+        Mark[] second = new Mark[dimension];
+        for (int i = 0; i < dimension; i++) {
+            first[i] = cells[(dimension * i) + i];
+        }
+        int offset = dimension - 1;
+        for (int i = 0; i < dimension; i++) {
+            second[i] = cells[offset];
+            offset += dimension - 1;
+        }
+        return Arrays.asList(new Line(first), new Line(second));
     }
 
     public Mark winningPlayerMark() {

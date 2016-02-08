@@ -17,7 +17,7 @@ public class FakeUserInterface extends UserInterface {
     private int countAnnounceGameEndCalls = 0;
 
     public FakeUserInterface() {
-        super(new FakeConsole(), new StandardBoardPainter());
+        super(new FakeConsole(), new PrettyBoardPainter());
     }
 
     @Override
@@ -30,6 +30,12 @@ public class FakeUserInterface extends UserInterface {
         askForPositionWasCalled = true;
         String userInput = moves.remove(0);
         return userInput;
+    }
+
+    @Override
+    public int getBoardDimensionFromUser() {
+        String input = moves.remove(0);
+        return Integer.parseInt(input);
     }
 
     @Override

@@ -5,11 +5,9 @@ import de.rabea.game.GameMode;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 public class UserInterfaceTest {
@@ -17,39 +15,21 @@ public class UserInterfaceTest {
     private UserInterface userInterface;
     private FakeConsole fakeConsole;
     private Board board;
-    private StandardBoardPainter standardBoardPainter;
+    private FakeBoardPainter fakeBoardPainter;
 
     @Before
     public void setup() {
-        board = new Board();
+        board = new Board(3);
         fakeConsole = new FakeConsole();
-        standardBoardPainter = new StandardBoardPainter();
-        userInterface = new UserInterface(fakeConsole, standardBoardPainter);
+        fakeBoardPainter = new FakeBoardPainter();
+        userInterface = new UserInterface(fakeConsole, fakeBoardPainter);
     }
 
     @Test
-    public void displaysEmptyBoard() {
+    public void displaysBoard() {
+        Board board = new Board(3);
         userInterface.displayBoard(board);
-        assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\n" +
-                "1 2 3 \n" +
-                "4 5 6 \n" +
-                "7 8 9 "
-        );
-    }
-
-
-    @Test
-    public void displaysBoardWithMarks() {
-        board.placeMark(1, X);
-        board.placeMark(3, O);
-        userInterface.displayBoard(board);
-        assertThat(fakeConsole.messagePrinted()).isEqualTo(
-                "\n" +
-                "1 X 3 \n" +
-                "O 5 6 \n" +
-                "7 8 9 "
-        );
+        assertEquals(fakeConsole.messagePrinted(), "board placeholder");
     }
 
     @Test
@@ -109,6 +89,27 @@ public class UserInterfaceTest {
     }
 
     @Test
+    public void getsBoardSizeSelectionFromUser3x3() {
+        fakeConsole.userInput("3");
+        assertEquals(3, userInterface.getBoardDimensionFromUser());
+    }
+
+    @Test
+    public void getsBoardSizeSelectionFromUser4x4() {
+        fakeConsole.userInput("4");
+        assertEquals(4, userInterface.getBoardDimensionFromUser());
+    }
+
+    @Test
+    public void asksUserAgainForBoardSizeIfUserGivesBadInput() {
+        fakeConsole.userInput("something wrong", "3");
+        userInterface.getBoardDimensionFromUser();
+        assertEquals("Choose a board size: \n" +
+                " 3 - 3x3 board \n" +
+                " 4 - 4x4 board", fakeConsole.messagePrinted());
+
+    }
+    @Test
     public void tellsTheUserThatFirstPlayerIsXAndSecondIsO() {
         userInterface.announceMarkDistribution(GameMode.HumanVsHuman);
         assertEquals("The first user to play is X. The second player is O.", fakeConsole.messagePrinted());
@@ -136,5 +137,12 @@ public class UserInterfaceTest {
     public void communicatesThatPositionIsUnavailable() {
         userInterface.positionUnavailableWarning(board);
         assertEquals("Sorry, this position is not available!", fakeConsole.messagePrinted());
+    }
+
+    private class FakeBoardPainter extends PrettyBoardPainter {
+        @Override
+        public String drawBoard(Board board) {
+            return "board placeholder";
+        }
     }
 }
