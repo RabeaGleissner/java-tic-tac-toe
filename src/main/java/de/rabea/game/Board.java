@@ -102,12 +102,8 @@ public class Board {
         return dimension;
     }
 
-    public boolean is3x3() {
-        return dimension == 3;
-    }
-
-    public boolean is4x4() {
-        return dimension == 4;
+    public boolean hasDimensionOf(int size) {
+        return dimension == size;
     }
 
     public int indexOfLastCell() {
