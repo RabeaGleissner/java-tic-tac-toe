@@ -102,10 +102,6 @@ public class Board {
         return dimension;
     }
 
-    public boolean hasDimensionOf(int size) {
-        return dimension == size;
-    }
-
     public int indexOfLastCell() {
         return cells().length - 1;
     }
@@ -114,16 +110,16 @@ public class Board {
         return cell == indexOfLastCell();
     }
 
-    public boolean isEndOfRowIndexExceptLastRow(int cell) {
+    public boolean isEndOfRow(int cell) {
         for (int cellIndex : indexOfLastCellPerRow()) {
-            if (cell == cellIndex && isNotLastCellIndex(cell)) {
+            if (cell == cellIndex) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isNotLastCellIndex(int cell) {
+    public boolean isNotLastCellIndex(int cell) {
         return !(isIndexOfLastCell(cell));
     }
 
