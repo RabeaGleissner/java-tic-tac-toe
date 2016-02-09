@@ -12,10 +12,6 @@ import static org.junit.Assert.assertFalse;
 
 
 public class BoardTest {
-    @Test
-    public void failingTestToTestTravis() {
-        assertTrue(false);
-    }
 
     @Test
     public void boardIsEmpty3x3() {
