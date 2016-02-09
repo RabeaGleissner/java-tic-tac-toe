@@ -1,4 +1,6 @@
-# Tic Tac Toe (Noughts and Crosses) Game 
+# Tic Tac Toe (Noughts and Crosses) Game
+ 
+[![Build Status](https://travis-ci.org/RabeaGleissner/java-tic-tac-toe.svg?branch=master)](https://travis-ci.org/RabeaGleissner/java-tic-tac-toe)
 
 You need to have Maven installed to run the application.
 
