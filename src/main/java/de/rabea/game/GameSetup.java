@@ -15,19 +15,27 @@ public class GameSetup {
 
     public void startApplication() {
         userInterface.greet();
-        setUpNewGame();
+        setUpGame();
     }
 
-    public void setUpNewGame() {
+    public void setUpGame() {
         GameMode gameMode = userInterface.getGameModeFromUser();
         int boardDimension = userInterface.getBoardDimensionFromUser();
         userInterface.announceMarkDistribution(gameMode);
+        game = createGame(gameMode);
+        game.play(boardDimension);
+        playAnotherGame();
+    }
+
+    private Game createGame(GameMode gameMode) {
         Player player = playerFactory.createPlayer(gameMode);
         Player opponent = playerFactory.createOpponent(gameMode);
-        game = new Game(userInterface, player, opponent);
-        game.play(boardDimension);
+        return new Game(userInterface, player, opponent);
+    }
+
+    private void playAnotherGame() {
         if (userInterface.playAgain()) {
-            setUpNewGame();
+            setUpGame();
         }
     }
 

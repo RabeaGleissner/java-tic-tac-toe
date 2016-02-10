@@ -37,7 +37,7 @@ public class GameSetupTest {
         fakeUserInterface.provideConsoleInput("1", "3", "1", "7", "3", "4", "2", "y", "1", "3", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
         PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
         GameSetup gameSetup = new GameSetup(fakeUserInterface, playerFactory);
-        gameSetup.setUpNewGame();
+        gameSetup.setUpGame();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(2, fakeUserInterface.announceWinnerCalled());
     }
