@@ -26,7 +26,7 @@ public class GameSetupTest {
         fakeUserInterface.provideConsoleInput("1", "3", "1", "7", "2", "4", "3", "n");
         PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
         GameSetup gameSetup = new GameSetup(fakeUserInterface, playerFactory);
-        gameSetup.startApplication();
+        gameSetup.start();
         assertTrue(fakeUserInterface.greetUserWasCalled);
         assertTrue(gameSetup.getPlayer() instanceof HumanPlayer);
         assertTrue(gameSetup.getOpponent() instanceof HumanPlayer);
@@ -37,7 +37,7 @@ public class GameSetupTest {
         fakeUserInterface.provideConsoleInput("1", "3", "1", "7", "3", "4", "2", "y", "1", "3", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
         PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
         GameSetup gameSetup = new GameSetup(fakeUserInterface, playerFactory);
-        gameSetup.setUpGame();
+        gameSetup.setUpGameAndPlay();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(2, fakeUserInterface.announceWinnerCalled());
     }
@@ -47,7 +47,7 @@ public class GameSetupTest {
         fakeUserInterface.provideConsoleInput("2", "3", "1", "2", "3", "n");
         GameSetup gameSetup = new GameSetup(fakeUserInterface,
                 new FakePlayerFactory(fakeUserInterface, createFakeComputerPlayerWithInput()));
-        gameSetup.startApplication();
+        gameSetup.start();
         assertTrue(fakeUserInterface.greetUserWasCalled);
         assertTrue(gameSetup.getPlayer() instanceof HumanPlayer);
         assertTrue(gameSetup.getOpponent() instanceof FakeComputerPlayer);
