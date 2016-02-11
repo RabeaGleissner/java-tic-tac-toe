@@ -25,7 +25,7 @@ public class GameTest {
     @Test
     public void playsHuman3x3GameOnce() {
         Game game = new Game(fakeUserInterface, new HumanPlayer(fakeUserInterface, X),
-                new HumanPlayer(fakeUserInterface, O), gameSetup);
+                new HumanPlayer(fakeUserInterface, O));
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
         game.play(3);
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
@@ -35,7 +35,7 @@ public class GameTest {
     @Test
     public void playsHuman4x4GameOnce() {
         Game game = new Game(fakeUserInterface, new HumanPlayer(fakeUserInterface, X),
-                new HumanPlayer(fakeUserInterface, O), gameSetup);
+                new HumanPlayer(fakeUserInterface, O));
         fakeUserInterface.provideConsoleInput("1", "7", "2", "12", "3", "11", "4", "n");
         game.play(4);
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
@@ -46,7 +46,7 @@ public class GameTest {
     public void playsHumanVsComputer3x3GameOnce() {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, new HumanPlayer(fakeUserInterface, X),
-                fakeComputerPlayer, gameSetup);
+                fakeComputerPlayer);
         fakeUserInterface.provideConsoleInput("1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
         gameWithFakeComputerPlayer.play(3);
@@ -57,21 +57,11 @@ public class GameTest {
     public void playsHumanVsComputer4x4GameOnce() {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, new HumanPlayer(fakeUserInterface, X),
-                fakeComputerPlayer, gameSetup);
+                fakeComputerPlayer);
         fakeUserInterface.provideConsoleInput("1", "5", "9", "13", "n");
         fakeComputerPlayer.giveNumbers(5, 6, 7);
         gameWithFakeComputerPlayer.play(4);
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
-    }
-
-    @Test
-    public void playsHuman3x3GameTwice() {
-        Game game = new Game(fakeUserInterface, new HumanPlayer(fakeUserInterface, X),
-                new HumanPlayer(fakeUserInterface, O), gameSetup);
-        fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "y", "1", "3", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
-        game.play(3);
-        assertTrue(fakeUserInterface.wasAskForPositionCalled());
-        assertEquals(2, fakeUserInterface.announceWinnerCalled());
     }
 }
 

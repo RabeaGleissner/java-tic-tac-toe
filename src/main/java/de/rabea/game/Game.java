@@ -7,13 +7,11 @@ public class Game {
     private final UserInterface userInterface;
     private Player player;
     private Player opponent ;
-    private GameSetup gameSetup;
 
-    public Game(UserInterface userInterface, Player player, Player opponent, GameSetup gameSetup) {
+    public Game(UserInterface userInterface, Player player, Player opponent) {
         this.userInterface = userInterface;
         this.player = player;
         this.opponent = opponent;
-        this.gameSetup = gameSetup;
     }
 
     public void play(int boardDimension) {
@@ -26,9 +24,6 @@ public class Game {
             }
         }
         finishGame(currentPlayer.mark(), board);
-        if (userInterface.playAgain()) {
-            gameSetup.setUpNewGame();
-        }
     }
 
     public Player switchPlayer(Player currentPlayer) {

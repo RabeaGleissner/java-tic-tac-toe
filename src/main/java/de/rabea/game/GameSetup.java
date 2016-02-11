@@ -13,19 +13,30 @@ public class GameSetup {
         this.playerFactory = playerFactory;
     }
 
-    public void startApplication() {
+    public void start() {
         userInterface.greet();
-        setUpNewGame();
+        setUpGameAndPlay();
     }
 
-    public void setUpNewGame() {
+    public void setUpGameAndPlay() {
         GameMode gameMode = userInterface.getGameModeFromUser();
         int boardDimension = userInterface.getBoardDimensionFromUser();
         userInterface.announceMarkDistribution(gameMode);
+        game = createGame(gameMode);
+        game.play(boardDimension);
+        giveReplayOption();
+    }
+
+    private Game createGame(GameMode gameMode) {
         Player player = playerFactory.createPlayer(gameMode);
         Player opponent = playerFactory.createOpponent(gameMode);
-        game = new Game(userInterface, player, opponent, this);
-        game.play(boardDimension);
+        return new Game(userInterface, player, opponent);
+    }
+
+    private void giveReplayOption() {
+        if (userInterface.playAgain()) {
+            setUpGameAndPlay();
+        }
     }
 
     Player getPlayer() {
@@ -35,5 +46,4 @@ public class GameSetup {
     Player getOpponent() {
         return game.getOpponent();
     }
-
 }
