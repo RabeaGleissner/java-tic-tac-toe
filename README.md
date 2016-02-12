@@ -20,4 +20,7 @@ java -cp target/tic-tac-toe-1.0-SNAPSHOT.jar de.rabea.App
 
 #### How to run the tests
 
-- when you've `cd`ed into the java-tic-tac-toe folder in your terminal, type `mvn test`
+`cd` into the java-tic-tac-toe folder in your terminal and type
+ - `mvn test` to run tests while excluding the slower running tests
+ - `mvn integration-test` to run all tests
+
