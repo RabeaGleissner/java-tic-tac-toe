@@ -20,7 +20,7 @@ public class ComputerPlayerSpeedTest {
         long endTime = System.nanoTime();
         long duration = (endTime - startTime)/1000000;
         System.out.println("duration in milliseconds= " + duration);
-        assertTrue(true);
+        assertTrue(3200 > duration);
     }
 
     @Test(timeout=2999)
@@ -33,6 +33,6 @@ public class ComputerPlayerSpeedTest {
         long endTime = System.nanoTime();
         long duration = (endTime - startTime)/1000000;
         System.out.println("duration in milliseconds= " + duration);
-        assertTrue(true);
+        assertTrue(2999 > duration);
     }
 }
