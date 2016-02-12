@@ -1,13 +1,10 @@
 package de.rabea.player;
 
 import de.rabea.game.Board;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import static de.rabea.game.Mark.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class UnbeatableComputerPlayerTest {
     UnbeatableComputerPlayer unbeatableComputerPlayer = new UnbeatableComputerPlayer(O);
