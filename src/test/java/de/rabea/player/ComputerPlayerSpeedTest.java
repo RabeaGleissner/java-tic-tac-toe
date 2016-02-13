@@ -1,6 +1,7 @@
 package de.rabea.player;
 
 import de.rabea.game.Board;
+import org.junit.Before;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.X;
@@ -8,29 +9,27 @@ import static org.junit.Assert.assertTrue;
 
 public class ComputerPlayerSpeedTest {
 
-    @Test(timeout=3200)
+    UnbeatableComputerPlayer computer;
+
+    @Before
+    public void setup() {
+        computer = new UnbeatableComputerPlayer(X);
+    }
+
+    @Test(timeout=800)
     public void measureSpeedOfFirstMoveOn3x3Board() {
-        UnbeatableComputerPlayer computer = new UnbeatableComputerPlayer(X);
-        Board board;
-        long startTime = System.nanoTime();
-        for (int i = 0; i <= 10; i++) {
-            board = new Board(3);
-            computer.getPosition(board);
-        }
-        long endTime = System.nanoTime();
-        long duration = (endTime - startTime)/1000000;
-        assertTrue(3200 > duration);
+        assertTrue(800 > durationOfFirstComputerMove(new Board(3)));
     }
 
     @Test(timeout=2999)
     public void measureSpeedOfFirstMoveOn4x4Board() {
-        UnbeatableComputerPlayer computer = new UnbeatableComputerPlayer(X);
-        Board board;
+        assertTrue(2999 > durationOfFirstComputerMove(new Board(4)));
+    }
+
+    private long durationOfFirstComputerMove(Board board) {
         long startTime = System.nanoTime();
-        board = new Board(4);
         computer.getPosition(board);
         long endTime = System.nanoTime();
-        long duration = (endTime - startTime)/1000000;
-        assertTrue(2999 > duration);
+        return (endTime - startTime)/1000000;
     }
 }
