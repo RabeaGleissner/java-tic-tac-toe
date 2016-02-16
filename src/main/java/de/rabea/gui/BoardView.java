@@ -4,7 +4,10 @@ import de.rabea.game.Board;
 import de.rabea.game.Mark;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+
+import static de.rabea.game.Mark.*;
 
 public class BoardView {
 
@@ -18,7 +21,13 @@ public class BoardView {
         GridPane gridPane = new GridPane();
         int i = 0;
         for (Mark cell : board.cells()) {
-            gridPane.add(new Button(cell.toString()), i / 3, i % 3);
+            int column = i / 3;
+            int row= i % 3;
+            if (cell == EMPTY) {
+                gridPane.add(new Button(cell.toString()), column, row);
+            } else {
+                gridPane.add(new Label("hi"), column, row);
+            }
             i++;
         }
 

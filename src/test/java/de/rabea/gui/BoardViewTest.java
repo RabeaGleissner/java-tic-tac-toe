@@ -6,6 +6,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -49,5 +50,16 @@ public class BoardViewTest {
             assertTrue( node instanceof Button);
         }
 
+    }
+
+    @Test
+    public void markedPlacesAreJustLabels() {
+        Board board = new Board(3);
+        board.placeMarkOnExistingBoard(2, Mark.X);
+
+        BoardView boardView = new BoardView(board);
+        Parent node = boardView.draw();
+
+        assertTrue(node.getChildrenUnmodifiable().get(2) instanceof Label);
     }
 }
