@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -47,19 +46,32 @@ public class BoardViewTest {
         Parent gridPane = boardView.draw();
 
         for (Node node : gridPane.getChildrenUnmodifiable()) {
-            assertTrue( node instanceof Button);
+            assertTrue(isButton(node));
         }
+    }
 
+    private boolean isButton(Node node) {
+        return node instanceof Button;
     }
 
     @Test
-    public void markedPlacesAreJustLabels() {
+    public void labelsContainCorrespondingPlayerMark() {
         Board board = new Board(3);
         board.placeMarkOnExistingBoard(2, Mark.X);
 
         BoardView boardView = new BoardView(board);
         Parent node = boardView.draw();
-
-        assertTrue(node.getChildrenUnmodifiable().get(2) instanceof Label);
+        assertEquals("X", findLabel(node, 2).getText());
     }
+
+    private Label findLabel(Parent node, int position) {
+        Node target = node.getChildrenUnmodifiable().get(position);
+        if(target instanceof Label) {
+            return (Label) target;
+        }
+
+        throw new RuntimeException("Did not find a label on position " + position);
+    }
+
+
 }

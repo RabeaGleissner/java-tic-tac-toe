@@ -26,11 +26,10 @@ public class BoardView {
             if (cell == EMPTY) {
                 gridPane.add(new Button(cell.toString()), column, row);
             } else {
-                gridPane.add(new Label("hi"), column, row);
+                gridPane.add(new Label(cell.toString()), column, row);
             }
             i++;
         }
-
 
         return gridPane;
     }
