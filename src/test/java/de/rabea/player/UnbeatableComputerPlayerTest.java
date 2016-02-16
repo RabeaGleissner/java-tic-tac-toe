@@ -1,12 +1,10 @@
 package de.rabea.player;
 
 import de.rabea.game.Board;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.*;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class UnbeatableComputerPlayerTest {
     UnbeatableComputerPlayer unbeatableComputerPlayer = new UnbeatableComputerPlayer(O);
@@ -61,35 +59,5 @@ public class UnbeatableComputerPlayerTest {
                                 EMPTY, EMPTY, EMPTY, EMPTY,
                                 EMPTY, EMPTY, EMPTY, EMPTY);
         assertEquals(3, unbeatableComputerPlayer.getPosition(board));
-    }
-
-    @Ignore
-    @Test(timeout=3200)
-    public void measureSpeedOfFirstMoveOn3x3Board() {
-        UnbeatableComputerPlayer computer = new UnbeatableComputerPlayer(X);
-        Board board;
-        long startTime = System.nanoTime();
-        for (int i = 0; i <= 10; i++) {
-            board = new Board(3);
-            computer.getPosition(board);
-        }
-        long endTime = System.nanoTime();
-        long duration = (endTime - startTime)/1000000;
-        System.out.println("duration in milliseconds= " + duration);
-        assertTrue(true);
-    }
-
-    @Ignore
-    @Test(timeout=2999)
-    public void measureSpeedOfFirstMoveOn4x4Board() {
-        UnbeatableComputerPlayer computer = new UnbeatableComputerPlayer(X);
-        Board board;
-        long startTime = System.nanoTime();
-            board = new Board(4);
-            computer.getPosition(board);
-        long endTime = System.nanoTime();
-        long duration = (endTime - startTime)/1000000;
-        System.out.println("duration in milliseconds= " + duration);
-        assertTrue(true);
     }
 }
