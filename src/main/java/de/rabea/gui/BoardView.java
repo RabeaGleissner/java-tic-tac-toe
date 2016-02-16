@@ -12,9 +12,11 @@ import static de.rabea.game.Mark.*;
 public class BoardView {
 
     private Board board;
+    private ClickCarrier carrier;
 
-    public BoardView(Board board) {
+    public BoardView(Board board, ClickCarrier carrier) {
         this.board = board;
+        this.carrier = carrier;
     }
 
     public Parent draw() {
@@ -24,7 +26,9 @@ public class BoardView {
             int column = i / 3;
             int row= i % 3;
             if (cell == EMPTY) {
-                gridPane.add(new Button(cell.toString()), column, row);
+                Button button = new Button(cell.toString());
+                button.setOnAction( event -> carrier.click(7));
+                gridPane.add(button, column, row);
             } else {
                 gridPane.add(new Label(cell.toString()), column, row);
             }

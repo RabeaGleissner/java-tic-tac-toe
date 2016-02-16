@@ -24,7 +24,7 @@ public class BoardViewTest {
     @Test
     public void threeByThreeBoardHasNineChildren() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(board);
+        BoardView boardView = new BoardView(board, new ClickCarrier());
         Parent gridPane = boardView.draw();
 
         assertEquals(9, gridPane.getChildrenUnmodifiable().size());
@@ -33,7 +33,7 @@ public class BoardViewTest {
     @Test
     public void fourByFourBoardHasSixteenChildren() {
         Board board = new Board(4);
-        BoardView boardView = new BoardView(board);
+        BoardView boardView = new BoardView(board, new ClickCarrier());
         Parent gridPane = boardView.draw();
 
         assertEquals(16, gridPane.getChildrenUnmodifiable().size());
@@ -42,7 +42,7 @@ public class BoardViewTest {
     @Test
     public void allElementsOnEmptyBoardAreButtons() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(board);
+        BoardView boardView = new BoardView(board, new ClickCarrier());
         Parent gridPane = boardView.draw();
 
         for (Node node : gridPane.getChildrenUnmodifiable()) {
@@ -50,18 +50,36 @@ public class BoardViewTest {
         }
     }
 
-    private boolean isButton(Node node) {
-        return node instanceof Button;
-    }
-
     @Test
     public void labelsContainCorrespondingPlayerMark() {
         Board board = new Board(3);
         board.placeMarkOnExistingBoard(2, Mark.X);
 
-        BoardView boardView = new BoardView(board);
+        BoardView boardView = new BoardView(board, new ClickCarrier());
         Parent node = boardView.draw();
         assertEquals("X", findLabel(node, 2).getText());
+    }
+
+    @Test
+    public void reactsToAClick() {
+        ClickCarrier carrier = new ClickCarrier();
+        Board board = new Board(3);
+        BoardView boardView = new BoardView(board, carrier);
+        Parent draw = boardView.draw();
+        Button button = findButton(draw, 7);
+        button.fire();
+
+        assertEquals(carrier.whatWasClicked(), 7);
+
+    }
+
+    private Button findButton(Parent node, int position) {
+        Node target = node.getChildrenUnmodifiable().get(position);
+        if(target instanceof Button) {
+            return (Button) target;
+        }
+
+        throw new RuntimeException("Did not find a button on position " + position);
     }
 
     private Label findLabel(Parent node, int position) {
@@ -71,6 +89,10 @@ public class BoardViewTest {
         }
 
         throw new RuntimeException("Did not find a label on position " + position);
+    }
+
+    private boolean isButton(Node node) {
+        return node instanceof Button;
     }
 
 

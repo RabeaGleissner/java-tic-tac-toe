@@ -10,7 +10,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(board);
+        BoardView boardView = new BoardView(board, new ClickCarrier());
         primaryStage.setScene(new Scene(boardView.draw()));
         primaryStage.show();
     }
