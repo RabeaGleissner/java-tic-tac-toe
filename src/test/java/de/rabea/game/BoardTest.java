@@ -218,7 +218,7 @@ public class BoardTest {
     public void mapsPositionsOverToMarks() {
         Board board = new Board(3);
 
-        Map<Integer, Mark> marks = board.marks();
+        Map<Integer, Mark> marks = board.cellsWithIndex();
         for (Map.Entry<Integer, Mark> pair : marks.entrySet()) {
             assertTrue(pair.getValue() == EMPTY);
         }

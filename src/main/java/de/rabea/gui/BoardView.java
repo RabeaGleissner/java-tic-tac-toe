@@ -14,27 +14,28 @@ import static de.rabea.game.Mark.*;
 public class BoardView {
 
     private Board board;
-    private ClickCarrier carrier;
+    private GuiPlayer guiPlayer;
 
-    public BoardView(Board board, ClickCarrier carrier) {
+    public BoardView(Board board, GuiPlayer guiPlayer) {
         this.board = board;
-        this.carrier = carrier;
+        this.guiPlayer = guiPlayer;
     }
 
     public Parent draw() {
         GridPane gridPane = new GridPane();
-        for (Map.Entry<Integer, Mark> entry: board.marks().entrySet()) {
-            int column = entry.getKey() / 3;
-            int row= entry.getKey() % 3;
-            if (entry.getValue() == EMPTY) {
-                Button button = new Button(entry.getValue().toString());
-                button.setOnAction( event -> carrier.click(entry.getKey()));
+        for (Map.Entry<Integer, Mark> entry : board.cellsWithIndex().entrySet()) {
+            int position = entry.getKey();
+            Mark cell = entry.getValue();
+            int column = position / 3;
+            int row = position % 3;
+            if (cell == EMPTY) {
+                Button button = new Button(position + "");
+                button.setOnAction(event -> guiPlayer.click(position));
                 gridPane.add(button, column, row);
             } else {
-                gridPane.add(new Label(entry.getValue().toString()), column, row);
+                gridPane.add(new Label(cell.toString()), column, row);
             }
         }
-
         return gridPane;
     }
 }

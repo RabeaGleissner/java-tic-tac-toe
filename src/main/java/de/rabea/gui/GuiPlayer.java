@@ -1,10 +1,10 @@
 package de.rabea.gui;
 
-public class ClickCarrier {
+public class GuiPlayer {
 
     private int clicked;
 
-    public int whatWasClicked() {
+    public int clickedPosition() {
         return clicked;
     }
 

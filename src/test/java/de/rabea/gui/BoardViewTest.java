@@ -24,7 +24,7 @@ public class BoardViewTest {
     @Test
     public void threeByThreeBoardHasNineChildren() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(board, new ClickCarrier());
+        BoardView boardView = new BoardView(board, new GuiPlayer());
         Parent gridPane = boardView.draw();
 
         assertEquals(9, gridPane.getChildrenUnmodifiable().size());
@@ -33,7 +33,7 @@ public class BoardViewTest {
     @Test
     public void fourByFourBoardHasSixteenChildren() {
         Board board = new Board(4);
-        BoardView boardView = new BoardView(board, new ClickCarrier());
+        BoardView boardView = new BoardView(board, new GuiPlayer());
         Parent gridPane = boardView.draw();
 
         assertEquals(16, gridPane.getChildrenUnmodifiable().size());
@@ -42,7 +42,7 @@ public class BoardViewTest {
     @Test
     public void allElementsOnEmptyBoardAreButtons() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(board, new ClickCarrier());
+        BoardView boardView = new BoardView(board, new GuiPlayer());
         Parent gridPane = boardView.draw();
 
         for (Node node : gridPane.getChildrenUnmodifiable()) {
@@ -55,22 +55,21 @@ public class BoardViewTest {
         Board board = new Board(3);
         board.placeMarkOnExistingBoard(2, Mark.X);
 
-        BoardView boardView = new BoardView(board, new ClickCarrier());
+        BoardView boardView = new BoardView(board, new GuiPlayer());
         Parent node = boardView.draw();
         assertEquals("X", findLabel(node, 2).getText());
     }
 
     @Test
     public void reactsToAClick() {
-        ClickCarrier carrier = new ClickCarrier();
+        GuiPlayer carrier = new GuiPlayer();
         Board board = new Board(3);
         BoardView boardView = new BoardView(board, carrier);
-        Parent draw = boardView.draw();
-        Button button = findButton(draw, 7);
+        Parent drawnBoard = boardView.draw();
+        Button button = findButton(drawnBoard, 7);
         button.fire();
 
-        assertEquals(carrier.whatWasClicked(), 7);
-
+        assertEquals(carrier.clickedPosition(), 7);
     }
 
     private Button findButton(Parent node, int position) {

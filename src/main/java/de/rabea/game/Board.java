@@ -183,7 +183,7 @@ public class Board {
         return null;
     }
 
-    public Map<Integer, Mark> marks() {
+    public Map<Integer, Mark> cellsWithIndex() {
         Map<Integer, Mark> marks = new HashMap<>();
         for (int i = 0; i < cells.length; i++) {
             marks.put(i, cells[i]);
