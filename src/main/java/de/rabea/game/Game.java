@@ -7,15 +7,16 @@ public class Game {
     private final UserInterface userInterface;
     private Player player;
     private Player opponent ;
+    private Board board;
 
-    public Game(UserInterface userInterface, Player player, Player opponent) {
+    public Game(UserInterface userInterface, Player player, Player opponent,  Board board) {
         this.userInterface = userInterface;
         this.player = player;
         this.opponent = opponent;
+        this.board = board;
     }
 
-    public void play(int boardDimension) {
-        Board board = new Board(boardDimension);
+    public void play() {
         Player currentPlayer = player;
         while (gameIsNotOver(board)){
             playOneRound(currentPlayer, board);

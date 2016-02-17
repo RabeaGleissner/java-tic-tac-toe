@@ -13,29 +13,28 @@ public class GameRunner {
         this.playerFactory = playerFactory;
     }
 
-    public void start() {
-        userInterface.greet();
+    public void setUpGameAndPlay() {
+        game = createGame();
+        game.play();
+        replayIfRequested();
+    }
+
+    private Game createGame() {
+        GameMode gameMode = userInterface.getGameModeFromUser();
+        int boardDimension = userInterface.getBoardDimensionFromUser();
+        Board board = new Board(boardDimension);
+        userInterface.announceMarkDistribution(gameMode);
+        return new Game(userInterface, playerFactory.createPlayer(gameMode),
+                playerFactory.createOpponent(gameMode), board);
+    }
+
+    private void replay() {
         setUpGameAndPlay();
     }
 
-    public void setUpGameAndPlay() {
-        GameMode gameMode = userInterface.getGameModeFromUser();
-        int boardDimension = userInterface.getBoardDimensionFromUser();
-        userInterface.announceMarkDistribution(gameMode);
-        game = createGame(gameMode);
-        game.play(boardDimension);
-        giveReplayOption();
-    }
-
-    private Game createGame(GameMode gameMode) {
-        Player player = playerFactory.createPlayer(gameMode);
-        Player opponent = playerFactory.createOpponent(gameMode);
-        return new Game(userInterface, player, opponent);
-    }
-
-    private void giveReplayOption() {
+    private void replayIfRequested() {
         if (userInterface.playAgain()) {
-            setUpGameAndPlay();
+            replay();
         }
     }
 

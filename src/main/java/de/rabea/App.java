@@ -15,6 +15,6 @@ public class App {
         UserInterface userInterface = new UserInterface(new RealConsole(bufferedReader, System.out), new PrettyBoardPainter());
         PlayerFactory playerFactory = new PlayerFactory(userInterface);
         GameRunner gameRunner = new GameRunner(userInterface, playerFactory);
-        gameRunner.start();
+        gameRunner.setUpGameAndPlay();
     }
 }

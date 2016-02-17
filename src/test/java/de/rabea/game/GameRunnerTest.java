@@ -24,18 +24,10 @@ public class GameRunnerTest {
     }
 
     @Test
-    public void greetsUserWhenFirstSettingUpGame() {
-        fakeConsoleInputForOneHvH3x3Game();
-        GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
-        gameRunner.start();
-        assertTrue(fakeUserInterface.greetUserWasCalled);
-    }
-
-    @Test
     public void createsTwoHumanPlayersWhenRequested() {
         fakeConsoleInputForOneHvH3x3Game();
         GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
-        gameRunner.start();
+        gameRunner.setUpGameAndPlay();
         assertTrue(gameRunner.getPlayer() instanceof HumanPlayer);
         assertTrue(gameRunner.getOpponent() instanceof HumanPlayer);
     }
@@ -54,7 +46,7 @@ public class GameRunnerTest {
         fakeConsoleInputForOneHvC3x3Game();
         GameRunner gameRunner = new GameRunner(fakeUserInterface,
                 new FakePlayerFactory(fakeUserInterface, createFakeComputerPlayerWithInput()));
-        gameRunner.start();
+        gameRunner.setUpGameAndPlay();
         assertTrue(gameRunner.getPlayer() instanceof HumanPlayer);
         assertTrue(gameRunner.getOpponent() instanceof FakeComputerPlayer);
     }
