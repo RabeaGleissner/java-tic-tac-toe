@@ -3,6 +3,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static de.rabea.game.Mark.*;
 import static java.util.Arrays.asList;
@@ -211,6 +212,16 @@ public class BoardTest {
     public void knowsThatThereIsAWinnerOn4x4() {
         Board board = backwardsDiagonalsWinning4x4Board();
         assertTrue(board.hasWinner());
+    }
+
+    @Test
+    public void mapsPositionsOverToMarks() {
+        Board board = new Board(3);
+
+        Map<Integer, Mark> marks = board.marks();
+        for (Map.Entry<Integer, Mark> pair : marks.entrySet()) {
+            assertTrue(pair.getValue() == EMPTY);
+        }
     }
 
     private Board full3x3BoardNoWinner() {

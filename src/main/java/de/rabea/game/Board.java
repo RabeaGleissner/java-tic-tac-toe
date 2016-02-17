@@ -1,9 +1,6 @@
 package de.rabea.game;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static de.rabea.game.Mark.*;
 
@@ -184,5 +181,13 @@ public class Board {
             return winningLine.get().firstMarkInLine();
         }
         return null;
+    }
+
+    public Map<Integer, Mark> marks() {
+        Map<Integer, Mark> marks = new HashMap<>();
+        for (int i = 0; i < cells.length; i++) {
+            marks.put(i, cells[i]);
+        }
+        return marks;
     }
 }

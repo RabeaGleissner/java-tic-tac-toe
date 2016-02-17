@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+import java.util.Map;
+
 import static de.rabea.game.Mark.*;
 
 public class BoardView {
@@ -21,18 +23,16 @@ public class BoardView {
 
     public Parent draw() {
         GridPane gridPane = new GridPane();
-        int i = 0;
-        for (Mark cell : board.cells()) {
-            int column = i / 3;
-            int row= i % 3;
-            if (cell == EMPTY) {
-                Button button = new Button(cell.toString());
-                button.setOnAction( event -> carrier.click(7));
+        for (Map.Entry<Integer, Mark> entry: board.marks().entrySet()) {
+            int column = entry.getKey() / 3;
+            int row= entry.getKey() % 3;
+            if (entry.getValue() == EMPTY) {
+                Button button = new Button(entry.getValue().toString());
+                button.setOnAction( event -> carrier.click(entry.getKey()));
                 gridPane.add(button, column, row);
             } else {
-                gridPane.add(new Label(cell.toString()), column, row);
+                gridPane.add(new Label(entry.getValue().toString()), column, row);
             }
-            i++;
         }
 
         return gridPane;
