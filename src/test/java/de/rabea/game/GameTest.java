@@ -26,7 +26,8 @@ public class GameTest {
     public void playsHuman3x3GameOnce() {
         Game game = new Game(fakeUserInterface, new HumanPlayer(fakeUserInterface, X),
                 new HumanPlayer(fakeUserInterface, O), new Board(3));
-        fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
+        fakeUserInterface.choosePositions("1", "7", "3", "4", "2");
+        fakeUserInterface.replayChoice("no");
         game.play();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
@@ -36,7 +37,8 @@ public class GameTest {
     public void playsHuman4x4GameOnce() {
         Game game = new Game(fakeUserInterface, new HumanPlayer(fakeUserInterface, X),
                 new HumanPlayer(fakeUserInterface, O), new Board(4));
-        fakeUserInterface.provideConsoleInput("1", "7", "2", "12", "3", "11", "4", "n");
+        fakeUserInterface.choosePositions("1", "7", "2", "12", "3", "11", "4");
+        fakeUserInterface.replayChoice("no");
         game.play();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
@@ -47,7 +49,8 @@ public class GameTest {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, new HumanPlayer(fakeUserInterface, X),
                 fakeComputerPlayer, new Board(3));
-        fakeUserInterface.provideConsoleInput("1", "4", "7", "n");
+        fakeUserInterface.choosePositions("1", "4", "7");
+        fakeUserInterface.replayChoice("no");
         fakeComputerPlayer.giveNumbers(1, 2);
         gameWithFakeComputerPlayer.play();
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
@@ -58,7 +61,8 @@ public class GameTest {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
         Game gameWithFakeComputerPlayer = new Game(fakeUserInterface, new HumanPlayer(fakeUserInterface, X),
                 fakeComputerPlayer, new Board(4));
-        fakeUserInterface.provideConsoleInput("1", "5", "9", "13", "n");
+        fakeUserInterface.choosePositions("1", "5", "9", "13");
+        fakeUserInterface.replayChoice("no");
         fakeComputerPlayer.giveNumbers(5, 6, 7);
         gameWithFakeComputerPlayer.play();
         assertEquals(1, fakeUserInterface.announceWinnerCalled());

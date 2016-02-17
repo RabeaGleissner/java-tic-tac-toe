@@ -102,10 +102,6 @@ public class FakeUserInterface extends UserInterface {
         replayChoice("no");
     }
 
-    public void provideConsoleInput(String... userChoices) {
-        moves.addAll(Arrays.asList(userChoices));
-    }
-
     public void choosePositions(String... userChoices) {
         moves.addAll(Arrays.asList(userChoices));
     }
@@ -130,7 +126,7 @@ public class FakeUserInterface extends UserInterface {
         }
     }
 
-    private void replayChoice(String userChoice) {
+    public void replayChoice(String userChoice) {
         if (userChoice.equals("no")) {
             moves.add("n");
         } else if (userChoice.equals("yes")) {
@@ -151,5 +147,4 @@ public class FakeUserInterface extends UserInterface {
     public boolean wasPositionUnavailableWarningCalled() {
         return positionUnavailableWarningWasCalled;
     }
-
 }
