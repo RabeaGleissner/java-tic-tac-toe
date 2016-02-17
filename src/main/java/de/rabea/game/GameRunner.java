@@ -3,12 +3,12 @@ package de.rabea.game;
 import de.rabea.player.PlayerFactory;
 import de.rabea.ui.UserInterface;
 
-public class GameSetup {
+public class GameRunner {
     private UserInterface userInterface;
     private PlayerFactory playerFactory;
     private Game game;
 
-    public GameSetup(UserInterface userInterface, PlayerFactory playerFactory) {
+    public GameRunner(UserInterface userInterface, PlayerFactory playerFactory) {
         this.userInterface = userInterface;
         this.playerFactory = playerFactory;
     }

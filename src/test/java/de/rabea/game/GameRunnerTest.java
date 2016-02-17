@@ -13,7 +13,7 @@ import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class GameSetupTest {
+public class GameRunnerTest {
     FakeUserInterface fakeUserInterface;
     PlayerFactory playerFactory;
 
@@ -26,25 +26,25 @@ public class GameSetupTest {
     @Test
     public void greetsUserWhenFirstSettingUpGame() {
         fakeConsoleInputForOneHvH3x3Game();
-        GameSetup gameSetup = new GameSetup(fakeUserInterface, playerFactory);
-        gameSetup.start();
+        GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
+        gameRunner.start();
         assertTrue(fakeUserInterface.greetUserWasCalled);
     }
 
     @Test
     public void createsTwoHumanPlayersWhenRequested() {
         fakeConsoleInputForOneHvH3x3Game();
-        GameSetup gameSetup = new GameSetup(fakeUserInterface, playerFactory);
-        gameSetup.start();
-        assertTrue(gameSetup.getPlayer() instanceof HumanPlayer);
-        assertTrue(gameSetup.getOpponent() instanceof HumanPlayer);
+        GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
+        gameRunner.start();
+        assertTrue(gameRunner.getPlayer() instanceof HumanPlayer);
+        assertTrue(gameRunner.getOpponent() instanceof HumanPlayer);
     }
 
     @Test
     public void playsHuman3x3GameTwice() {
         fakeConsoleInputForTwoHvH3x3Games();
-        GameSetup gameSetup = new GameSetup(fakeUserInterface, playerFactory);
-        gameSetup.setUpGameAndPlay();
+        GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
+        gameRunner.setUpGameAndPlay();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(2, fakeUserInterface.announceWinnerCalled());
     }
@@ -52,11 +52,11 @@ public class GameSetupTest {
     @Test
     public void createsHumanAndComputerPlayer() {
         fakeConsoleInputForOneHvC3x3Game();
-        GameSetup gameSetup = new GameSetup(fakeUserInterface,
+        GameRunner gameRunner = new GameRunner(fakeUserInterface,
                 new FakePlayerFactory(fakeUserInterface, createFakeComputerPlayerWithInput()));
-        gameSetup.start();
-        assertTrue(gameSetup.getPlayer() instanceof HumanPlayer);
-        assertTrue(gameSetup.getOpponent() instanceof FakeComputerPlayer);
+        gameRunner.start();
+        assertTrue(gameRunner.getPlayer() instanceof HumanPlayer);
+        assertTrue(gameRunner.getOpponent() instanceof FakeComputerPlayer);
     }
 
     private FakeComputerPlayer createFakeComputerPlayerWithInput() {

@@ -14,12 +14,12 @@ import static org.junit.Assert.assertTrue;
 
 public class GameTest {
     FakeUserInterface fakeUserInterface;
-    GameSetup gameSetup;
+    GameRunner gameRunner;
 
     @Before
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
-        gameSetup = new GameSetup(fakeUserInterface, new PlayerFactory(fakeUserInterface));
+        gameRunner = new GameRunner(fakeUserInterface, new PlayerFactory(fakeUserInterface));
     }
 
     @Test
