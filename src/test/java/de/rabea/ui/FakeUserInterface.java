@@ -68,24 +68,54 @@ public class FakeUserInterface extends UserInterface {
     @Override
     public GameMode getGameModeFromUser() {
         String userChoice = moves.remove(0);
-        if (userChoice.equals("1")) {
-            return GameMode.HumanVsHuman;
-        } else if (userChoice.equals("2")) {
-            return GameMode.HumanVsComputer;
-        } else if (userChoice.equals("3")) {
-            return GameMode.ComputerVsHuman;
-        } else {
-            return GameMode.HumanVsHuman;
+        switch (userChoice) {
+            case "1":
+                return GameMode.HumanVsHuman;
+            case "2":
+                return GameMode.HumanVsComputer;
+            case "3":
+                return GameMode.ComputerVsHuman;
+            default:
+                throw new RuntimeException("did not recognise choice for game mode");
         }
-
     }
 
     public void provideConsoleInput(String... userChoices) {
         moves.addAll(Arrays.asList(userChoices));
     }
 
-    public boolean wasGreetUserCalled() {
-        return greetUserWasCalled;
+    public void choosePositions(String... userChoices) {
+        moves.addAll(Arrays.asList(userChoices));
+    }
+
+    public void chooseBoardSize(String choice) {
+        if (choice.equals("3x3")) {
+            moves.add("3");
+        } else if (choice.equals("4x4")) {
+            moves.add("4");
+        } else {
+            throw new RuntimeException("board size choice not available");
+        }
+    }
+
+    public void chooseGameType(String choice) {
+        if (choice.equals("Human vs Human")) {
+            moves.add("1");
+        } else if (choice.equals("Human vs Computer")) {
+            moves.add("2");
+        } else {
+            throw new RuntimeException("game type choice not implemented");
+        }
+    }
+
+    public void replayChoice(String userChoice) {
+        if (userChoice.equals("no")) {
+            moves.add("n");
+        } else if (userChoice.equals("yes")) {
+            moves.add("y");
+        } else {
+            throw new RuntimeException("did not recognise replay choice");
+        }
     }
 
     public boolean wasAskForPositionCalled() {
@@ -99,4 +129,5 @@ public class FakeUserInterface extends UserInterface {
     public boolean wasPositionUnavailableWarningCalled() {
         return positionUnavailableWarningWasCalled;
     }
+
 }

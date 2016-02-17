@@ -15,27 +15,34 @@ import static org.junit.Assert.assertTrue;
 
 public class GameSetupTest {
     FakeUserInterface fakeUserInterface;
+    PlayerFactory playerFactory;
 
     @Before
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
+        playerFactory = new PlayerFactory(fakeUserInterface);
     }
 
     @Test
-    public void setsUpFirstHumanVsHuman3x3Game() {
-        fakeUserInterface.provideConsoleInput("1", "3", "1", "7", "2", "4", "3", "n");
-        PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
+    public void greetsUserWhenFirstSettingUpGame() {
+        fakeConsoleInputForOneHvH3x3Game();
         GameSetup gameSetup = new GameSetup(fakeUserInterface, playerFactory);
         gameSetup.start();
         assertTrue(fakeUserInterface.greetUserWasCalled);
+    }
+
+    @Test
+    public void createsTwoHumanPlayersWhenRequested() {
+        fakeConsoleInputForOneHvH3x3Game();
+        GameSetup gameSetup = new GameSetup(fakeUserInterface, playerFactory);
+        gameSetup.start();
         assertTrue(gameSetup.getPlayer() instanceof HumanPlayer);
         assertTrue(gameSetup.getOpponent() instanceof HumanPlayer);
     }
 
     @Test
     public void playsHuman3x3GameTwice() {
-        fakeUserInterface.provideConsoleInput("1", "3", "1", "7", "3", "4", "2", "y", "1", "3", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
-        PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
+        fakeConsoleInputForTwoHvH3x3Games();
         GameSetup gameSetup = new GameSetup(fakeUserInterface, playerFactory);
         gameSetup.setUpGameAndPlay();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
@@ -43,12 +50,11 @@ public class GameSetupTest {
     }
 
     @Test
-    public void setsUpFirstHumanVsComputer3x3Game() {
-        fakeUserInterface.provideConsoleInput("2", "3", "1", "2", "3", "n");
+    public void createsHumanAndComputerPlayer() {
+        fakeConsoleInputForOneHvC3x3Game();
         GameSetup gameSetup = new GameSetup(fakeUserInterface,
                 new FakePlayerFactory(fakeUserInterface, createFakeComputerPlayerWithInput()));
         gameSetup.start();
-        assertTrue(fakeUserInterface.greetUserWasCalled);
         assertTrue(gameSetup.getPlayer() instanceof HumanPlayer);
         assertTrue(gameSetup.getOpponent() instanceof FakeComputerPlayer);
     }
@@ -76,5 +82,43 @@ public class GameSetupTest {
         public Player createOpponent(GameMode gameMode) {
             return fakeComputerPlayer;
         }
+    }
+
+    private void fakeConsoleInputForOneHvH3x3Game() {
+        chooseHumanVsHumanGame();
+        choose3x3BoardSize();
+        makeMoves();
+        doNotPlayAgain();
+    }
+
+    private void fakeConsoleInputForTwoHvH3x3Games() {
+        chooseHumanVsHumanGame();
+        choose3x3BoardSize();
+        makeMoves();
+        fakeUserInterface.replayChoice("yes");
+        fakeConsoleInputForOneHvH3x3Game();
+    }
+
+    private void fakeConsoleInputForOneHvC3x3Game() {
+        fakeUserInterface.chooseGameType("Human vs Computer");
+        choose3x3BoardSize();
+        fakeUserInterface.choosePositions("1", "2", "3");
+        doNotPlayAgain();
+    }
+
+    private void doNotPlayAgain() {
+        fakeUserInterface.replayChoice("no");
+    }
+
+    private void makeMoves() {
+        fakeUserInterface.choosePositions("1", "7", "2", "4", "3");
+    }
+
+    private void choose3x3BoardSize() {
+        fakeUserInterface.chooseBoardSize("3x3");
+    }
+
+    private void chooseHumanVsHumanGame() {
+        fakeUserInterface.chooseGameType("Human vs Human");
     }
 }
