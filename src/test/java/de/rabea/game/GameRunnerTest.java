@@ -25,7 +25,7 @@ public class GameRunnerTest {
 
     @Test
     public void createsTwoHumanPlayersWhenRequested() {
-        fakeConsoleInputForOneHvH3x3Game();
+        fakeUserInterface.fakeConsoleInputForOneHvH3x3Game();
         GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
         gameRunner.setUpGameAndPlay();
         assertTrue(gameRunner.getPlayer() instanceof HumanPlayer);
@@ -34,7 +34,7 @@ public class GameRunnerTest {
 
     @Test
     public void playsHuman3x3GameTwice() {
-        fakeConsoleInputForTwoHvH3x3Games();
+        fakeUserInterface.fakeConsoleInputForTwoHvH3x3Games();
         GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
         gameRunner.setUpGameAndPlay();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
@@ -43,7 +43,7 @@ public class GameRunnerTest {
 
     @Test
     public void createsHumanAndComputerPlayer() {
-        fakeConsoleInputForOneHvC3x3Game();
+        fakeUserInterface.fakeConsoleInputForOneHvC3x3Game();
         GameRunner gameRunner = new GameRunner(fakeUserInterface,
                 new FakePlayerFactory(fakeUserInterface, createFakeComputerPlayerWithInput()));
         gameRunner.setUpGameAndPlay();
@@ -74,43 +74,5 @@ public class GameRunnerTest {
         public Player createOpponent(GameMode gameMode) {
             return fakeComputerPlayer;
         }
-    }
-
-    private void fakeConsoleInputForOneHvH3x3Game() {
-        chooseHumanVsHumanGame();
-        choose3x3BoardSize();
-        makeMoves();
-        doNotPlayAgain();
-    }
-
-    private void fakeConsoleInputForTwoHvH3x3Games() {
-        chooseHumanVsHumanGame();
-        choose3x3BoardSize();
-        makeMoves();
-        fakeUserInterface.replayChoice("yes");
-        fakeConsoleInputForOneHvH3x3Game();
-    }
-
-    private void fakeConsoleInputForOneHvC3x3Game() {
-        fakeUserInterface.chooseGameType("Human vs Computer");
-        choose3x3BoardSize();
-        fakeUserInterface.choosePositions("1", "2", "3");
-        doNotPlayAgain();
-    }
-
-    private void doNotPlayAgain() {
-        fakeUserInterface.replayChoice("no");
-    }
-
-    private void makeMoves() {
-        fakeUserInterface.choosePositions("1", "7", "2", "4", "3");
-    }
-
-    private void choose3x3BoardSize() {
-        fakeUserInterface.chooseBoardSize("3x3");
-    }
-
-    private void chooseHumanVsHumanGame() {
-        fakeUserInterface.chooseGameType("Human vs Human");
     }
 }

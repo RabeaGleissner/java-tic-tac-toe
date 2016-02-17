@@ -80,6 +80,28 @@ public class FakeUserInterface extends UserInterface {
         }
     }
 
+    public void fakeConsoleInputForOneHvH3x3Game() {
+        chooseGameType("Human vs Human");
+        chooseBoardSize("3x3");
+        choosePositions("1", "7", "2", "4", "3");
+        replayChoice("no");
+    }
+
+    public void fakeConsoleInputForTwoHvH3x3Games() {
+        chooseGameType("Human vs Human");
+        chooseBoardSize("3x3");
+        choosePositions("1", "7", "2", "4", "3");
+        replayChoice("yes");
+        fakeConsoleInputForOneHvH3x3Game();
+    }
+
+    public void fakeConsoleInputForOneHvC3x3Game() {
+        chooseGameType("Human vs Computer");
+        chooseBoardSize("3x3");
+        choosePositions("1", "2", "3");
+        replayChoice("no");
+    }
+
     public void provideConsoleInput(String... userChoices) {
         moves.addAll(Arrays.asList(userChoices));
     }
@@ -98,7 +120,7 @@ public class FakeUserInterface extends UserInterface {
         }
     }
 
-    public void chooseGameType(String choice) {
+    private void chooseGameType(String choice) {
         if (choice.equals("Human vs Human")) {
             moves.add("1");
         } else if (choice.equals("Human vs Computer")) {
@@ -108,7 +130,7 @@ public class FakeUserInterface extends UserInterface {
         }
     }
 
-    public void replayChoice(String userChoice) {
+    private void replayChoice(String userChoice) {
         if (userChoice.equals("no")) {
             moves.add("n");
         } else if (userChoice.equals("yes")) {
