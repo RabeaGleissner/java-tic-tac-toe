@@ -6,7 +6,6 @@ import de.rabea.ui.UserInterface;
 public class GameRunner {
     private UserInterface userInterface;
     private PlayerFactory playerFactory;
-    private Game game;
 
     public GameRunner(UserInterface userInterface, PlayerFactory playerFactory) {
         this.userInterface = userInterface;
@@ -14,12 +13,12 @@ public class GameRunner {
     }
 
     public void setUpGameAndPlay() {
-        game = createGame();
+        Game game = createGame();
         game.play();
         replayIfRequested();
     }
 
-    private Game createGame() {
+    public Game createGame() {
         GameMode gameMode = userInterface.getGameModeFromUser();
         int boardDimension = userInterface.getBoardDimensionFromUser();
         Board board = new Board(boardDimension);
@@ -36,13 +35,5 @@ public class GameRunner {
         if (userInterface.playAgain()) {
             replay();
         }
-    }
-
-    Player getPlayer() {
-        return game.getPlayer();
-    }
-
-    Player getOpponent() {
-        return game.getOpponent();
     }
 }
