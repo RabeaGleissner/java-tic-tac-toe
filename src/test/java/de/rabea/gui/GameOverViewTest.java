@@ -2,6 +2,7 @@ package de.rabea.gui;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,4 +24,11 @@ public class GameOverViewTest {
         assertEquals("Game over", text.getText());
     }
 
+    @Test
+    public void displaysReplayButton() {
+        GameOverView gameOverView = new GameOverView();
+        Parent gridPane = gameOverView.draw();
+        Button button = (Button) gridPane.getChildrenUnmodifiable().get(1);
+        assertEquals("Click to play again", button.getText());
+    }
 }
