@@ -5,25 +5,31 @@ import de.rabea.game.Mark;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.swing.text.View;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class BoardViewTest {
+    ViewUpdater viewUpdater;
 
     @Before
     public void setUp() throws Exception {
         new JFXPanel();
+        viewUpdater = new ViewUpdater(new Scene(new GridPane()));
     }
 
     @Test
     public void threeByThreeBoardHasNineChildren() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board)));
+        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board, viewUpdater)));
         Parent gridPane = boardView.draw();
 
         assertEquals(9, gridPane.getChildrenUnmodifiable().size());
@@ -32,7 +38,7 @@ public class BoardViewTest {
     @Test
     public void fourByFourBoardHasSixteenChildren() {
         Board board = new Board(4);
-        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board)));
+        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board, viewUpdater)));
         Parent gridPane = boardView.draw();
 
         assertEquals(16, gridPane.getChildrenUnmodifiable().size());
@@ -41,7 +47,7 @@ public class BoardViewTest {
     @Test
     public void allElementsOnEmptyBoardAreButtons() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board)));
+        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board, viewUpdater)));
         Parent gridPane = boardView.draw();
 
         for (Node node : gridPane.getChildrenUnmodifiable()) {
@@ -54,7 +60,7 @@ public class BoardViewTest {
         Board board = new Board(3);
         board.placeMarkOnExistingBoard(2, Mark.X);
 
-        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board)));
+        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board, viewUpdater)));
         Parent node = boardView.draw();
         assertEquals("X", findLabel(node, 2).getText());
     }
@@ -62,7 +68,7 @@ public class BoardViewTest {
     @Test
     public void reactsToAClick() {
         Board board = new Board(3);
-        GuiPlayer carrier = new GuiPlayer(new GuiGame(board));
+        GuiPlayer carrier = new GuiPlayer(new GuiGame(board, viewUpdater));
         BoardView boardView = new BoardView(board, carrier);
         Parent drawnBoard = boardView.draw();
         Button button = findButton(drawnBoard, 7);

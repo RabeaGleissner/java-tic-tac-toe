@@ -6,16 +6,17 @@ import de.rabea.game.Mark;
 public class GuiGame {
 
     private Board board;
+    private ViewUpdater viewUpdater;
 
-    public GuiGame(Board board) {
+    public GuiGame(Board board, ViewUpdater viewUpdater) {
         this.board = board;
+        this.viewUpdater = viewUpdater;
     }
 
     public void playRound(int position) {
-        if (!board.gameOver()) {
-            board.placeMarkOnExistingBoard(position, Mark.X);
-        } else {
-            System.out.println("game is over");
+        board.placeMarkOnExistingBoard(position, Mark.X);
+        if (board.gameOver()) {
+            viewUpdater.showGameOverView();
         }
     }
 }

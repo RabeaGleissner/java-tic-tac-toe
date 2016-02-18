@@ -18,6 +18,6 @@ public class GuiApp {
     }
 
     public GuiGame createGame(Board board) {
-        return new GuiGame(board);
+        return new GuiGame(board, viewUpdater);
     }
 }
