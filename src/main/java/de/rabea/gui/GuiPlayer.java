@@ -12,5 +12,7 @@ public class GuiPlayer {
         this.position = clicked;
     }
 
-
+    public boolean hasNewMove() {
+        return position != -1;
+    }
 }
