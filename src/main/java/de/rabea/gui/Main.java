@@ -1,18 +1,19 @@
 package de.rabea.gui;
 
-import de.rabea.game.Board;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Board board = new Board(3);
-        BoardView boardView = new BoardView(board, new GuiPlayer());
-        primaryStage.setScene(new Scene(boardView.draw()));
+        Scene scene = new Scene(new StackPane(), 500, 500);
+        primaryStage.setScene(scene);
         primaryStage.show();
+        GuiApp guiApp = new GuiApp(new ViewUpdater(scene));
+        guiApp.start();
     }
 
     public static void main(String[] args) {
