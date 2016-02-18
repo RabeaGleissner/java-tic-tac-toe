@@ -15,7 +15,6 @@ import static org.junit.Assert.assertTrue;
 
 public class BoardViewTest {
 
-
     @Before
     public void setUp() throws Exception {
         new JFXPanel();
@@ -24,7 +23,7 @@ public class BoardViewTest {
     @Test
     public void threeByThreeBoardHasNineChildren() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(board, new GuiPlayer());
+        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board)));
         Parent gridPane = boardView.draw();
 
         assertEquals(9, gridPane.getChildrenUnmodifiable().size());
@@ -33,7 +32,7 @@ public class BoardViewTest {
     @Test
     public void fourByFourBoardHasSixteenChildren() {
         Board board = new Board(4);
-        BoardView boardView = new BoardView(board, new GuiPlayer());
+        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board)));
         Parent gridPane = boardView.draw();
 
         assertEquals(16, gridPane.getChildrenUnmodifiable().size());
@@ -42,7 +41,7 @@ public class BoardViewTest {
     @Test
     public void allElementsOnEmptyBoardAreButtons() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(board, new GuiPlayer());
+        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board)));
         Parent gridPane = boardView.draw();
 
         for (Node node : gridPane.getChildrenUnmodifiable()) {
@@ -55,15 +54,15 @@ public class BoardViewTest {
         Board board = new Board(3);
         board.placeMarkOnExistingBoard(2, Mark.X);
 
-        BoardView boardView = new BoardView(board, new GuiPlayer());
+        BoardView boardView = new BoardView(board, new GuiPlayer(new GuiGame(board)));
         Parent node = boardView.draw();
         assertEquals("X", findLabel(node, 2).getText());
     }
 
     @Test
     public void reactsToAClick() {
-        GuiPlayer carrier = new GuiPlayer();
         Board board = new Board(3);
+        GuiPlayer carrier = new GuiPlayer(new GuiGame(board));
         BoardView boardView = new BoardView(board, carrier);
         Parent drawnBoard = boardView.draw();
         Button button = findButton(drawnBoard, 7);

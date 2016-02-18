@@ -12,13 +12,12 @@ public class GuiApp {
 
     public void start() {
         Board board = new Board(3);
-        GuiPlayer guiPlayer = new GuiPlayer();
+        GuiGame game = createGame(board);
+        GuiPlayer guiPlayer = new GuiPlayer(game);
         viewUpdater.showBoard(guiPlayer, board);
-        GuiGame game = createGame(board, guiPlayer);
-        game.playGame();
     }
 
-    public GuiGame createGame(Board board, GuiPlayer guiPlayer) {
-        return new GuiGame(board, guiPlayer);
+    public GuiGame createGame(Board board) {
+        return new GuiGame(board);
     }
 }

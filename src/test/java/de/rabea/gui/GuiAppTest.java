@@ -13,7 +13,7 @@ public class GuiAppTest {
     public void createsGame() {
         ViewUpdater viewUpdater = new ViewUpdater(new Scene(new GridPane()));
         GuiApp guiApp = new GuiApp(viewUpdater);
-        assertTrue(guiApp.createGame(new Board(3), new GuiPlayer()) instanceof GuiGame);
+        assertTrue(guiApp.createGame(new Board(3)) instanceof GuiGame);
     }
 
 }
