@@ -26,8 +26,8 @@ public class BoardView {
         for (Map.Entry<Integer, Mark> entry : board.cellsWithIndex().entrySet()) {
             int position = entry.getKey();
             Mark cell = entry.getValue();
-            int column = position / 3;
-            int row = position % 3;
+            int column = position % 3;
+            int row = position / 3;
             if (cell == EMPTY) {
                 Button button = new Button(position + "");
                 button.setOnAction(event -> guiPlayer.click(position));

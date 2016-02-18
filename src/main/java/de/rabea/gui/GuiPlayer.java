@@ -2,13 +2,15 @@ package de.rabea.gui;
 
 public class GuiPlayer {
 
-    private int clicked;
+    private int position = -1;
 
     public int clickedPosition() {
-        return clicked;
+        return position;
     }
 
     public void click(int clicked) {
-        this.clicked = clicked;
+        this.position = clicked;
     }
+
+
 }
