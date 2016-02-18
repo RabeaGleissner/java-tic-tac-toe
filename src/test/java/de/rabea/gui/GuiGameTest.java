@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 import org.junit.Before;
 import org.junit.Test;
 
+import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -26,7 +27,7 @@ public class GuiGameTest {
     @Test
     public void playsOneRound() {
         GuiGame guiGame = new GuiGame(board, viewUpdater);
-        guiGame.playRound(1);
+        guiGame.playRound(1, X);
         assertFalse(board.isPositionAvailable(1));
     }
 
@@ -34,9 +35,9 @@ public class GuiGameTest {
     public void displaysGameOverViewIfGameIsOver() {
         ViewUpdaterSpy viewUpdaterSpy = new ViewUpdaterSpy(new Scene(new GridPane()));
         GuiGame guiGame = new GuiGame(board, viewUpdaterSpy);
-        guiGame.playRound(0);
-        guiGame.playRound(1);
-        guiGame.playRound(2);
+        guiGame.playRound(0, X);
+        guiGame.playRound(1, X);
+        guiGame.playRound(2, X);
         assertTrue(viewUpdaterSpy.displaysGameOverView);
     }
 
