@@ -13,11 +13,11 @@ public class GuiGame {
         this.viewUpdater = viewUpdater;
     }
 
-    public void playRound(int position, Mark mark) {
+    public void playRound(int position, Mark mark, GuiPlayer guiPlayer) {
         board.placeMarkOnExistingBoard(position, mark);
+        viewUpdater.showBoard(guiPlayer, board);
         if (board.gameOver()) {
             viewUpdater.showGameOverView();
         }
-
     }
 }

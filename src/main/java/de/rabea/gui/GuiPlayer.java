@@ -19,7 +19,7 @@ public class GuiPlayer {
     }
 
     public void click(int clicked) {
-        guiGame.playRound(clicked, currentMark);
+        guiGame.playRound(clicked, currentMark, this);
         this.position = clicked;
         switchMark();
     }
