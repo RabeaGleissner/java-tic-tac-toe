@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static de.rabea.game.Mark.*;
 
-public class BoardView {
+public class BoardView implements GuiView {
 
     private Board board;
     private ClickHandler clickHandler;
