@@ -21,4 +21,8 @@ public class JavaFXButton {
     public void setId(int position) {
         actualButton.setId(position + "");
     }
+
+    public void setText(String text) {
+        actualButton.setText(text);
+    }
 }
