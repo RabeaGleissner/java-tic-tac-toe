@@ -3,7 +3,6 @@ package de.rabea.gui;
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
@@ -14,11 +13,11 @@ import static de.rabea.game.Mark.*;
 public class BoardView {
 
     private Board board;
-    private GuiPlayer guiPlayer;
+    private ClickHandler clickHandler;
 
-    public BoardView(Board board, GuiPlayer guiPlayer) {
+    public BoardView(Board board, ClickHandler clickHandler) {
         this.board = board;
-        this.guiPlayer = guiPlayer;
+        this.clickHandler = clickHandler;
     }
 
     public Parent draw() {
@@ -29,13 +28,19 @@ public class BoardView {
             int column = position % 3;
             int row = position / 3;
             if (cell == EMPTY) {
-                Button button = new Button(position + "");
-                button.setOnAction(event -> guiPlayer.click(position));
-                gridPane.add(button, column, row);
+                JavaFXButton javaFXButton = createButton(position);
+                gridPane.add(javaFXButton.getActualButton(), column, row);
             } else {
                 gridPane.add(new Label(cell.toString()), column, row);
             }
         }
         return gridPane;
+    }
+
+    private JavaFXButton createButton(int position) {
+        JavaFXButton javaFXButton = new JavaFXButton();
+        javaFXButton.setOnAction(clickHandler);
+        javaFXButton.setId(position);
+        return javaFXButton;
     }
 }
