@@ -5,6 +5,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.X;
@@ -26,6 +27,7 @@ public class GuiGameTest {
         guiPlayer = new GuiPlayer(guiGame);
     }
 
+    @Ignore
     @Test
     public void playsOneRound() {
         GuiGame guiGame = new GuiGame(board, viewUpdater);
