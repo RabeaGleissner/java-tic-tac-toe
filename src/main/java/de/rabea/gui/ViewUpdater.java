@@ -17,7 +17,7 @@ public class ViewUpdater {
     }
 
     public void showGameOverView() {
-        GameOverView gameOverView = new GameOverView();
-        scene.setRoot(gameOverView.draw());
+        GameEndView gameEndView = new GameEndView();
+        scene.setRoot(gameEndView.draw());
     }
 }

@@ -4,7 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
-public class GameOverView {
+public class GameEndView {
 
     public GridPane draw() {
         GridPane gridPane = new GridPane();

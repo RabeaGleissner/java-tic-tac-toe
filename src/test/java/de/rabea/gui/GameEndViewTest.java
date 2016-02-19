@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 
-public class GameOverViewTest {
+public class GameEndViewTest {
 
     @Before
     public void setUp() throws Exception {
@@ -18,16 +18,16 @@ public class GameOverViewTest {
 
     @Test
     public void hasGameOverMessage() {
-        GameOverView gameOverView = new GameOverView();
-        Parent gridPane = gameOverView.draw();
+        GameEndView gameEndView = new GameEndView();
+        Parent gridPane = gameEndView.draw();
         Text text = (Text) gridPane.getChildrenUnmodifiable().get(0);
         assertEquals("Game over", text.getText());
     }
 
     @Test
     public void displaysReplayButton() {
-        GameOverView gameOverView = new GameOverView();
-        Parent gridPane = gameOverView.draw();
+        GameEndView gameEndView = new GameEndView();
+        Parent gridPane = gameEndView.draw();
         Button button = (Button) gridPane.getChildrenUnmodifiable().get(1);
         assertEquals("Click to play again", button.getText());
     }
