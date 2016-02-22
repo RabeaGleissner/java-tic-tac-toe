@@ -23,11 +23,6 @@ public class JavaFXUi implements UserInterface {
     }
 
     @Override
-    public void greet() {
-        System.out.println("Hello and welcome to Tic Tac Toe!");
-    }
-
-    @Override
     public GameMode getGameModeFromUser() {
         return GameMode.HumanVsHuman;
     }

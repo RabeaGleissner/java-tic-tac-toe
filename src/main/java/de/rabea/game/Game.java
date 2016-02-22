@@ -17,6 +17,7 @@ public class Game {
     public void play(int boardDimension) {
         Board board = new Board(boardDimension);
         Player currentPlayer = player;
+        userInterface.displayBoard(board);
         while (gameIsNotOver(board)){
             if (player.hasMove()) {
                 playOneRound(currentPlayer, board);
@@ -37,7 +38,6 @@ public class Game {
     }
 
     private void playOneRound(Player player, Board board) {
-        userInterface.displayBoard(board);
         board.placeMarkOnExistingBoard(player.getPosition(board), player.mark());
         userInterface.displayBoard(board);
     }

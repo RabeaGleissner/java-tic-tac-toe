@@ -8,8 +8,6 @@ public interface UserInterface {
 
     void displayBoard(Board board);
 
-    void greet();
-
     GameMode getGameModeFromUser();
 
     int getBoardDimensionFromUser();

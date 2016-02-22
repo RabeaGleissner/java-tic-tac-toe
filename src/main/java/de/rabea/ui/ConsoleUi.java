@@ -37,7 +37,6 @@ public class ConsoleUi implements UserInterface {
         console.print(clearScreenCharacters());
     }
 
-    @Override
     public void greet() {
         clearScreen();
         console.print(GREETING);
