@@ -26,7 +26,7 @@ public class GuiApp {
     }
 
     public void start(NextGuiPlayer guiPlayer, NextGuiPlayer guiOpponent, ViewUpdater viewUpdater) {
-        Game game = new Game(new JavaFXUi(guiPlayer, viewUpdater), guiPlayer, guiOpponent);
+        Game game = new Game(new JavaFXUi(guiPlayer, viewUpdater, this), guiPlayer, guiOpponent);
         Thread thread = new Thread(){
             public void run(){
                 game.play(3);

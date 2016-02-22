@@ -9,10 +9,12 @@ public class JavaFXUi implements UserInterface {
 
     private NextGuiPlayer guiPlayer;
     private ViewUpdater viewUpdater;
+    private GuiApp guiApp;
 
-    public JavaFXUi(NextGuiPlayer guiPlayer, ViewUpdater viewUpdater) {
+    public JavaFXUi(NextGuiPlayer guiPlayer, ViewUpdater viewUpdater, GuiApp guiApp) {
         this.guiPlayer = guiPlayer;
         this.viewUpdater = viewUpdater;
+        this.guiApp = guiApp;
     }
 
     @Override
@@ -37,8 +39,7 @@ public class JavaFXUi implements UserInterface {
 
     @Override
     public void announceGameEnd(Mark lastPlayedMark, boolean winner) {
-        System.out.println("Game over");
-
+        viewUpdater.showGameOverView(guiApp);
     }
 
     @Override
