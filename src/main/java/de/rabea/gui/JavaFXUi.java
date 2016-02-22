@@ -7,11 +7,11 @@ import de.rabea.ui.UserInterface;
 
 public class JavaFXUi implements UserInterface {
 
-    private NextGuiPlayer guiPlayer;
+    private GuiPlayer guiPlayer;
     private ViewUpdater viewUpdater;
     private GuiApp guiApp;
 
-    public JavaFXUi(NextGuiPlayer guiPlayer, ViewUpdater viewUpdater, GuiApp guiApp) {
+    public JavaFXUi(GuiPlayer guiPlayer, ViewUpdater viewUpdater, GuiApp guiApp) {
         this.guiPlayer = guiPlayer;
         this.viewUpdater = viewUpdater;
         this.guiApp = guiApp;

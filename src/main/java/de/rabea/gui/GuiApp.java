@@ -19,13 +19,13 @@ public class GuiApp {
     public void displayBoard() {
         Board board = new Board(3);
         ClickCarrier carrier = new ClickCarrier();
-        NextGuiPlayer guiPlayer = new NextGuiPlayer(Mark.X, carrier);
-        NextGuiPlayer guiOpponent = new NextGuiPlayer(Mark.O, carrier);
+        GuiPlayer guiPlayer = new GuiPlayer(Mark.X, carrier);
+        GuiPlayer guiOpponent = new GuiPlayer(Mark.O, carrier);
         viewUpdater.showBoard(guiPlayer, board);
         start(guiPlayer, guiOpponent, viewUpdater);
     }
 
-    public void start(NextGuiPlayer guiPlayer, NextGuiPlayer guiOpponent, ViewUpdater viewUpdater) {
+    public void start(GuiPlayer guiPlayer, GuiPlayer guiOpponent, ViewUpdater viewUpdater) {
         Game game = new Game(new JavaFXUi(guiPlayer, viewUpdater, this), guiPlayer, guiOpponent);
         Thread thread = new Thread(){
             public void run(){

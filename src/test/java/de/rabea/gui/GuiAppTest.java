@@ -41,7 +41,7 @@ public class GuiAppTest {
         }
 
         @Override
-        public void showBoard(NextGuiPlayer guiPlayer, Board board) {
+        public void showBoard(GuiPlayer guiPlayer, Board board) {
             hasShownBoard = true;
         }
 
