@@ -14,7 +14,6 @@ public class ViewUpdater {
     public void showBoardSizeOptionsView(GuiApp guiApp) {
         BoardSizeView boardSizeView = new BoardSizeView();
         scene.setRoot(boardSizeView.draw(guiApp));
-
     }
 
     public void showBoard(NextGuiPlayer guiPlayer, Board board) {

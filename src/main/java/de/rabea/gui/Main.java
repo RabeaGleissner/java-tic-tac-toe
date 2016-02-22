@@ -12,8 +12,9 @@ public class Main extends Application {
         Scene scene = new Scene(new StackPane(), 500, 500);
         primaryStage.setScene(scene);
         primaryStage.show();
-        GuiApp guiApp = new GuiApp(new ViewUpdater(scene));
-        guiApp.start();
+        ViewUpdater viewUpdater = new ViewUpdater(scene);
+        GuiApp guiApp = new GuiApp(viewUpdater);
+        guiApp.displayGameOptions();
     }
 
     public static void main(String[] args) {

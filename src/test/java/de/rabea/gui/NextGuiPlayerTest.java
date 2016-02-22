@@ -14,7 +14,6 @@ public class NextGuiPlayerTest {
     @Test
     public void hasMoveWhenClickCarrierHasSomething() {
         ClickCarrier carrier = ClickCarrier.withMove(3);
-
         NextGuiPlayer player = new NextGuiPlayer(Mark.X, carrier);
         assertTrue(player.hasMove());
     }
@@ -22,7 +21,6 @@ public class NextGuiPlayerTest {
     @Test
     public void returnsMoveFromCarrier() {
         ClickCarrier carrier = ClickCarrier.withMove(5);
-
         NextGuiPlayer player = new NextGuiPlayer(Mark.X, carrier);
         assertEquals(5, player.getPosition(new Board(3)));
     }
@@ -30,17 +28,14 @@ public class NextGuiPlayerTest {
     @Test
     public void returnsMoveExactlyOnce() {
         ClickCarrier carrier = ClickCarrier.withMove(3);
-
         NextGuiPlayer player = new NextGuiPlayer(O, carrier);
-
-        assertTrue("First wasn't there", player.hasMove());
-        assertFalse("Second move shouldn't have left data", player.hasMove());
+        assertEquals(3, player.getPosition(new Board(3)));
+        assertEquals(-1, player.getPosition(new Board(3)));
     }
 
     @Test
     public void hasNoMoveWhenThereIsNoData() {
         ClickCarrier carrier = ClickCarrier.withNoData();
-
         NextGuiPlayer player = new NextGuiPlayer(Mark.X, carrier);
         assertFalse(player.hasMove());
     }

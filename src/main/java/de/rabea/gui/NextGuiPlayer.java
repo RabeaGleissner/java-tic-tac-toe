@@ -15,8 +15,7 @@ public class NextGuiPlayer extends Player {
 
     @Override
     public boolean hasMove() {
-        System.out.println("hasMove method" );
-        return carrier.getMove() != -1;
+        return carrier.isMoveAvailable();
     }
 
     @Override

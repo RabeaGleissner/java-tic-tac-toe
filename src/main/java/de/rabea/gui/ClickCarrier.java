@@ -31,8 +31,11 @@ public class ClickCarrier {
         }
     }
 
+    public boolean isMoveAvailable() {
+        return moveAvailable;
+    }
+
     public void addMove(int move) {
-        System.out.println("move (in ClickCarrier) = " + move);
         this.position = move;
         moveAvailable = true;
     }

@@ -17,10 +17,8 @@ public class Game {
     public void play(int boardDimension) {
         Board board = new Board(boardDimension);
         Player currentPlayer = player;
-        userInterface.displayBoard(board);
         while (gameIsNotOver(board)){
-            if(player.hasMove()) {
-                System.out.println("player has move");
+            if (player.hasMove()) {
                 playOneRound(currentPlayer, board);
                 if (gameIsNotOver(board)) {
                     currentPlayer = switchPlayer(currentPlayer);
@@ -40,8 +38,8 @@ public class Game {
 
     private void playOneRound(Player player, Board board) {
         userInterface.displayBoard(board);
-
         board.placeMarkOnExistingBoard(player.getPosition(board), player.mark());
+        userInterface.displayBoard(board);
     }
 
     private void finishGame(Mark mark, Board board) {

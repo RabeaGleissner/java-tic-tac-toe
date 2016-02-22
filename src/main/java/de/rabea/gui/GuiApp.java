@@ -1,6 +1,7 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
+import de.rabea.game.Game;
 import de.rabea.game.Mark;
 
 public class GuiApp {
@@ -11,15 +12,28 @@ public class GuiApp {
         this.viewUpdater = viewUpdater;
     }
 
-    public void start() {
-        Board board = new Board(3);
-        GuiGame game = createGame(board);
-        ClickCarrier carrier = new ClickCarrier();
-        NextGuiPlayer guiPlayer = new NextGuiPlayer(Mark.X, carrier);
-        viewUpdater.showBoard(carrier, board);
+    public void displayGameOptions() {
+        viewUpdater.showBoardSizeOptionsView(this);
     }
 
-    public GuiGame createGame(Board board) {
-        return new GuiGame(board, viewUpdater);
+    public void displayBoard() {
+        Board board = new Board(3);
+        ClickCarrier carrier = new ClickCarrier();
+        NextGuiPlayer guiPlayer = new NextGuiPlayer(Mark.X, carrier);
+        NextGuiPlayer guiOpponent = new NextGuiPlayer(Mark.O, carrier);
+        viewUpdater.showBoard(guiPlayer, board);
+        start(guiPlayer, guiOpponent, viewUpdater);
     }
+
+    public void start(NextGuiPlayer guiPlayer, NextGuiPlayer guiOpponent, ViewUpdater viewUpdater) {
+        Game game = new Game(new JavaFXUi(guiPlayer, viewUpdater), guiPlayer, guiOpponent);
+        Thread thread = new Thread(){
+            public void run(){
+                game.play(3);
+            }
+        };
+
+        thread.start();
+    }
+
 }
