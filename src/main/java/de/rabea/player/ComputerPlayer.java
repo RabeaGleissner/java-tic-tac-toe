@@ -17,4 +17,9 @@ public class ComputerPlayer extends Player {
         int index = randomNumberCalculator.randomNumber(board.emptyCells().size());
         return board.emptyCells().get(index);
     }
+
+    @Override
+    public boolean hasMove() {
+        return true;
+    }
 }

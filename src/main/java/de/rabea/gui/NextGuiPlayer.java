@@ -13,12 +13,18 @@ public class NextGuiPlayer extends Player {
         this.carrier = carrier;
     }
 
+    @Override
     public boolean hasMove() {
+        System.out.println("hasMove method" );
         return carrier.getMove() != -1;
     }
 
     @Override
     public int getPosition(Board board) {
         return carrier.getMove();
+    }
+
+    public ClickCarrier getCarrier() {
+        return carrier;
     }
 }

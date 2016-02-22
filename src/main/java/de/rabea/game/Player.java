@@ -11,4 +11,7 @@ public abstract class Player {
         return mark;
     }
     public abstract int getPosition(Board board);
+    public abstract boolean hasMove();
+
+
 }

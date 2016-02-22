@@ -19,6 +19,11 @@ public class HumanPlayer extends Player {
         return returnUsersPosition(board);
     }
 
+    @Override
+    public boolean hasMove() {
+        return true;
+    }
+
     public int returnUsersPosition(Board board) {
         String userInput = userInterface.readUserInput();
         if (userInterface.isUserInputInvalid(userInput)) {

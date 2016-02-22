@@ -16,6 +16,11 @@ public class UnbeatableComputerPlayer extends Player {
         return minimax(maximumDepth, Integer.MIN_VALUE, Integer.MAX_VALUE, board, mark).getMove();
     }
 
+    @Override
+    public boolean hasMove() {
+        return true;
+    }
+
     private ScoredMove minimax(int remainingDepth, int alpha, int beta, Board currentBoard, Mark currentMark) {
         ScoredMove currentBestMove = resetBestScore(currentMark);
         if (currentBoard.gameOver() || remainingDepth == 0) {
