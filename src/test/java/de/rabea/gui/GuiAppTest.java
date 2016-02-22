@@ -32,7 +32,7 @@ public class GuiAppTest {
         }
 
         @Override
-        public void showBoard(GuiPlayer guiPlayer, Board board) {
+        public void showBoard(ClickCarrier carrier, Board board) {
             hasShownBoard = true;
         }
     }

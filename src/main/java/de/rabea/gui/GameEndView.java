@@ -3,7 +3,7 @@ package de.rabea.gui;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
-public class GameEndView implements GuiView {
+public class GameEndView {
 
     public GridPane draw() {
         GridPane gridPane = new GridPane();

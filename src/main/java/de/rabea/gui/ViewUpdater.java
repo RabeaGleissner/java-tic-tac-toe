@@ -11,13 +11,9 @@ public class ViewUpdater {
         this.scene = scene;
     }
 
-    public void showBoard(GuiPlayer guiPlayer, Board board) {
-
-        // FIXME: Will need to pass the 'ClickCarrier' in
-        BoardView boardView = new BoardView(board, new BoardClickHandler(new ClickCarrier()));
-        scene.setRoot(boardView.draw());
-
-        throw new RuntimeException("Hi there! I am being called");
+    public void showBoard(ClickCarrier carrier, Board board) {
+        BoardView boardView = new BoardView(new BoardClickHandler(carrier));
+        scene.setRoot(boardView.draw(board));
     }
 
     public void showGameOverView() {

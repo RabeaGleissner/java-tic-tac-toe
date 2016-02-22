@@ -2,6 +2,7 @@ package de.rabea.gui;
 
 import de.rabea.game.Board;
 import javafx.embed.swing.JFXPanel;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import org.junit.Before;
@@ -10,7 +11,6 @@ import org.junit.Test;
 
 import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class GuiGameTest {
     GuiPlayer guiPlayer;
@@ -27,46 +27,26 @@ public class GuiGameTest {
         guiPlayer = new GuiPlayer(guiGame);
     }
 
+
     @Ignore
     @Test
     public void playsOneRound() {
         GuiGame guiGame = new GuiGame(board, viewUpdater);
-        guiGame.playRound(1, X, new GuiPlayer(guiGame));
+        guiGame.playRound(1, X);
         assertFalse(board.isPositionAvailable(1));
     }
 
-    @Test
-    public void redrawsBoardAfterEachMove() {
-        ViewUpdaterSpy viewUpdaterSpy = new ViewUpdaterSpy(new Scene(new GridPane()));
-        GuiGame guiGame = new GuiGame(board, viewUpdaterSpy);
-        guiGame.playRound(1, X, new GuiPlayer(guiGame));
-        assertTrue(viewUpdaterSpy.redrawsBoard);
-    }
+    private static class FakeBoardView extends BoardView {
 
-    @Test
-    public void displaysGameOverViewIfGameIsOver() {
-        ViewUpdaterSpy viewUpdaterSpy = new ViewUpdaterSpy(new Scene(new GridPane()));
-        GuiGame guiGame = new GuiGame(board, viewUpdaterSpy);
-        guiGame.playRound(0, X, new GuiPlayer(guiGame));
-        guiGame.playRound(1, X, new GuiPlayer(guiGame));
-        guiGame.playRound(2, X, new GuiPlayer(guiGame));
-        assertTrue(viewUpdaterSpy.displaysGameOverView);
-    }
-
-    private class ViewUpdaterSpy extends ViewUpdater {
-        private boolean displaysGameOverView = false;
-        private boolean redrawsBoard = false;
-
-        public ViewUpdaterSpy(Scene scene) {
-            super(scene);
+        public FakeBoardView(ClickHandler clickHandler) {
+            super(clickHandler);
         }
 
-        public void showBoard(GuiPlayer guiPlayer, Board board) {
-            redrawsBoard = true;
-        }
+        @Override
+        public Parent draw(Board board) {
 
-        public void showGameOverView() {
-            displaysGameOverView = true;
+            return super.draw(board);
         }
     }
+
 }

@@ -10,17 +10,15 @@ import java.util.Map;
 
 import static de.rabea.game.Mark.*;
 
-public class BoardView implements GuiView {
+public class BoardView {
 
-    private Board board;
     private ClickHandler clickHandler;
 
-    public BoardView(Board board, ClickHandler clickHandler) {
-        this.board = board;
+    public BoardView(ClickHandler clickHandler) {
         this.clickHandler = clickHandler;
     }
 
-    public Parent draw() {
+    public Parent draw(Board board) {
         GridPane gridPane = new GridPane();
         for (Map.Entry<Integer, Mark> entry : board.cellsWithIndex().entrySet()) {
             int position = entry.getKey();

@@ -27,8 +27,8 @@ public class BoardViewTest {
     @Test
     public void threeByThreeBoardHasNineChildren() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(board, new BoardClickHandler(new ClickCarrier()));
-        Parent gridPane = boardView.draw();
+        BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier()));
+        Parent gridPane = boardView.draw(board);
 
         assertEquals(9, gridPane.getChildrenUnmodifiable().size());
     }
@@ -36,8 +36,8 @@ public class BoardViewTest {
     @Test
     public void fourByFourBoardHasSixteenChildren() {
         Board board = new Board(4);
-        BoardView boardView = new BoardView(board, new BoardClickHandler(new ClickCarrier()));
-        Parent gridPane = boardView.draw();
+        BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier()));
+        Parent gridPane = boardView.draw(board);
 
         assertEquals(16, gridPane.getChildrenUnmodifiable().size());
     }
@@ -45,8 +45,8 @@ public class BoardViewTest {
     @Test
     public void allElementsOnEmptyBoardAreButtons() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(board, new BoardClickHandler(new ClickCarrier()));
-        Parent gridPane = boardView.draw();
+        BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier()));
+        Parent gridPane = boardView.draw(board);
 
         for (Node node : gridPane.getChildrenUnmodifiable()) {
             assertTrue(isButton(node));
@@ -58,8 +58,8 @@ public class BoardViewTest {
         Board board = new Board(3);
         board.placeMarkOnExistingBoard(2, Mark.X);
 
-        BoardView boardView = new BoardView(board, new BoardClickHandler(new ClickCarrier()));
-        Parent node = boardView.draw();
+        BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier()));
+        Parent node = boardView.draw(board);
         assertEquals("X", findLabel(node, 2).getText());
     }
 
@@ -68,8 +68,8 @@ public class BoardViewTest {
         Board board = new Board(3);
 
         ClickCarrier carrier = new ClickCarrier();
-        BoardView boardView = new BoardView(board, new BoardClickHandler(carrier));
-        Parent drawnBoard = boardView.draw();
+        BoardView boardView = new BoardView(new BoardClickHandler(carrier));
+        Parent drawnBoard = boardView.draw(board);
         Button button = findButton(drawnBoard, 7);
         button.fire();
 
