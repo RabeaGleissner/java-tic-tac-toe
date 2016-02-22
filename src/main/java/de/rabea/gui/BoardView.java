@@ -2,6 +2,7 @@ package de.rabea.gui;
 
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -20,6 +21,7 @@ public class BoardView {
 
     public Parent draw(Board board) {
         GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
         for (Map.Entry<Integer, Mark> entry : board.cellsWithIndex().entrySet()) {
             int position = entry.getKey();
             Mark cell = entry.getValue();
@@ -29,7 +31,9 @@ public class BoardView {
                 JavaFXButton javaFXButton = createButton(position);
                 gridPane.add(javaFXButton.getActualButton(), column, row);
             } else {
-                gridPane.add(new Label(cell.toString()), column, row);
+                Label label = new Label(cell.toString());
+                label.getStyleClass().add("cell");
+                gridPane.add(label, column, row);
             }
         }
         return gridPane;
@@ -40,6 +44,7 @@ public class BoardView {
         javaFXButton.setOnAction(clickHandler);
         javaFXButton.setText((position + 1) + "");
         javaFXButton.setId(position);
+        javaFXButton.getActualButton().getStyleClass().add("cell");
         return javaFXButton;
     }
 }

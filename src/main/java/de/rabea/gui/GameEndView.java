@@ -1,5 +1,6 @@
 package de.rabea.gui;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
@@ -7,6 +8,7 @@ public class GameEndView {
 
     public GridPane draw(GuiApp guiApp) {
         GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
         gridPane.add(new Text("Game over"), 3, 3);
         JavaFXButton replayButton = new JavaFXButton();
         replayButton.setText("Click to play again");

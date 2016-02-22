@@ -10,6 +10,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Scene scene = new Scene(new StackPane(), 500, 500);
+        scene.getStylesheets().add(Main.class.getResource("/styles.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
         ViewUpdater viewUpdater = new ViewUpdater(scene);
