@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 public class UserInterfaceTest {
 
-    private UserInterface userInterface;
+    private ConsoleUi userInterface;
     private FakeConsole fakeConsole;
     private Board board;
     private FakeBoardPainter fakeBoardPainter;
@@ -22,7 +22,7 @@ public class UserInterfaceTest {
         board = new Board(3);
         fakeConsole = new FakeConsole();
         fakeBoardPainter = new FakeBoardPainter();
-        userInterface = new UserInterface(fakeConsole, fakeBoardPainter);
+        userInterface = new ConsoleUi(fakeConsole, fakeBoardPainter);
     }
 
     @Test

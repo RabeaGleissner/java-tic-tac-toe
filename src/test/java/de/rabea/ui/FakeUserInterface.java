@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FakeUserInterface extends UserInterface {
+public class FakeUserInterface extends ConsoleUi {
 
     public boolean greetUserWasCalled = false;
     public boolean askForPositionWasCalled = false;

@@ -3,8 +3,8 @@ package de.rabea.game;
 import de.rabea.player.FakeComputerPlayer;
 import de.rabea.player.HumanPlayer;
 import de.rabea.player.PlayerFactory;
+import de.rabea.ui.ConsoleUi;
 import de.rabea.ui.FakeUserInterface;
-import de.rabea.ui.UserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -62,7 +62,7 @@ public class GameSetupTest {
     private class FakePlayerFactory extends PlayerFactory {
         private FakeComputerPlayer fakeComputerPlayer;
 
-        public FakePlayerFactory(UserInterface userInterface, FakeComputerPlayer fakeComputerPlayer) {
+        public FakePlayerFactory(ConsoleUi userInterface, FakeComputerPlayer fakeComputerPlayer) {
             super(userInterface);
             this.fakeComputerPlayer = fakeComputerPlayer;
         }

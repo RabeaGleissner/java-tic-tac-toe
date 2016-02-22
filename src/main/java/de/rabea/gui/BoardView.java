@@ -38,6 +38,7 @@ public class BoardView {
     private JavaFXButton createButton(int position) {
         JavaFXButton javaFXButton = new JavaFXButton();
         javaFXButton.setOnAction(clickHandler);
+        javaFXButton.setText((position + 1) + "");
         javaFXButton.setId(position);
         return javaFXButton;
     }

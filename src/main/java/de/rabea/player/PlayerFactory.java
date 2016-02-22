@@ -2,16 +2,16 @@ package de.rabea.player;
 
 import de.rabea.game.GameMode;
 import de.rabea.game.Player;
-import de.rabea.ui.UserInterface;
+import de.rabea.ui.ConsoleUi;
 
 import static de.rabea.game.GameMode.*;
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 
 public class PlayerFactory {
-    private UserInterface userInterface;
+    private ConsoleUi userInterface;
 
-    public PlayerFactory(UserInterface userInterface) {
+    public PlayerFactory(ConsoleUi userInterface) {
         this.userInterface = userInterface;
     }
 

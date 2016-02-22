@@ -3,12 +3,12 @@ package de.rabea.player;
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
 import de.rabea.game.Player;
-import de.rabea.ui.UserInterface;
+import de.rabea.ui.ConsoleUi;
 
 public class HumanPlayer extends Player {
-    private UserInterface userInterface;
+    private ConsoleUi userInterface;
 
-    public HumanPlayer(UserInterface userInterface, Mark mark) {
+    public HumanPlayer(ConsoleUi userInterface, Mark mark) {
         super(mark);
         this.userInterface = userInterface;
     }

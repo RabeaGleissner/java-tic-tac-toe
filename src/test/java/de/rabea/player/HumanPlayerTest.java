@@ -1,10 +1,7 @@
 package de.rabea.player;
 
 import de.rabea.game.Board;
-import de.rabea.ui.FakeConsole;
-import de.rabea.ui.FakeUserInterface;
-import de.rabea.ui.PrettyBoardPainter;
-import de.rabea.ui.UserInterface;
+import de.rabea.ui.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +17,7 @@ public class HumanPlayerTest {
     @Before
     public void setup() {
         fakeConsole = new FakeConsole();
-        humanPlayer = new HumanPlayer(new UserInterface(fakeConsole, new PrettyBoardPainter()), X);
+        humanPlayer = new HumanPlayer(new ConsoleUi(fakeConsole, new PrettyBoardPainter()), X);
         board = new Board(3);
     }
 
