@@ -23,7 +23,7 @@ public class GameSetup {
         int boardDimension = userInterface.getBoardDimensionFromUser();
         userInterface.announceMarkDistribution(gameMode);
         game = createGame(gameMode);
-        game.play(boardDimension);
+        game.play(new Board(boardDimension));
         giveReplayOption();
     }
 

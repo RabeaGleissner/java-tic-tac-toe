@@ -27,7 +27,7 @@ public class GameTest {
         Game game = new Game(fakeUserInterface, new HumanPlayer(fakeUserInterface, X),
                 new HumanPlayer(fakeUserInterface, O));
         fakeUserInterface.provideConsoleInput("1", "7", "3", "4", "2", "n");
-        game.play(3);
+        game.play(new Board(3));
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
     }
@@ -37,7 +37,7 @@ public class GameTest {
         Game game = new Game(fakeUserInterface, new HumanPlayer(fakeUserInterface, X),
                 new HumanPlayer(fakeUserInterface, O));
         fakeUserInterface.provideConsoleInput("1", "7", "2", "12", "3", "11", "4", "n");
-        game.play(4);
+        game.play(new Board(4));
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
     }
@@ -49,7 +49,7 @@ public class GameTest {
                 fakeComputerPlayer);
         fakeUserInterface.provideConsoleInput("1", "4", "7", "n");
         fakeComputerPlayer.giveNumbers(1, 2);
-        gameWithFakeComputerPlayer.play(3);
+        gameWithFakeComputerPlayer.play(new Board(3));
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
     }
 
@@ -60,7 +60,7 @@ public class GameTest {
                 fakeComputerPlayer);
         fakeUserInterface.provideConsoleInput("1", "5", "9", "13", "n");
         fakeComputerPlayer.giveNumbers(5, 6, 7);
-        gameWithFakeComputerPlayer.play(4);
+        gameWithFakeComputerPlayer.play(new Board(4));
         assertEquals(1, fakeUserInterface.announceWinnerCalled());
     }
 }

@@ -11,20 +11,20 @@ public class BoardSizeClickHandlerTest {
         GuiAppSpy guiAppSpy = new GuiAppSpy(null);
         BoardSizeClickHandler handler = new BoardSizeClickHandler(guiAppSpy);
         handler.action("test");
-        assertTrue(guiAppSpy.displayBoardWasCalled);
+        assertTrue(guiAppSpy.prepareGameWasCalled);
     }
 
     private class GuiAppSpy extends GuiApp {
 
-        private boolean displayBoardWasCalled = false;
+        private boolean prepareGameWasCalled = false;
 
         public GuiAppSpy(ViewUpdater viewUpdater) {
             super(viewUpdater);
         }
 
         @Override
-        public void displayBoard() {
-            displayBoardWasCalled = true;
+        public void prepareGame() {
+            prepareGameWasCalled = true;
         }
     }
 }

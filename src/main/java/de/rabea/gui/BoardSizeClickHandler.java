@@ -9,6 +9,6 @@ public class BoardSizeClickHandler implements ClickHandler {
 
     @Override
     public void action(String position) {
-        guiApp.displayBoard();
+        guiApp.prepareGame();
     }
 }

@@ -26,9 +26,9 @@ public class GuiAppTest {
     }
 
     @Test
-    public void startsGameAndShowsBoard() {
+    public void preparesGameAndShowsBoard() {
         GuiApp guiApp = new GuiApp(viewUpdaterSpy);
-        guiApp.displayBoard();
+        guiApp.prepareGame();
         assertTrue(viewUpdaterSpy.hasShownBoard);
     }
 
@@ -41,7 +41,7 @@ public class GuiAppTest {
         }
 
         @Override
-        public void showBoard(GuiPlayer guiPlayer, Board board) {
+        public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp) {
             hasShownBoard = true;
         }
 

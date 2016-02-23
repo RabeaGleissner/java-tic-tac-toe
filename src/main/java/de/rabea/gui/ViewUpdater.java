@@ -16,9 +16,9 @@ public class ViewUpdater {
         scene.setRoot(boardSizeView.draw(guiApp));
     }
 
-    public void showBoard(GuiPlayer guiPlayer, Board board) {
-        BoardView boardView = new BoardView(new BoardClickHandler(guiPlayer.getCarrier()));
-        scene.setRoot(boardView.draw(board));
+    public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp) {
+        BoardView boardView = new BoardView(new BoardClickHandler(guiPlayer.getCarrier(), guiApp));
+        scene.setRoot(boardView.draw(board, guiApp));
     }
 
     public void showGameOverView(GuiApp guiApp) {

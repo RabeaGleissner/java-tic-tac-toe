@@ -1,6 +1,7 @@
 package de.rabea.ui;
 
 import de.rabea.game.*;
+import de.rabea.gui.GuiApp;
 
 public class ConsoleUi implements UserInterface {
     private final Console console;

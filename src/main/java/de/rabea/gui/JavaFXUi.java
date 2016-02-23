@@ -19,7 +19,7 @@ public class JavaFXUi implements UserInterface {
 
     @Override
     public void displayBoard(Board board) {
-        viewUpdater.showBoard(guiPlayer, board);
+        viewUpdater.showBoard(guiPlayer, board, guiApp);
     }
 
     @Override

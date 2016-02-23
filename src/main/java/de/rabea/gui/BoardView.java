@@ -19,7 +19,7 @@ public class BoardView {
         this.clickHandler = clickHandler;
     }
 
-    public Parent draw(Board board) {
+    public Parent draw(Board board, GuiApp guiApp) {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         for (Map.Entry<Integer, Mark> entry : board.cellsWithIndex().entrySet()) {

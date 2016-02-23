@@ -7,33 +7,33 @@ public class Game {
     private final UserInterface userInterface;
     private Player player;
     private Player opponent ;
+    private Player currentPlayer;
 
     public Game(UserInterface userInterface, Player player, Player opponent) {
         this.userInterface = userInterface;
         this.player = player;
         this.opponent = opponent;
+        this.currentPlayer = player;
     }
 
-    public void play(int boardDimension) {
-        Board board = new Board(boardDimension);
-        Player currentPlayer = player;
+    public void play(Board board) {
         userInterface.displayBoard(board);
-        while (gameIsNotOver(board)){
-            if (player.hasMove()) {
-                playOneRound(currentPlayer, board);
-                if (gameIsNotOver(board)) {
-                    currentPlayer = switchPlayer(currentPlayer);
-                }
+        while (gameIsNotOver(board) && currentPlayer.hasMove()){
+            playOneRound(currentPlayer, board);
+            if (gameIsNotOver(board)) {
+                switchPlayer();
             }
         }
-        finishGame(currentPlayer.mark(), board);
+        if (board.gameOver()) {
+            finishGame(currentPlayer.mark(), board);
+        }
     }
 
-    public Player switchPlayer(Player currentPlayer) {
+    public void switchPlayer() {
         if (currentPlayer == player) {
-            return opponent;
+            currentPlayer = opponent;
         } else {
-            return player;
+            currentPlayer = player;
         }
     }
 
