@@ -23,6 +23,7 @@ public class GuiAppTest {
     public void displaysGameOptions() {
         GuiApp guiApp = new GuiApp(viewUpdaterSpy);
         guiApp.displayGameOptions();
+
         assertTrue(viewUpdaterSpy.hasShownBoardSizeOptions);
     }
 
@@ -30,6 +31,7 @@ public class GuiAppTest {
     public void creates3x3Board() {
         GuiApp guiApp = new GuiApp(new ViewUpdater(new Scene(new GridPane())));
         guiApp.createBoard("3x3");
+
         assertEquals(3, guiApp.getBoard().getDimension());
     }
 
@@ -37,6 +39,7 @@ public class GuiAppTest {
     public void creates4x4Board() {
         GuiApp guiApp = new GuiApp(new ViewUpdater(new Scene(new GridPane())));
         guiApp.createBoard("4x4");
+
         assertEquals(4, guiApp.getBoard().getDimension());
     }
 
@@ -45,6 +48,7 @@ public class GuiAppTest {
         GuiApp guiApp = new GuiApp(viewUpdaterSpy);
         guiApp.createBoard("3x3");
         guiApp.prepareGameForPlaying();
+
         assertTrue(viewUpdaterSpy.hasShownBoard);
     }
 

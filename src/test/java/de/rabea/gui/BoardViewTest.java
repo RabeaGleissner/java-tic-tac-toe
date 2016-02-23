@@ -24,7 +24,6 @@ public class BoardViewTest {
         new JFXPanel();
         viewUpdater = new ViewUpdater(new Scene(new GridPane()));
         guiApp = new GuiApp(viewUpdater);
-
     }
 
     @Test
@@ -60,9 +59,9 @@ public class BoardViewTest {
     public void labelsContainCorrespondingPlayerMark() {
         Board board = new Board(3);
         board.placeMarkOnExistingBoard(2, Mark.X);
-
         BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier(), guiApp));
         Parent node = boardView.draw(board);
+
         assertEquals("X", findLabel(node, 2).getText());
     }
 
@@ -70,7 +69,6 @@ public class BoardViewTest {
     public void reactsToAClick() {
         Board board = new Board(3);
         GuiAppSpy guiAppSpy = new GuiAppSpy(viewUpdater);
-
         ClickCarrier carrier = new ClickCarrier();
         BoardView boardView = new BoardView(new BoardClickHandler(carrier, guiAppSpy));
         Parent drawnBoard = boardView.draw(board);

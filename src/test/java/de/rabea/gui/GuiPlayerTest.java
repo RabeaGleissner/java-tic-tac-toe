@@ -15,6 +15,7 @@ public class GuiPlayerTest {
     public void hasMoveWhenClickCarrierHasSomething() {
         ClickCarrier carrier = ClickCarrier.withMove(3);
         GuiPlayer player = new GuiPlayer(Mark.X, carrier);
+
         assertTrue(player.hasMove());
     }
 
@@ -22,6 +23,7 @@ public class GuiPlayerTest {
     public void returnsMoveFromCarrier() {
         ClickCarrier carrier = ClickCarrier.withMove(5);
         GuiPlayer player = new GuiPlayer(Mark.X, carrier);
+
         assertEquals(5, player.getPosition(new Board(3)));
     }
 
@@ -29,6 +31,7 @@ public class GuiPlayerTest {
     public void returnsMoveExactlyOnce() {
         ClickCarrier carrier = ClickCarrier.withMove(3);
         GuiPlayer player = new GuiPlayer(O, carrier);
+
         assertEquals(3, player.getPosition(new Board(3)));
         assertEquals(-1, player.getPosition(new Board(3)));
     }
@@ -37,6 +40,7 @@ public class GuiPlayerTest {
     public void hasNoMoveWhenThereIsNoData() {
         ClickCarrier carrier = ClickCarrier.withNoData();
         GuiPlayer player = new GuiPlayer(Mark.X, carrier);
+
         assertFalse(player.hasMove());
     }
 }

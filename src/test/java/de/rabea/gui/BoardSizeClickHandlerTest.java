@@ -11,6 +11,7 @@ public class BoardSizeClickHandlerTest {
         GuiAppSpy guiAppSpy = new GuiAppSpy(null);
         BoardSizeClickHandler handler = new BoardSizeClickHandler(guiAppSpy);
         handler.action("test");
+
         assertTrue(guiAppSpy.prepareGameWasCalled);
     }
 

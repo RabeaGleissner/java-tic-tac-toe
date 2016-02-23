@@ -12,7 +12,6 @@ public class GuiApp {
 
     public GuiApp(ViewUpdater viewUpdater) {
         this.viewUpdater = viewUpdater;
-
     }
 
     public void displayGameOptions() {

@@ -9,7 +9,6 @@ public class BoardClickHandler implements ClickHandler {
         this.guiApp = guiApp;
     }
 
-
     @Override
     public void action(String position) {
         clickCarrier.addMove(convertToInteger(position));

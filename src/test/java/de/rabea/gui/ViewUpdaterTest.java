@@ -25,6 +25,7 @@ public class ViewUpdaterTest {
         ViewUpdater viewUpdater = new ViewUpdater(scene);
         viewUpdater.showBoardSizeOptionsView(new GuiApp(viewUpdater));
         Label label = (Label) scene.getRoot().getChildrenUnmodifiable().get(0);
+
         assertEquals("Please select a board size:", label.getText());
     }
 
@@ -34,6 +35,7 @@ public class ViewUpdaterTest {
         ViewUpdater viewUpdater = new ViewUpdater(scene);
         viewUpdater.showBoard(new GuiPlayer(Mark.X, new ClickCarrier(1)), new Board(3), new GuiApp(viewUpdater));
         int numberOfButtons = scene.getRoot().getChildrenUnmodifiable().size();
+
         assertEquals(9, numberOfButtons);
     }
 
@@ -43,6 +45,7 @@ public class ViewUpdaterTest {
         ViewUpdater viewUpdater = new ViewUpdater(scene);
         viewUpdater.showGameOverView(new GuiApp(viewUpdater));
         Button replayButton = (Button) scene.getRoot().getChildrenUnmodifiable().get(1);
+
         assertEquals("Click to play again", replayButton.getText());
     }
 }

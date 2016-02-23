@@ -10,6 +10,7 @@ public class ReplayClickHandlerTest {
         GuiAppSpy guiAppSpy = new GuiAppSpy(null);
         ReplayClickHandler handler = new ReplayClickHandler(guiAppSpy);
         handler.action("test");
+
         assertTrue(guiAppSpy.displayGameOptionsWasCalled);
     }
 
