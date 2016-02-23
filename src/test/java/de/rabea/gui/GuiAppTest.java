@@ -43,7 +43,8 @@ public class GuiAppTest {
     @Test
     public void preparesGameAndShowsBoard() {
         GuiApp guiApp = new GuiApp(viewUpdaterSpy);
-        guiApp.prepareGame();
+        guiApp.createBoard("3x3");
+        guiApp.prepareGameForPlaying();
         assertTrue(viewUpdaterSpy.hasShownBoard);
     }
 

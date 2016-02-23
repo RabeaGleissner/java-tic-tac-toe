@@ -25,10 +25,10 @@ public class GuiApp {
         } else {
             board = new Board(4);
         }
-        prepareGame();
+        prepareGameForPlaying();
     }
 
-    public void prepareGame() {
+    public void prepareGameForPlaying() {
         ClickCarrier carrier = new ClickCarrier();
         GuiPlayer guiPlayer = new GuiPlayer(Mark.X, carrier);
         GuiPlayer guiOpponent = new GuiPlayer(Mark.O, carrier);
