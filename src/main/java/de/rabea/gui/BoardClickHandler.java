@@ -13,7 +13,7 @@ public class BoardClickHandler implements ClickHandler {
     @Override
     public void action(String position) {
         clickCarrier.addMove(convertToInteger(position));
-        guiApp.displayBoard();
+        guiApp.startGame();
     }
 
     private int convertToInteger(String position) {

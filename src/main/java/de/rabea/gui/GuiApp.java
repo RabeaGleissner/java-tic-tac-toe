@@ -19,17 +19,30 @@ public class GuiApp {
         viewUpdater.showBoardSizeOptionsView(this);
     }
 
+    public void createBoard(String boardSize) {
+        if (boardSize.equals("3x3")) {
+            board = new Board(3);
+        } else {
+            board = new Board(4);
+        }
+        prepareGame();
+    }
+
     public void prepareGame() {
-        board = new Board(3);
         ClickCarrier carrier = new ClickCarrier();
         GuiPlayer guiPlayer = new GuiPlayer(Mark.X, carrier);
         GuiPlayer guiOpponent = new GuiPlayer(Mark.O, carrier);
         viewUpdater.showBoard(guiPlayer, board, this);
         game = new Game(new JavaFXUi(guiPlayer, viewUpdater, this), guiPlayer, guiOpponent);
+        startGame();
     }
 
-    public void displayBoard() {
+    public void startGame() {
         game.play(board);
+    }
+
+    public Board getBoard() {
+        return board;
     }
 }
 

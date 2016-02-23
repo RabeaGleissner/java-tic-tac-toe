@@ -31,7 +31,7 @@ public class BoardViewTest {
     public void threeByThreeBoardHasNineChildren() {
         Board board = new Board(3);
         BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier(), guiApp));
-        Parent gridPane = boardView.draw(board, guiApp);
+        Parent gridPane = boardView.draw(board);
 
         assertEquals(9, gridPane.getChildrenUnmodifiable().size());
     }
@@ -40,7 +40,7 @@ public class BoardViewTest {
     public void fourByFourBoardHasSixteenChildren() {
         Board board = new Board(4);
         BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier(), guiApp));
-        Parent gridPane = boardView.draw(board, guiApp);
+        Parent gridPane = boardView.draw(board);
 
         assertEquals(16, gridPane.getChildrenUnmodifiable().size());
     }
@@ -49,7 +49,7 @@ public class BoardViewTest {
     public void allElementsOnEmptyBoardAreButtons() {
         Board board = new Board(3);
         BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier(), guiApp));
-        Parent gridPane = boardView.draw(board, guiApp);
+        Parent gridPane = boardView.draw(board);
 
         for (Node node : gridPane.getChildrenUnmodifiable()) {
             assertTrue(isButton(node));
@@ -62,7 +62,7 @@ public class BoardViewTest {
         board.placeMarkOnExistingBoard(2, Mark.X);
 
         BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier(), guiApp));
-        Parent node = boardView.draw(board, guiApp);
+        Parent node = boardView.draw(board);
         assertEquals("X", findLabel(node, 2).getText());
     }
 
@@ -73,7 +73,7 @@ public class BoardViewTest {
 
         ClickCarrier carrier = new ClickCarrier();
         BoardView boardView = new BoardView(new BoardClickHandler(carrier, guiAppSpy));
-        Parent drawnBoard = boardView.draw(board, guiAppSpy);
+        Parent drawnBoard = boardView.draw(board);
         Button button = findButton(drawnBoard, 7);
         button.fire();
 
@@ -90,7 +90,7 @@ public class BoardViewTest {
         }
 
         @Override
-        public void displayBoard() {
+        public void startGame() {
             displayBoard = true;
         }
     }

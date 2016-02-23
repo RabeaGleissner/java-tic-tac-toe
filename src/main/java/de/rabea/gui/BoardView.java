@@ -19,14 +19,14 @@ public class BoardView {
         this.clickHandler = clickHandler;
     }
 
-    public Parent draw(Board board, GuiApp guiApp) {
+    public Parent draw(Board board) {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         for (Map.Entry<Integer, Mark> entry : board.cellsWithIndex().entrySet()) {
             int position = entry.getKey();
             Mark cell = entry.getValue();
-            int column = position % 3;
-            int row = position / 3;
+            int column = position % board.getDimension();
+            int row = position / board.getDimension();
             if (cell == EMPTY) {
                 JavaFXButton javaFXButton = createButton(position);
                 gridPane.add(javaFXButton.getActualButton(), column, row);
@@ -43,7 +43,7 @@ public class BoardView {
         JavaFXButton javaFXButton = new JavaFXButton();
         javaFXButton.setOnAction(clickHandler);
         javaFXButton.setText((position + 1) + "");
-        javaFXButton.setId(position);
+        javaFXButton.setId(position + "");
         javaFXButton.getActualButton().getStyleClass().add("cell");
         return javaFXButton;
     }

@@ -34,4 +34,13 @@ public class BoardSizeViewTest {
         assertTrue(button instanceof Button);
         assertEquals("3x3 board", button.getText());
     }
+
+    @Test
+    public void hasButtonToChoose4x4Board() {
+        BoardSizeView boardSizeView = new BoardSizeView();
+        Parent parent = boardSizeView.draw(new GuiApp(new ViewUpdater(new Scene(new GridPane()))));
+        Button button = (Button) parent.getChildrenUnmodifiable().get(2);
+        assertTrue(button instanceof Button);
+        assertEquals("4x4 board", button.getText());
+    }
 }

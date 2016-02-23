@@ -18,8 +18,8 @@ public class JavaFXButton {
         return actualButton;
     }
 
-    public void setId(int position) {
-        actualButton.setId(position + "");
+    public void setId(String id) {
+        actualButton.setId(id);
     }
 
     public void setText(String text) {
