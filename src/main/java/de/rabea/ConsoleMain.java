@@ -9,7 +9,7 @@ import de.rabea.ui.RealConsole;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class App {
+public class ConsoleMain {
     public static void main( String[] args ) {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         ConsoleUi userInterface = new ConsoleUi(new RealConsole(bufferedReader, System.out), new PrettyBoardPainter());

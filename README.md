@@ -13,9 +13,14 @@ cd java-tic-tac-toe
 
 mvn package
 
-java -cp target/tic-tac-toe-1.0-SNAPSHOT.jar de.rabea.App
-
 ```
+To play the game in the console, run this command:
+
+`java -cp target/tic-tac-toe-1.0-SNAPSHOT.jar de.rabea.ConsoleMain`
+
+To play the game with a graphical userinterface, use this command:
+
+`java -cp target/tic-tac-toe-1.0-SNAPSHOT.jar de.rabea.GuiMain`
 
 
 #### How to run the tests

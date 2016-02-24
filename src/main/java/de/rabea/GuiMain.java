@@ -1,16 +1,18 @@
-package de.rabea.gui;
+package de.rabea;
 
+import de.rabea.gui.GuiApp;
+import de.rabea.gui.ViewUpdater;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class GuiMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         Scene scene = new Scene(new StackPane(), 500, 500);
-        scene.getStylesheets().add(Main.class.getResource("/styles.css").toExternalForm());
+        scene.getStylesheets().add(GuiMain.class.getResource("/styles.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
         ViewUpdater viewUpdater = new ViewUpdater(scene);
