@@ -29,6 +29,12 @@
               <include>**</include>
             </includes>
             <excludes>
+              <exclude>**/BoardViewTest.java</exclude>
+              <exclude>**/BoardClickHandlerTest.java</exclude>
+              <exclude>**/BoardSizeViewTest.java</exclude>
+              <exclude>**/GameEndViewTest.java</exclude>
+              <exclude>**/GuiAppTest.java</exclude>
+              <exclude>**/ViewUpdaterTest.java</exclude>
               <exclude>*ComputerPlayerSpeedTest*</exclude>
             </excludes>
           </configuration>
