@@ -1,15 +1,16 @@
 package de.rabea.gui;
 
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+
+import static javafx.geometry.Pos.CENTER;
 
 public class BoardSizeView {
 
     public Parent draw(GuiApp guiApp) {
         GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setAlignment(CENTER);
         gridPane.add(new Label("Please select a board size:"), 0, 0);
         addButtons(guiApp, gridPane);
         return gridPane;

@@ -8,7 +8,7 @@ public class BoardSizeClickHandlerTest {
 
     @Test
     public void displaysBoardOnClickAction() {
-        GuiAppSpy guiAppSpy = new GuiAppSpy(null);
+        GuiAppSpy guiAppSpy = new GuiAppSpy();
         BoardSizeClickHandler handler = new BoardSizeClickHandler(guiAppSpy);
         handler.action("test");
 
@@ -19,8 +19,8 @@ public class BoardSizeClickHandlerTest {
 
         private boolean prepareGameWasCalled = false;
 
-        public GuiAppSpy(ViewUpdater viewUpdater) {
-            super(viewUpdater);
+        public GuiAppSpy() {
+            super(null);
         }
 
         @Override

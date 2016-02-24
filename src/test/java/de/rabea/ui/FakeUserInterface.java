@@ -84,10 +84,6 @@ public class FakeUserInterface extends ConsoleUi {
         moves.addAll(Arrays.asList(userChoices));
     }
 
-    public boolean wasGreetUserCalled() {
-        return greetUserWasCalled;
-    }
-
     public boolean wasAskForPositionCalled() {
         return askForPositionWasCalled;
     }

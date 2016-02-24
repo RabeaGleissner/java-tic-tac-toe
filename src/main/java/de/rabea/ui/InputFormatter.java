@@ -24,7 +24,7 @@ public class InputFormatter {
     }
 
     public int subtractOneToMatchArrayIndex(int position) {
-        position --;
+        position--;
         return position;
     }
 }
