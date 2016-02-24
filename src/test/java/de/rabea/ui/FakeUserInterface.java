@@ -10,10 +10,10 @@ import java.util.List;
 
 public class FakeUserInterface extends ConsoleUi {
 
-    public boolean greetUserWasCalled = false;
-    public boolean askForPositionWasCalled = false;
+    private boolean greetUserWasCalled = false;
+    private boolean askForPositionWasCalled = false;
     private boolean positionUnavailableWarningWasCalled = false;
-    private List<String> moves = new LinkedList<String>();
+    private List<String> moves = new LinkedList<>();
     private int countAnnounceGameEndCalls = 0;
 
     public FakeUserInterface() {
@@ -28,8 +28,7 @@ public class FakeUserInterface extends ConsoleUi {
     @Override
     public String readUserInput() {
         askForPositionWasCalled = true;
-        String userInput = moves.remove(0);
-        return userInput;
+        return moves.remove(0);
     }
 
     @Override
@@ -106,7 +105,7 @@ public class FakeUserInterface extends ConsoleUi {
         moves.addAll(Arrays.asList(userChoices));
     }
 
-    public void chooseBoardSize(String choice) {
+    private void chooseBoardSize(String choice) {
         if (choice.equals("3x3")) {
             moves.add("3");
         } else if (choice.equals("4x4")) {

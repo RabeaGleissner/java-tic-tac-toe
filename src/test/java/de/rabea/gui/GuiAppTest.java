@@ -11,7 +11,7 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GuiAppTest {
-    ViewUpdaterSpy viewUpdaterSpy;
+    private ViewUpdaterSpy viewUpdaterSpy;
 
     @Before
     public void setUp() throws Exception {

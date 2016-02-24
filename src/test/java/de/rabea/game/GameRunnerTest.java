@@ -14,8 +14,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GameRunnerTest {
-    FakeUserInterface fakeUserInterface;
-    PlayerFactory playerFactory;
+    private FakeUserInterface fakeUserInterface;
+    private PlayerFactory playerFactory;
 
     @Before
     public void setup() {

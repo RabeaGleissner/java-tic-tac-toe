@@ -29,7 +29,7 @@ public class Game {
         }
     }
 
-    public void switchPlayer() {
+    private void switchPlayer() {
         if (currentPlayer == player) {
             currentPlayer = opponent;
         } else {

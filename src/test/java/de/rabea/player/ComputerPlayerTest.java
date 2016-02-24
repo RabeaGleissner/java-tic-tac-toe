@@ -9,7 +9,7 @@ import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
 
 public class ComputerPlayerTest {
-    Board board;
+    private Board board;
 
     @Before
     public void setup() {

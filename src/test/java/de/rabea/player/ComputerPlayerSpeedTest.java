@@ -8,7 +8,7 @@ import static de.rabea.game.Mark.X;
 
 public class ComputerPlayerSpeedTest {
 
-    UnbeatableComputerPlayer computer;
+    private UnbeatableComputerPlayer computer;
 
     @Before
     public void setup() {

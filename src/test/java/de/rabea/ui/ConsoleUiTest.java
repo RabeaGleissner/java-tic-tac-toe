@@ -10,18 +10,17 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-public class UserInterfaceTest {
+public class ConsoleUiTest {
 
     private ConsoleUi userInterface;
     private FakeConsole fakeConsole;
     private Board board;
-    private FakeBoardPainter fakeBoardPainter;
 
     @Before
     public void setup() {
         board = new Board(3);
         fakeConsole = new FakeConsole();
-        fakeBoardPainter = new FakeBoardPainter();
+        FakeBoardPainter fakeBoardPainter = new FakeBoardPainter();
         userInterface = new ConsoleUi(fakeConsole, fakeBoardPainter);
     }
 

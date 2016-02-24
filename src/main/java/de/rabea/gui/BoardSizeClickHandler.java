@@ -1,7 +1,7 @@
 package de.rabea.gui;
 
 public class BoardSizeClickHandler implements ClickHandler {
-    GuiApp guiApp;
+    private GuiApp guiApp;
 
     public BoardSizeClickHandler(GuiApp guiApp) {
         this.guiApp = guiApp;

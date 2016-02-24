@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class ReplayClickHandlerTest {
+
     @Test
     public void displaysGameOptionsOnClick() {
         GuiAppSpy guiAppSpy = new GuiAppSpy(null);
@@ -15,7 +16,6 @@ public class ReplayClickHandlerTest {
     }
 
     private class GuiAppSpy extends GuiApp {
-
         private boolean displayGameOptionsWasCalled;
 
         public GuiAppSpy(ViewUpdater viewUpdater) {

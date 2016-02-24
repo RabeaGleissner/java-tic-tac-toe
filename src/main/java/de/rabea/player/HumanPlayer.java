@@ -24,7 +24,7 @@ public class HumanPlayer extends Player {
         return true;
     }
 
-    public int returnUsersPosition(Board board) {
+    private int returnUsersPosition(Board board) {
         String userInput = userInterface.readUserInput();
         if (userInterface.isUserInputInvalid(userInput)) {
             return getDifferentUserInputIfInputIsBad(board);

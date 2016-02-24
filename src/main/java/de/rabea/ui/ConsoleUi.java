@@ -165,7 +165,7 @@ public class ConsoleUi implements UserInterface {
     private void markDistributionForHvC() {
         console.print(MARK_DISTRIBUTION_HVC);
     }
-    public String clearScreenCharacters() {
+    private String clearScreenCharacters() {
         return CLEAR_SCREEN;
     }
 }

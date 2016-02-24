@@ -119,7 +119,7 @@ public class Board {
         return !(isIndexOfLastCell(cell));
     }
 
-    public List<Line> getAllLines() {
+    private List<Line> getAllLines() {
         List<Line> allLines = new ArrayList<>();
         allLines.addAll(getRows());
         allLines.addAll(getColumns());

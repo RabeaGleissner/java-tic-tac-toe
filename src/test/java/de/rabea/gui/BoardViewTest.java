@@ -16,8 +16,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class BoardViewTest {
-    ViewUpdater viewUpdater;
-    GuiApp guiApp;
+    private ViewUpdater viewUpdater;
+    private GuiApp guiApp;
 
     @Before
     public void setUp() throws Exception {

@@ -1,13 +1,19 @@
 package de.rabea.player;
 
 import de.rabea.game.Board;
+import org.junit.Before;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.*;
 import static org.junit.Assert.assertEquals;
 
 public class UnbeatableComputerPlayerTest {
-    UnbeatableComputerPlayer unbeatableComputerPlayer = new UnbeatableComputerPlayer(O);
+    private UnbeatableComputerPlayer unbeatableComputerPlayer;
+
+    @Before
+    public void setup() {
+        unbeatableComputerPlayer = new UnbeatableComputerPlayer(O);
+    }
 
 
     @Test

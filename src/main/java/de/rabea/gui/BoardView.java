@@ -28,7 +28,7 @@ public class BoardView {
             int column = position % board.getDimension();
             int row = position / board.getDimension();
             if (cell == EMPTY) {
-                JavaFXButton javaFXButton = createButton(position);
+                JavaFXButton javaFXButton = new JavaFXButton(clickHandler, (position + 1) + "", position + "", "cell");
                 gridPane.add(javaFXButton.getActualButton(), column, row);
             } else {
                 Label label = new Label(cell.toString());
@@ -37,10 +37,5 @@ public class BoardView {
             }
         }
         return gridPane;
-    }
-
-    private JavaFXButton createButton(int position) {
-        JavaFXButton javaFXButton = new JavaFXButton(clickHandler, (position + 1) + "", position + "", "cell");
-        return javaFXButton;
     }
 }
