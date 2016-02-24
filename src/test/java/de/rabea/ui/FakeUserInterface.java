@@ -68,20 +68,72 @@ public class FakeUserInterface extends ConsoleUi {
     @Override
     public GameMode getGameModeFromUser() {
         String userChoice = moves.remove(0);
-        if (userChoice.equals("1")) {
-            return GameMode.HumanVsHuman;
-        } else if (userChoice.equals("2")) {
-            return GameMode.HumanVsComputer;
-        } else if (userChoice.equals("3")) {
-            return GameMode.ComputerVsHuman;
-        } else {
-            return GameMode.HumanVsHuman;
+        switch (userChoice) {
+            case "1":
+                return GameMode.HumanVsHuman;
+            case "2":
+                return GameMode.HumanVsComputer;
+            case "3":
+                return GameMode.ComputerVsHuman;
+            default:
+                throw new RuntimeException("did not recognise choice for game mode");
         }
-
     }
 
-    public void provideConsoleInput(String... userChoices) {
+    public void fakeConsoleInputForOneHvH3x3Game() {
+        chooseGameType("Human vs Human");
+        chooseBoardSize("3x3");
+        choosePositions("1", "7", "2", "4", "3");
+        replayChoice("no");
+    }
+
+    public void fakeConsoleInputForTwoHvH3x3Games() {
+        chooseGameType("Human vs Human");
+        chooseBoardSize("3x3");
+        choosePositions("1", "7", "2", "4", "3");
+        replayChoice("yes");
+        fakeConsoleInputForOneHvH3x3Game();
+    }
+
+    public void fakeConsoleInputForOneHvC3x3Game() {
+        chooseGameType("Human vs Computer");
+        chooseBoardSize("3x3");
+        choosePositions("1", "2", "3");
+        replayChoice("no");
+    }
+
+    public void choosePositions(String... userChoices) {
         moves.addAll(Arrays.asList(userChoices));
+    }
+
+    public void chooseBoardSize(String choice) {
+        if (choice.equals("3x3")) {
+            moves.add("3");
+        } else if (choice.equals("4x4")) {
+            moves.add("4");
+        } else {
+            throw new RuntimeException("board size choice not available");
+        }
+    }
+
+    private void chooseGameType(String choice) {
+        if (choice.equals("Human vs Human")) {
+            moves.add("1");
+        } else if (choice.equals("Human vs Computer")) {
+            moves.add("2");
+        } else {
+            throw new RuntimeException("game type choice not implemented");
+        }
+    }
+
+    public void replayChoice(String userChoice) {
+        if (userChoice.equals("no")) {
+            moves.add("n");
+        } else if (userChoice.equals("yes")) {
+            moves.add("y");
+        } else {
+            throw new RuntimeException("did not recognise replay choice");
+        }
     }
 
     public boolean wasAskForPositionCalled() {

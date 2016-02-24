@@ -13,44 +13,42 @@ import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class GameSetupTest {
+public class GameRunnerTest {
     FakeUserInterface fakeUserInterface;
+    PlayerFactory playerFactory;
 
     @Before
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
+        playerFactory = new PlayerFactory(fakeUserInterface);
     }
 
     @Test
-    public void setsUpFirstHumanVsHuman3x3Game() {
-        fakeUserInterface.provideConsoleInput("1", "3", "1", "7", "2", "4", "3", "n");
-        PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
-        GameSetup gameSetup = new GameSetup(fakeUserInterface, playerFactory);
-        gameSetup.start();
-        assertTrue(fakeUserInterface.greetUserWasCalled);
-        assertTrue(gameSetup.getPlayer() instanceof HumanPlayer);
-        assertTrue(gameSetup.getOpponent() instanceof HumanPlayer);
+    public void createsTwoHumanPlayersWhenRequested() {
+        fakeUserInterface.fakeConsoleInputForOneHvH3x3Game();
+        GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
+        Game game = gameRunner.createGame();
+        assertTrue(game.getPlayer() instanceof HumanPlayer);
+        assertTrue(game.getOpponent() instanceof HumanPlayer);
     }
 
     @Test
     public void playsHuman3x3GameTwice() {
-        fakeUserInterface.provideConsoleInput("1", "3", "1", "7", "3", "4", "2", "y", "1", "3", "2", "5", "9", "7", "3", "6", "4", "8", "1", "n");
-        PlayerFactory playerFactory = new PlayerFactory(fakeUserInterface);
-        GameSetup gameSetup = new GameSetup(fakeUserInterface, playerFactory);
-        gameSetup.setUpGameAndPlay();
+        fakeUserInterface.fakeConsoleInputForTwoHvH3x3Games();
+        GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
+        gameRunner.setUpGameAndPlay();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(2, fakeUserInterface.announceWinnerCalled());
     }
 
     @Test
-    public void setsUpFirstHumanVsComputer3x3Game() {
-        fakeUserInterface.provideConsoleInput("2", "3", "1", "2", "3", "n");
-        GameSetup gameSetup = new GameSetup(fakeUserInterface,
+    public void createsHumanAndComputerPlayer() {
+        fakeUserInterface.fakeConsoleInputForOneHvC3x3Game();
+        GameRunner gameRunner = new GameRunner(fakeUserInterface,
                 new FakePlayerFactory(fakeUserInterface, createFakeComputerPlayerWithInput()));
-        gameSetup.start();
-        assertTrue(fakeUserInterface.greetUserWasCalled);
-        assertTrue(gameSetup.getPlayer() instanceof HumanPlayer);
-        assertTrue(gameSetup.getOpponent() instanceof FakeComputerPlayer);
+        Game game =  gameRunner.createGame();
+        assertTrue(game.getPlayer() instanceof HumanPlayer);
+        assertTrue(game.getOpponent() instanceof FakeComputerPlayer);
     }
 
     private FakeComputerPlayer createFakeComputerPlayerWithInput() {

@@ -1,6 +1,6 @@
 package de.rabea;
 
-import de.rabea.game.GameSetup;
+import de.rabea.game.GameRunner;
 import de.rabea.player.PlayerFactory;
 import de.rabea.ui.ConsoleUi;
 import de.rabea.ui.PrettyBoardPainter;
@@ -14,7 +14,7 @@ public class App {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         ConsoleUi userInterface = new ConsoleUi(new RealConsole(bufferedReader, System.out), new PrettyBoardPainter());
         PlayerFactory playerFactory = new PlayerFactory(userInterface);
-        GameSetup gameSetup = new GameSetup(userInterface, playerFactory);
-        gameSetup.start();
+        GameRunner gameRunner = new GameRunner(userInterface, playerFactory);
+        gameRunner.setUpGameAndPlay();
     }
 }
