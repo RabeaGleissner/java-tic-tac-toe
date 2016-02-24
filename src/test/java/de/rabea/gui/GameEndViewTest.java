@@ -16,7 +16,7 @@ public class GameEndViewTest {
     private GuiApp guiApp;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         new JFXPanel();
         guiApp = new GuiApp(new ViewUpdater(new Scene(new GridPane())));
     }

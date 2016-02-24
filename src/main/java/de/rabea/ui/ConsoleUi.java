@@ -132,11 +132,8 @@ public class ConsoleUi implements UserInterface {
     private boolean userReplayChoice(String userChoice) {
         if (inputFormatter.formatForReplayOption(userChoice) == Replay.YES) {
             return true;
-        } else if (inputFormatter.formatForReplayOption(userChoice) == Replay.NO) {
-            return false;
-        } else {
-            return playAgain();
-        }
+        } else
+            return inputFormatter.formatForReplayOption(userChoice) != Replay.NO && playAgain();
     }
 
     public void positionUnavailableWarning(Board board) {

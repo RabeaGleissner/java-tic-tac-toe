@@ -20,7 +20,7 @@ public class BoardViewTest {
     private GuiApp guiApp;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         new JFXPanel();
         viewUpdater = new ViewUpdater(new Scene(new GridPane()));
         guiApp = new GuiApp(viewUpdater);
