@@ -3,6 +3,7 @@ package de.rabea.ui;
 import de.rabea.game.Board;
 import org.junit.Test;
 
+import static de.rabea.game.Mark.EMPTY;
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
@@ -11,9 +12,9 @@ public class PrettyBoardPainterTest {
 
     @Test
     public void displays3x3BoardWithMarksInDifferentColoursAndDashedLines() {
-        Board board = new Board(3);
-        board.placeMarkOnExistingBoard(1, X);
-        board.placeMarkOnExistingBoard(3, O);
+        Board board = new Board(EMPTY, X, EMPTY,
+                                O, EMPTY, EMPTY,
+                                EMPTY, EMPTY, EMPTY);
         PrettyBoardPainter prettyBoardPainter = new PrettyBoardPainter();
         assertEquals(
                   "\n|  1 |  \u001B[34mX\u001B[0m |  3 | \n" +
@@ -28,10 +29,10 @@ public class PrettyBoardPainterTest {
 
     @Test
     public void displays4x4BoardWithColourfulMarksAndDashedLines() {
-        Board board = new Board(4);
-        board.placeMarkOnExistingBoard(1, X);
-        board.placeMarkOnExistingBoard(4, O);
-        board.placeMarkOnExistingBoard(15,X);
+        Board board = new Board(EMPTY, X, EMPTY, EMPTY,
+                                O, EMPTY, EMPTY, EMPTY,
+                                EMPTY, EMPTY, EMPTY, EMPTY,
+                                EMPTY, EMPTY, EMPTY, X);
         PrettyBoardPainter prettyBoardPainter = new PrettyBoardPainter();
         assertEquals(
                 "\n|  1 |  \u001B[34mX\u001B[0m |  3 |  4 | \n" +

@@ -12,25 +12,23 @@ import static org.junit.Assert.assertTrue;
 public class HumanPlayerTest {
     private FakeConsole fakeConsole;
     private HumanPlayer humanPlayer;
-    private Board board;
 
     @Before
     public void setup() {
         fakeConsole = new FakeConsole();
         humanPlayer = new HumanPlayer(new ConsoleUi(fakeConsole, new PrettyBoardPainter()), X);
-        board = new Board(3);
     }
 
     @Test
     public void convertsUserPositionIntoInteger() {
         fakeConsole.userInput("2");
-        assertEquals(1, humanPlayer.getPosition(board));
+        assertEquals(1, humanPlayer.getPosition(new Board(3)));
     }
 
     @Test
     public void givesWarningWhenUserEntryIsNotANumber() {
         fakeConsole.userInput("NaN", "8");
-        humanPlayer.getPosition(board);
+        humanPlayer.getPosition(new Board(3));
         assertEquals("Please select a position for your mark.", fakeConsole.messagePrinted());
     }
 
@@ -43,10 +41,11 @@ public class HumanPlayerTest {
     public void asksUserAgainWhenPositionIsOccupied() {
         FakeUserInterface fakeUserInterface = new FakeUserInterface();
         HumanPlayer humanPlayer = new HumanPlayer(fakeUserInterface, X);
-        board.placeMarkOnExistingBoard(0, X);
+        Board board = new Board(3);
+        Board nextBoard = board.placeMark(0, X);
         fakeUserInterface.choosePositions("1", "7", "3", "4", "2");
         fakeUserInterface.replayChoice("no");
-        humanPlayer.getPosition(board);
+        humanPlayer.getPosition(nextBoard);
         assertTrue(fakeUserInterface.wasPositionUnavailableWarningCalled());
     }
 }

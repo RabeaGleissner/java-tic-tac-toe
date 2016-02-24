@@ -19,7 +19,7 @@ public class Game {
     public void play(Board board) {
         userInterface.displayBoard(board);
         while (gameIsNotOver(board) && currentPlayer.hasMove()){
-            playOneRound(currentPlayer, board);
+            board = playOneRound(currentPlayer, board);
             if (gameIsNotOver(board)) {
                 switchPlayer();
             }
@@ -37,9 +37,10 @@ public class Game {
         }
     }
 
-    private void playOneRound(Player player, Board board) {
-        board.placeMarkOnExistingBoard(player.getPosition(board), player.mark());
-        userInterface.displayBoard(board);
+    private Board playOneRound(Player player, Board board) {
+        Board nextBoard = board.placeMark(player.getPosition(board), player.mark());
+        userInterface.displayBoard(nextBoard);
+        return nextBoard;
     }
 
     private void finishGame(Mark mark, Board board) {

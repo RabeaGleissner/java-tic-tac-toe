@@ -58,9 +58,9 @@ public class BoardViewTest {
     @Test
     public void labelsContainCorrespondingPlayerMark() {
         Board board = new Board(3);
-        board.placeMarkOnExistingBoard(2, Mark.X);
+        Board nextBoard = board.placeMark(2, Mark.X);
         BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier(), guiApp));
-        Parent node = boardView.draw(board);
+        Parent node = boardView.draw(nextBoard);
 
         assertEquals("X", findLabel(node, 2).getText());
     }
