@@ -10,9 +10,7 @@ public class GameEndView {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(Pos.CENTER);
         gridPane.add(new Text("Game over"), 3, 3);
-        JavaFXButton replayButton = new JavaFXButton();
-        replayButton.setText("Click to play again");
-        replayButton.setOnAction(new ReplayClickHandler(guiApp));
+        JavaFXButton replayButton = new JavaFXButton(new ReplayClickHandler(guiApp), "Click to play again", "replayButton", "replay-button");
         gridPane.add(replayButton.getActualButton(), 4, 5);
         return gridPane;
     }

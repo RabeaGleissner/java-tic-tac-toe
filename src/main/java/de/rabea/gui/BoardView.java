@@ -40,11 +40,7 @@ public class BoardView {
     }
 
     private JavaFXButton createButton(int position) {
-        JavaFXButton javaFXButton = new JavaFXButton();
-        javaFXButton.setOnAction(clickHandler);
-        javaFXButton.setText((position + 1) + "");
-        javaFXButton.setId(position + "");
-        javaFXButton.getActualButton().getStyleClass().add("cell");
+        JavaFXButton javaFXButton = new JavaFXButton(clickHandler, (position + 1) + "", position + "", "cell");
         return javaFXButton;
     }
 }
