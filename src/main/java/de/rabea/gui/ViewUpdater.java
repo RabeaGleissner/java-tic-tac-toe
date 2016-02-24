@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 
 public class ViewUpdater {
 
-    private Scene scene;
+    private final Scene scene;
 
     public ViewUpdater(Scene scene) {
         this.scene = scene;

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FakeRandomNumberCalculator extends RandomNumberCalculator {
 
-    private List<Integer> listOfNumbers;
+    private final List<Integer> listOfNumbers;
 
     public FakeRandomNumberCalculator() {
         listOfNumbers = new LinkedList<>();

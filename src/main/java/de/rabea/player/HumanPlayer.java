@@ -6,7 +6,7 @@ import de.rabea.game.Player;
 import de.rabea.ui.ConsoleUi;
 
 public class HumanPlayer extends Player {
-    private ConsoleUi userInterface;
+    private final ConsoleUi userInterface;
 
     public HumanPlayer(ConsoleUi userInterface, Mark mark) {
         super(mark);

@@ -3,7 +3,7 @@ package de.rabea.game;
 import static de.rabea.game.Mark.EMPTY;
 
 public class Line {
-    private Mark[] line;
+    private final Mark[] line;
 
     public Line(Mark... marks) {
         line = marks;

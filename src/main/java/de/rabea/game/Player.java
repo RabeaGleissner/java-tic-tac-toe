@@ -1,7 +1,7 @@
 package de.rabea.game;
 
 public abstract class Player {
-    protected Mark mark;
+    protected final Mark mark;
 
     protected Player(Mark mark) {
         this.mark = mark;

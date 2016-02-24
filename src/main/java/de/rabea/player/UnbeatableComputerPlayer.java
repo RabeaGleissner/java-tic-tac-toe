@@ -73,8 +73,8 @@ public class UnbeatableComputerPlayer extends Player {
     }
 
     private class ScoredMove {
-        private int score;
-        private int move;
+        private final int score;
+        private final int move;
 
         public ScoredMove(int score, int move) {
             this.score = score;

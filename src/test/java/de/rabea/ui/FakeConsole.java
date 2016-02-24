@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FakeConsole implements Console {
 
-    private List<String> userInput;
+    private final List<String> userInput;
     private String consoleOutput;
 
     public FakeConsole() {

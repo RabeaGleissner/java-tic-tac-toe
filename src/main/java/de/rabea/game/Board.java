@@ -7,8 +7,8 @@ import static de.rabea.game.Mark.*;
 public class Board {
 
     private Mark[] cells;
-    private int dimension;
-    private int numberOfCells;
+    private final int dimension;
+    private final int numberOfCells;
 
     public Board(Mark... gameState) {
         this((int) Math.sqrt(gameState.length));

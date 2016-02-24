@@ -1,8 +1,8 @@
 package de.rabea.gui;
 
 public class BoardClickHandler implements ClickHandler {
-    private ClickCarrier clickCarrier;
-    private GuiApp guiApp;
+    private final ClickCarrier clickCarrier;
+    private final GuiApp guiApp;
 
     public BoardClickHandler(ClickCarrier clickCarrier, GuiApp guiApp) {
         this.clickCarrier = clickCarrier;

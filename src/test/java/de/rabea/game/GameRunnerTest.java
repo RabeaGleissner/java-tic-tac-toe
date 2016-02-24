@@ -58,7 +58,7 @@ public class GameRunnerTest {
     }
 
     private class FakePlayerFactory extends PlayerFactory {
-        private FakeComputerPlayer fakeComputerPlayer;
+        private final FakeComputerPlayer fakeComputerPlayer;
 
         public FakePlayerFactory(ConsoleUi userInterface, FakeComputerPlayer fakeComputerPlayer) {
             super(userInterface);

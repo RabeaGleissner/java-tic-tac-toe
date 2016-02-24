@@ -10,10 +10,9 @@ import java.util.List;
 
 public class FakeUserInterface extends ConsoleUi {
 
-    private boolean greetUserWasCalled = false;
     private boolean askForPositionWasCalled = false;
     private boolean positionUnavailableWarningWasCalled = false;
-    private List<String> moves = new LinkedList<>();
+    private final List<String> moves = new LinkedList<>();
     private int countAnnounceGameEndCalls = 0;
 
     public FakeUserInterface() {
@@ -22,7 +21,6 @@ public class FakeUserInterface extends ConsoleUi {
 
     @Override
     public void greet() {
-        greetUserWasCalled = true;
     }
 
     @Override

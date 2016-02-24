@@ -9,7 +9,7 @@ import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 
 public class PlayerFactory {
-    private ConsoleUi userInterface;
+    private final ConsoleUi userInterface;
 
     public PlayerFactory(ConsoleUi userInterface) {
         this.userInterface = userInterface;

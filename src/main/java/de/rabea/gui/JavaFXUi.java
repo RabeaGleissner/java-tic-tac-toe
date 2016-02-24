@@ -7,9 +7,9 @@ import de.rabea.ui.UserInterface;
 
 public class JavaFXUi implements UserInterface {
 
-    private GuiPlayer guiPlayer;
-    private ViewUpdater viewUpdater;
-    private GuiApp guiApp;
+    private final GuiPlayer guiPlayer;
+    private final ViewUpdater viewUpdater;
+    private final GuiApp guiApp;
 
     public JavaFXUi(GuiPlayer guiPlayer, ViewUpdater viewUpdater, GuiApp guiApp) {
         this.guiPlayer = guiPlayer;

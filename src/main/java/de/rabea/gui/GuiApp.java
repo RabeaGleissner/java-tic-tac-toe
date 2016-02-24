@@ -6,7 +6,7 @@ import de.rabea.game.Mark;
 
 public class GuiApp {
 
-    private ViewUpdater viewUpdater;
+    private final ViewUpdater viewUpdater;
     private Board board = null;
     private Game game;
 

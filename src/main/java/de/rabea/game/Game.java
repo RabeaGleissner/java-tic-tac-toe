@@ -5,8 +5,8 @@ import de.rabea.ui.UserInterface;
 public class Game {
 
     private final UserInterface userInterface;
-    private Player player;
-    private Player opponent ;
+    private final Player player;
+    private final Player opponent ;
     private Player currentPlayer;
 
     public Game(UserInterface userInterface, Player player, Player opponent) {

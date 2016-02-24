@@ -13,7 +13,7 @@ import static de.rabea.game.Mark.*;
 
 public class BoardView {
 
-    private ClickHandler clickHandler;
+    private final ClickHandler clickHandler;
 
     public BoardView(ClickHandler clickHandler) {
         this.clickHandler = clickHandler;
