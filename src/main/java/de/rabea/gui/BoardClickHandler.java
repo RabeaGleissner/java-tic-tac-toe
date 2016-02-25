@@ -1,18 +1,22 @@
 package de.rabea.gui;
 
-public class BoardClickHandler implements ClickHandler {
-    private final ClickCarrier clickCarrier;
-    private final GuiApp guiApp;
+import de.rabea.game.Board;
 
-    public BoardClickHandler(ClickCarrier clickCarrier, GuiApp guiApp) {
-        this.clickCarrier = clickCarrier;
+public class BoardClickHandler implements ClickHandler {
+    private final GuiPlayer guiPlayer;
+    private final GuiApp guiApp;
+    private final Board board;
+
+    public BoardClickHandler(GuiPlayer guiPlayer, GuiApp guiApp, Board board) {
+        this.guiPlayer = guiPlayer;
         this.guiApp = guiApp;
+        this.board = board;
     }
 
     @Override
     public void action(String position) {
-        clickCarrier.addMove(convertToInteger(position));
-        guiApp.startGame();
+        guiPlayer.addMove(convertToInteger(position));
+        guiApp.startGame(board, guiPlayer);
     }
 
     private int convertToInteger(String position) {

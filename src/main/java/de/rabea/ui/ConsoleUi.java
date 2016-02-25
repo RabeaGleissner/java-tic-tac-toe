@@ -1,6 +1,7 @@
 package de.rabea.ui;
 
 import de.rabea.game.*;
+import de.rabea.player.HumanPlayer;
 
 public class ConsoleUi implements UserInterface {
     private final Console console;
@@ -28,7 +29,7 @@ public class ConsoleUi implements UserInterface {
 
 
     @Override
-    public void displayBoard(Board board) {
+    public void displayBoard(Board board, Player player) {
         clearScreen();
         console.print(boardPainter.drawBoard(board));
     }
@@ -137,7 +138,7 @@ public class ConsoleUi implements UserInterface {
     }
 
     public void positionUnavailableWarning(Board board) {
-        displayBoard(board);
+        displayBoard(board, new HumanPlayer(this, Mark.X));
         console.print(UNAVAILABLE_POSITION);
     }
 
@@ -151,7 +152,7 @@ public class ConsoleUi implements UserInterface {
 
     public void notANumberWarning(Board board) {
         clearScreen();
-        displayBoard(board);
+        displayBoard(board, new HumanPlayer(this, Mark.X));
         console.print(ENTER_A_NUMBER);
     }
 

@@ -1,7 +1,10 @@
 package de.rabea.player;
 
 import de.rabea.game.Board;
-import de.rabea.ui.*;
+import de.rabea.ui.ConsoleUi;
+import de.rabea.ui.FakeConsole;
+import de.rabea.ui.FakeUserInterface;
+import de.rabea.ui.PrettyBoardPainter;
 import org.junit.Before;
 import org.junit.Test;
 

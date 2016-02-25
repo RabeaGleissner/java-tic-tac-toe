@@ -7,7 +7,6 @@ import de.rabea.game.Mark;
 public class GuiApp {
 
     private final ViewUpdater viewUpdater;
-    private Board board = null;
     private Game game;
 
     public GuiApp(ViewUpdater viewUpdater) {
@@ -18,30 +17,26 @@ public class GuiApp {
         viewUpdater.showBoardSizeOptionsView(this);
     }
 
-    public void createBoard(String boardSize) {
+    public Board createBoard(String boardSize) {
         if (boardSize.equals("3x3")) {
-            board = new Board(3);
+            return new Board(3);
         } else {
-            board = new Board(4);
+            return new Board(4);
         }
-        prepareGameForPlaying();
     }
 
-    public void prepareGameForPlaying() {
-        ClickCarrier carrier = new ClickCarrier();
-        GuiPlayer guiPlayer = new GuiPlayer(Mark.X, carrier);
-        GuiPlayer guiOpponent = new GuiPlayer(Mark.O, carrier);
+    public void prepareGameForPlaying(String boardSize) {
+        Board board = createBoard(boardSize);
+        GuiPlayer guiPlayer = new GuiPlayer(Mark.X);
+        GuiPlayer guiOpponent = new GuiPlayer(Mark.O);
         viewUpdater.showBoard(guiPlayer, board, this);
-        game = new Game(new JavaFXUi(guiPlayer, viewUpdater, this), guiPlayer, guiOpponent);
-        startGame();
+        game = new Game(new JavaFXUi(viewUpdater, this), guiPlayer, guiOpponent);
+        startGame(board, guiPlayer);
     }
 
-    public void startGame() {
+    public void startGame(Board board, GuiPlayer guiPlayer) {
+        viewUpdater.showBoard(guiPlayer, board, this);
         game.play(board);
-    }
-
-    public Board getBoard() {
-        return board;
     }
 }
 

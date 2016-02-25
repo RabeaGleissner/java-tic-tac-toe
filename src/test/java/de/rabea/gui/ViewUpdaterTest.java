@@ -33,7 +33,7 @@ public class ViewUpdaterTest {
     public void showsBoard() {
         Scene scene = new Scene(new GridPane());
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showBoard(new GuiPlayer(Mark.X, new ClickCarrier(1)), new Board(3), new GuiApp(viewUpdater));
+        viewUpdater.showBoard(new GuiPlayer(Mark.X), new Board(3), new GuiApp(viewUpdater));
         int numberOfButtons = scene.getRoot().getChildrenUnmodifiable().size();
 
         assertEquals(9, numberOfButtons);

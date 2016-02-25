@@ -9,6 +9,6 @@ public class BoardSizeClickHandler implements ClickHandler {
 
     @Override
     public void action(String boardSize) {
-        guiApp.createBoard(boardSize);
+        guiApp.prepareGameForPlaying(boardSize);
     }
 }

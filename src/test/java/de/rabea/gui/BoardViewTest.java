@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import org.junit.Before;
 import org.junit.Test;
 
+import static de.rabea.game.Mark.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -29,7 +30,7 @@ public class BoardViewTest {
     @Test
     public void threeByThreeBoardHasNineChildren() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier(), guiApp));
+        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board));
         Parent gridPane = boardView.draw(board);
 
         assertEquals(9, gridPane.getChildrenUnmodifiable().size());
@@ -38,7 +39,7 @@ public class BoardViewTest {
     @Test
     public void fourByFourBoardHasSixteenChildren() {
         Board board = new Board(4);
-        BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier(), guiApp));
+        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board));
         Parent gridPane = boardView.draw(board);
 
         assertEquals(16, gridPane.getChildrenUnmodifiable().size());
@@ -47,7 +48,7 @@ public class BoardViewTest {
     @Test
     public void allElementsOnEmptyBoardAreButtons() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier(), guiApp));
+        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board));
         Parent gridPane = boardView.draw(board);
 
         for (Node node : gridPane.getChildrenUnmodifiable()) {
@@ -58,8 +59,8 @@ public class BoardViewTest {
     @Test
     public void labelsContainCorrespondingPlayerMark() {
         Board board = new Board(3);
-        Board nextBoard = board.placeMark(2, Mark.X);
-        BoardView boardView = new BoardView(new BoardClickHandler(new ClickCarrier(), guiApp));
+        Board nextBoard = board.placeMark(2, X);
+        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board));
         Parent node = boardView.draw(nextBoard);
 
         assertEquals("X", findLabel(node, 2).getText());
@@ -69,13 +70,13 @@ public class BoardViewTest {
     public void reactsToAClick() {
         Board board = new Board(3);
         GuiAppSpy guiAppSpy = new GuiAppSpy(viewUpdater);
-        ClickCarrier carrier = new ClickCarrier();
-        BoardView boardView = new BoardView(new BoardClickHandler(carrier, guiAppSpy));
+        GuiPlayer guiPlayer = new GuiPlayer(X);
+        BoardView boardView = new BoardView(new BoardClickHandler(guiPlayer, guiAppSpy, board));
         Parent drawnBoard = boardView.draw(board);
         Button button = findButton(drawnBoard, 7);
         button.fire();
 
-        assertEquals(7, carrier.getMove());
+        assertEquals(7, guiPlayer.getPosition(board));
         assertTrue(guiAppSpy.displayBoard);
     }
 
@@ -88,7 +89,7 @@ public class BoardViewTest {
         }
 
         @Override
-        public void startGame() {
+        public void startGame(Board board, GuiPlayer guiPlayer) {
             displayBoard = true;
         }
     }

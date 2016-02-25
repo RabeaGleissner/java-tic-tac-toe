@@ -12,25 +12,25 @@ import static org.junit.Assert.assertTrue;
 public class GuiPlayerTest {
 
     @Test
-    public void hasMoveWhenClickCarrierHasSomething() {
-        ClickCarrier carrier = ClickCarrier.withMove(3);
-        GuiPlayer player = new GuiPlayer(Mark.X, carrier);
+    public void hasMoveWhenMoveHasBeenAdded() {
+        GuiPlayer player = new GuiPlayer(Mark.X);
+        player.addMove(1);
 
         assertTrue(player.hasMove());
     }
 
     @Test
-    public void returnsMoveFromCarrier() {
-        ClickCarrier carrier = ClickCarrier.withMove(5);
-        GuiPlayer player = new GuiPlayer(Mark.X, carrier);
+    public void returnsMove() {
+        GuiPlayer player = new GuiPlayer(Mark.X);
+        player.addMove(5);
 
         assertEquals(5, player.getPosition(new Board(3)));
     }
 
     @Test
     public void returnsMoveExactlyOnce() {
-        ClickCarrier carrier = ClickCarrier.withMove(3);
-        GuiPlayer player = new GuiPlayer(O, carrier);
+        GuiPlayer player = new GuiPlayer(O);
+        player.addMove(3);
 
         assertEquals(3, player.getPosition(new Board(3)));
         assertEquals(-1, player.getPosition(new Board(3)));
@@ -38,8 +38,7 @@ public class GuiPlayerTest {
 
     @Test
     public void hasNoMoveWhenThereIsNoData() {
-        ClickCarrier carrier = ClickCarrier.withNoData();
-        GuiPlayer player = new GuiPlayer(Mark.X, carrier);
+        GuiPlayer player = new GuiPlayer(Mark.X);
 
         assertFalse(player.hasMove());
     }

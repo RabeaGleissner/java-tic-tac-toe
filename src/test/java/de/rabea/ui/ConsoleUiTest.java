@@ -2,6 +2,8 @@ package de.rabea.ui;
 
 import de.rabea.game.Board;
 import de.rabea.game.GameMode;
+import de.rabea.game.Mark;
+import de.rabea.player.HumanPlayer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +29,7 @@ public class ConsoleUiTest {
     @Test
     public void displaysBoard() {
         Board board = new Board(3);
-        userInterface.displayBoard(board);
+        userInterface.displayBoard(board, new HumanPlayer(userInterface, Mark.X));
         assertEquals(fakeConsole.messagePrinted(), "board placeholder");
     }
 
