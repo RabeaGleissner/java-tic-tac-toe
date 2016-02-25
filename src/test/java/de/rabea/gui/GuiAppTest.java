@@ -61,7 +61,7 @@ public class GuiAppTest {
         }
 
         @Override
-        public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp) {
+        public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp, boolean positionInUse) {
             hasShownBoard = true;
         }
 

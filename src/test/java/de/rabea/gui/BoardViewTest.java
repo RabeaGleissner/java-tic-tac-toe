@@ -28,8 +28,8 @@ public class BoardViewTest {
     @Test
     public void threeByThreeBoardHasNineChildren() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board));
-        Parent gridPane = boardView.draw(board);
+        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board), new PositionInUseClickHandlerStub());
+        Parent gridPane = boardView.draw(board, false);
 
         assertEquals(9, gridPane.getChildrenUnmodifiable().size());
     }
@@ -37,8 +37,8 @@ public class BoardViewTest {
     @Test
     public void fourByFourBoardHasSixteenChildren() {
         Board board = new Board(4);
-        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board));
-        Parent gridPane = boardView.draw(board);
+        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board), new PositionInUseClickHandlerStub());
+        Parent gridPane = boardView.draw(board, false);
 
         assertEquals(16, gridPane.getChildrenUnmodifiable().size());
     }
@@ -46,8 +46,8 @@ public class BoardViewTest {
     @Test
     public void allElementsOnEmptyBoardAreActiveButtons() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board));
-        Parent gridPane = boardView.draw(board);
+        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board), new PositionInUseClickHandlerStub());
+        Parent gridPane = boardView.draw(board, false);
 
         for (Node node : gridPane.getChildrenUnmodifiable()) {
             assertTrue(isActiveButton(node));
@@ -58,8 +58,8 @@ public class BoardViewTest {
     public void disabledButtonsContainCorrespondingPlayerMark() {
         Board board = new Board(3);
         Board nextBoard = board.placeMark(2, X);
-        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board));
-        Parent node = boardView.draw(nextBoard);
+        BoardView boardView = new BoardView(new BoardClickHandler(new GuiPlayer(X), guiApp, board), new PositionInUseClickHandlerStub());
+        Parent node = boardView.draw(nextBoard, false);
 
         assertEquals("X", findDisabledButton(node, 2).getText());
     }
@@ -69,13 +69,25 @@ public class BoardViewTest {
         Board board = new Board(3);
         GuiAppSpy guiAppSpy = new GuiAppSpy(viewUpdater);
         GuiPlayer guiPlayer = new GuiPlayer(X);
-        BoardView boardView = new BoardView(new BoardClickHandler(guiPlayer, guiAppSpy, board));
-        Parent drawnBoard = boardView.draw(board);
+        BoardView boardView = new BoardView(new BoardClickHandler(guiPlayer, guiAppSpy, board), new PositionInUseClickHandlerStub());
+        Parent drawnBoard = boardView.draw(board, false);
         Button button = findActiveButton(drawnBoard, 7);
         button.fire();
 
         assertEquals(7, guiPlayer.getPosition(board));
         assertTrue(guiAppSpy.displayBoard);
+    }
+
+    private class PositionInUseClickHandlerStub extends PositionInUseClickHandler {
+
+        public PositionInUseClickHandlerStub() {
+            super(null, null, null, null);
+        }
+
+        @Override
+        public void action(String position) {
+
+        }
     }
 
     private class GuiAppSpy extends GuiApp {
