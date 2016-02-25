@@ -4,19 +4,19 @@ import de.rabea.game.Board;
 import de.rabea.game.Mark;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 import java.util.Map;
 
-import static de.rabea.game.Mark.*;
+import static de.rabea.game.Mark.EMPTY;
 
 public class BoardView {
 
-    private final ClickHandler clickHandler;
+    private final ClickHandler boardClickHandler;
 
-    public BoardView(ClickHandler clickHandler) {
-        this.clickHandler = clickHandler;
+    public BoardView(ClickHandler boardClickHandler) {
+        this.boardClickHandler = boardClickHandler;
     }
 
     public Parent draw(Board board) {
@@ -28,12 +28,11 @@ public class BoardView {
             int column = position % board.getDimension();
             int row = position / board.getDimension();
             if (cell == EMPTY) {
-                JavaFXButton javaFXButton = new JavaFXButton(clickHandler, (position + 1) + "", position + "", "cell");
-                gridPane.add(javaFXButton.getActualButton(), column, row);
+                JavaFXButton activeButton = new JavaFXButton(boardClickHandler, "_", position + "", "active-button");
+                gridPane.add(activeButton.getActualButton(), column, row);
             } else {
-                Label label = new Label(cell.toString());
-                label.getStyleClass().add("cell");
-                gridPane.add(label, column, row);
+                JavaFXButton disabledButton = new JavaFXButton(boardClickHandler, cell.toString(), cell.toString(), "disabled-button");
+                gridPane.add(disabledButton.getActualButton(), column, row);
             }
         }
         return gridPane;
