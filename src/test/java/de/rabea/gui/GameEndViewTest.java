@@ -4,8 +4,8 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +25,7 @@ public class GameEndViewTest {
     public void hasGameOverMessage() {
         GameEndView gameEndView = new GameEndView();
         Parent gridPane = gameEndView.draw(guiApp);
-        Text text = (Text) gridPane.getChildrenUnmodifiable().get(0);
+        Label text = (Label) gridPane.getChildrenUnmodifiable().get(0);
         assertEquals("Game over", text.getText());
     }
 

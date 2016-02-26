@@ -11,7 +11,9 @@ public class BoardSizeView {
     public Parent draw(GuiApp guiApp) {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(CENTER);
-        gridPane.add(new Label("Please select a board size:"), 0, 0);
+        Label label = new Label("Please select a board size:");
+        label.getStyleClass().add("header");
+        gridPane.add(label, 0, 0, 3, 1);
         addButtons(guiApp, gridPane);
         return gridPane;
     }

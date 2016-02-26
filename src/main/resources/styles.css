@@ -1,5 +1,6 @@
 .root {
     -fx-background-color: lightyellow;
+    -fx-font-family: Helvetica, Arial;
 }
 
 .active-button, .disabled-button {
@@ -13,9 +14,19 @@
 }
 
 .active-button {
+    -fx-background-color: #d4ebf2;
+    -fx-cursor: hand;
+}
+
+.active-button:hover {
     -fx-background-color: #ADD8E6;
 }
 
 .disabled-button {
     -fx-background-color: lightgrey;
+}
+
+.header {
+    -fx-padding: 0 0 30px 0;
+    -fx-font-size: 20px;
 }
