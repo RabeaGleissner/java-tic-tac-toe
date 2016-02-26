@@ -33,7 +33,7 @@ public class JavaFXUi implements UserInterface {
 
     @Override
     public void announceGameEnd(Mark lastPlayedMark, boolean winner) {
-        viewUpdater.showGameOverView(guiApp);
+        viewUpdater.showGameOverView(guiApp, lastPlayedMark, winner);
     }
 
     @Override

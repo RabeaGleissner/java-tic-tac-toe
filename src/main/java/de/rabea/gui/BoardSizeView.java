@@ -24,6 +24,7 @@ public class BoardSizeView {
     }
 
     private JavaFXButton createButton(GuiApp guiApp, String size) {
-        return new JavaFXButton(new BoardSizeClickHandler(guiApp), size + " board", size, "board-size-buttons");
+        return new JavaFXButton(new BoardSizeClickHandler(guiApp), size + " board",
+                size, "board-size-buttons");
     }
 }

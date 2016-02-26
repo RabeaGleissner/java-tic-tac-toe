@@ -1,6 +1,7 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
+import de.rabea.game.Mark;
 import javafx.scene.Scene;
 
 public class ViewUpdater {
@@ -21,8 +22,8 @@ public class ViewUpdater {
         scene.setRoot(boardView.draw(board, positionFull));
     }
 
-    public void showGameOverView(GuiApp guiApp) {
+    public void showGameOverView(GuiApp guiApp, Mark lastPlayedMark, boolean winner) {
         GameEndView gameEndView = new GameEndView();
-        scene.setRoot(gameEndView.draw(guiApp));
+        scene.setRoot(gameEndView.draw(guiApp, lastPlayedMark, winner));
     }
 }

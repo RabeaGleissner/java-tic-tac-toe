@@ -1,19 +1,30 @@
 package de.rabea.gui;
 
-import javafx.geometry.Pos;
+import de.rabea.game.Mark;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+import static javafx.geometry.Pos.CENTER;
+
 public class GameEndView {
 
-    public GridPane draw(GuiApp guiApp) {
+    public GridPane draw(GuiApp guiApp, Mark lastPlayedMark, boolean winner) {
         GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        Label label = new Label("Game over");
-        label.getStyleClass().add("header");
-        gridPane.add(label, 0, 0, 3, 1);
-        JavaFXButton replayButton = new JavaFXButton(new ReplayClickHandler(guiApp), "Click to play again", "replayButton", "replay-button");
-        gridPane.add(replayButton.getActualButton(), 1, 1, 3, 1);
+        gridPane.setAlignment(CENTER);
+        Label winnerMessage = new Label(message(lastPlayedMark, winner));
+        winnerMessage.getStyleClass().add("header");
+        gridPane.add(winnerMessage, 1, 1, 3, 1);
+        JavaFXButton replayButton = new JavaFXButton(new ReplayClickHandler(guiApp),
+                "Play again", "replayButton", "replay-button");
+        gridPane.add(replayButton.getActualButton(), 2, 2, 3, 1);
         return gridPane;
+    }
+
+    private String message(Mark lastPlayedMark, boolean winner) {
+        if (winner) {
+            return "Game over. Winner is " + lastPlayedMark.toString() + ".";
+        } else {
+            return "Game over. It's a draw!";
+        }
     }
 }

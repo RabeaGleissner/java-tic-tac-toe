@@ -1,7 +1,6 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
-import de.rabea.game.Mark;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import org.junit.Before;
 import org.junit.Test;
 
+import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
 
 public class ViewUpdaterTest {
@@ -33,7 +33,7 @@ public class ViewUpdaterTest {
     public void showsBoard() {
         Scene scene = new Scene(new GridPane());
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showBoard(new GuiPlayer(Mark.X), new Board(3), new GuiApp(viewUpdater), false);
+        viewUpdater.showBoard(new GuiPlayer(X), new Board(3), new GuiApp(viewUpdater), false);
         int numberOfButtons = scene.getRoot().getChildrenUnmodifiable().size();
 
         assertEquals(9, numberOfButtons);
@@ -43,9 +43,9 @@ public class ViewUpdaterTest {
     public void showsGameOverView() {
         Scene scene = new Scene(new GridPane());
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showGameOverView(new GuiApp(viewUpdater));
+        viewUpdater.showGameOverView(new GuiApp(viewUpdater), X, false);
         Button replayButton = (Button) scene.getRoot().getChildrenUnmodifiable().get(1);
 
-        assertEquals("Click to play again", replayButton.getText());
+        assertEquals("Play again", replayButton.getText());
     }
 }
