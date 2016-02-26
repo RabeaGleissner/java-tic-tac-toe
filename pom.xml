@@ -35,6 +35,7 @@
               <exclude>**/GameEndViewTest.java</exclude>
               <exclude>**/GuiAppTest.java</exclude>
               <exclude>**/ViewUpdaterTest.java</exclude>
+              <exclude>**/EmptyCellClickHandlerTest.java</exclude>
               <exclude>*ComputerPlayerSpeedTest*</exclude>
             </excludes>
           </configuration>
