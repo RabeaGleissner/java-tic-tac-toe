@@ -13,12 +13,12 @@ import static javafx.geometry.Pos.CENTER;
 
 public class BoardView {
 
-    private final ClickHandler boardClickHandler;
-    private final ClickHandler positionInUseClickHandler;
+    private final ClickHandler emptyCellClickHandler;
+    private final ClickHandler fullCellClickHandler;
 
-    public BoardView(ClickHandler boardClickHandler, ClickHandler positionInUseClickHandler) {
-        this.boardClickHandler = boardClickHandler;
-        this.positionInUseClickHandler = positionInUseClickHandler;
+    public BoardView(ClickHandler emptyCellClickHandler, ClickHandler fullCellClickHandler) {
+        this.emptyCellClickHandler = emptyCellClickHandler;
+        this.fullCellClickHandler = fullCellClickHandler;
     }
 
     public Parent draw(Board board, boolean positionInUse) {
@@ -30,15 +30,17 @@ public class BoardView {
             int column = position % board.getDimension();
             int row = position / board.getDimension();
             if (cell == EMPTY) {
-                JavaFXButton activeButton = new JavaFXButton(boardClickHandler, "_", position + "", "active-button");
+                JavaFXButton activeButton = new JavaFXButton(emptyCellClickHandler, "_", position + "", "active-button");
                 gridPane.add(activeButton.getActualButton(), column, row);
             } else {
-                JavaFXButton disabledButton = new JavaFXButton(positionInUseClickHandler, cell.toString(), cell.toString(), "disabled-button");
+                JavaFXButton disabledButton = new JavaFXButton(fullCellClickHandler, cell.toString(), cell.toString(), "disabled-button");
                 gridPane.add(disabledButton.getActualButton(), column, row);
             }
         }
         if (positionInUse) {
-            gridPane.add(new Text("Position already in use!"), 0, 5, 3, 1);
+            Text text = new Text("Position already in use!");
+            text.setId("positionInUseWarning");
+            gridPane.add(text, 0, 5, 3, 1);
         }
 
         return gridPane;

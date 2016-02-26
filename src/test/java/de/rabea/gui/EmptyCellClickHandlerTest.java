@@ -8,14 +8,14 @@ import org.junit.Test;
 import static de.rabea.game.Mark.O;
 import static org.junit.Assert.assertEquals;
 
-public class BoardClickHandlerTest {
+public class EmptyCellClickHandlerTest {
 
     @Test
     public void hasNewPositionAvailable() {
         GuiPlayer guiPlayer = new GuiPlayer(O);
         Board board = new Board(3);
-        BoardClickHandler boardClickHandler = new BoardClickHandler(guiPlayer, new GuiAppStub(new ViewUpdater(new Scene(new GridPane()))), board);
-        boardClickHandler.action("3");
+        EmptyCellClickHandler emptyCellClickHandler = new EmptyCellClickHandler(guiPlayer, new GuiAppStub(new ViewUpdater(new Scene(new GridPane()))), board);
+        emptyCellClickHandler.action("3");
 
         assertEquals(3, guiPlayer.getPosition(board));
     }

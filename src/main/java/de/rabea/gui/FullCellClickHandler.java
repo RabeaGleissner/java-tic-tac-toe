@@ -2,7 +2,7 @@ package de.rabea.gui;
 
 import de.rabea.game.Board;
 
-public class PositionInUseClickHandler implements ClickHandler {
+public class FullCellClickHandler implements ClickHandler {
 
 
     private ViewUpdater viewUpdater;
@@ -10,13 +10,12 @@ public class PositionInUseClickHandler implements ClickHandler {
     private Board board;
     private GuiApp guiApp;
 
-    public PositionInUseClickHandler(ViewUpdater viewUpdater, GuiPlayer guiPlayer, Board board, GuiApp guiApp) {
+    public FullCellClickHandler(ViewUpdater viewUpdater, GuiPlayer guiPlayer, Board board, GuiApp guiApp) {
         this.viewUpdater = viewUpdater;
         this.guiPlayer = guiPlayer;
         this.board = board;
         this.guiApp = guiApp;
     }
-
 
     @Override
     public void action(String position) {
