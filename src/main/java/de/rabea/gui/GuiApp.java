@@ -27,15 +27,15 @@ public class GuiApp {
 
     public void prepareGameForPlaying(String boardSize) {
         Board board = createBoard(boardSize);
-        GuiPlayer guiPlayer = new GuiPlayer(Mark.X);
-        GuiPlayer guiOpponent = new GuiPlayer(Mark.O);
-        viewUpdater.showBoard(guiPlayer, board, this);
-        game = new Game(new JavaFXUi(viewUpdater, this), guiPlayer, guiOpponent);
-        startGame(board, guiPlayer);
+        GuiPlayer player = new GuiPlayer(Mark.X);
+        GuiPlayer opponent = new GuiPlayer(Mark.O);
+        viewUpdater.showBoard(player, board, this);
+        game = new Game(new JavaFXUi(viewUpdater, this), player, opponent);
+        playOneRound(board, player);
     }
 
-    public void startGame(Board board, GuiPlayer guiPlayer) {
-        viewUpdater.showBoard(guiPlayer, board, this);
+    public void playOneRound(Board board, GuiPlayer player) {
+        viewUpdater.showBoard(player, board, this);
         game.play(board);
     }
 }

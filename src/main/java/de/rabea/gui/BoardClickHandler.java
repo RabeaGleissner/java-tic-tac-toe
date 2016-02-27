@@ -16,7 +16,7 @@ public class BoardClickHandler implements ClickHandler {
     @Override
     public void action(String position) {
         guiPlayer.addMove(convertToInteger(position));
-        guiApp.startGame(board, guiPlayer);
+        guiApp.playOneRound(board, guiPlayer);
     }
 
     private int convertToInteger(String position) {

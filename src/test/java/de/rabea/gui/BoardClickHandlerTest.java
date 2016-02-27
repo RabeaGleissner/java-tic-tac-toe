@@ -27,7 +27,7 @@ public class BoardClickHandlerTest {
         }
 
         @Override
-        public void startGame(Board board, GuiPlayer guiPlayer) {
+        public void playOneRound(Board board, GuiPlayer player) {
 
         }
     }

@@ -17,10 +17,8 @@ public class BoardSizeView {
     }
 
     private void addButtons(GuiApp guiApp, GridPane gridPane) {
-        JavaFXButton button3x3 = createButton(guiApp, "3x3");
-        JavaFXButton button4x4 = createButton(guiApp, "4x4");
-        gridPane.add(button3x3.getActualButton(), 1, 1);
-        gridPane.add(button4x4.getActualButton(), 2, 1);
+        gridPane.add(createButton(guiApp, "3x3").getActualButton(), 1, 1);
+        gridPane.add(createButton(guiApp, "4x4").getActualButton(), 2, 1);
     }
 
     private JavaFXButton createButton(GuiApp guiApp, String size) {

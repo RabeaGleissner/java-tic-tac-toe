@@ -35,7 +35,7 @@ public class ConsoleUi implements UserInterface {
     }
 
     private void clearScreen() {
-        console.print(clearScreenCharacters());
+        console.print(CLEAR_SCREEN);
     }
 
     public void greet() {
@@ -162,8 +162,5 @@ public class ConsoleUi implements UserInterface {
 
     private void markDistributionForHvC() {
         console.print(MARK_DISTRIBUTION_HVC);
-    }
-    private String clearScreenCharacters() {
-        return CLEAR_SCREEN;
     }
 }

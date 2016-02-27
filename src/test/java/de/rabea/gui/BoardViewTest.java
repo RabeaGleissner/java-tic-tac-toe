@@ -89,7 +89,7 @@ public class BoardViewTest {
         }
 
         @Override
-        public void startGame(Board board, GuiPlayer guiPlayer) {
+        public void playOneRound(Board board, GuiPlayer player) {
             displayBoard = true;
         }
     }
