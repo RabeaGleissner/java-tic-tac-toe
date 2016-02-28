@@ -2,9 +2,9 @@ package de.rabea.player;
 
 import de.rabea.game.GameMode;
 import de.rabea.game.Player;
+import de.rabea.gui.GuiPlayer;
 import de.rabea.ui.ConsoleUi;
 
-import static de.rabea.game.GameMode.*;
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 
@@ -16,18 +16,34 @@ public class PlayerFactory {
     }
 
     public Player createPlayer(GameMode gameMode) {
-        if (gameMode == HumanVsHuman || gameMode == HumanVsComputer) {
-            return new HumanPlayer(userInterface, X);
-        } else {
-            return new UnbeatableComputerPlayer(X);
+        switch (gameMode) {
+            case HumanVsHuman:
+            case HumanVsComputer:
+                return new HumanPlayer(userInterface, X);
+            case ComputerVsComputer:
+            case ComputerVsHuman:
+                return new UnbeatableComputerPlayer(X);
+            case GuiHumanVsGuiHuman:
+            case GuiHumanVsComputer:
+                return new GuiPlayer(X);
+            default:
+                throw new RuntimeException("Illegal GameMode!");
         }
     }
 
     public Player createOpponent(GameMode gameMode) {
-        if (gameMode == HumanVsComputer || gameMode == ComputerVsComputer) {
-            return new UnbeatableComputerPlayer(O);
-        } else {
-            return new HumanPlayer(userInterface, O);
+        switch (gameMode) {
+            case HumanVsComputer:
+            case ComputerVsComputer:
+            case GuiHumanVsComputer:
+                return new UnbeatableComputerPlayer(O);
+            case HumanVsHuman:
+            case ComputerVsHuman:
+                return new HumanPlayer(userInterface, O);
+            case GuiHumanVsGuiHuman:
+                return new GuiPlayer(O);
+            default:
+                throw new RuntimeException("Illegal GameMode!");
         }
     }
 }
