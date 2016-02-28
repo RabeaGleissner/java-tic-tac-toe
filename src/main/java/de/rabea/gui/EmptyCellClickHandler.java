@@ -2,12 +2,12 @@ package de.rabea.gui;
 
 import de.rabea.game.Board;
 
-public class BoardClickHandler implements ClickHandler {
+public class EmptyCellClickHandler implements ClickHandler {
     private final GuiPlayer guiPlayer;
     private final GuiApp guiApp;
     private final Board board;
 
-    public BoardClickHandler(GuiPlayer guiPlayer, GuiApp guiApp, Board board) {
+    public EmptyCellClickHandler(GuiPlayer guiPlayer, GuiApp guiApp, Board board) {
         this.guiPlayer = guiPlayer;
         this.guiApp = guiApp;
         this.board = board;

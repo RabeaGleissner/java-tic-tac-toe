@@ -18,7 +18,7 @@ public class JavaFXUi implements UserInterface {
 
     @Override
     public void displayBoard(Board board, Player player) {
-        viewUpdater.showBoard((GuiPlayer) player, board, guiApp);
+        viewUpdater.showBoard((GuiPlayer) player, board, guiApp, false);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class JavaFXUi implements UserInterface {
 
     @Override
     public void announceGameEnd(Mark lastPlayedMark, boolean winner) {
-        viewUpdater.showGameOverView(guiApp);
+        viewUpdater.showGameOverView(guiApp, lastPlayedMark, winner);
     }
 
     @Override

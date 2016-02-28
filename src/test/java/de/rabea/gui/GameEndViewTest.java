@@ -4,11 +4,13 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import org.junit.Before;
 import org.junit.Test;
 
+import static de.rabea.game.Mark.O;
+import static de.rabea.game.Mark.X;
 import static junit.framework.TestCase.assertEquals;
 
 public class GameEndViewTest {
@@ -24,16 +26,16 @@ public class GameEndViewTest {
     @Test
     public void hasGameOverMessage() {
         GameEndView gameEndView = new GameEndView();
-        Parent gridPane = gameEndView.draw(guiApp);
-        Text text = (Text) gridPane.getChildrenUnmodifiable().get(0);
-        assertEquals("Game over", text.getText());
+        Parent gridPane = gameEndView.draw(guiApp, X, true);
+        Label text = (Label) gridPane.getChildrenUnmodifiable().get(0);
+        assertEquals("Game over. Winner is X.", text.getText());
     }
 
     @Test
     public void displaysReplayButton() {
         GameEndView gameEndView = new GameEndView();
-        Parent gridPane = gameEndView.draw(guiApp);
+        Parent gridPane = gameEndView.draw(guiApp, O, true);
         Button button = (Button) gridPane.getChildrenUnmodifiable().get(1);
-        assertEquals("Click to play again", button.getText());
+        assertEquals("Play again", button.getText());
     }
 }
