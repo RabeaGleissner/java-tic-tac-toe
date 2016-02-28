@@ -1,9 +1,10 @@
 package de.rabea.gui;
 
-import de.rabea.game.*;
+import de.rabea.game.Board;
+import de.rabea.game.Game;
+import de.rabea.game.GameMode;
+import de.rabea.game.Player;
 import de.rabea.player.PlayerFactory;
-
-import static de.rabea.game.GameMode.GuiHumanVsGuiHuman;
 
 public class GuiApp {
 
@@ -17,7 +18,18 @@ public class GuiApp {
         this.playerFactory = playerFactory;
     }
 
-    public void displayGameOptions() {
+    public void displayGameModeOptions() {
+        viewUpdater.showGameModeOptions(this);
+    }
+
+    public void createGame(GameMode gameMode) {
+        Player player = playerFactory.createPlayer(gameMode);
+        game = new Game(new JavaFXUi(viewUpdater, this), player,
+                playerFactory.createOpponent(gameMode));
+        displayBoardSizeOptions();
+    }
+
+    public void displayBoardSizeOptions() {
         viewUpdater.showBoardSizeOptionsView(this);
     }
 
@@ -31,9 +43,6 @@ public class GuiApp {
 
     public void prepareGameForPlaying(String boardSize) {
         Board board = createBoard(boardSize);
-        Player player = playerFactory.createPlayer(GuiHumanVsGuiHuman);
-        game = new Game(new JavaFXUi(viewUpdater, this), player,
-                playerFactory.createOpponent(GuiHumanVsGuiHuman));
         playOneRound(board);
     }
 

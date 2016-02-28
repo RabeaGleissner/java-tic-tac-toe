@@ -31,6 +31,16 @@ public class ViewUpdaterTest {
     }
 
     @Test
+    public void showsGameModeOptions() {
+        Scene scene = new Scene(new GridPane());
+        ViewUpdater viewUpdater = new ViewUpdater(scene);
+        viewUpdater.showGameModeOptions(new GuiApp(viewUpdater, new PlayerFactory(null)));
+        Label label = (Label) scene.getRoot().getChildrenUnmodifiable().get(0);
+
+        assertEquals("Please select a game mode:", label.getText());
+    }
+
+    @Test
     public void showsBoard() {
         Scene scene = new Scene(new GridPane());
         ViewUpdater viewUpdater = new ViewUpdater(scene);

@@ -12,9 +12,12 @@ public class ViewUpdater {
         this.scene = scene;
     }
 
+    public void showGameModeOptions(GuiApp guiApp) {
+        scene.setRoot(new GameModeView().draw(guiApp));
+    }
+
     public void showBoardSizeOptionsView(GuiApp guiApp) {
-        BoardSizeView boardSizeView = new BoardSizeView();
-        scene.setRoot(boardSizeView.draw(guiApp));
+        scene.setRoot(new BoardSizeView().draw(guiApp));
     }
 
     public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp, boolean positionFull) {
@@ -23,7 +26,7 @@ public class ViewUpdater {
     }
 
     public void showGameOverView(GuiApp guiApp, Mark lastPlayedMark, boolean winner) {
-        GameEndView gameEndView = new GameEndView();
-        scene.setRoot(gameEndView.draw(guiApp, lastPlayedMark, winner));
+        scene.setRoot(new GameEndView().draw(guiApp, lastPlayedMark, winner));
     }
+
 }

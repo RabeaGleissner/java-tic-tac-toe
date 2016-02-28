@@ -10,6 +10,6 @@ public class ReplayClickHandler implements ClickHandler {
 
     @Override
     public void action(String position) {
-        guiApp.displayGameOptions();
+        guiApp.displayGameModeOptions();
     }
 }

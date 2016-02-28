@@ -18,7 +18,7 @@ public class GuiMain extends Application {
         primaryStage.show();
         ViewUpdater viewUpdater = new ViewUpdater(scene);
         GuiApp guiApp = new GuiApp(viewUpdater, new PlayerFactory(null));
-        guiApp.displayGameOptions();
+        guiApp.displayGameModeOptions();
     }
 
     public static void main(String[] args) {

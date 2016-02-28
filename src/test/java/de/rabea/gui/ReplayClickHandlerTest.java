@@ -12,19 +12,19 @@ public class ReplayClickHandlerTest {
         ReplayClickHandler handler = new ReplayClickHandler(guiAppSpy);
         handler.action("test");
 
-        assertTrue(guiAppSpy.displayGameOptionsWasCalled);
+        assertTrue(guiAppSpy.displayGameModeOptionsWasCalled);
     }
 
     private class GuiAppSpy extends GuiApp {
-        private boolean displayGameOptionsWasCalled;
+        private boolean displayGameModeOptionsWasCalled;
 
         public GuiAppSpy() {
             super(null, null);
         }
 
         @Override
-        public void displayGameOptions() {
-            displayGameOptionsWasCalled = true;
+        public void displayGameModeOptions() {
+            displayGameModeOptionsWasCalled = true;
         }
     }
 
