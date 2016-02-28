@@ -2,49 +2,47 @@ package de.rabea.gui;
 
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 import java.util.Map;
 
-import static de.rabea.game.Mark.*;
+import static de.rabea.game.Mark.EMPTY;
+import static javafx.geometry.Pos.CENTER;
 
 public class BoardView {
 
-    private ClickHandler clickHandler;
+    private final ClickHandler emptyCellClickHandler;
+    private final ClickHandler fullCellClickHandler;
 
-    public BoardView(ClickHandler clickHandler) {
-        this.clickHandler = clickHandler;
+    public BoardView(ClickHandler emptyCellClickHandler, ClickHandler fullCellClickHandler) {
+        this.emptyCellClickHandler = emptyCellClickHandler;
+        this.fullCellClickHandler = fullCellClickHandler;
     }
 
-    public Parent draw(Board board) {
+    public Parent draw(Board board, boolean positionInUse) {
         GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setAlignment(CENTER);
         for (Map.Entry<Integer, Mark> entry : board.cellsWithIndex().entrySet()) {
             int position = entry.getKey();
             Mark cell = entry.getValue();
             int column = position % board.getDimension();
             int row = position / board.getDimension();
             if (cell == EMPTY) {
-                JavaFXButton javaFXButton = createButton(position);
-                gridPane.add(javaFXButton.getActualButton(), column, row);
+                JavaFXButton activeButton = new JavaFXButton(emptyCellClickHandler, "_", position + "", "active-button");
+                gridPane.add(activeButton.getActualButton(), column, row);
             } else {
-                Label label = new Label(cell.toString());
-                label.getStyleClass().add("cell");
-                gridPane.add(label, column, row);
+                JavaFXButton disabledButton = new JavaFXButton(fullCellClickHandler, cell.toString(), cell.toString(), "disabled-button");
+                gridPane.add(disabledButton.getActualButton(), column, row);
             }
         }
-        return gridPane;
-    }
+        if (positionInUse) {
+            Text text = new Text("Position already in use!");
+            text.setId("positionInUseWarning");
+            gridPane.add(text, 0, 5, 3, 1);
+        }
 
-    private JavaFXButton createButton(int position) {
-        JavaFXButton javaFXButton = new JavaFXButton();
-        javaFXButton.setOnAction(clickHandler);
-        javaFXButton.setText((position + 1) + "");
-        javaFXButton.setId(position + "");
-        javaFXButton.getActualButton().getStyleClass().add("cell");
-        return javaFXButton;
+        return gridPane;
     }
 }

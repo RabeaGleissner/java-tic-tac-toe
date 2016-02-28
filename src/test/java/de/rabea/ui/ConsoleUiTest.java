@@ -2,6 +2,8 @@ package de.rabea.ui;
 
 import de.rabea.game.Board;
 import de.rabea.game.GameMode;
+import de.rabea.game.Mark;
+import de.rabea.player.HumanPlayer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,25 +12,24 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-public class UserInterfaceTest {
+public class ConsoleUiTest {
 
     private ConsoleUi userInterface;
     private FakeConsole fakeConsole;
     private Board board;
-    private FakeBoardPainter fakeBoardPainter;
 
     @Before
     public void setup() {
         board = new Board(3);
         fakeConsole = new FakeConsole();
-        fakeBoardPainter = new FakeBoardPainter();
+        FakeBoardPainter fakeBoardPainter = new FakeBoardPainter();
         userInterface = new ConsoleUi(fakeConsole, fakeBoardPainter);
     }
 
     @Test
     public void displaysBoard() {
         Board board = new Board(3);
-        userInterface.displayBoard(board);
+        userInterface.displayBoard(board, new HumanPlayer(userInterface, Mark.X));
         assertEquals(fakeConsole.messagePrinted(), "board placeholder");
     }
 

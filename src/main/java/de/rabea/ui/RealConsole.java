@@ -5,8 +5,8 @@ import de.rabea.game.Console;
 import java.io.*;
 
 public class RealConsole implements Console {
-    private BufferedReader bufferedReader;
-    private PrintStream output;
+    private final BufferedReader bufferedReader;
+    private final PrintStream output;
 
     public RealConsole(BufferedReader bufferedReader, PrintStream output) {
         this.bufferedReader= bufferedReader;

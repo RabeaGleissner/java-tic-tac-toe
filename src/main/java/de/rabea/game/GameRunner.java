@@ -4,8 +4,8 @@ import de.rabea.player.PlayerFactory;
 import de.rabea.ui.ConsoleUi;
 
 public class GameRunner {
-    private ConsoleUi userInterface;
-    private PlayerFactory playerFactory;
+    private final ConsoleUi userInterface;
+    private final PlayerFactory playerFactory;
     private Board board;
 
     public GameRunner(ConsoleUi userInterface, PlayerFactory playerFactory) {

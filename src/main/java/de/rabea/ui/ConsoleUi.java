@@ -1,10 +1,11 @@
 package de.rabea.ui;
 
 import de.rabea.game.*;
+import de.rabea.player.HumanPlayer;
 
 public class ConsoleUi implements UserInterface {
     private final Console console;
-    private BoardPainter boardPainter;
+    private final BoardPainter boardPainter;
 
     public ConsoleUi(Console console, BoardPainter boardPainter) {
         this.console = console;
@@ -24,17 +25,17 @@ public class ConsoleUi implements UserInterface {
     private final String CLEAR_SCREEN = "\033[H\033[2J";
     private final String BOARD_SIZE_OPTIONS = "Choose a board size: \n 3 - 3x3 board \n 4 - 4x4 board" ;
     private final String BOARD_SIZE_WARNING = "Please enter either 3 for a 3x3 Board and 4 for a 4x4 Board";
-    private InputFormatter inputFormatter = new InputFormatter();
+    private final InputFormatter inputFormatter = new InputFormatter();
 
 
     @Override
-    public void displayBoard(Board board) {
+    public void displayBoard(Board board, Player player) {
         clearScreen();
         console.print(boardPainter.drawBoard(board));
     }
 
     private void clearScreen() {
-        console.print(clearScreenCharacters());
+        console.print(CLEAR_SCREEN);
     }
 
     public void greet() {
@@ -132,15 +133,12 @@ public class ConsoleUi implements UserInterface {
     private boolean userReplayChoice(String userChoice) {
         if (inputFormatter.formatForReplayOption(userChoice) == Replay.YES) {
             return true;
-        } else if (inputFormatter.formatForReplayOption(userChoice) == Replay.NO) {
-            return false;
-        } else {
-            return playAgain();
-        }
+        } else
+            return inputFormatter.formatForReplayOption(userChoice) != Replay.NO && playAgain();
     }
 
     public void positionUnavailableWarning(Board board) {
-        displayBoard(board);
+        displayBoard(board, new HumanPlayer(this, Mark.X));
         console.print(UNAVAILABLE_POSITION);
     }
 
@@ -154,7 +152,7 @@ public class ConsoleUi implements UserInterface {
 
     public void notANumberWarning(Board board) {
         clearScreen();
-        displayBoard(board);
+        displayBoard(board, new HumanPlayer(this, Mark.X));
         console.print(ENTER_A_NUMBER);
     }
 
@@ -164,8 +162,5 @@ public class ConsoleUi implements UserInterface {
 
     private void markDistributionForHvC() {
         console.print(MARK_DISTRIBUTION_HVC);
-    }
-    public String clearScreenCharacters() {
-        return CLEAR_SCREEN;
     }
 }

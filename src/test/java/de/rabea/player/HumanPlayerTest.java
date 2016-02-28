@@ -1,7 +1,10 @@
 package de.rabea.player;
 
 import de.rabea.game.Board;
-import de.rabea.ui.*;
+import de.rabea.ui.ConsoleUi;
+import de.rabea.ui.FakeConsole;
+import de.rabea.ui.FakeUserInterface;
+import de.rabea.ui.PrettyBoardPainter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,27 +13,25 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class HumanPlayerTest {
-    FakeConsole fakeConsole;
-    HumanPlayer humanPlayer;
-    Board board;
+    private FakeConsole fakeConsole;
+    private HumanPlayer humanPlayer;
 
     @Before
     public void setup() {
         fakeConsole = new FakeConsole();
         humanPlayer = new HumanPlayer(new ConsoleUi(fakeConsole, new PrettyBoardPainter()), X);
-        board = new Board(3);
     }
 
     @Test
     public void convertsUserPositionIntoInteger() {
         fakeConsole.userInput("2");
-        assertEquals(1, humanPlayer.getPosition(board));
+        assertEquals(1, humanPlayer.getPosition(new Board(3)));
     }
 
     @Test
     public void givesWarningWhenUserEntryIsNotANumber() {
         fakeConsole.userInput("NaN", "8");
-        humanPlayer.getPosition(board);
+        humanPlayer.getPosition(new Board(3));
         assertEquals("Please select a position for your mark.", fakeConsole.messagePrinted());
     }
 
@@ -43,10 +44,11 @@ public class HumanPlayerTest {
     public void asksUserAgainWhenPositionIsOccupied() {
         FakeUserInterface fakeUserInterface = new FakeUserInterface();
         HumanPlayer humanPlayer = new HumanPlayer(fakeUserInterface, X);
-        board.placeMarkOnExistingBoard(0, X);
+        Board board = new Board(3);
+        Board nextBoard = board.placeMark(0, X);
         fakeUserInterface.choosePositions("1", "7", "3", "4", "2");
         fakeUserInterface.replayChoice("no");
-        humanPlayer.getPosition(board);
+        humanPlayer.getPosition(nextBoard);
         assertTrue(fakeUserInterface.wasPositionUnavailableWarningCalled());
     }
 }

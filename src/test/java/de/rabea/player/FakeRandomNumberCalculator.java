@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FakeRandomNumberCalculator extends RandomNumberCalculator {
 
-    private List<Integer> listOfNumbers;
+    private final List<Integer> listOfNumbers;
 
     public FakeRandomNumberCalculator() {
         listOfNumbers = new LinkedList<>();
@@ -14,8 +14,7 @@ public class FakeRandomNumberCalculator extends RandomNumberCalculator {
 
     @Override
     public int randomNumber(int unusedNumber) {
-        int number = listOfNumbers.remove(0);
-        return number;
+        return listOfNumbers.remove(0);
     }
 
     public void giveNumbers(Integer ... num) {

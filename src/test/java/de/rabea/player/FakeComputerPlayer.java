@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FakeComputerPlayer extends ComputerPlayer {
 
-    private List<Integer> listOfNumbers;
+    private final List<Integer> listOfNumbers;
 
     public FakeComputerPlayer(Mark mark) {
         super(null, mark);

@@ -27,7 +27,7 @@ public class UnbeatableComputerPlayer extends Player {
             return new ScoredMove(score(currentBoard, remainingDepth), currentBestMove.getScore());
         }
         for (int position : currentBoard.emptyCells()) {
-            Board nextBoardState = currentBoard.placeMarkOnNewBoard(position, currentMark, currentBoard);
+            Board nextBoardState = currentBoard.placeMark(position, currentMark);
             ScoredMove score = minimax(remainingDepth - 1, alpha, beta, nextBoardState, currentMark.switchMark(currentMark));
             currentBestMove = updateScore(currentMark, currentBestMove, position, score);
             if (currentMark == mark) {
@@ -73,8 +73,8 @@ public class UnbeatableComputerPlayer extends Player {
     }
 
     private class ScoredMove {
-        private int score;
-        private int move;
+        private final int score;
+        private final int move;
 
         public ScoredMove(int score, int move) {
             this.score = score;

@@ -6,24 +6,31 @@ import de.rabea.game.Player;
 
 public class GuiPlayer extends Player {
 
-    private final ClickCarrier carrier;
+    private int position;
+    private boolean moveAvailable;
 
-    public GuiPlayer(Mark mark, ClickCarrier carrier) {
+    public GuiPlayer(Mark mark) {
         super(mark);
-        this.carrier = carrier;
+        this.moveAvailable = false;
     }
 
     @Override
     public boolean hasMove() {
-        return carrier.isMoveAvailable();
+        return this.moveAvailable;
     }
 
     @Override
     public int getPosition(Board board) {
-        return carrier.getMove();
+        if (moveAvailable) {
+            this.moveAvailable = false;
+            return position;
+        } else {
+            return -1;
+        }
     }
 
-    public ClickCarrier getCarrier() {
-        return carrier;
+    public void addMove(int position) {
+        this.position = position;
+        this.moveAvailable = true;
     }
 }

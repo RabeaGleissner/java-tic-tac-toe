@@ -1,5 +1,49 @@
-.cell {
-    -fx-background-color: #ADD8E6;
-    -fx-padding: 20px;
+.root {
+    -fx-background-color: lightyellow;
+    -fx-font-family: Helvetica, Arial;
+}
+
+.button {
+    -fx-cursor: hand;
+}
+
+.active-button, .disabled-button {
     -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-min-height: 80px;
+    -fx-min-width: 80px;
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.active-button {
+    -fx-background-color: #d4ebf2;
+}
+
+.active-button:hover, .replay-button:hover, .board-size-buttons:hover {
+    -fx-background-color: #ADD8E6;
+}
+
+.disabled-button {
+    -fx-background-color: lightgrey;
+}
+
+.header {
+    -fx-padding: 0 0 30px 0;
+    -fx-font-size: 20px;
+    -fx-font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+}
+
+.board-size-buttons, .replay-button {
+     -fx-min-height: 50px;
+     -fx-min-width: 150px;
+     -fx-font-size: 18px;
+     -fx-background-color: #d4ebf2;
+}
+
+.board-size-buttons {
+     -fx-padding: 5px;
+     -fx-border-insets: 5px;
+     -fx-background-insets: 5px;
 }

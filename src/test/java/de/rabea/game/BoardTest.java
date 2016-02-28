@@ -35,15 +35,15 @@ public class BoardTest {
     @Test
     public void markedPositionIsNoLongerAvailableOn3x3() {
         Board board = new Board(3);
-        board.placeMarkOnExistingBoard(1, X);
-        assertFalse(board.isPositionAvailable(1));
+        Board nextBoard = board.placeMark(1, X);
+        assertFalse(nextBoard.isPositionAvailable(1));
     }
 
     @Test
     public void markedPositionIsNoLongerAvailableOn4x4() {
         Board board = new Board(4);
-        board.placeMarkOnExistingBoard(1, X);
-        assertFalse(board.isPositionAvailable(1));
+        Board nextBoard = board.placeMark(1, X);
+        assertFalse(nextBoard.isPositionAvailable(1));
     }
 
     @Test
@@ -62,21 +62,18 @@ public class BoardTest {
 
     @Test
     public void listsAllEmptyPositionsFor3x3() {
-        Board board = new Board(3);
-        board.placeMarkOnExistingBoard(1, X);
-        board.placeMarkOnExistingBoard(2, O);
-        board.placeMarkOnExistingBoard(3, X);
-        board.placeMarkOnExistingBoard(6, O);
+        Board board = new Board(EMPTY, X, O,
+                                X, EMPTY, EMPTY,
+                                O, EMPTY, EMPTY);
         assertEquals(asList(0, 4, 5, 7, 8), board.emptyCells());
     }
 
     @Test
     public void listsAllEmptyPositionsFor4x4() {
-        Board board = new Board(4);
-        board.placeMarkOnExistingBoard(1, X);
-        board.placeMarkOnExistingBoard(2, O);
-        board.placeMarkOnExistingBoard(3, X);
-        board.placeMarkOnExistingBoard(6, O);
+        Board board = new Board(EMPTY, X, O, X,
+                                EMPTY, EMPTY, O, EMPTY,
+                                EMPTY, EMPTY, EMPTY, EMPTY,
+                                EMPTY, EMPTY, EMPTY, EMPTY);
         List<Integer> emptyCells = asList(0, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15);
         assertEquals(emptyCells, board.emptyCells());
     }
@@ -197,14 +194,14 @@ public class BoardTest {
     @Test
     public void placesMarkOnNew3x3Board() {
         Board board = new Board(3);
-        board.placeMarkOnNewBoard(1, X, board);
+        board.placeMark(1, X);
         assertEquals(9, board.emptyCells().size());
     }
 
     @Test
     public void placesMarkOnNew4x4Board() {
         Board board = new Board(4);
-        board.placeMarkOnNewBoard(1, X, board);
+        board.placeMark(1, X);
         assertEquals(16, board.emptyCells().size());
     }
 

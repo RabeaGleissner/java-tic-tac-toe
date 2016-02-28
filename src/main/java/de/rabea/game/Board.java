@@ -7,8 +7,8 @@ import static de.rabea.game.Mark.*;
 public class Board {
 
     private Mark[] cells;
-    private int dimension;
-    private int numberOfCells;
+    private final int dimension;
+    private final int numberOfCells;
 
     public Board(Mark... gameState) {
         this((int) Math.sqrt(gameState.length));
@@ -33,12 +33,8 @@ public class Board {
         return cells;
     }
 
-    public void placeMarkOnExistingBoard(int position, Mark mark) {
-        cells[position] = mark;
-    }
-
-    public Board placeMarkOnNewBoard(int position, Mark mark, Board board) {
-        Mark[] gameStateCopy = board.cells().clone();
+    public Board placeMark(int position, Mark mark) {
+        Mark[] gameStateCopy = this.cells().clone();
         gameStateCopy[position] = mark;
         return new Board(gameStateCopy);
     }
@@ -119,7 +115,7 @@ public class Board {
         return !(isIndexOfLastCell(cell));
     }
 
-    public List<Line> getAllLines() {
+    private List<Line> getAllLines() {
         List<Line> allLines = new ArrayList<>();
         allLines.addAll(getRows());
         allLines.addAll(getColumns());

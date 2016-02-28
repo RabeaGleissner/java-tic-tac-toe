@@ -11,7 +11,7 @@ import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GuiAppTest {
-    ViewUpdaterSpy viewUpdaterSpy;
+    private ViewUpdaterSpy viewUpdaterSpy;
 
     @Before
     public void setUp() throws Exception {
@@ -30,24 +30,24 @@ public class GuiAppTest {
     @Test
     public void creates3x3Board() {
         GuiApp guiApp = new GuiApp(new ViewUpdater(new Scene(new GridPane())));
-        guiApp.createBoard("3x3");
+        Board board = guiApp.createBoard("3x3");
 
-        assertEquals(3, guiApp.getBoard().getDimension());
+        assertEquals(3, board.getDimension());
     }
 
     @Test
     public void creates4x4Board() {
         GuiApp guiApp = new GuiApp(new ViewUpdater(new Scene(new GridPane())));
-        guiApp.createBoard("4x4");
+        Board board = guiApp.createBoard("4x4");
 
-        assertEquals(4, guiApp.getBoard().getDimension());
+        assertEquals(4, board.getDimension());
     }
 
     @Test
     public void preparesGameAndShowsBoard() {
         GuiApp guiApp = new GuiApp(viewUpdaterSpy);
         guiApp.createBoard("3x3");
-        guiApp.prepareGameForPlaying();
+        guiApp.prepareGameForPlaying("3x3");
 
         assertTrue(viewUpdaterSpy.hasShownBoard);
     }
@@ -61,7 +61,7 @@ public class GuiAppTest {
         }
 
         @Override
-        public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp) {
+        public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp, boolean positionFull) {
             hasShownBoard = true;
         }
 

@@ -1,7 +1,7 @@
 package de.rabea.gui;
 
 public class BoardSizeClickHandler implements ClickHandler {
-    GuiApp guiApp;
+    private final GuiApp guiApp;
 
     public BoardSizeClickHandler(GuiApp guiApp) {
         this.guiApp = guiApp;
@@ -9,6 +9,6 @@ public class BoardSizeClickHandler implements ClickHandler {
 
     @Override
     public void action(String boardSize) {
-        guiApp.createBoard(boardSize);
+        guiApp.prepareGameForPlaying(boardSize);
     }
 }

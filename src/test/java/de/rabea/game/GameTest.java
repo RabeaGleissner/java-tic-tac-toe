@@ -2,7 +2,6 @@ package de.rabea.game;
 
 import de.rabea.player.FakeComputerPlayer;
 import de.rabea.player.HumanPlayer;
-import de.rabea.player.PlayerFactory;
 import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,13 +12,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GameTest {
-    FakeUserInterface fakeUserInterface;
-    GameRunner gameRunner;
+    private FakeUserInterface fakeUserInterface;
 
     @Before
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
-        gameRunner = new GameRunner(fakeUserInterface, new PlayerFactory(fakeUserInterface));
     }
 
     @Test

@@ -5,8 +5,8 @@ import de.rabea.ui.UserInterface;
 public class Game {
 
     private final UserInterface userInterface;
-    private Player player;
-    private Player opponent ;
+    private final Player player;
+    private final Player opponent ;
     private Player currentPlayer;
 
     public Game(UserInterface userInterface, Player player, Player opponent) {
@@ -17,11 +17,12 @@ public class Game {
     }
 
     public void play(Board board) {
-        userInterface.displayBoard(board);
+        userInterface.displayBoard(board, currentPlayer);
         while (gameIsNotOver(board) && currentPlayer.hasMove()){
-            playOneRound(currentPlayer, board);
+            board = playOneRound(currentPlayer, board);
             if (gameIsNotOver(board)) {
                 switchPlayer();
+                userInterface.displayBoard(board, currentPlayer);
             }
         }
         if (board.gameOver()) {
@@ -29,21 +30,16 @@ public class Game {
         }
     }
 
-    public void switchPlayer() {
-        if (currentPlayer == player) {
-            currentPlayer = opponent;
-        } else {
-            currentPlayer = player;
-        }
+    private void switchPlayer() {
+        currentPlayer = currentPlayer == player ? opponent : player;
     }
 
-    private void playOneRound(Player player, Board board) {
-        board.placeMarkOnExistingBoard(player.getPosition(board), player.mark());
-        userInterface.displayBoard(board);
+    private Board playOneRound(Player player, Board board) {
+        return board.placeMark(player.getPosition(board), player.mark());
     }
 
     private void finishGame(Mark mark, Board board) {
-        userInterface.displayBoard(board);
+        userInterface.displayBoard(board, player);
         userInterface.announceGameEnd(mark, board.hasWinner());
     }
 

@@ -6,23 +6,15 @@ public class JavaFXButton {
 
     private final Button actualButton;
 
-    public JavaFXButton() {
+    public JavaFXButton(ClickHandler clickHandler, String text, String id, String cssClass) {
         this.actualButton = new Button();
-    }
-
-    public void setOnAction(ClickHandler clickHandler) {
+        actualButton.setId(id);
         actualButton.setOnAction(event -> clickHandler.action(actualButton.getId()));
+        actualButton.setText(text);
+        actualButton.getStyleClass().add(cssClass);
     }
 
     public Button getActualButton() {
         return actualButton;
-    }
-
-    public void setId(String id) {
-        actualButton.setId(id);
-    }
-
-    public void setText(String text) {
-        actualButton.setText(text);
     }
 }

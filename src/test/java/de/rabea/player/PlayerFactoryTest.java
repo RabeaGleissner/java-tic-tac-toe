@@ -1,27 +1,18 @@
 package de.rabea.player;
 
-import de.rabea.game.Console;
 import de.rabea.game.GameMode;
-import de.rabea.ui.FakeConsole;
 import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Mark.O;
 import static org.junit.Assert.assertTrue;
 
 public class PlayerFactoryTest {
-    FakeUserInterface fakeUserInterface;
-    FakeComputerPlayer fakeComputerPlayer;
-    Console fakeConsole;
-    PlayerFactory playerFactory;
+    private FakeUserInterface fakeUserInterface;
 
     @Before
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
-        fakeComputerPlayer = new FakeComputerPlayer(O);
-        fakeConsole = new FakeConsole();
-        playerFactory = new PlayerFactory(fakeUserInterface);
     }
 
     @Test

@@ -11,23 +11,20 @@ public class BoardSizeView {
     public Parent draw(GuiApp guiApp) {
         GridPane gridPane = new GridPane();
         gridPane.setAlignment(CENTER);
-        gridPane.add(new Label("Please select a board size:"), 0, 0);
+        Label label = new Label("Please select a board size:");
+        label.getStyleClass().add("header");
+        gridPane.add(label, 0, 0, 3, 1);
         addButtons(guiApp, gridPane);
         return gridPane;
     }
 
     private void addButtons(GuiApp guiApp, GridPane gridPane) {
-        JavaFXButton button3x3 = createButton(guiApp, "3x3");
-        JavaFXButton button4x4 = createButton(guiApp, "4x4");
-        gridPane.add(button3x3.getActualButton(), 1, 1);
-        gridPane.add(button4x4.getActualButton(), 2, 1);
+        gridPane.add(createButton(guiApp, "3x3").getActualButton(), 1, 1);
+        gridPane.add(createButton(guiApp, "4x4").getActualButton(), 2, 1);
     }
 
     private JavaFXButton createButton(GuiApp guiApp, String size) {
-        JavaFXButton button = new JavaFXButton();
-        button.setOnAction(new BoardSizeClickHandler(guiApp));
-        button.setText(size + " board");
-        button.setId(size);
-        return button;
+        return new JavaFXButton(new BoardSizeClickHandler(guiApp), size + " board",
+                size, "board-size-buttons");
     }
 }
