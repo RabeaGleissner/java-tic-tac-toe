@@ -20,7 +20,7 @@ public class BoardSizeClickHandlerTest {
         private boolean prepareGameWasCalled = false;
 
         public GuiAppSpy() {
-            super(null);
+            super(null, null);
         }
 
         @Override

@@ -1,13 +1,13 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
+import de.rabea.player.PlayerFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class BoardViewTest {
     public void setUp() {
         new JFXPanel();
         viewUpdater = new ViewUpdater(new Scene(new GridPane()));
-        guiApp = new GuiApp(viewUpdater);
+        guiApp = new GuiApp(viewUpdater, new PlayerFactory(null));
     }
 
     @Test
@@ -85,7 +85,7 @@ public class BoardViewTest {
     @Test
     public void reactsToAClick() {
         Board board = new Board(3);
-        GuiAppSpy guiAppSpy = new GuiAppSpy(viewUpdater);
+        GuiAppSpy guiAppSpy = new GuiAppSpy();
         GuiPlayer guiPlayer = new GuiPlayer(X);
         BoardView boardView = new BoardView(new EmptyCellClickHandler(guiPlayer, guiAppSpy, board), new FullCellClickHandlerStub());
         Parent drawnBoard = boardView.draw(board, false);
@@ -112,12 +112,12 @@ public class BoardViewTest {
 
         private boolean displayBoard = false;
 
-        public GuiAppSpy(ViewUpdater viewUpdater) {
-            super(viewUpdater);
+        public GuiAppSpy() {
+            super(null, null);
         }
 
         @Override
-        public void playOneRound(Board board, GuiPlayer player) {
+        public void playOneRound(Board board) {
             displayBoard = true;
         }
     }

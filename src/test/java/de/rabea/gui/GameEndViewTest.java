@@ -1,5 +1,6 @@
 package de.rabea.gui;
 
+import de.rabea.player.PlayerFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +21,7 @@ public class GameEndViewTest {
     @Before
     public void setUp() {
         new JFXPanel();
-        guiApp = new GuiApp(new ViewUpdater(new Scene(new GridPane())));
+        guiApp = new GuiApp(new ViewUpdater(new Scene(new GridPane())), new PlayerFactory(null));
     }
 
     @Test

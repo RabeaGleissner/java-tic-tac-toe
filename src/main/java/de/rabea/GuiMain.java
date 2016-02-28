@@ -2,6 +2,7 @@ package de.rabea;
 
 import de.rabea.gui.GuiApp;
 import de.rabea.gui.ViewUpdater;
+import de.rabea.player.PlayerFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -16,7 +17,7 @@ public class GuiMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        GuiApp guiApp = new GuiApp(viewUpdater);
+        GuiApp guiApp = new GuiApp(viewUpdater, new PlayerFactory(null));
         guiApp.displayGameOptions();
     }
 

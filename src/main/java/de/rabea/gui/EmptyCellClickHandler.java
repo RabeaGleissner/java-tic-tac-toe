@@ -16,7 +16,7 @@ public class EmptyCellClickHandler implements ClickHandler {
     @Override
     public void action(String position) {
         guiPlayer.addMove(convertToInteger(position));
-        guiApp.playOneRound(board, guiPlayer);
+        guiApp.playOneRound(board);
     }
 
     private int convertToInteger(String position) {

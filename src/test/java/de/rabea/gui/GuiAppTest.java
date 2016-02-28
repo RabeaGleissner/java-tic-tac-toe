@@ -1,6 +1,7 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
+import de.rabea.player.PlayerFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -21,7 +22,7 @@ public class GuiAppTest {
 
     @Test
     public void displaysGameOptions() {
-        GuiApp guiApp = new GuiApp(viewUpdaterSpy);
+        GuiApp guiApp = new GuiApp(viewUpdaterSpy, new PlayerFactory(null));
         guiApp.displayGameOptions();
 
         assertTrue(viewUpdaterSpy.hasShownBoardSizeOptions);
@@ -29,7 +30,7 @@ public class GuiAppTest {
 
     @Test
     public void creates3x3Board() {
-        GuiApp guiApp = new GuiApp(new ViewUpdater(new Scene(new GridPane())));
+        GuiApp guiApp = new GuiApp(new ViewUpdater(new Scene(new GridPane())), new PlayerFactory(null));
         Board board = guiApp.createBoard("3x3");
 
         assertEquals(3, board.getDimension());
@@ -37,7 +38,7 @@ public class GuiAppTest {
 
     @Test
     public void creates4x4Board() {
-        GuiApp guiApp = new GuiApp(new ViewUpdater(new Scene(new GridPane())));
+        GuiApp guiApp = new GuiApp(new ViewUpdater(new Scene(new GridPane())), new PlayerFactory(null));
         Board board = guiApp.createBoard("4x4");
 
         assertEquals(4, board.getDimension());
@@ -45,7 +46,7 @@ public class GuiAppTest {
 
     @Test
     public void preparesGameAndShowsBoard() {
-        GuiApp guiApp = new GuiApp(viewUpdaterSpy);
+        GuiApp guiApp = new GuiApp(viewUpdaterSpy, new PlayerFactory(null));
         guiApp.createBoard("3x3");
         guiApp.prepareGameForPlaying("3x3");
 
