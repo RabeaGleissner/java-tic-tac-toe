@@ -14,15 +14,13 @@ public class GameRunner {
     }
 
     public void setUpGameAndPlay() {
-        Game game = createGame();
-        game.play(board);
+        createGame().play(board);
         replayIfRequested();
     }
 
     public Game createGame() {
         GameMode gameMode = userInterface.getGameModeFromUser();
-        int boardDimension = userInterface.getBoardDimensionFromUser();
-        board = new Board(boardDimension);
+        board = new Board(userInterface.getBoardDimensionFromUser());
         userInterface.announceMarkDistribution(gameMode);
         return new Game(userInterface, playerFactory.createPlayer(gameMode),
                 playerFactory.createOpponent(gameMode));

@@ -28,14 +28,11 @@ public class GuiApp {
     public void prepareGameForPlaying(String boardSize) {
         Board board = createBoard(boardSize);
         GuiPlayer player = new GuiPlayer(Mark.X);
-        GuiPlayer opponent = new GuiPlayer(Mark.O);
-        viewUpdater.showBoard(player, board, this, false);
-        game = new Game(new JavaFXUi(viewUpdater, this), player, opponent);
+        game = new Game(new JavaFXUi(viewUpdater, this), player, new GuiPlayer(Mark.O));
         playOneRound(board, player);
     }
 
     public void playOneRound(Board board, GuiPlayer player) {
-        viewUpdater.showBoard(player, board, this, false);
         game.play(board);
     }
 }
