@@ -54,7 +54,7 @@ public class ViewUpdaterTest {
     public void showsGameOverView() {
         Scene scene = new Scene(new GridPane());
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showGameOverView(new GuiApp(viewUpdater, new PlayerFactory(null)), X, false);
+        viewUpdater.showGameEndView(new GuiApp(viewUpdater, new PlayerFactory(null)), X, false);
         Button replayButton = (Button) scene.getRoot().getChildrenUnmodifiable().get(1);
 
         assertEquals("Play again", replayButton.getText());

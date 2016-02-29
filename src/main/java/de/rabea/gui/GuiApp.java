@@ -3,7 +3,6 @@ package de.rabea.gui;
 import de.rabea.game.Board;
 import de.rabea.game.Game;
 import de.rabea.game.GameMode;
-import de.rabea.game.Player;
 import de.rabea.player.PlayerFactory;
 
 public class GuiApp {
@@ -23,10 +22,13 @@ public class GuiApp {
     }
 
     public void createGameAndGetBoardSize(GameMode gameMode) {
-        Player player = playerFactory.createPlayer(gameMode);
-        game = new Game(new JavaFXUi(viewUpdater, this), player,
-                playerFactory.createOpponent(gameMode));
+        game = createNewGame(gameMode);
         viewUpdater.showBoardSizeOptionsView(this);
+    }
+
+    public Game createNewGame(GameMode gameMode) {
+        return new Game(new JavaFXUi(viewUpdater, this), playerFactory.createPlayer(gameMode),
+                playerFactory.createOpponent(gameMode));
     }
 
     public Board createBoard(String boardSize) {

@@ -55,11 +55,11 @@ public class Game {
        return !board.gameOver();
     }
 
-    Player getPlayer() {
+    public Player getPlayer() {
         return this.player;
     }
 
-    Player getOpponent() {
+    public Player getOpponent() {
         return this.opponent;
     }
 }

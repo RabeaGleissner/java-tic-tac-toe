@@ -1,13 +1,14 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
+import de.rabea.game.Game;
 import de.rabea.game.GameMode;
 import de.rabea.player.PlayerFactory;
+import de.rabea.player.UnbeatableComputerPlayer;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
@@ -53,11 +54,18 @@ public class GuiAppTest {
         assertTrue(viewUpdaterSpy.hasShownGameModeOptions);
     }
 
-    @Ignore
+    @Test
+    public void createsANewGame() {
+        GuiApp guiApp = new GuiApp(viewUpdaterSpy, new PlayerFactory(null));
+        Game game = guiApp.createNewGame(GameMode.GuiHumanVsComputer);
+        assertTrue(game.getPlayer() instanceof GuiPlayer);
+        assertTrue(game.getOpponent() instanceof UnbeatableComputerPlayer);
+    }
+
     @Test
     public void preparesGameAndShowsBoard() {
         GuiApp guiApp = new GuiApp(viewUpdaterSpy, new PlayerFactory(null));
-//        guiApp.createBoard("3x3");
+        guiApp.createGameAndGetBoardSize(GameMode.GuiHumanVsGuiHuman);
         guiApp.startGame("3x3");
 
         assertTrue(viewUpdaterSpy.hasShownBoard);

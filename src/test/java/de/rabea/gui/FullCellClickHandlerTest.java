@@ -13,7 +13,7 @@ public class FullCellClickHandlerTest {
         FullCellClickHandler fullCellClickHandler = new FullCellClickHandler(viewUpdaterSpy, new GuiPlayer(null), new Board(3), new GuiApp(viewUpdaterSpy, null));
         fullCellClickHandler.action(null);
 
-        assertTrue(viewUpdaterSpy.showBoardMethodCalledWithCorrectBoolean);
+        assertTrue(viewUpdaterSpy.showPositionFullWarning);
 
     }
 }

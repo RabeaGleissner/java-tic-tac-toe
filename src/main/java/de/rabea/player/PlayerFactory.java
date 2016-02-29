@@ -16,34 +16,27 @@ public class PlayerFactory {
     }
 
     public Player createPlayer(GameMode gameMode) {
-        switch (gameMode) {
-            case HumanVsHuman:
-            case HumanVsComputer:
-                return new HumanPlayer(userInterface, X);
-            case ComputerVsComputer:
-            case ComputerVsHuman:
-                return new UnbeatableComputerPlayer(X);
-            case GuiHumanVsGuiHuman:
-            case GuiHumanVsComputer:
-                return new GuiPlayer(X);
-            default:
-                throw new RuntimeException("Illegal GameMode!");
+        if (gameMode == GameMode.HumanVsHuman ||
+                gameMode == GameMode.HumanVsComputer) {
+            return new HumanPlayer(userInterface, X);
+        } else if (gameMode == GameMode.ComputerVsComputer ||
+                gameMode == GameMode.ComputerVsHuman) {
+            return new UnbeatableComputerPlayer(X);
+        } else {
+            return new GuiPlayer(X);
         }
     }
 
     public Player createOpponent(GameMode gameMode) {
-        switch (gameMode) {
-            case HumanVsComputer:
-            case ComputerVsComputer:
-            case GuiHumanVsComputer:
-                return new UnbeatableComputerPlayer(O);
-            case HumanVsHuman:
-            case ComputerVsHuman:
-                return new HumanPlayer(userInterface, O);
-            case GuiHumanVsGuiHuman:
-                return new GuiPlayer(O);
-            default:
-                throw new RuntimeException("Illegal GameMode!");
+        if (gameMode == GameMode.HumanVsComputer ||
+                gameMode == GameMode.ComputerVsComputer ||
+                gameMode == GameMode.GuiHumanVsComputer) {
+            return new UnbeatableComputerPlayer(O);
+        } else if (gameMode == GameMode.HumanVsHuman ||
+                gameMode == GameMode.ComputerVsHuman) {
+            return new HumanPlayer(userInterface, O);
+        } else {
+            return new GuiPlayer(O);
         }
     }
 }

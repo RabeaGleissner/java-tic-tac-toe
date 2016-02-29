@@ -25,7 +25,7 @@ public class ViewUpdater {
         scene.setRoot(boardView.draw(board, positionFull));
     }
 
-    public void showGameOverView(GuiApp guiApp, Mark lastPlayedMark, boolean winner) {
+    public void showGameEndView(GuiApp guiApp, Mark lastPlayedMark, boolean winner) {
         scene.setRoot(new GameEndView().draw(guiApp, lastPlayedMark, winner));
     }
 
