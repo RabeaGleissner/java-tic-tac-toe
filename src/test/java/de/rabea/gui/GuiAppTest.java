@@ -1,6 +1,7 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
+import de.rabea.game.GameMode;
 import de.rabea.player.PlayerFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -24,7 +25,7 @@ public class GuiAppTest {
     @Test
     public void displaysGameOptions() {
         GuiApp guiApp = new GuiApp(viewUpdaterSpy, new PlayerFactory(null));
-        guiApp.displayBoardSizeOptions();
+        guiApp.createGameAndGetBoardSize(GameMode.GuiHumanVsComputer);
 
         assertTrue(viewUpdaterSpy.hasShownBoardSizeOptions);
     }
@@ -57,7 +58,7 @@ public class GuiAppTest {
     public void preparesGameAndShowsBoard() {
         GuiApp guiApp = new GuiApp(viewUpdaterSpy, new PlayerFactory(null));
 //        guiApp.createBoard("3x3");
-        guiApp.prepareGameForPlaying("3x3");
+        guiApp.startGame("3x3");
 
         assertTrue(viewUpdaterSpy.hasShownBoard);
     }

@@ -24,7 +24,7 @@ public class BoardSizeClickHandlerTest {
         }
 
         @Override
-        public void prepareGameForPlaying(String boardSize) {
+        public void startGame(String boardSize) {
             prepareGameWasCalled = true;
         }
     }

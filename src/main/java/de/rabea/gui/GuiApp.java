@@ -22,14 +22,10 @@ public class GuiApp {
         viewUpdater.showGameModeOptions(this);
     }
 
-    public void createGame(GameMode gameMode) {
+    public void createGameAndGetBoardSize(GameMode gameMode) {
         Player player = playerFactory.createPlayer(gameMode);
         game = new Game(new JavaFXUi(viewUpdater, this), player,
                 playerFactory.createOpponent(gameMode));
-        displayBoardSizeOptions();
-    }
-
-    public void displayBoardSizeOptions() {
         viewUpdater.showBoardSizeOptionsView(this);
     }
 
@@ -41,7 +37,7 @@ public class GuiApp {
         }
     }
 
-    public void prepareGameForPlaying(String boardSize) {
+    public void startGame(String boardSize) {
         Board board = createBoard(boardSize);
         playOneRound(board);
     }

@@ -14,9 +14,9 @@ public class GameOptionsClickHandler implements ClickHandler {
     @Override
     public void action(String gameOption) {
         if (gameOption.equals("HumanvsHuman")) {
-            guiApp.createGame(GuiHumanVsGuiHuman);
+            guiApp.createGameAndGetBoardSize(GuiHumanVsGuiHuman);
         } else {
-            guiApp.createGame(GuiHumanVsComputer);
+            guiApp.createGameAndGetBoardSize(GuiHumanVsComputer);
         }
 
     }
