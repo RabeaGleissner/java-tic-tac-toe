@@ -1,5 +1,7 @@
 package de.rabea.game;
 
+import de.rabea.gui.GuiPlayer;
+import de.rabea.player.UnbeatableComputerPlayer;
 import de.rabea.ui.UserInterface;
 
 public class Game {
@@ -22,11 +24,17 @@ public class Game {
             board = playOneRound(currentPlayer, board);
             if (gameIsNotOver(board)) {
                 switchPlayer();
-                userInterface.displayBoard(board, currentPlayer);
+                updateView(board);
             }
         }
         if (board.gameOver()) {
             finishGame(currentPlayer.mark(), board);
+        }
+    }
+
+    private void updateView(Board board) {
+        if (!(currentPlayer instanceof UnbeatableComputerPlayer && player instanceof GuiPlayer)) {
+            userInterface.displayBoard(board, currentPlayer);
         }
     }
 
