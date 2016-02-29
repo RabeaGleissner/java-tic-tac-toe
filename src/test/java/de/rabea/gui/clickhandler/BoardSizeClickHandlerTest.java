@@ -3,22 +3,35 @@ package de.rabea.gui.clickhandler;
 import de.rabea.game.GameRunner;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class BoardSizeClickHandlerTest {
 
     @Test
-    public void displaysBoardOnClickAction() {
+    public void createsAnddisplays3x3BoardOnClickAction() {
         GameRunnerSpy guiAppSpy = new GameRunnerSpy();
         BoardSizeClickHandler handler = new BoardSizeClickHandler(guiAppSpy);
-        handler.action("test");
+        handler.action("3x3");
 
-        assertTrue(guiAppSpy.prepareGameWasCalled);
+        assertTrue(guiAppSpy.createBoardAndPlayWasCalled);
+        assertEquals(3, guiAppSpy.givenBoardSize);
+    }
+
+    @Test
+    public void createsAnddisplays4x4BoardOnClickAction() {
+        GameRunnerSpy guiAppSpy = new GameRunnerSpy();
+        BoardSizeClickHandler handler = new BoardSizeClickHandler(guiAppSpy);
+        handler.action("4x4");
+
+        assertTrue(guiAppSpy.createBoardAndPlayWasCalled);
+        assertEquals(4, guiAppSpy.givenBoardSize);
     }
 
     private class GameRunnerSpy extends GameRunner {
 
-        private boolean prepareGameWasCalled = false;
+        private boolean createBoardAndPlayWasCalled = false;
+        private int givenBoardSize;
 
         public GameRunnerSpy() {
             super(null, null);
@@ -26,7 +39,8 @@ public class BoardSizeClickHandlerTest {
 
         @Override
         public void createBoardAndPlay(int boardSize) {
-            prepareGameWasCalled = true;
+            createBoardAndPlayWasCalled = true;
+            givenBoardSize = boardSize;
         }
     }
 }

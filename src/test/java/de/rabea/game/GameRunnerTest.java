@@ -99,7 +99,6 @@ public class GameRunnerTest {
 
     @Test
     public void createsHumanAndComputerPlayerForConsoleGame() {
-        fakeUserInterface.fakeConsoleInputForOneHvC3x3Game();
         GameRunner gameRunner = new GameRunner(fakeUserInterface,
                 new FakePlayerFactory(fakeUserInterface, createFakeComputerPlayerWithInput()));
         Game game =  gameRunner.createGame(HumanVsComputer);

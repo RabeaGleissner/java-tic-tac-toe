@@ -41,9 +41,4 @@ public class JavaFXUi implements UserInterface {
     public boolean playAgain() {
         return false;
     }
-
-    @Override
-    public void announceMarkDistribution(GameMode gameMode) {
-
-    }
 }

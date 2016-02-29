@@ -108,18 +108,6 @@ public class ConsoleUiTest {
         assertEquals("Choose a board size: \n" +
                 " 3 - 3x3 board \n" +
                 " 4 - 4x4 board", fakeConsole.messagePrinted());
-
-    }
-    @Test
-    public void tellsTheUserThatFirstPlayerIsXAndSecondIsO() {
-        userInterface.announceMarkDistribution(GameMode.HumanVsHuman);
-        assertEquals("The first user to play is X. The second player is O.", fakeConsole.messagePrinted());
-    }
-
-    @Test
-    public void tellsTheUserThatHumanIsXAndComputerIsO() {
-        userInterface.announceMarkDistribution(GameMode.HumanVsComputer);
-        assertEquals("The human player is X. The computer player is O.", fakeConsole.messagePrinted());
     }
 
     @Test

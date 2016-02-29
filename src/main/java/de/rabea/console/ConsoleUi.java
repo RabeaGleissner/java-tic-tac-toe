@@ -16,8 +16,6 @@ public class ConsoleUi implements UserInterface {
     private final String WANT_TO_PLAY_AGAIN = "Do you want to play again? y/n";
     private final String GREETING = "Welcome to Tic Tac Toe.\n ";
     private final String GAME_OPTIONS = "Please choose the game mode. \n 1 - Human vs Human\n 2 - Human vs Computer\n 3 - Computer vs Human\n 4 - Computer vs Computer";
-    private final String MARK_DISTRIBUTION_TWO_PLAYERS = "The first user to play is X. The second player is O.";
-    private final String MARK_DISTRIBUTION_HVC = "The human player is X. The computer player is O.";
     private final String WINNER_ANNOUNCEMENT = "Game over! The winner is: ";
     private final String DRAW_ANNOUNCEMENT = "Game over! It's a draw.";
     private final String UNAVAILABLE_POSITION = "Sorry, this position is not available!";
@@ -94,14 +92,6 @@ public class ConsoleUi implements UserInterface {
         }
     }
 
-    public void announceMarkDistribution(GameMode gameMode) {
-        if (gameMode == GameMode.HumanVsComputer) {
-            markDistributionForHvC();
-        } else {
-            markDistributionForHvH();
-        }
-    }
-
     @Override
     public void announceGameEnd(Mark lastPlayedMark, boolean winner) {
         if (winner) {
@@ -154,13 +144,5 @@ public class ConsoleUi implements UserInterface {
         clearScreen();
         displayBoard(board, new HumanPlayer(this, Mark.X));
         console.print(ENTER_A_NUMBER);
-    }
-
-    private void markDistributionForHvH() {
-        console.print(MARK_DISTRIBUTION_TWO_PLAYERS);
-    }
-
-    private void markDistributionForHvC() {
-        console.print(MARK_DISTRIBUTION_HVC);
     }
 }
