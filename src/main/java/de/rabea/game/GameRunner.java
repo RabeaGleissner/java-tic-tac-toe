@@ -23,16 +23,7 @@ public class GameRunner {
         boardSize = userInterface.getBoardDimensionFromUser();
     }
 
-    public Game createGame(GameMode gameMode) {
-        return new Game(userInterface, playerFactory.createPlayer(gameMode),
-                playerFactory.createOpponent(gameMode));
-    }
-
-    public Board createBoard(int boardSize) {
-        return new Board(boardSize);
-    }
-
-    public void createBoardAndPlay(int boardSize) {
+    public void playWithFreshBoard(int boardSize) {
         playOneRound(createBoard(boardSize));
     }
 
@@ -43,7 +34,7 @@ public class GameRunner {
     public void setUpConsoleGameAndPlay() {
         displayGameModeOptions();
         setGameAndDisplayBoardSizeOptions(gameMode);
-        createBoardAndPlay(boardSize);
+        playWithFreshBoard(boardSize);
         replayIfRequested();
     }
 
@@ -55,5 +46,14 @@ public class GameRunner {
         if (userInterface.playAgain()) {
             replay();
         }
+    }
+
+    public Game createGame(GameMode gameMode) {
+        return new Game(userInterface, playerFactory.createPlayer(gameMode),
+                playerFactory.createOpponent(gameMode));
+    }
+
+    public Board createBoard(int boardSize) {
+        return new Board(boardSize);
     }
 }

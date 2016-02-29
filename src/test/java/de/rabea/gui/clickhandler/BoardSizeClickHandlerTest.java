@@ -27,20 +27,4 @@ public class BoardSizeClickHandlerTest {
         assertTrue(guiAppSpy.createBoardAndPlayWasCalled);
         assertEquals(4, guiAppSpy.givenBoardSize);
     }
-
-    private class GameRunnerSpy extends GameRunner {
-
-        private boolean createBoardAndPlayWasCalled = false;
-        private int givenBoardSize;
-
-        public GameRunnerSpy() {
-            super(null, null);
-        }
-
-        @Override
-        public void createBoardAndPlay(int boardSize) {
-            createBoardAndPlayWasCalled = true;
-            givenBoardSize = boardSize;
-        }
-    }
 }

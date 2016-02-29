@@ -1,7 +1,5 @@
 package de.rabea.gui.clickhandler;
 
-import de.rabea.game.GameMode;
-import de.rabea.game.GameRunner;
 import org.junit.Test;
 
 import static de.rabea.game.GameMode.GuiHumanVsComputer;
@@ -24,19 +22,5 @@ public class GameModeClickHandlerTest {
         GameModeClickHandler clickHandler = new GameModeClickHandler(spy);
         clickHandler.action("HumanvsComputer");
         assertEquals(GuiHumanVsComputer, spy.createsGameWithThisMode);
-    }
-
-    private class GameRunnerSpy extends GameRunner {
-
-        private GameMode createsGameWithThisMode = null;
-
-        public GameRunnerSpy() {
-            super(null, null);
-        }
-
-        @Override
-        public void setGameAndDisplayBoardSizeOptions(GameMode gameMode) {
-            createsGameWithThisMode = gameMode;
-        }
     }
 }

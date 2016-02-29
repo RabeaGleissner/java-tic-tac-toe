@@ -13,9 +13,9 @@ public class BoardSizeClickHandler implements ClickHandler {
     @Override
     public void action(String boardSize) {
         if (boardSize.equals("3x3")) {
-            gameRunner.createBoardAndPlay(3);
+            gameRunner.playWithFreshBoard(3);
         } else {
-            gameRunner.createBoardAndPlay(4);
+            gameRunner.playWithFreshBoard(4);
         }
     }
 }

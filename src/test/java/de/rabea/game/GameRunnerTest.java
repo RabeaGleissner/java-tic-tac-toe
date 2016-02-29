@@ -75,7 +75,7 @@ public class GameRunnerTest {
     public void preparesGameAndShowsBoard() {
         GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
         gameRunner.setGameAndDisplayBoardSizeOptions(GameMode.GuiHumanVsGuiHuman);
-        gameRunner.createBoardAndPlay(3);
+        gameRunner.playWithFreshBoard(3);
 
         assertTrue(viewUpdaterSpy.hasShownBoard);
     }
