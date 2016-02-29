@@ -1,7 +1,6 @@
 package de.rabea.game;
 
 import de.rabea.player.PlayerFactory;
-import de.rabea.ui.UserInterface;
 
 public class GameRunner {
     private final UserInterface userInterface;

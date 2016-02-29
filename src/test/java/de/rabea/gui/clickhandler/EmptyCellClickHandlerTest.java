@@ -2,9 +2,9 @@ package de.rabea.gui.clickhandler;
 
 import de.rabea.game.Board;
 import de.rabea.game.GameRunner;
+import de.rabea.game.UserInterface;
 import de.rabea.gui.GuiPlayer;
 import de.rabea.player.PlayerFactory;
-import de.rabea.ui.UserInterface;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.O;

@@ -1,4 +1,4 @@
-package de.rabea.ui;
+package de.rabea.console;
 
 import org.junit.Test;
 

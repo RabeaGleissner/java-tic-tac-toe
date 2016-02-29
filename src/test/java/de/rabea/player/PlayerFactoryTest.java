@@ -1,8 +1,8 @@
 package de.rabea.player;
 
+import de.rabea.console.FakeUserInterface;
 import de.rabea.game.GameMode;
 import de.rabea.gui.GuiPlayer;
-import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,9 +1,4 @@
-package de.rabea.ui;
-
-import de.rabea.game.Board;
-import de.rabea.game.GameMode;
-import de.rabea.game.Mark;
-import de.rabea.game.Player;
+package de.rabea.game;
 
 public interface UserInterface {
 

@@ -1,10 +1,10 @@
 package de.rabea;
 
+import de.rabea.console.ConsoleUi;
+import de.rabea.console.PrettyBoardPainter;
+import de.rabea.console.RealConsole;
 import de.rabea.game.GameRunner;
 import de.rabea.player.PlayerFactory;
-import de.rabea.ui.ConsoleUi;
-import de.rabea.ui.PrettyBoardPainter;
-import de.rabea.ui.RealConsole;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

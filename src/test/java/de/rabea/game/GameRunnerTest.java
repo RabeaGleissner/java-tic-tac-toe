@@ -1,5 +1,7 @@
 package de.rabea.game;
 
+import de.rabea.console.ConsoleUi;
+import de.rabea.console.FakeUserInterface;
 import de.rabea.gui.GuiPlayer;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdaterSpy;
@@ -7,8 +9,6 @@ import de.rabea.player.FakeComputerPlayer;
 import de.rabea.player.HumanPlayer;
 import de.rabea.player.PlayerFactory;
 import de.rabea.player.UnbeatableComputerPlayer;
-import de.rabea.ui.ConsoleUi;
-import de.rabea.ui.FakeUserInterface;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +33,7 @@ public class GameRunnerTest {
     }
 
     @Test
-    public void displaysGameOptions() {
+    public void displaysGameOptionsOnGui() {
         GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
         gameRunner.setGameAndDisplayBoardSizeOptions(GameMode.GuiHumanVsComputer);
 

@@ -1,7 +1,6 @@
 package de.rabea.gui;
 
 import de.rabea.game.*;
-import de.rabea.ui.UserInterface;
 
 public class JavaFXUi implements UserInterface {
 

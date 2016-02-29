@@ -2,7 +2,6 @@ package de.rabea.game;
 
 import de.rabea.gui.GuiPlayer;
 import de.rabea.player.UnbeatableComputerPlayer;
-import de.rabea.ui.UserInterface;
 
 public class Game {
 

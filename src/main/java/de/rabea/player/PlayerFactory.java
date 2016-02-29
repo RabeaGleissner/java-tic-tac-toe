@@ -1,9 +1,9 @@
 package de.rabea.player;
 
+import de.rabea.console.ConsoleUi;
 import de.rabea.game.GameMode;
 import de.rabea.game.Player;
 import de.rabea.gui.GuiPlayer;
-import de.rabea.ui.ConsoleUi;
 
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;

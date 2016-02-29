@@ -1,6 +1,4 @@
-package de.rabea.ui;
-
-import de.rabea.game.Console;
+package de.rabea.console;
 
 import java.io.BufferedReader;
 import java.io.IOException;
