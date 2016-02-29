@@ -16,4 +16,6 @@ public interface UserInterface {
     void announceGameEnd(Mark lastPlayedMark, boolean winner);
 
     boolean playAgain();
+
+    void announceMarkDistribution(GameMode gameMode);
 }

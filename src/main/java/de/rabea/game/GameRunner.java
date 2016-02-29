@@ -1,14 +1,14 @@
 package de.rabea.game;
 
 import de.rabea.player.PlayerFactory;
-import de.rabea.ui.ConsoleUi;
+import de.rabea.ui.UserInterface;
 
 public class GameRunner {
-    private final ConsoleUi userInterface;
+    private final UserInterface userInterface;
     private final PlayerFactory playerFactory;
     private Board board;
 
-    public GameRunner(ConsoleUi userInterface, PlayerFactory playerFactory) {
+    public GameRunner(UserInterface userInterface, PlayerFactory playerFactory) {
         this.userInterface = userInterface;
         this.playerFactory = playerFactory;
     }

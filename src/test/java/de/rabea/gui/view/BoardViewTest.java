@@ -3,6 +3,7 @@ package de.rabea.gui.view;
 import de.rabea.game.Board;
 import de.rabea.gui.GuiApp;
 import de.rabea.gui.GuiPlayer;
+import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdater;
 import de.rabea.gui.clickhandler.EmptyCellClickHandler;
 import de.rabea.gui.clickhandler.FullCellClickHandler;
@@ -21,14 +22,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class BoardViewTest {
-    private ViewUpdater viewUpdater;
+    private JavaFXUi javaFXUi;
     private GuiApp guiApp;
 
     @Before
     public void setUp() {
         new JFXPanel();
-        viewUpdater = new ViewUpdater(new Scene(new GridPane()));
-        guiApp = new GuiApp(viewUpdater, new PlayerFactory(null));
+        javaFXUi = new JavaFXUi(new ViewUpdater(new Scene(new GridPane())));
+        guiApp = new GuiApp(javaFXUi, new PlayerFactory(null));
     }
 
     @Test

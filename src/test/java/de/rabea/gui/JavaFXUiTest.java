@@ -9,24 +9,22 @@ import static org.junit.Assert.assertTrue;
 
 public class JavaFXUiTest {
     private ViewUpdaterSpy viewUpdaterSpy;
-    private GuiApp guiApp;
 
     @Before
     public void setup() {
         viewUpdaterSpy = new ViewUpdaterSpy();
-        guiApp = new GuiApp(null, null);
     }
 
     @Test
     public void displaysBoard() {
-        JavaFXUi ui = new JavaFXUi(viewUpdaterSpy, guiApp);
+        JavaFXUi ui = new JavaFXUi(viewUpdaterSpy);
         ui.displayBoard(new Board(3), new GuiPlayer(X));
         assertTrue(viewUpdaterSpy.hasShownBoard);
     }
 
     @Test
     public void announcesGameEnd() {
-        JavaFXUi ui = new JavaFXUi(viewUpdaterSpy, guiApp);
+        JavaFXUi ui = new JavaFXUi(viewUpdaterSpy);
         ui.announceGameEnd(X, true);
         assertTrue(viewUpdaterSpy.hasShownGameEndView);
     }

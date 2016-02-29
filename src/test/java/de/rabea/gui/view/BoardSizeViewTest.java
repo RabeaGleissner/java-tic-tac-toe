@@ -1,6 +1,7 @@
 package de.rabea.gui.view;
 
 import de.rabea.gui.GuiApp;
+import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdater;
 import de.rabea.player.PlayerFactory;
 import javafx.embed.swing.JFXPanel;
@@ -16,6 +17,8 @@ import static org.junit.Assert.assertEquals;
 
 public class BoardSizeViewTest {
 
+    private final ViewUpdater viewUpdater = new ViewUpdater(new Scene(new GridPane()));
+
     @Before
     public void setUp() throws Exception {
         new JFXPanel();
@@ -24,7 +27,7 @@ public class BoardSizeViewTest {
     @Test
     public void asksUserToSelectBoardSize() {
         BoardSizeView boardSizeView = new BoardSizeView();
-        Parent parent = boardSizeView.draw(new GuiApp(new ViewUpdater(new Scene(new GridPane())), new PlayerFactory(null)));
+        Parent parent = boardSizeView.draw(new GuiApp(new JavaFXUi(viewUpdater), new PlayerFactory(null)));
         Label label = (Label) parent.getChildrenUnmodifiable().get(0);
 
         assertEquals("Please select a board size:", label.getText());
@@ -33,7 +36,7 @@ public class BoardSizeViewTest {
     @Test
     public void hasButtonToChoose3x3Board() {
         BoardSizeView boardSizeView = new BoardSizeView();
-        Parent parent = boardSizeView.draw(new GuiApp(new ViewUpdater(new Scene(new GridPane())), new PlayerFactory(null)));
+        Parent parent = boardSizeView.draw(new GuiApp(new JavaFXUi(viewUpdater), new PlayerFactory(null)));
         Button button = (Button) parent.getChildrenUnmodifiable().get(1);
 
         assertEquals("3x3 board", button.getText());
@@ -42,7 +45,7 @@ public class BoardSizeViewTest {
     @Test
     public void hasButtonToChoose4x4Board() {
         BoardSizeView boardSizeView = new BoardSizeView();
-        Parent parent = boardSizeView.draw(new GuiApp(new ViewUpdater(new Scene(new GridPane())), new PlayerFactory(null)));
+        Parent parent = boardSizeView.draw(new GuiApp(new JavaFXUi(viewUpdater), new PlayerFactory(null)));
         Button button = (Button) parent.getChildrenUnmodifiable().get(2);
 
         assertEquals("4x4 board", button.getText());

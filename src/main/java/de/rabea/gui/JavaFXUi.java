@@ -9,10 +9,13 @@ import de.rabea.ui.UserInterface;
 public class JavaFXUi implements UserInterface {
 
     private final ViewUpdater viewUpdater;
-    private final GuiApp guiApp;
+    private GuiApp guiApp;
 
-    public JavaFXUi(ViewUpdater viewUpdater, GuiApp guiApp) {
+    public JavaFXUi(ViewUpdater viewUpdater) {
         this.viewUpdater = viewUpdater;
+    }
+
+    public void setGuiApp(GuiApp guiApp) {
         this.guiApp = guiApp;
     }
 
@@ -23,11 +26,13 @@ public class JavaFXUi implements UserInterface {
 
     @Override
     public GameMode getGameModeFromUser() {
+        viewUpdater.showGameModeOptions(guiApp);
         return GameMode.HumanVsHuman;
     }
 
     @Override
     public int getBoardDimensionFromUser() {
+        viewUpdater.showBoardSizeOptionsView(guiApp);
         return 3;
     }
 
@@ -39,5 +44,10 @@ public class JavaFXUi implements UserInterface {
     @Override
     public boolean playAgain() {
         return false;
+    }
+
+    @Override
+    public void announceMarkDistribution(GameMode gameMode) {
+
     }
 }

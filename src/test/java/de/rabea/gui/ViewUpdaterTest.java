@@ -24,7 +24,7 @@ public class ViewUpdaterTest {
     public void showsBoardSizeOptions() {
         Scene scene = new Scene(new GridPane());
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showBoardSizeOptionsView(new GuiApp(viewUpdater, new PlayerFactory(null)));
+        viewUpdater.showBoardSizeOptionsView(new GuiApp(new JavaFXUi(viewUpdater), new PlayerFactory(null)));
         Label label = (Label) scene.getRoot().getChildrenUnmodifiable().get(0);
 
         assertEquals("Please select a board size:", label.getText());
@@ -34,7 +34,7 @@ public class ViewUpdaterTest {
     public void showsGameModeOptions() {
         Scene scene = new Scene(new GridPane());
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showGameModeOptions(new GuiApp(viewUpdater, new PlayerFactory(null)));
+        viewUpdater.showGameModeOptions(new GuiApp(new JavaFXUi(viewUpdater), new PlayerFactory(null)));
         Label label = (Label) scene.getRoot().getChildrenUnmodifiable().get(0);
 
         assertEquals("Please select a game mode:", label.getText());
@@ -44,7 +44,7 @@ public class ViewUpdaterTest {
     public void showsBoard() {
         Scene scene = new Scene(new GridPane());
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showBoard(new GuiPlayer(X), new Board(3), new GuiApp(viewUpdater, new PlayerFactory(null)), false);
+        viewUpdater.showBoard(new GuiPlayer(X), new Board(3), new GuiApp(new JavaFXUi(viewUpdater), new PlayerFactory(null)), false);
         int numberOfButtons = scene.getRoot().getChildrenUnmodifiable().size();
 
         assertEquals(9, numberOfButtons);
@@ -54,7 +54,7 @@ public class ViewUpdaterTest {
     public void showsGameOverView() {
         Scene scene = new Scene(new GridPane());
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showGameEndView(new GuiApp(viewUpdater, new PlayerFactory(null)), X, false);
+        viewUpdater.showGameEndView(new GuiApp(new JavaFXUi(viewUpdater), new PlayerFactory(null)), X, false);
         Button replayButton = (Button) scene.getRoot().getChildrenUnmodifiable().get(1);
 
         assertEquals("Play again", replayButton.getText());

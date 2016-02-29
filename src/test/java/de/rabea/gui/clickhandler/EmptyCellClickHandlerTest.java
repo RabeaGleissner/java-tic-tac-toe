@@ -3,8 +3,8 @@ package de.rabea.gui.clickhandler;
 import de.rabea.game.Board;
 import de.rabea.gui.GuiApp;
 import de.rabea.gui.GuiPlayer;
-import de.rabea.gui.ViewUpdater;
 import de.rabea.player.PlayerFactory;
+import de.rabea.ui.UserInterface;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.O;
@@ -24,8 +24,8 @@ public class EmptyCellClickHandlerTest {
 
     public class GuiAppStub extends GuiApp {
 
-        public GuiAppStub(ViewUpdater viewUpdater, PlayerFactory playerFactory) {
-            super(viewUpdater, playerFactory);
+        public GuiAppStub(UserInterface userInterface, PlayerFactory playerFactory) {
+            super(userInterface, playerFactory);
         }
 
         @Override

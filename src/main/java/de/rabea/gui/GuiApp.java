@@ -4,30 +4,31 @@ import de.rabea.game.Board;
 import de.rabea.game.Game;
 import de.rabea.game.GameMode;
 import de.rabea.player.PlayerFactory;
+import de.rabea.ui.UserInterface;
 
 public class GuiApp {
 
-    private final ViewUpdater viewUpdater;
+    private final UserInterface userInterface;
     private final PlayerFactory playerFactory;
     private Game game;
 
 
-    public GuiApp(ViewUpdater viewUpdater, PlayerFactory playerFactory) {
-        this.viewUpdater = viewUpdater;
+    public GuiApp(UserInterface userInterface, PlayerFactory playerFactory) {
+        this.userInterface = userInterface;
         this.playerFactory = playerFactory;
     }
 
     public void displayGameModeOptions() {
-        viewUpdater.showGameModeOptions(this);
+        userInterface.getGameModeFromUser();
     }
 
     public void createGameAndGetBoardSize(GameMode gameMode) {
         game = createNewGame(gameMode);
-        viewUpdater.showBoardSizeOptionsView(this);
+        userInterface.getBoardDimensionFromUser();
     }
 
     public Game createNewGame(GameMode gameMode) {
-        return new Game(new JavaFXUi(viewUpdater, this), playerFactory.createPlayer(gameMode),
+        return new Game(userInterface, playerFactory.createPlayer(gameMode),
                 playerFactory.createOpponent(gameMode));
     }
 
