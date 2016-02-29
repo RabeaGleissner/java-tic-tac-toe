@@ -1,44 +1,41 @@
 package de.rabea.gui;
 
-import de.rabea.game.Board;
-import de.rabea.game.GameMode;
-import de.rabea.game.Mark;
-import de.rabea.game.Player;
+import de.rabea.game.*;
 import de.rabea.ui.UserInterface;
 
 public class JavaFXUi implements UserInterface {
 
     private final ViewUpdater viewUpdater;
-    private GuiApp guiApp;
+    private GameRunner gameRunner;
 
     public JavaFXUi(ViewUpdater viewUpdater) {
         this.viewUpdater = viewUpdater;
     }
 
-    public void setGuiApp(GuiApp guiApp) {
-        this.guiApp = guiApp;
+    public void setGameRunner(GameRunner gameRunner) {
+        this.gameRunner = gameRunner;
     }
 
     @Override
     public void displayBoard(Board board, Player player) {
-        viewUpdater.showBoard((GuiPlayer) player, board, guiApp, false);
+        viewUpdater.showBoard((GuiPlayer) player, board, gameRunner, false);
     }
 
     @Override
     public GameMode getGameModeFromUser() {
-        viewUpdater.showGameModeOptions(guiApp);
-        return GameMode.HumanVsHuman;
+        viewUpdater.showGameModeOptions(gameRunner);
+        return null;
     }
 
     @Override
     public int getBoardDimensionFromUser() {
-        viewUpdater.showBoardSizeOptionsView(guiApp);
+        viewUpdater.showBoardSizeOptionsView(gameRunner);
         return 3;
     }
 
     @Override
     public void announceGameEnd(Mark lastPlayedMark, boolean winner) {
-        viewUpdater.showGameEndView(guiApp, lastPlayedMark, winner);
+        viewUpdater.showGameEndView(gameRunner, lastPlayedMark, winner);
     }
 
     @Override

@@ -1,33 +1,58 @@
 package de.rabea.game;
 
+import de.rabea.gui.GuiPlayer;
 import de.rabea.player.PlayerFactory;
 import de.rabea.ui.UserInterface;
 
 public class GameRunner {
     private final UserInterface userInterface;
     private final PlayerFactory playerFactory;
-    private Board board;
+    private GameMode gameMode;
+    private Game game;
+    private int boardSize;
 
     public GameRunner(UserInterface userInterface, PlayerFactory playerFactory) {
         this.userInterface = userInterface;
         this.playerFactory = playerFactory;
     }
 
-    public void setUpGameAndPlay() {
-        createGame().play(board);
-        replayIfRequested();
+    public void displayGameModeOptions() {
+       gameMode = userInterface.getGameModeFromUser();
     }
 
-    public Game createGame() {
-        GameMode gameMode = userInterface.getGameModeFromUser();
-        board = new Board(userInterface.getBoardDimensionFromUser());
-        userInterface.announceMarkDistribution(gameMode);
+    public void setGameAndDisplayBoardSizeOptions(GameMode gameMode) {
+        game = createGame(gameMode);
+        boardSize = userInterface.getBoardDimensionFromUser();
+    }
+
+    public Game createGame(GameMode gameMode) {
         return new Game(userInterface, playerFactory.createPlayer(gameMode),
                 playerFactory.createOpponent(gameMode));
     }
 
+    public Board createBoard(int boardSize) {
+        return new Board(boardSize);
+    }
+
+    public void createBoardAndPlay(int boardSize) {
+//        if (!(game.getPlayer() instanceof GuiPlayer) && !(game.getOpponent() instanceof GuiPlayer) ) {
+            playOneRound(createBoard(boardSize));
+//        }
+    }
+
+    public void playOneRound(Board board) {
+        game.play(board);
+    }
+
+    public void setUpConsoleGameAndPlay() {
+        displayGameModeOptions();
+        setGameAndDisplayBoardSizeOptions(gameMode);
+        createBoardAndPlay(boardSize);
+        replayIfRequested();
+    }
+
     private void replay() {
-        setUpGameAndPlay();
+        setUpConsoleGameAndPlay();
     }
 
     private void replayIfRequested() {

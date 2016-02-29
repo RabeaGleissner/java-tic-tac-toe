@@ -1,6 +1,7 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
+import de.rabea.game.GameRunner;
 import de.rabea.game.Mark;
 
 public class ViewUpdaterSpy extends ViewUpdater {
@@ -15,7 +16,7 @@ public class ViewUpdaterSpy extends ViewUpdater {
     }
 
     @Override
-    public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp, boolean positionFull) {
+    public void showBoard(GuiPlayer guiPlayer, Board board, GameRunner gameRunner, boolean positionFull) {
         hasShownBoard = true;
         if (positionFull) {
             showPositionFullWarning = true;
@@ -23,17 +24,17 @@ public class ViewUpdaterSpy extends ViewUpdater {
     }
 
     @Override
-    public void showBoardSizeOptionsView(GuiApp guiApp) {
+    public void showBoardSizeOptionsView(GameRunner gameRunner) {
         hasShownBoardSizeOptions = true;
     }
 
     @Override
-    public void showGameModeOptions(GuiApp guiApp) {
+    public void showGameModeOptions(GameRunner gameRunner) {
         hasShownGameModeOptions = true;
     }
 
     @Override
-    public void showGameEndView(GuiApp guiApp, Mark lastPlayedMark, boolean winner) {
+    public void showGameEndView(GameRunner gameRunner, Mark lastPlayedMark, boolean winner) {
         hasShownGameEndView = true;
     }
 

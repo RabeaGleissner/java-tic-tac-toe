@@ -1,7 +1,7 @@
 package de.rabea.gui.view;
 
 import de.rabea.game.Board;
-import de.rabea.gui.GuiApp;
+import de.rabea.game.GameRunner;
 import de.rabea.gui.GuiPlayer;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdater;
@@ -23,19 +23,19 @@ import static org.junit.Assert.assertTrue;
 
 public class BoardViewTest {
     private JavaFXUi javaFXUi;
-    private GuiApp guiApp;
+    private GameRunner gameRunner;
 
     @Before
     public void setUp() {
         new JFXPanel();
         javaFXUi = new JavaFXUi(new ViewUpdater(new Scene(new GridPane())));
-        guiApp = new GuiApp(javaFXUi, new PlayerFactory(null));
+        gameRunner = new GameRunner(javaFXUi, new PlayerFactory(null));
     }
 
     @Test
     public void threeByThreeBoardHasNineChildren() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), guiApp, board),
+        BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), gameRunner, board),
                 new FullCellClickHandlerStub());
         Parent gridPane = boardView.draw(board, false);
 
@@ -45,7 +45,7 @@ public class BoardViewTest {
     @Test
     public void fourByFourBoardHasSixteenChildren() {
         Board board = new Board(4);
-        BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), guiApp, board),
+        BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), gameRunner, board),
                 new FullCellClickHandlerStub());
         Parent gridPane = boardView.draw(board, false);
 
@@ -55,7 +55,7 @@ public class BoardViewTest {
     @Test
     public void allElementsOnEmptyBoardAreActiveButtons() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), guiApp, board),
+        BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), gameRunner, board),
                 new FullCellClickHandlerStub());
         Parent gridPane = boardView.draw(board, false);
 
@@ -68,7 +68,7 @@ public class BoardViewTest {
     public void disabledButtonsContainCorrespondingPlayerMark() {
         Board board = new Board(3);
         Board nextBoard = board.placeMark(2, X);
-        BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), guiApp, board),
+        BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), gameRunner, board),
                 new FullCellClickHandlerStub());
         Parent node = boardView.draw(nextBoard, false);
 
@@ -78,7 +78,7 @@ public class BoardViewTest {
     @Test
     public void addsPositionInUseWarningWhenPositionIsInUse() {
         Board board = new Board(3);
-        BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), guiApp, board),
+        BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), gameRunner, board),
                 new FullCellClickHandlerStub());
         Parent node = boardView.draw(board, true);
 
@@ -91,15 +91,15 @@ public class BoardViewTest {
     @Test
     public void reactsToAClick() {
         Board board = new Board(3);
-        GuiAppSpy guiAppSpy = new GuiAppSpy();
+        GameRunnerSpy gameRunnerSpy = new GameRunnerSpy();
         GuiPlayer guiPlayer = new GuiPlayer(X);
-        BoardView boardView = new BoardView(new EmptyCellClickHandler(guiPlayer, guiAppSpy, board), new FullCellClickHandlerStub());
+        BoardView boardView = new BoardView(new EmptyCellClickHandler(guiPlayer, gameRunnerSpy, board), new FullCellClickHandlerStub());
         Parent drawnBoard = boardView.draw(board, false);
         Button button = findActiveButton(drawnBoard, 7);
         button.fire();
 
         assertEquals(7, guiPlayer.getPosition(board));
-        assertTrue(guiAppSpy.displayBoard);
+        assertTrue(gameRunnerSpy.displayBoard);
     }
 
     private class FullCellClickHandlerStub extends FullCellClickHandler {
@@ -114,11 +114,11 @@ public class BoardViewTest {
         }
     }
 
-    private class GuiAppSpy extends GuiApp {
+    private class GameRunnerSpy extends GameRunner {
 
         private boolean displayBoard = false;
 
-        public GuiAppSpy() {
+        public GameRunnerSpy() {
             super(null, null);
         }
 

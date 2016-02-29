@@ -1,6 +1,7 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
+import de.rabea.game.GameRunner;
 import de.rabea.game.Mark;
 import de.rabea.gui.clickhandler.EmptyCellClickHandler;
 import de.rabea.gui.clickhandler.FullCellClickHandler;
@@ -18,22 +19,22 @@ public class ViewUpdater {
         this.scene = scene;
     }
 
-    public void showGameModeOptions(GuiApp guiApp) {
-        scene.setRoot(new GameModeView().draw(guiApp));
+    public void showGameModeOptions(GameRunner gameRunner) {
+        scene.setRoot(new GameModeView().draw(gameRunner));
     }
 
-    public void showBoardSizeOptionsView(GuiApp guiApp) {
-        scene.setRoot(new BoardSizeView().draw(guiApp));
+    public void showBoardSizeOptionsView(GameRunner gameRunner) {
+        scene.setRoot(new BoardSizeView().draw(gameRunner));
     }
 
-    public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp, boolean positionFull) {
-        BoardView boardView = new BoardView(new EmptyCellClickHandler(guiPlayer, guiApp, board),
-                new FullCellClickHandler(this, guiPlayer, board, guiApp));
+    public void showBoard(GuiPlayer guiPlayer, Board board, GameRunner gameRunner, boolean positionFull) {
+        BoardView boardView = new BoardView(new EmptyCellClickHandler(guiPlayer, gameRunner, board),
+                new FullCellClickHandler(this, guiPlayer, board, gameRunner));
         scene.setRoot(boardView.draw(board, positionFull));
     }
 
-    public void showGameEndView(GuiApp guiApp, Mark lastPlayedMark, boolean winner) {
-        scene.setRoot(new GameEndView().draw(guiApp, lastPlayedMark, winner));
+    public void showGameEndView(GameRunner gameRunner, Mark lastPlayedMark, boolean winner) {
+        scene.setRoot(new GameEndView().draw(gameRunner, lastPlayedMark, winner));
     }
 
 }

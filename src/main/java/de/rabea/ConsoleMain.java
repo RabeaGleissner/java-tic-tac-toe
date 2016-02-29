@@ -15,6 +15,6 @@ public class ConsoleMain {
         ConsoleUi userInterface = new ConsoleUi(new RealConsole(bufferedReader, System.out), new PrettyBoardPainter());
         PlayerFactory playerFactory = new PlayerFactory(userInterface);
         GameRunner gameRunner = new GameRunner(userInterface, playerFactory);
-        gameRunner.setUpGameAndPlay();
+        gameRunner.setUpConsoleGameAndPlay();
     }
 }

@@ -8,6 +8,9 @@ import de.rabea.ui.FakeUserInterface;
 import org.junit.Before;
 import org.junit.Test;
 
+import static de.rabea.game.GameMode.GuiHumanVsGuiHuman;
+import static de.rabea.game.GameMode.HumanVsComputer;
+import static de.rabea.game.GameMode.HumanVsHuman;
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
@@ -27,7 +30,7 @@ public class GameRunnerTest {
     public void createsTwoHumanPlayersWhenRequested() {
         fakeUserInterface.fakeConsoleInputForOneHvH3x3Game();
         GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
-        Game game = gameRunner.createGame();
+        Game game = gameRunner.createGame(HumanVsHuman);
         assertTrue(game.getPlayer() instanceof HumanPlayer);
         assertTrue(game.getOpponent() instanceof HumanPlayer);
     }
@@ -36,7 +39,7 @@ public class GameRunnerTest {
     public void playsHuman3x3GameTwice() {
         fakeUserInterface.fakeConsoleInputForTwoHvH3x3Games();
         GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
-        gameRunner.setUpGameAndPlay();
+        gameRunner.setUpConsoleGameAndPlay();
         assertTrue(fakeUserInterface.wasAskForPositionCalled());
         assertEquals(2, fakeUserInterface.announceWinnerCalled());
     }
@@ -46,7 +49,7 @@ public class GameRunnerTest {
         fakeUserInterface.fakeConsoleInputForOneHvC3x3Game();
         GameRunner gameRunner = new GameRunner(fakeUserInterface,
                 new FakePlayerFactory(fakeUserInterface, createFakeComputerPlayerWithInput()));
-        Game game =  gameRunner.createGame();
+        Game game =  gameRunner.createGame(HumanVsComputer);
         assertTrue(game.getPlayer() instanceof HumanPlayer);
         assertTrue(game.getOpponent() instanceof FakeComputerPlayer);
     }

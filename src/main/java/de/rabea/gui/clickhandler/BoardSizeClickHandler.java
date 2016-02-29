@@ -1,17 +1,21 @@
 package de.rabea.gui.clickhandler;
 
+import de.rabea.game.GameRunner;
 import de.rabea.gui.ClickHandler;
-import de.rabea.gui.GuiApp;
 
 public class BoardSizeClickHandler implements ClickHandler {
-    private final GuiApp guiApp;
+    private final GameRunner gameRunner;
 
-    public BoardSizeClickHandler(GuiApp guiApp) {
-        this.guiApp = guiApp;
+    public BoardSizeClickHandler(GameRunner guiGameRunner) {
+        this.gameRunner = guiGameRunner;
     }
 
     @Override
     public void action(String boardSize) {
-        guiApp.startGame(boardSize);
+        if (boardSize.equals("3x3")) {
+            gameRunner.createBoardAndPlay(3);
+        } else {
+            gameRunner.createBoardAndPlay(4);
+        }
     }
 }

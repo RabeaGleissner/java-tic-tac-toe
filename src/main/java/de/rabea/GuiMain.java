@@ -1,6 +1,6 @@
 package de.rabea;
 
-import de.rabea.gui.GuiApp;
+import de.rabea.game.GameRunner;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdater;
 import de.rabea.player.PlayerFactory;
@@ -19,9 +19,9 @@ public class GuiMain extends Application {
         primaryStage.show();
         ViewUpdater viewUpdater = new ViewUpdater(scene);
         JavaFXUi ui = new JavaFXUi(viewUpdater);
-        GuiApp guiApp = new GuiApp(ui, new PlayerFactory(null));
-        ui.setGuiApp(guiApp);
-        guiApp.displayGameModeOptions();
+        GameRunner gameRunner = new GameRunner(ui, new PlayerFactory(null));
+        ui.setGameRunner(gameRunner);
+        gameRunner.displayGameModeOptions();
     }
 
     public static void main(String[] args) {
