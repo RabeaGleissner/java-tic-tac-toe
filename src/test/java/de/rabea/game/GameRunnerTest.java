@@ -1,14 +1,18 @@
 package de.rabea.game;
 
+import de.rabea.gui.GuiPlayer;
+import de.rabea.gui.JavaFXUi;
+import de.rabea.gui.ViewUpdaterSpy;
 import de.rabea.player.FakeComputerPlayer;
 import de.rabea.player.HumanPlayer;
 import de.rabea.player.PlayerFactory;
+import de.rabea.player.UnbeatableComputerPlayer;
 import de.rabea.ui.ConsoleUi;
 import de.rabea.ui.FakeUserInterface;
+import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.GameMode.GuiHumanVsGuiHuman;
 import static de.rabea.game.GameMode.HumanVsComputer;
 import static de.rabea.game.GameMode.HumanVsHuman;
 import static de.rabea.game.Mark.O;
@@ -19,15 +23,64 @@ import static org.junit.Assert.assertTrue;
 public class GameRunnerTest {
     private FakeUserInterface fakeUserInterface;
     private PlayerFactory playerFactory;
+    private ViewUpdaterSpy viewUpdaterSpy;
 
     @Before
     public void setup() {
         fakeUserInterface = new FakeUserInterface();
         playerFactory = new PlayerFactory(fakeUserInterface);
+        viewUpdaterSpy = new ViewUpdaterSpy();
     }
 
     @Test
-    public void createsTwoHumanPlayersWhenRequested() {
+    public void displaysGameOptions() {
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        gameRunner.setGameAndDisplayBoardSizeOptions(GameMode.GuiHumanVsComputer);
+
+        assertTrue(viewUpdaterSpy.hasShownBoardSizeOptions);
+    }
+
+    @Test
+    public void creates3x3Board() {
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        Board board = gameRunner.createBoard(3);
+
+        TestCase.assertEquals(3, board.getDimension());
+    }
+
+    @Test
+    public void creates4x4Board() {
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        Board board = gameRunner.createBoard(4);
+
+        TestCase.assertEquals(4, board.getDimension());
+    }
+
+    @Test
+    public void showsOptionsForGameMode() {
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        gameRunner.displayGameModeOptions();
+        assertTrue(viewUpdaterSpy.hasShownGameModeOptions);
+    }
+
+    @Test
+    public void createsANewGame() {
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        Game game = gameRunner.createGame(GameMode.GuiHumanVsComputer);
+        assertTrue(game.getPlayer() instanceof GuiPlayer);
+        assertTrue(game.getOpponent() instanceof UnbeatableComputerPlayer);
+    }
+
+    @Test
+    public void preparesGameAndShowsBoard() {
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        gameRunner.setGameAndDisplayBoardSizeOptions(GameMode.GuiHumanVsGuiHuman);
+        gameRunner.createBoardAndPlay(3);
+
+        assertTrue(viewUpdaterSpy.hasShownBoard);
+    }
+    @Test
+    public void createsTwoHumanPlayersWhenRequestedForConsoleGame() {
         fakeUserInterface.fakeConsoleInputForOneHvH3x3Game();
         GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
         Game game = gameRunner.createGame(HumanVsHuman);
@@ -36,7 +89,7 @@ public class GameRunnerTest {
     }
 
     @Test
-    public void playsHuman3x3GameTwice() {
+    public void playsHuman3x3ConsoleGameTwice() {
         fakeUserInterface.fakeConsoleInputForTwoHvH3x3Games();
         GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
         gameRunner.setUpConsoleGameAndPlay();
@@ -45,7 +98,7 @@ public class GameRunnerTest {
     }
 
     @Test
-    public void createsHumanAndComputerPlayer() {
+    public void createsHumanAndComputerPlayerForConsoleGame() {
         fakeUserInterface.fakeConsoleInputForOneHvC3x3Game();
         GameRunner gameRunner = new GameRunner(fakeUserInterface,
                 new FakePlayerFactory(fakeUserInterface, createFakeComputerPlayerWithInput()));

@@ -1,6 +1,5 @@
 package de.rabea.game;
 
-import de.rabea.gui.GuiPlayer;
 import de.rabea.player.PlayerFactory;
 import de.rabea.ui.UserInterface;
 
@@ -35,9 +34,7 @@ public class GameRunner {
     }
 
     public void createBoardAndPlay(int boardSize) {
-//        if (!(game.getPlayer() instanceof GuiPlayer) && !(game.getOpponent() instanceof GuiPlayer) ) {
-            playOneRound(createBoard(boardSize));
-//        }
+        playOneRound(createBoard(boardSize));
     }
 
     public void playOneRound(Board board) {
