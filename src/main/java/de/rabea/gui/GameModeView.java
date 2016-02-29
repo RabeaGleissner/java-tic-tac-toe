@@ -20,7 +20,7 @@ public class GameModeView {
 
     private void addButtons(GuiApp guiApp, GridPane gridPane) {
         gridPane.add(createButton(guiApp, "Human vs Human").getActualButton(), 1, 1);
-        gridPane.add(createButton(guiApp, "Human vs Computer").getActualButton(), 2, 1);
+        gridPane.add(createButton(guiApp, "Human vs Computer").getActualButton(), 1, 2);
     }
 
     private JavaFXButton createButton(GuiApp guiApp, String gameMode) {

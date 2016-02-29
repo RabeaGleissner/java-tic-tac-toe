@@ -21,7 +21,7 @@
     -fx-background-color: #d4ebf2;
 }
 
-.active-button:hover, .replay-button:hover, .board-size-buttons:hover {
+.active-button:hover, .replay-button:hover, .board-size-buttons:hover, .game-mode-buttons:hover {
     -fx-background-color: #ADD8E6;
 }
 
@@ -35,15 +35,23 @@
     -fx-font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
 }
 
-.board-size-buttons, .replay-button {
-     -fx-min-height: 50px;
-     -fx-min-width: 150px;
-     -fx-font-size: 18px;
-     -fx-background-color: #d4ebf2;
+.board-size-buttons, .replay-button, .game-mode-buttons {
+    -fx-min-height: 50px;
+    -fx-font-size: 18px;
+    -fx-background-color: #d4ebf2;
 }
 
 .board-size-buttons {
-     -fx-padding: 5px;
-     -fx-border-insets: 5px;
-     -fx-background-insets: 5px;
+    -fx-min-width: 150px;
+}
+
+.game-mode-buttons {
+    -fx-min-width: 200px;
+    -fx-display: block;
+}
+
+.board-size-buttons, .game-mode-buttons {
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
 }
