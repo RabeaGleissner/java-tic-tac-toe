@@ -1,6 +1,8 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
+import de.rabea.game.GameRunner;
+import de.rabea.player.PlayerFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,5 +29,14 @@ public class JavaFXUiTest {
         JavaFXUi ui = new JavaFXUi(viewUpdaterSpy);
         ui.announceGameEnd(X, true);
         assertTrue(viewUpdaterSpy.hasShownGameEndView);
+    }
+
+    @Test
+    public void setsGameRunner() {
+        JavaFXUi ui = new JavaFXUi(viewUpdaterSpy);
+        GameRunner gameRunner = new GameRunner(ui, new PlayerFactory(null));
+        ui.setGameRunner(gameRunner);
+        ui.getGameModeFromUser();
+        assertTrue(viewUpdaterSpy.passedInGameRunner != null);
     }
 }
