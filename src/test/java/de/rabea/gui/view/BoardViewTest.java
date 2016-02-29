@@ -1,6 +1,11 @@
-package de.rabea.gui;
+package de.rabea.gui.view;
 
 import de.rabea.game.Board;
+import de.rabea.gui.GuiApp;
+import de.rabea.gui.GuiPlayer;
+import de.rabea.gui.ViewUpdater;
+import de.rabea.gui.clickhandler.EmptyCellClickHandler;
+import de.rabea.gui.clickhandler.FullCellClickHandler;
 import de.rabea.player.PlayerFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
@@ -11,7 +16,7 @@ import javafx.scene.layout.GridPane;
 import org.junit.Before;
 import org.junit.Test;
 
-import static de.rabea.game.Mark.*;
+import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

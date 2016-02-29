@@ -1,5 +1,7 @@
-package de.rabea.gui;
+package de.rabea.gui.view;
 
+import de.rabea.gui.GuiApp;
+import de.rabea.gui.ViewUpdater;
 import de.rabea.player.PlayerFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;

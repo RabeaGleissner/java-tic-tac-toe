@@ -2,6 +2,12 @@ package de.rabea.gui;
 
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
+import de.rabea.gui.clickhandler.EmptyCellClickHandler;
+import de.rabea.gui.clickhandler.FullCellClickHandler;
+import de.rabea.gui.view.BoardSizeView;
+import de.rabea.gui.view.BoardView;
+import de.rabea.gui.view.GameEndView;
+import de.rabea.gui.view.GameModeView;
 import javafx.scene.Scene;
 
 public class ViewUpdater {
@@ -21,7 +27,8 @@ public class ViewUpdater {
     }
 
     public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp, boolean positionFull) {
-        BoardView boardView = new BoardView(new EmptyCellClickHandler(guiPlayer, guiApp, board), new FullCellClickHandler(this, guiPlayer, board, guiApp));
+        BoardView boardView = new BoardView(new EmptyCellClickHandler(guiPlayer, guiApp, board),
+                new FullCellClickHandler(this, guiPlayer, board, guiApp));
         scene.setRoot(boardView.draw(board, positionFull));
     }
 

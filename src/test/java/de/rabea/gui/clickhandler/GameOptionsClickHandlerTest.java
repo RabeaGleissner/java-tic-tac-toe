@@ -1,9 +1,11 @@
-package de.rabea.gui;
+package de.rabea.gui.clickhandler;
 
 import de.rabea.game.GameMode;
+import de.rabea.gui.GuiApp;
 import org.junit.Test;
 
-import static de.rabea.game.GameMode.*;
+import static de.rabea.game.GameMode.GuiHumanVsComputer;
+import static de.rabea.game.GameMode.GuiHumanVsGuiHuman;
 import static org.junit.Assert.assertEquals;
 
 public class GameOptionsClickHandlerTest {

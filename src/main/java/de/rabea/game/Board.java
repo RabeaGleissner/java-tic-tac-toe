@@ -2,7 +2,7 @@ package de.rabea.game;
 
 import java.util.*;
 
-import static de.rabea.game.Mark.*;
+import static de.rabea.game.Mark.EMPTY;
 
 public class Board {
 

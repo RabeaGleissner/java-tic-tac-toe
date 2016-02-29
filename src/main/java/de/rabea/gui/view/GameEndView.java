@@ -1,6 +1,9 @@
-package de.rabea.gui;
+package de.rabea.gui.view;
 
 import de.rabea.game.Mark;
+import de.rabea.gui.GuiApp;
+import de.rabea.gui.JavaFXButton;
+import de.rabea.gui.clickhandler.ReplayClickHandler;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 

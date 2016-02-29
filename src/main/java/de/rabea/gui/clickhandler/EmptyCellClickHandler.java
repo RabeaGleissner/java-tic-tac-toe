@@ -1,6 +1,9 @@
-package de.rabea.gui;
+package de.rabea.gui.clickhandler;
 
 import de.rabea.game.Board;
+import de.rabea.gui.ClickHandler;
+import de.rabea.gui.GuiApp;
+import de.rabea.gui.GuiPlayer;
 
 public class EmptyCellClickHandler implements ClickHandler {
     private final GuiPlayer guiPlayer;

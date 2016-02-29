@@ -1,5 +1,6 @@
-package de.rabea.gui;
+package de.rabea.gui.clickhandler;
 
+import de.rabea.gui.GuiApp;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

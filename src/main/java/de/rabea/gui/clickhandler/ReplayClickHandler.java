@@ -1,4 +1,7 @@
-package de.rabea.gui;
+package de.rabea.gui.clickhandler;
+
+import de.rabea.gui.ClickHandler;
+import de.rabea.gui.GuiApp;
 
 public class ReplayClickHandler implements ClickHandler {
 

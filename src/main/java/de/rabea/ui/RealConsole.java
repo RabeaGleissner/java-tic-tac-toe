@@ -2,7 +2,10 @@ package de.rabea.ui;
 
 import de.rabea.game.Console;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.UncheckedIOException;
 
 public class RealConsole implements Console {
     private final BufferedReader bufferedReader;

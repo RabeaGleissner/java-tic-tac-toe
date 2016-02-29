@@ -1,7 +1,9 @@
-package de.rabea.gui;
+package de.rabea.gui.view;
 
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
+import de.rabea.gui.ClickHandler;
+import de.rabea.gui.JavaFXButton;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
