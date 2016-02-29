@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.UncheckedIOException;
 
-public class RealConsole implements Console {
+public class GameConsole implements Console {
     private final BufferedReader bufferedReader;
     private final PrintStream output;
 
-    public RealConsole(BufferedReader bufferedReader, PrintStream output) {
+    public GameConsole(BufferedReader bufferedReader, PrintStream output) {
         this.bufferedReader= bufferedReader;
         this.output = output;
     }

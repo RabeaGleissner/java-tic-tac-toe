@@ -6,15 +6,15 @@ import java.io.*;
 
 import static org.junit.Assert.assertEquals;
 
-public class RealConsoleTest {
+public class GameConsoleTest {
 
 
     @Test
     public void readsAGivenStringFromTheConsole() {
         InputStream input = new ByteArrayInputStream("hello\n".getBytes());
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input));
-        RealConsole realConsole = new RealConsole(bufferedReader, null);
-        assertEquals("hello", realConsole.readUserInput());
+        GameConsole gameConsole = new GameConsole(bufferedReader, null);
+        assertEquals("hello", gameConsole.readUserInput());
     }
 
     @Test
@@ -23,16 +23,16 @@ public class RealConsoleTest {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input));
         OutputStream output = new ByteArrayOutputStream();
         PrintStream printedOutput = new PrintStream(output);
-        RealConsole realConsole = new RealConsole(bufferedReader, printedOutput);
-        realConsole.print("hey");
+        GameConsole gameConsole = new GameConsole(bufferedReader, printedOutput);
+        gameConsole.print("hey");
         assertEquals("hey\n", output.toString());
     }
 
     @Test(expected=UncheckedIOException.class)
     public void throwsAnExceptionWhenBufferedReaderIsClosed() throws IOException {
         BufferedReader closedBufferedReader = closedBufferedReader();
-        RealConsole realConsole = new RealConsole(closedBufferedReader, null);
-        realConsole.readUserInput();
+        GameConsole gameConsole = new GameConsole(closedBufferedReader, null);
+        gameConsole.readUserInput();
     }
 
     private BufferedReader closedBufferedReader() throws IOException {
