@@ -16,21 +16,4 @@ public class FullCellClickHandlerTest {
         assertTrue(viewUpdaterSpy.showBoardMethodCalledWithCorrectBoolean);
 
     }
-
-    private class ViewUpdaterSpy extends ViewUpdater {
-
-        private boolean showBoardMethodCalledWithCorrectBoolean = false;
-
-        public ViewUpdaterSpy() {
-            super(null);
-        }
-
-        @Override
-        public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp, boolean positionFull) {
-            if (positionFull) {
-                showBoardMethodCalledWithCorrectBoolean = true;
-            }
-
-        }
-    }
 }

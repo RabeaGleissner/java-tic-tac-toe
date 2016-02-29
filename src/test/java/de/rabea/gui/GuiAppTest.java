@@ -18,7 +18,7 @@ public class GuiAppTest {
     @Before
     public void setUp() throws Exception {
         new JFXPanel();
-        viewUpdaterSpy = new ViewUpdaterSpy(new Scene(new GridPane()));
+        viewUpdaterSpy = new ViewUpdaterSpy();
     }
 
     @Test
@@ -45,6 +45,13 @@ public class GuiAppTest {
         assertEquals(4, board.getDimension());
     }
 
+    @Test
+    public void showsOptionsForGameMode() {
+        GuiApp guiApp = new GuiApp(viewUpdaterSpy, new PlayerFactory(null));
+        guiApp.displayGameModeOptions();
+        assertTrue(viewUpdaterSpy.hasShownGameModeOptions);
+    }
+
     @Ignore
     @Test
     public void preparesGameAndShowsBoard() {
@@ -55,22 +62,4 @@ public class GuiAppTest {
         assertTrue(viewUpdaterSpy.hasShownBoard);
     }
 
-    private class ViewUpdaterSpy extends ViewUpdater {
-        private boolean hasShownBoard = false;
-        private boolean hasShownBoardSizeOptions = false;
-
-        public ViewUpdaterSpy(Scene scene) {
-            super(scene);
-        }
-
-        @Override
-        public void showBoard(GuiPlayer guiPlayer, Board board, GuiApp guiApp, boolean positionFull) {
-            hasShownBoard = true;
-        }
-
-        @Override
-        public void showBoardSizeOptionsView(GuiApp guiApp) {
-            hasShownBoardSizeOptions = true;
-        }
-    }
 }
