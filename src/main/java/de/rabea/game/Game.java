@@ -24,9 +24,7 @@ public class Game {
             switchPlayer();
             userInterface.displayBoard(board, currentPlayer);
         }
-        if (board.gameOver()) {
-            finishGame(board);
-        }
+        finishGame(board);
     }
 
     private void switchPlayer() {
@@ -38,9 +36,11 @@ public class Game {
     }
 
     private void finishGame(Board board) {
-        switchPlayer();
-        userInterface.displayBoard(board, player1);
-        userInterface.announceGameEnd(currentPlayer.mark(), board.hasWinner());
+        if (board.gameOver()) {
+            switchPlayer();
+            userInterface.displayBoard(board, player1);
+            userInterface.announceGameEnd(currentPlayer.mark(), board.hasWinner());
+        }
     }
 
     private boolean gameIsNotOver(Board board) {
