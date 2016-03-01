@@ -17,11 +17,12 @@ import static org.junit.Assert.assertEquals;
 
 public class BoardSizeViewTest {
 
-    private final ViewUpdater viewUpdater = new ViewUpdater(new Scene(new GridPane()));
+    private ViewUpdater viewUpdater;
 
     @Before
     public void setUp() throws Exception {
         new JFXPanel();
+        viewUpdater = new ViewUpdater(new Scene(new GridPane()));
     }
 
     @Test

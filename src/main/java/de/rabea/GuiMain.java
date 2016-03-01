@@ -17,8 +17,7 @@ public class GuiMain extends Application {
         scene.getStylesheets().add(GuiMain.class.getResource("/styles.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
-        ViewUpdater viewUpdater = new ViewUpdater(scene);
-        JavaFXUi ui = new JavaFXUi(viewUpdater);
+        JavaFXUi ui = new JavaFXUi(new ViewUpdater(scene));
         GameRunner gameRunner = new GameRunner(ui, new PlayerFactory(null));
         ui.setGameRunner(gameRunner);
         gameRunner.displayGameModeOptions();

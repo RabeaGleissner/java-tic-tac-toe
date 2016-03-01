@@ -19,19 +19,19 @@ import static junit.framework.TestCase.assertEquals;
 
 public class GameEndViewTest {
 
-    private GameRunner guiGameRunner;
+    private GameRunner gameRunner;
 
     @Before
     public void setUp() {
         new JFXPanel();
-        guiGameRunner = new GameRunner(new JavaFXUi(new ViewUpdater(new Scene(new GridPane())))
-                , new PlayerFactory(null));
+        gameRunner = new GameRunner(new JavaFXUi(new ViewUpdater(new Scene(new GridPane()))),
+                new PlayerFactory(null));
     }
 
     @Test
     public void hasGameOverMessage() {
         GameEndView gameEndView = new GameEndView();
-        Parent gridPane = gameEndView.draw(guiGameRunner, X, true);
+        Parent gridPane = gameEndView.draw(gameRunner, X, true);
         Label text = (Label) gridPane.getChildrenUnmodifiable().get(0);
         assertEquals("Game over. Winner is X.", text.getText());
     }
@@ -39,7 +39,7 @@ public class GameEndViewTest {
     @Test
     public void displaysReplayButton() {
         GameEndView gameEndView = new GameEndView();
-        Parent gridPane = gameEndView.draw(guiGameRunner, O, true);
+        Parent gridPane = gameEndView.draw(gameRunner, O, true);
         Button button = (Button) gridPane.getChildrenUnmodifiable().get(1);
         assertEquals("Play again", button.getText());
     }

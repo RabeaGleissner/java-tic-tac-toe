@@ -15,17 +15,19 @@ import static de.rabea.game.Mark.X;
 import static org.junit.Assert.assertEquals;
 
 public class ViewUpdaterTest {
+    private Scene scene;
 
     @Before
     public void setUp() throws Exception {
         new JFXPanel();
+        scene = new Scene(new GridPane());
     }
 
     @Test
     public void showsBoardSizeOptions() {
-        Scene scene = new Scene(new GridPane());
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showBoardSizeOptionsView(new GameRunner(new JavaFXUi(viewUpdater), new PlayerFactory(null)));
+        viewUpdater.showBoardSizeOptionsView(new GameRunner(new JavaFXUi(viewUpdater),
+                new PlayerFactory(null)));
         Label label = (Label) scene.getRoot().getChildrenUnmodifiable().get(0);
 
         assertEquals("Please select a board size:", label.getText());
@@ -33,29 +35,39 @@ public class ViewUpdaterTest {
 
     @Test
     public void showsGameModeOptions() {
-        Scene scene = new Scene(new GridPane());
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showGameModeOptions(new GameRunner(new JavaFXUi(viewUpdater), new PlayerFactory(null)));
+        viewUpdater.showGameModeOptions(new GameRunner(new JavaFXUi(viewUpdater),
+                new PlayerFactory(null)));
         Label label = (Label) scene.getRoot().getChildrenUnmodifiable().get(0);
 
         assertEquals("Please select a game mode:", label.getText());
     }
 
     @Test
-    public void showsBoard() {
-        Scene scene = new Scene(new GridPane());
+    public void shows3x3Board() {
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showBoard(new GuiPlayer(X), new Board(3), new GameRunner(new JavaFXUi(viewUpdater), new PlayerFactory(null)), false);
+        viewUpdater.showBoard(new GuiPlayer(X), new Board(3), new GameRunner(new JavaFXUi(viewUpdater),
+                new PlayerFactory(null)), false);
         int numberOfButtons = scene.getRoot().getChildrenUnmodifiable().size();
 
         assertEquals(9, numberOfButtons);
     }
 
     @Test
-    public void showsGameOverView() {
-        Scene scene = new Scene(new GridPane());
+    public void shows4x4Board() {
         ViewUpdater viewUpdater = new ViewUpdater(scene);
-        viewUpdater.showGameEndView(new GameRunner(new JavaFXUi(viewUpdater), new PlayerFactory(null)), X, false);
+        viewUpdater.showBoard(new GuiPlayer(X), new Board(4), new GameRunner(new JavaFXUi(viewUpdater),
+                new PlayerFactory(null)), false);
+        int numberOfButtons = scene.getRoot().getChildrenUnmodifiable().size();
+
+        assertEquals(16, numberOfButtons);
+    }
+
+    @Test
+    public void showsGameEndView() {
+        ViewUpdater viewUpdater = new ViewUpdater(scene);
+        viewUpdater.showGameEndView(new GameRunner(new JavaFXUi(viewUpdater),
+                new PlayerFactory(null)), X, false);
         Button replayButton = (Button) scene.getRoot().getChildrenUnmodifiable().get(1);
 
         assertEquals("Play again", replayButton.getText());

@@ -37,6 +37,6 @@ public class JavaFXUiTest {
         GameRunner gameRunner = new GameRunner(ui, new PlayerFactory(null));
         ui.setGameRunner(gameRunner);
         ui.getGameModeFromUser();
-        assertTrue(viewUpdaterSpy.passedInGameRunner != null);
+        assertTrue(viewUpdaterSpy.gameRunnerThatWasPassedIn != null);
     }
 }

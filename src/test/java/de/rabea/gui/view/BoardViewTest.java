@@ -22,18 +22,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class BoardViewTest {
-    private JavaFXUi javaFXUi;
     private GameRunner gameRunner;
 
     @Before
     public void setUp() {
         new JFXPanel();
-        javaFXUi = new JavaFXUi(new ViewUpdater(new Scene(new GridPane())));
-        gameRunner = new GameRunner(javaFXUi, new PlayerFactory(null));
+        gameRunner = new GameRunner(new JavaFXUi(new ViewUpdater(new Scene(new GridPane()))),
+                new PlayerFactory(null));
     }
 
     @Test
-    public void threeByThreeBoardHasNineChildren() {
+    public void threeByThreeBoardViewHasNineElements() {
         Board board = new Board(3);
         BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), gameRunner, board),
                 new FullCellClickHandlerStub());
@@ -43,7 +42,7 @@ public class BoardViewTest {
     }
 
     @Test
-    public void fourByFourBoardHasSixteenChildren() {
+    public void fourByFourBoardViewHasSixteenElements() {
         Board board = new Board(4);
         BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), gameRunner, board),
                 new FullCellClickHandlerStub());
@@ -76,7 +75,7 @@ public class BoardViewTest {
     }
 
     @Test
-    public void addsPositionInUseWarningWhenPositionIsInUse() {
+    public void addsPositionInUseWarningWhenClickedPositionIsInUse() {
         Board board = new Board(3);
         BoardView boardView = new BoardView(new EmptyCellClickHandler(new GuiPlayer(X), gameRunner, board),
                 new FullCellClickHandlerStub());
@@ -89,14 +88,13 @@ public class BoardViewTest {
     }
 
     @Test
-    public void reactsToAClick() {
+    public void reactsToAClickByUpdatingPlayerWithPositionAndDisplayingBoard() {
         Board board = new Board(3);
         GameRunnerSpy gameRunnerSpy = new GameRunnerSpy();
         GuiPlayer guiPlayer = new GuiPlayer(X);
-        BoardView boardView = new BoardView(new EmptyCellClickHandler(guiPlayer, gameRunnerSpy, board), new FullCellClickHandlerStub());
-        Parent drawnBoard = boardView.draw(board, false);
-        Button button = findActiveButton(drawnBoard, 7);
-        button.fire();
+        BoardView boardView = new BoardView(new EmptyCellClickHandler(guiPlayer, gameRunnerSpy, board),
+                new FullCellClickHandlerStub());
+        findActiveButton(boardView.draw(board, false), 7).fire();
 
         assertEquals(7, guiPlayer.getPosition(board));
         assertTrue(gameRunnerSpy.displayBoard);

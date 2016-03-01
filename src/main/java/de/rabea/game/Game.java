@@ -19,7 +19,7 @@ public class Game {
 
     public void play(Board board) {
         userInterface.displayBoard(board, currentPlayer);
-        while (gameIsNotOver(board) && currentPlayer.hasMove()){
+        while (gameIsNotOver(board) && currentPlayer.hasMove()) {
             board = playOneRound(currentPlayer, board);
             if (gameIsNotOver(board)) {
                 switchPlayer();

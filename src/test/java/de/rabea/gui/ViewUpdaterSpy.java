@@ -10,7 +10,7 @@ public class ViewUpdaterSpy extends ViewUpdater {
     public boolean hasShownGameModeOptions = false;
     public boolean showPositionFullWarning;
     public boolean hasShownGameEndView = false;
-    public GameRunner passedInGameRunner = null;
+    public GameRunner gameRunnerThatWasPassedIn = null;
 
     public ViewUpdaterSpy() {
         super(null);
@@ -32,7 +32,7 @@ public class ViewUpdaterSpy extends ViewUpdater {
     @Override
     public void showGameModeOptions(GameRunner gameRunner) {
         hasShownGameModeOptions = true;
-        passedInGameRunner = gameRunner;
+        gameRunnerThatWasPassedIn = gameRunner;
     }
 
     @Override

@@ -36,5 +36,4 @@ public class ViewUpdater {
     public void showGameEndView(GameRunner gameRunner, Mark lastPlayedMark, boolean winner) {
         scene.setRoot(new GameEndView().draw(gameRunner, lastPlayedMark, winner));
     }
-
 }
