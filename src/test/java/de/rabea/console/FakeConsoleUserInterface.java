@@ -10,10 +10,12 @@ import java.util.List;
 
 public class FakeConsoleUserInterface extends ConsoleUi {
 
-    private boolean askForPositionWasCalled = false;
     private boolean positionUnavailableWarningWasCalled = false;
     private final List<String> moves = new LinkedList<>();
     public int countAnnounceGameEndCalls = 0;
+    private final List<GameMode> gameModes = new LinkedList<>();
+    private final List<String> replayChoices = new LinkedList<>();
+    private final List<Integer> dimensions = new LinkedList<>();
 
     public FakeConsoleUserInterface() {
         super(new FakeConsole(), new PrettyBoardPainter());
@@ -21,19 +23,21 @@ public class FakeConsoleUserInterface extends ConsoleUi {
 
     @Override
     public void greet() {
-        
+
     }
 
     @Override
     public String readUserInput() {
-        askForPositionWasCalled = true;
         return moves.remove(0);
     }
 
     @Override
     public int getBoardDimensionFromUser() {
-        String input = moves.remove(0);
-        return Integer.parseInt(input);
+        return dimensions.remove(0);
+    }
+
+    public void setBoardDimensions(Integer... selectedDimensions) {
+        dimensions.addAll(Arrays.asList(selectedDimensions));
     }
 
     @Override
@@ -45,7 +49,6 @@ public class FakeConsoleUserInterface extends ConsoleUi {
 
     @Override
     public void askForPosition() {
-        askForPositionWasCalled = true;
     }
 
     @Override
@@ -55,7 +58,7 @@ public class FakeConsoleUserInterface extends ConsoleUi {
 
     @Override
     public boolean playAgain() {
-        return moves.remove(0).equals("y");
+        return replayChoices.remove(0).equals("yes");
     }
 
     @Override
@@ -65,56 +68,19 @@ public class FakeConsoleUserInterface extends ConsoleUi {
 
     @Override
     public GameMode getGameModeFromUser() {
-        String userChoice = moves.remove(0);
-        switch (userChoice) {
-            case "1":
-                return GameMode.HumanVsHuman;
-            case "2":
-                return GameMode.HumanVsComputer;
-            case "3":
-                return GameMode.ComputerVsHuman;
-            default:
-                throw new RuntimeException("did not recognise choice for game mode");
-        }
+        return gameModes.remove(0);
     }
 
-    public void fakeConsoleInputForOneHvH3x3Game() {
-        chooseGameType("Human vs Human");
-        chooseBoardSize("3x3");
-        choosePositions("1", "7", "2", "4", "3");
-        replayChoice("no");
-    }
-
-    public void fakeConsoleInputForTwoHvH3x3Games() {
-        chooseGameType("Human vs Human");
-        chooseBoardSize("3x3");
-        choosePositions("1", "7", "2", "4", "3");
-        replayChoice("yes");
-        fakeConsoleInputForOneHvH3x3Game();
+    public void setGameMode (GameMode... modes) {
+        gameModes.addAll(Arrays.asList(modes));
     }
 
     public void choosePositions(String... userChoices) {
         moves.addAll(Arrays.asList(userChoices));
     }
 
-    private void chooseBoardSize(String choice) {
-        if (choice.equals("3x3")) {
-            moves.add("3");
-        } else if (choice.equals("4x4")) {
-            moves.add("4");
-        } else {
-            throw new RuntimeException("board size choice not available");
-        }
-    }
-
-    private void chooseGameType(String choice) {
-        if (choice.equals("Human vs Human")) {
-            moves.add("1");
-        } else if (choice.equals("Human vs Computer")) {
-            moves.add("2");
-        } else {
-            throw new RuntimeException("game type choice not implemented");
-        }
+    public void setReplayChoice(String... userChoice) {
+        replayChoices.addAll(Arrays.asList(userChoice));
     }
 
     public void replayChoice(String userChoice) {
@@ -125,10 +91,6 @@ public class FakeConsoleUserInterface extends ConsoleUi {
         } else {
             throw new RuntimeException("did not recognise replay choice");
         }
-    }
-
-    public boolean wasAskForPositionCalled() {
-        return askForPositionWasCalled;
     }
 
     public boolean wasPositionUnavailableWarningCalled() {
