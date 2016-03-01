@@ -23,17 +23,11 @@ public class Game {
             board = playOneRound(currentPlayer, board);
             if (gameIsNotOver(board)) {
                 switchPlayer();
-                updateView(board);
+                userInterface.displayBoard(board, currentPlayer);
             }
         }
         if (board.gameOver()) {
             finishGame(currentPlayer.mark(), board);
-        }
-    }
-
-    private void updateView(Board board) {
-        if (!(currentPlayer instanceof UnbeatableComputerPlayer && player1 instanceof GuiPlayer)) {
-            userInterface.displayBoard(board, currentPlayer);
         }
     }
 

@@ -18,7 +18,9 @@ public class JavaFXUi implements UserInterface {
 
     @Override
     public void displayBoard(Board board, Player player) {
-        viewUpdater.showBoard((GuiPlayer) player, board, gameRunner, false);
+        if (!player.hasMove()) {
+            viewUpdater.showBoard((GuiPlayer) player, board, gameRunner, false);
+        }
     }
 
     @Override
