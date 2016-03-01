@@ -3,9 +3,7 @@ package de.rabea.player;
 import de.rabea.game.Board;
 import org.junit.Test;
 
-import static de.rabea.game.Mark.EMPTY;
-import static de.rabea.game.Mark.O;
-import static de.rabea.game.Mark.X;
+import static de.rabea.game.Mark.*;
 import static org.junit.Assert.assertEquals;
 
 public class ComputerPlayerTest {

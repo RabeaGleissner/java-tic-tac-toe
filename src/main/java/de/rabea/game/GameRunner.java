@@ -1,40 +1,59 @@
 package de.rabea.game;
 
 import de.rabea.player.PlayerFactory;
-import de.rabea.ui.ConsoleUi;
 
 public class GameRunner {
-    private final ConsoleUi userInterface;
+    private final UserInterface userInterface;
     private final PlayerFactory playerFactory;
-    private Board board;
+    private GameMode gameMode;
+    private Game game;
+    private int boardSize;
 
-    public GameRunner(ConsoleUi userInterface, PlayerFactory playerFactory) {
+    public GameRunner(UserInterface userInterface, PlayerFactory playerFactory) {
         this.userInterface = userInterface;
         this.playerFactory = playerFactory;
     }
 
-    public void setUpGameAndPlay() {
-        Game game = createGame();
+    public void displayGameModeOptions() {
+       gameMode = userInterface.getGameModeFromUser();
+    }
+
+    public void setGameAndDisplayBoardSizeOptions(GameMode gameMode) {
+        game = createGame(gameMode);
+        boardSize = userInterface.getBoardDimensionFromUser();
+    }
+
+    public void playWithFreshBoard(int boardSize) {
+        playOneRound(createBoard(boardSize));
+    }
+
+    public void playOneRound(Board board) {
         game.play(board);
+    }
+
+    public void setUpConsoleGameAndPlay() {
+        displayGameModeOptions();
+        setGameAndDisplayBoardSizeOptions(gameMode);
+        playWithFreshBoard(boardSize);
         replayIfRequested();
     }
 
-    public Game createGame() {
-        GameMode gameMode = userInterface.getGameModeFromUser();
-        int boardDimension = userInterface.getBoardDimensionFromUser();
-        board = new Board(boardDimension);
-        userInterface.announceMarkDistribution(gameMode);
-        return new Game(userInterface, playerFactory.createPlayer(gameMode),
-                playerFactory.createOpponent(gameMode));
-    }
-
     private void replay() {
-        setUpGameAndPlay();
+        setUpConsoleGameAndPlay();
     }
 
     private void replayIfRequested() {
         if (userInterface.playAgain()) {
             replay();
         }
+    }
+
+    public Game createGame(GameMode gameMode) {
+        return new Game(userInterface, playerFactory.createPlayer(gameMode),
+                playerFactory.createOpponent(gameMode));
+    }
+
+    public Board createBoard(int boardSize) {
+        return new Board(boardSize);
     }
 }

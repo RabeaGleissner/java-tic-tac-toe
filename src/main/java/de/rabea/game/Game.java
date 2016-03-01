@@ -1,6 +1,7 @@
 package de.rabea.game;
 
-import de.rabea.ui.UserInterface;
+import de.rabea.player.GuiPlayer;
+import de.rabea.player.UnbeatableComputerPlayer;
 
 public class Game {
 
@@ -18,15 +19,21 @@ public class Game {
 
     public void play(Board board) {
         userInterface.displayBoard(board, currentPlayer);
-        while (gameIsNotOver(board) && currentPlayer.hasMove()){
+        while (gameIsNotOver(board) && currentPlayer.hasMove()) {
             board = playOneRound(currentPlayer, board);
             if (gameIsNotOver(board)) {
                 switchPlayer();
-                userInterface.displayBoard(board, currentPlayer);
+                updateView(board);
             }
         }
         if (board.gameOver()) {
             finishGame(currentPlayer.mark(), board);
+        }
+    }
+
+    private void updateView(Board board) {
+        if (!(currentPlayer instanceof UnbeatableComputerPlayer && player instanceof GuiPlayer)) {
+            userInterface.displayBoard(board, currentPlayer);
         }
     }
 
@@ -47,11 +54,11 @@ public class Game {
        return !board.gameOver();
     }
 
-    Player getPlayer() {
+    public Player getPlayer() {
         return this.player;
     }
 
-    Player getOpponent() {
+    public Player getOpponent() {
         return this.opponent;
     }
 }

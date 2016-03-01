@@ -1,10 +1,9 @@
 package de.rabea.player;
 
+import de.rabea.console.ConsoleUi;
 import de.rabea.game.GameMode;
 import de.rabea.game.Player;
-import de.rabea.ui.ConsoleUi;
 
-import static de.rabea.game.GameMode.*;
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 
@@ -16,18 +15,27 @@ public class PlayerFactory {
     }
 
     public Player createPlayer(GameMode gameMode) {
-        if (gameMode == HumanVsHuman || gameMode == HumanVsComputer) {
+        if (gameMode == GameMode.HumanVsHuman ||
+                gameMode == GameMode.HumanVsComputer) {
             return new HumanPlayer(userInterface, X);
-        } else {
+        } else if (gameMode == GameMode.ComputerVsComputer ||
+                gameMode == GameMode.ComputerVsHuman) {
             return new UnbeatableComputerPlayer(X);
+        } else {
+            return new GuiPlayer(X);
         }
     }
 
     public Player createOpponent(GameMode gameMode) {
-        if (gameMode == HumanVsComputer || gameMode == ComputerVsComputer) {
+        if (gameMode == GameMode.HumanVsComputer ||
+                gameMode == GameMode.ComputerVsComputer ||
+                gameMode == GameMode.GuiHumanVsComputer) {
             return new UnbeatableComputerPlayer(O);
-        } else {
+        } else if (gameMode == GameMode.HumanVsHuman ||
+                gameMode == GameMode.ComputerVsHuman) {
             return new HumanPlayer(userInterface, O);
+        } else {
+            return new GuiPlayer(O);
         }
     }
 }

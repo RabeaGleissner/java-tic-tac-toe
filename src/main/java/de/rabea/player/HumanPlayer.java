@@ -1,9 +1,9 @@
 package de.rabea.player;
 
+import de.rabea.console.ConsoleUi;
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
 import de.rabea.game.Player;
-import de.rabea.ui.ConsoleUi;
 
 public class HumanPlayer extends Player {
     private final ConsoleUi userInterface;

@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import static de.rabea.game.Mark.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class UnbeatableComputerPlayerTest {
     private UnbeatableComputerPlayer unbeatableComputerPlayer;
@@ -65,5 +66,10 @@ public class UnbeatableComputerPlayerTest {
                                 EMPTY, EMPTY, EMPTY, EMPTY,
                                 EMPTY, EMPTY, EMPTY, EMPTY);
         assertEquals(3, unbeatableComputerPlayer.getPosition(board));
+    }
+
+    @Test
+    public void alwaysHasMoveAvailable() {
+        assertTrue(unbeatableComputerPlayer.hasMove());
     }
 }

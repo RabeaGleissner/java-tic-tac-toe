@@ -1,10 +1,10 @@
 package de.rabea.player;
 
+import de.rabea.console.ConsoleUi;
+import de.rabea.console.FakeConsole;
+import de.rabea.console.FakeConsoleUserInterface;
+import de.rabea.console.PrettyBoardPainter;
 import de.rabea.game.Board;
-import de.rabea.ui.ConsoleUi;
-import de.rabea.ui.FakeConsole;
-import de.rabea.ui.FakeUserInterface;
-import de.rabea.ui.PrettyBoardPainter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,13 +42,13 @@ public class HumanPlayerTest {
 
     @Test
     public void asksUserAgainWhenPositionIsOccupied() {
-        FakeUserInterface fakeUserInterface = new FakeUserInterface();
-        HumanPlayer humanPlayer = new HumanPlayer(fakeUserInterface, X);
+        FakeConsoleUserInterface fakeConsoleUserInterface = new FakeConsoleUserInterface();
+        HumanPlayer humanPlayer = new HumanPlayer(fakeConsoleUserInterface, X);
         Board board = new Board(3);
         Board nextBoard = board.placeMark(0, X);
-        fakeUserInterface.choosePositions("1", "7", "3", "4", "2");
-        fakeUserInterface.replayChoice("no");
+        fakeConsoleUserInterface.choosePositions("1", "7", "3", "4", "2");
+        fakeConsoleUserInterface.replayChoice("no");
         humanPlayer.getPosition(nextBoard);
-        assertTrue(fakeUserInterface.wasPositionUnavailableWarningCalled());
+        assertTrue(fakeConsoleUserInterface.wasPositionUnavailableWarningCalled());
     }
 }

@@ -1,7 +1,9 @@
 package de.rabea;
 
-import de.rabea.gui.GuiApp;
+import de.rabea.game.GameRunner;
+import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdater;
+import de.rabea.player.PlayerFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -15,9 +17,10 @@ public class GuiMain extends Application {
         scene.getStylesheets().add(GuiMain.class.getResource("/styles.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
-        ViewUpdater viewUpdater = new ViewUpdater(scene);
-        GuiApp guiApp = new GuiApp(viewUpdater);
-        guiApp.displayGameOptions();
+        JavaFXUi ui = new JavaFXUi(new ViewUpdater(scene));
+        GameRunner gameRunner = new GameRunner(ui, new PlayerFactory(null));
+        ui.setGameRunner(gameRunner);
+        gameRunner.displayGameModeOptions();
     }
 
     public static void main(String[] args) {
