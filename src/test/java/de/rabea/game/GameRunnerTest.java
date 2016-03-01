@@ -63,8 +63,8 @@ public class GameRunnerTest {
     public void createsANewGame() {
         GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
         Game game = gameRunner.createGame(GameMode.GuiHumanVsComputer);
-        assertTrue(game.getPlayer() instanceof GuiPlayer);
-        assertTrue(game.getOpponent() instanceof UnbeatableComputerPlayer);
+        assertTrue(game.getPlayer1() instanceof GuiPlayer);
+        assertTrue(game.getPlayer2() instanceof UnbeatableComputerPlayer);
     }
 
     @Test
@@ -81,15 +81,15 @@ public class GameRunnerTest {
         fakeConsoleUI.setGameMode(HumanVsHuman);
         GameRunner gameRunner = new GameRunner(fakeConsoleUI, playerFactory);
         Game game = gameRunner.createGame(HumanVsHuman);
-        assertTrue(game.getPlayer() instanceof HumanPlayer);
-        assertTrue(game.getOpponent() instanceof HumanPlayer);
+        assertTrue(game.getPlayer1() instanceof HumanPlayer);
+        assertTrue(game.getPlayer2() instanceof HumanPlayer);
     }
 
     @Test
     public void playsHuman3x3ConsoleGameTwice() {
         fakeConsoleUI.setGameMode(HumanVsHuman, HumanVsHuman);
         PlayerFactoryWithTwoFakeHumanPlayers playerFactoryWithTwoFakeHumans =
-                new PlayerFactoryWithTwoFakeHumanPlayers(fakeConsoleUI, createFakeHumanPlayerWithInput(), createFakeHumanOpponentWithInput());
+                new PlayerFactoryWithTwoFakeHumanPlayers(fakeConsoleUI, createFakeHumanPlayer1WithInput(), createFakeHumanPlayer2WithInput());
         fakeConsoleUI.setReplayChoice("yes", "no");
         fakeConsoleUI.setBoardDimensions(3,3);
         GameRunner gameRunner = new GameRunner(fakeConsoleUI, playerFactoryWithTwoFakeHumans);
@@ -102,8 +102,8 @@ public class GameRunnerTest {
         GameRunner gameRunner = new GameRunner(fakeConsoleUI,
                 new PlayerFactoryWithFakeComputerPlayer(fakeConsoleUI, createFakeComputerPlayerWithInput()));
         Game game =  gameRunner.createGame(HumanVsComputer);
-        assertTrue(game.getPlayer() instanceof HumanPlayer);
-        assertTrue(game.getOpponent() instanceof FakeComputerPlayer);
+        assertTrue(game.getPlayer1() instanceof HumanPlayer);
+        assertTrue(game.getPlayer2() instanceof FakeComputerPlayer);
     }
 
     private FakeComputerPlayer createFakeComputerPlayerWithInput() {
@@ -112,16 +112,16 @@ public class GameRunnerTest {
         return fakeComputerPlayer;
     }
 
-    private FakeHumanPlayer createFakeHumanPlayerWithInput() {
+    private FakeHumanPlayer createFakeHumanPlayer1WithInput() {
         FakeHumanPlayer fakeHumanPlayer = new FakeHumanPlayer(new FakeConsoleUserInterface(), X);
         fakeHumanPlayer.setPositions(0,1,2,0,1,2);
         return fakeHumanPlayer;
     }
 
-    private FakeHumanPlayer createFakeHumanOpponentWithInput() {
-        FakeHumanPlayer fakeHumanOpponent = new FakeHumanPlayer(new FakeConsoleUserInterface(), X);
-        fakeHumanOpponent.setPositions(8,7,8,7);
-        return fakeHumanOpponent;
+    private FakeHumanPlayer createFakeHumanPlayer2WithInput() {
+        FakeHumanPlayer fakeHumanPlayer = new FakeHumanPlayer(new FakeConsoleUserInterface(), X);
+        fakeHumanPlayer.setPositions(8,7,8,7);
+        return fakeHumanPlayer;
     }
 
     private class PlayerFactoryWithFakeComputerPlayer extends PlayerFactory {
@@ -133,34 +133,34 @@ public class GameRunnerTest {
         }
 
         @Override
-        public Player createPlayer(GameMode gameMode) {
+        public Player createPlayer1(GameMode gameMode) {
             return new FakeHumanPlayer(fakeConsoleUI, X);
         }
 
         @Override
-        public Player createOpponent(GameMode gameMode) {
+        public Player createPlayer2(GameMode gameMode) {
             return fakeComputerPlayer;
         }
     }
 
     private class PlayerFactoryWithTwoFakeHumanPlayers extends PlayerFactory {
-        private final FakeHumanPlayer fakePlayer;
-        private final FakeHumanPlayer fakeOpponent;
+        private final FakeHumanPlayer fakePlayer1;
+        private final FakeHumanPlayer fakePlayer2;
 
-        public PlayerFactoryWithTwoFakeHumanPlayers(ConsoleUi userInterface, FakeHumanPlayer fakeHumanPlayer, FakeHumanPlayer fakeHumanOpponent) {
+        public PlayerFactoryWithTwoFakeHumanPlayers(ConsoleUi userInterface, FakeHumanPlayer player1, FakeHumanPlayer player2) {
             super(userInterface);
-            this.fakePlayer = fakeHumanPlayer;
-            this.fakeOpponent = fakeHumanOpponent;
+            this.fakePlayer1 = player1;
+            this.fakePlayer2 = player2;
         }
 
         @Override
-        public Player createPlayer(GameMode gameMode) {
-            return fakePlayer;
+        public Player createPlayer1(GameMode gameMode) {
+            return fakePlayer1;
         }
 
         @Override
-        public Player createOpponent(GameMode gameMode) {
-            return fakeOpponent;
+        public Player createPlayer2(GameMode gameMode) {
+            return fakePlayer2;
         }
     }
 }

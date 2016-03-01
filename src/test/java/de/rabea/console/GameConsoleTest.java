@@ -8,7 +8,6 @@ import static org.junit.Assert.assertEquals;
 
 public class GameConsoleTest {
 
-
     @Test
     public void readsAGivenStringFromTheConsole() {
         InputStream input = new ByteArrayInputStream("hello\n".getBytes());

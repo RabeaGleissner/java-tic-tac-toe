@@ -6,15 +6,15 @@ import de.rabea.player.UnbeatableComputerPlayer;
 public class Game {
 
     private final UserInterface userInterface;
-    private final Player player;
-    private final Player opponent ;
+    private final Player player1;
+    private final Player player2;
     private Player currentPlayer;
 
-    public Game(UserInterface userInterface, Player player, Player opponent) {
+    public Game(UserInterface userInterface, Player player1, Player player2) {
         this.userInterface = userInterface;
-        this.player = player;
-        this.opponent = opponent;
-        this.currentPlayer = player;
+        this.player1 = player1;
+        this.player2 = player2;
+        this.currentPlayer = player1;
     }
 
     public void play(Board board) {
@@ -32,13 +32,13 @@ public class Game {
     }
 
     private void updateView(Board board) {
-        if (!(currentPlayer instanceof UnbeatableComputerPlayer && player instanceof GuiPlayer)) {
+        if (!(currentPlayer instanceof UnbeatableComputerPlayer && player1 instanceof GuiPlayer)) {
             userInterface.displayBoard(board, currentPlayer);
         }
     }
 
     private void switchPlayer() {
-        currentPlayer = currentPlayer == player ? opponent : player;
+        currentPlayer = currentPlayer == player1 ? player2 : player1;
     }
 
     private Board playOneRound(Player player, Board board) {
@@ -46,7 +46,7 @@ public class Game {
     }
 
     private void finishGame(Mark mark, Board board) {
-        userInterface.displayBoard(board, player);
+        userInterface.displayBoard(board, player1);
         userInterface.announceGameEnd(mark, board.hasWinner());
     }
 
@@ -54,11 +54,11 @@ public class Game {
        return !board.gameOver();
     }
 
-    public Player getPlayer() {
-        return this.player;
+    public Player getPlayer1() {
+        return this.player1;
     }
 
-    public Player getOpponent() {
-        return this.opponent;
+    public Player getPlayer2() {
+        return this.player2;
     }
 }

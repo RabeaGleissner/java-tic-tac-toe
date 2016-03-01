@@ -24,5 +24,4 @@ public class FakeHumanPlayer extends HumanPlayer {
         positions.addAll(Arrays.asList(givenPositions));
 
     }
-
 }
