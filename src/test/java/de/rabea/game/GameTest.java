@@ -1,15 +1,10 @@
 package de.rabea.game;
 
-import de.rabea.console.ConsoleUi;
 import de.rabea.console.FakeConsoleUserInterface;
 import de.rabea.player.FakeComputerPlayer;
-import de.rabea.player.HumanPlayer;
+import de.rabea.player.FakeHumanPlayer;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
@@ -79,23 +74,5 @@ public class GameTest {
         gameWithFakeComputerPlayer.play(new Board(4));
 
         assertEquals(1, fakeConsoleUI.countAnnounceGameEndCalls);
-    }
-
-    private class FakeHumanPlayer extends HumanPlayer {
-        private List<Integer> positions = new LinkedList<>();
-
-        public FakeHumanPlayer(ConsoleUi userInterface, Mark mark) {
-            super(userInterface, mark);
-        }
-
-        @Override
-        public int getPosition(Board board) {
-            return positions.remove(0);
-        }
-
-        public void setPositions(Integer... givenPositions) {
-            positions.addAll(Arrays.asList(givenPositions));
-
-        }
     }
 }
