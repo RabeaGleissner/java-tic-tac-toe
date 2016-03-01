@@ -21,13 +21,11 @@ public class Game {
         userInterface.displayBoard(board, currentPlayer);
         while (gameIsNotOver(board) && currentPlayer.hasMove()) {
             board = playOneRound(currentPlayer, board);
-            if (gameIsNotOver(board)) {
-                switchPlayer();
-                userInterface.displayBoard(board, currentPlayer);
-            }
+            switchPlayer();
+            userInterface.displayBoard(board, currentPlayer);
         }
         if (board.gameOver()) {
-            finishGame(currentPlayer.mark(), board);
+            finishGame(board);
         }
     }
 
@@ -39,9 +37,10 @@ public class Game {
         return board.placeMark(player.getPosition(board), player.mark());
     }
 
-    private void finishGame(Mark mark, Board board) {
+    private void finishGame(Board board) {
+        switchPlayer();
         userInterface.displayBoard(board, player1);
-        userInterface.announceGameEnd(mark, board.hasWinner());
+        userInterface.announceGameEnd(currentPlayer.mark(), board.hasWinner());
     }
 
     private boolean gameIsNotOver(Board board) {
