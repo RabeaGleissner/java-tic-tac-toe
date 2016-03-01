@@ -1,8 +1,8 @@
 package de.rabea.game;
 
 import de.rabea.console.ConsoleUi;
-import de.rabea.console.FakeUserInterface;
-import de.rabea.gui.GuiPlayer;
+import de.rabea.console.FakeConsoleUserInterface;
+import de.rabea.player.GuiPlayer;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdaterSpy;
 import de.rabea.player.FakeComputerPlayer;
@@ -21,14 +21,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GameRunnerTest {
-    private FakeUserInterface fakeUserInterface;
+    private FakeConsoleUserInterface fakeConsoleUserInterface;
     private PlayerFactory playerFactory;
     private ViewUpdaterSpy viewUpdaterSpy;
 
     @Before
     public void setup() {
-        fakeUserInterface = new FakeUserInterface();
-        playerFactory = new PlayerFactory(fakeUserInterface);
+        fakeConsoleUserInterface = new FakeConsoleUserInterface();
+        playerFactory = new PlayerFactory(fakeConsoleUserInterface);
         viewUpdaterSpy = new ViewUpdaterSpy();
     }
 
@@ -81,8 +81,8 @@ public class GameRunnerTest {
     }
     @Test
     public void createsTwoHumanPlayersWhenRequestedForConsoleGame() {
-        fakeUserInterface.fakeConsoleInputForOneHvH3x3Game();
-        GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
+        fakeConsoleUserInterface.fakeConsoleInputForOneHvH3x3Game();
+        GameRunner gameRunner = new GameRunner(fakeConsoleUserInterface, playerFactory);
         Game game = gameRunner.createGame(HumanVsHuman);
         assertTrue(game.getPlayer() instanceof HumanPlayer);
         assertTrue(game.getOpponent() instanceof HumanPlayer);
@@ -90,17 +90,17 @@ public class GameRunnerTest {
 
     @Test
     public void playsHuman3x3ConsoleGameTwice() {
-        fakeUserInterface.fakeConsoleInputForTwoHvH3x3Games();
-        GameRunner gameRunner = new GameRunner(fakeUserInterface, playerFactory);
+        fakeConsoleUserInterface.fakeConsoleInputForTwoHvH3x3Games();
+        GameRunner gameRunner = new GameRunner(fakeConsoleUserInterface, playerFactory);
         gameRunner.setUpConsoleGameAndPlay();
-        assertTrue(fakeUserInterface.wasAskForPositionCalled());
-        assertEquals(2, fakeUserInterface.announceWinnerCalled());
+        assertTrue(fakeConsoleUserInterface.wasAskForPositionCalled());
+        assertEquals(2, fakeConsoleUserInterface.countAnnounceGameEndCalls);
     }
 
     @Test
     public void createsHumanAndComputerPlayerForConsoleGame() {
-        GameRunner gameRunner = new GameRunner(fakeUserInterface,
-                new FakePlayerFactory(fakeUserInterface, createFakeComputerPlayerWithInput()));
+        GameRunner gameRunner = new GameRunner(fakeConsoleUserInterface,
+                new FakePlayerFactory(fakeConsoleUserInterface, createFakeComputerPlayerWithInput()));
         Game game =  gameRunner.createGame(HumanVsComputer);
         assertTrue(game.getPlayer() instanceof HumanPlayer);
         assertTrue(game.getOpponent() instanceof FakeComputerPlayer);
@@ -122,7 +122,7 @@ public class GameRunnerTest {
 
         @Override
         public Player createPlayer(GameMode gameMode) {
-            return new HumanPlayer(fakeUserInterface, X);
+            return new HumanPlayer(fakeConsoleUserInterface, X);
         }
 
         @Override

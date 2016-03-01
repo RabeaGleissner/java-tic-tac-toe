@@ -3,6 +3,7 @@ package de.rabea.gui;
 import de.rabea.game.Board;
 import de.rabea.game.GameRunner;
 import de.rabea.game.Mark;
+import de.rabea.player.GuiPlayer;
 
 public class ViewUpdaterSpy extends ViewUpdater {
     public boolean hasShownBoard = false;

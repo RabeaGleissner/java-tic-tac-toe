@@ -8,19 +8,20 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FakeUserInterface extends ConsoleUi {
+public class FakeConsoleUserInterface extends ConsoleUi {
 
     private boolean askForPositionWasCalled = false;
     private boolean positionUnavailableWarningWasCalled = false;
     private final List<String> moves = new LinkedList<>();
-    private int countAnnounceGameEndCalls = 0;
+    public int countAnnounceGameEndCalls = 0;
 
-    public FakeUserInterface() {
+    public FakeConsoleUserInterface() {
         super(new FakeConsole(), new PrettyBoardPainter());
     }
 
     @Override
     public void greet() {
+        
     }
 
     @Override
@@ -92,13 +93,6 @@ public class FakeUserInterface extends ConsoleUi {
         fakeConsoleInputForOneHvH3x3Game();
     }
 
-    public void fakeConsoleInputForOneHvC3x3Game() {
-        chooseGameType("Human vs Computer");
-        chooseBoardSize("3x3");
-        choosePositions("1", "2", "3");
-        replayChoice("no");
-    }
-
     public void choosePositions(String... userChoices) {
         moves.addAll(Arrays.asList(userChoices));
     }
@@ -135,10 +129,6 @@ public class FakeUserInterface extends ConsoleUi {
 
     public boolean wasAskForPositionCalled() {
         return askForPositionWasCalled;
-    }
-
-    public int announceWinnerCalled() {
-        return countAnnounceGameEndCalls;
     }
 
     public boolean wasPositionUnavailableWarningCalled() {

@@ -2,6 +2,7 @@ package de.rabea.gui;
 
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
+import de.rabea.player.GuiPlayer;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.O;

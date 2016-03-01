@@ -1,4 +1,4 @@
-package de.rabea.gui;
+package de.rabea.player;
 
 import de.rabea.game.Board;
 import de.rabea.game.Mark;

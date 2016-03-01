@@ -2,6 +2,7 @@ package de.rabea.gui;
 
 import de.rabea.game.Board;
 import de.rabea.game.GameRunner;
+import de.rabea.player.GuiPlayer;
 import de.rabea.player.PlayerFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;

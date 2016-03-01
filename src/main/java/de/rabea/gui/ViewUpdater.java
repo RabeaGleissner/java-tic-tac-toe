@@ -9,6 +9,7 @@ import de.rabea.gui.view.BoardSizeView;
 import de.rabea.gui.view.BoardView;
 import de.rabea.gui.view.GameEndView;
 import de.rabea.gui.view.GameModeView;
+import de.rabea.player.GuiPlayer;
 import javafx.scene.Scene;
 
 public class ViewUpdater {

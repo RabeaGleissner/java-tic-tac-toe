@@ -3,7 +3,7 @@ package de.rabea.gui.clickhandler;
 import de.rabea.game.Board;
 import de.rabea.game.GameRunner;
 import de.rabea.gui.ClickHandler;
-import de.rabea.gui.GuiPlayer;
+import de.rabea.player.GuiPlayer;
 
 public class EmptyCellClickHandler implements ClickHandler {
     private final GuiPlayer guiPlayer;
