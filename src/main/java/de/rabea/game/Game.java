@@ -1,8 +1,5 @@
 package de.rabea.game;
 
-import de.rabea.player.GuiPlayer;
-import de.rabea.player.UnbeatableComputerPlayer;
-
 public class Game {
 
     private final UserInterface userInterface;

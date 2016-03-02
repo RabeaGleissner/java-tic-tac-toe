@@ -2,9 +2,9 @@ package de.rabea.gui.clickhandler;
 
 import de.rabea.game.Board;
 import de.rabea.game.GameRunner;
-import de.rabea.player.GuiPlayer;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdaterSpy;
+import de.rabea.player.GuiPlayer;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

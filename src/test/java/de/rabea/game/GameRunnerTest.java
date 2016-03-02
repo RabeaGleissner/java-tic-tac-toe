@@ -2,9 +2,9 @@ package de.rabea.game;
 
 import de.rabea.console.ConsoleUi;
 import de.rabea.console.FakeConsoleUserInterface;
-import de.rabea.player.*;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdaterSpy;
+import de.rabea.player.*;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
