@@ -11,7 +11,7 @@ public class UnbeatableComputerPlayer extends Player {
     }
 
     @Override
-    public int getPosition(Board board) {
+    public int makeMove(Board board) {
         int maximumDepth = 8;
         return minimax(maximumDepth, Integer.MIN_VALUE, Integer.MAX_VALUE, board, mark).getMove();
     }

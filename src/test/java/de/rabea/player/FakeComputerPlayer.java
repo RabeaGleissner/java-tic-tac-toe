@@ -17,7 +17,7 @@ public class FakeComputerPlayer extends ComputerPlayer {
     }
 
     @Override
-    public int getPosition(Board board) {
+    public int makeMove(Board board) {
         return listOfNumbers.remove(0);
     }
 

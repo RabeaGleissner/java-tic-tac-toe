@@ -29,7 +29,7 @@ public class Game {
     }
 
     private Board playOneRound(Player player, Board board) {
-        return board.placeMark(player.getPosition(board), player.mark());
+        return board.placeMark(player.makeMove(board), player.mark());
     }
 
     private void finishGame(Board board) {

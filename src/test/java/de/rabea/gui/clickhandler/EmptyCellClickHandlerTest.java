@@ -19,7 +19,7 @@ public class EmptyCellClickHandlerTest {
         EmptyCellClickHandler emptyCellClickHandler = new EmptyCellClickHandler(guiPlayer, new GameRunnerStub(null, null), board);
         emptyCellClickHandler.action("3");
 
-        assertEquals(3, guiPlayer.getPosition(board));
+        assertEquals(3, guiPlayer.makeMove(board));
     }
 
     public class GameRunnerStub extends GameRunner {

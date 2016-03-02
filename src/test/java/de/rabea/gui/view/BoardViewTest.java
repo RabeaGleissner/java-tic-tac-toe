@@ -96,7 +96,7 @@ public class BoardViewTest {
                 new FullCellClickHandlerStub());
         findActiveButton(boardView.draw(board, false), 7).fire();
 
-        assertEquals(7, guiPlayer.getPosition(board));
+        assertEquals(7, guiPlayer.makeMove(board));
         assertTrue(gameRunnerSpy.displayBoard);
     }
 

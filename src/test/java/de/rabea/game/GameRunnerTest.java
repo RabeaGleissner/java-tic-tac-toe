@@ -114,13 +114,13 @@ public class GameRunnerTest {
 
     private FakeHumanPlayer createFakeHumanPlayer1WithInput() {
         FakeHumanPlayer fakeHumanPlayer = new FakeHumanPlayer(new FakeConsoleUserInterface(), X);
-        fakeHumanPlayer.setPositions(0,1,2,0,1,2);
+        fakeHumanPlayer.futureMoves(0,1,2,0,1,2);
         return fakeHumanPlayer;
     }
 
     private FakeHumanPlayer createFakeHumanPlayer2WithInput() {
         FakeHumanPlayer fakeHumanPlayer = new FakeHumanPlayer(new FakeConsoleUserInterface(), X);
-        fakeHumanPlayer.setPositions(8,7,8,7);
+        fakeHumanPlayer.futureMoves(8,7,8,7);
         return fakeHumanPlayer;
     }
 

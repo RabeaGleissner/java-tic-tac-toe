@@ -13,21 +13,21 @@ public class ComputerPlayerTest {
         FakeRandomNumberCalculator fakeRandomNumberCalc = new FakeRandomNumberCalculator();
         ComputerPlayer computerPlayer = new ComputerPlayer(fakeRandomNumberCalc, O);
         fakeRandomNumberCalc.giveNumbers(2);
-        assertEquals(2, computerPlayer.getPosition(new Board(3)));
+        assertEquals(2, computerPlayer.makeMove(new Board(3)));
     }
 
     @Test
     public void returnsTheOnlyAvailablePosition() {
         ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalculator(), O);
         Board board = new Board(X, X, O, X, O, X, O, X, EMPTY);
-        assertEquals(8, computerPlayer.getPosition(board));
+        assertEquals(8, computerPlayer.makeMove(board));
     }
 
     @Test
     public void thereIsOneFewerEmptyPositionAfterTheComputerMadeItsRandomMove() {
         Board board = new Board(3);
         ComputerPlayer computerPlayer = new ComputerPlayer(new RandomNumberCalculator(), O);
-        int computerPosition = computerPlayer.getPosition(board);
+        int computerPosition = computerPlayer.makeMove(board);
         Board nextBoard = board.placeMark(computerPosition, O);
         assertEquals(8, nextBoard.emptyCells().size());
     }

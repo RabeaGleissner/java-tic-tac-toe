@@ -20,7 +20,7 @@ public class GuiPlayer extends Player {
     }
 
     @Override
-    public int getPosition(Board board) {
+    public int makeMove(Board board) {
         if (moveAvailable) {
             this.moveAvailable = false;
             return position;

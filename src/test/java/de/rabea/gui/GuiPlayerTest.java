@@ -23,7 +23,7 @@ public class GuiPlayerTest {
         GuiPlayer player = new GuiPlayer(Mark.X);
         player.addMove(5);
 
-        assertEquals(5, player.getPosition(new Board(3)));
+        assertEquals(5, player.makeMove(new Board(3)));
     }
 
     @Test
@@ -31,8 +31,8 @@ public class GuiPlayerTest {
         GuiPlayer player = new GuiPlayer(O);
         player.addMove(3);
 
-        assertEquals(3, player.getPosition(new Board(3)));
-        assertEquals(-1, player.getPosition(new Board(3)));
+        assertEquals(3, player.makeMove(new Board(3)));
+        assertEquals(-1, player.makeMove(new Board(3)));
     }
 
     @Test
