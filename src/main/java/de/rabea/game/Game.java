@@ -6,12 +6,14 @@ public class Game {
     private final Player player1;
     private final Player player2;
     private Player currentPlayer;
+    private Player notCurrentPlayer;
 
     public Game(UserInterface userInterface, Player player1, Player player2) {
         this.userInterface = userInterface;
         this.player1 = player1;
         this.player2 = player2;
         this.currentPlayer = player1;
+        this.notCurrentPlayer = player2;
     }
 
     public void play(Board board) {
@@ -26,6 +28,7 @@ public class Game {
 
     private void switchPlayer() {
         currentPlayer = currentPlayer == player1 ? player2 : player1;
+        notCurrentPlayer = notCurrentPlayer == player1 ? player2 : player1;
     }
 
     private Board playOneRound(Player player, Board board) {
@@ -33,11 +36,8 @@ public class Game {
     }
 
     private void finishGame(Board board) {
-        if (board.gameOver()) {
-            switchPlayer();
-            userInterface.displayBoard(board, player1);
-            userInterface.announceGameEnd(currentPlayer.mark(), board.hasWinner());
-        }
+        userInterface.displayBoard(board, currentPlayer);
+        userInterface.announceGameEnd(notCurrentPlayer.mark(), board);
     }
 
     private boolean gameIsNotOver(Board board) {

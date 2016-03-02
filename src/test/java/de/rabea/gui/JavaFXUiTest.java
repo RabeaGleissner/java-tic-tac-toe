@@ -28,7 +28,7 @@ public class JavaFXUiTest {
     @Test
     public void announcesGameEnd() {
         JavaFXUi ui = new JavaFXUi(viewUpdaterSpy);
-        ui.announceGameEnd(X, true);
+        ui.announceGameEnd(X, new GameOverBoardStub());
         assertTrue(viewUpdaterSpy.hasShownGameEndView);
     }
 
@@ -39,5 +39,18 @@ public class JavaFXUiTest {
         ui.setGameRunner(gameRunner);
         ui.getGameModeFromUser();
         assertTrue(viewUpdaterSpy.gameRunnerThatWasPassedIn != null);
+    }
+
+    private class GameOverBoardStub extends Board {
+
+        @Override
+        public boolean gameOver() {
+            return true;
+        }
+
+        @Override
+        public boolean hasWinner() {
+            return true;
+        }
     }
 }

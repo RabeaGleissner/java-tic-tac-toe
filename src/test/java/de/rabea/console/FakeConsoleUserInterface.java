@@ -52,7 +52,7 @@ public class FakeConsoleUserInterface extends ConsoleUi {
     }
 
     @Override
-    public void announceGameEnd(Mark lastPlayedMark, boolean winner) {
+    public void announceGameEnd(Mark lastPlayedMark, Board board) {
         countAnnounceGameEndCalls++;
     }
 
