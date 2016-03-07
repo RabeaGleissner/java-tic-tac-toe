@@ -18,42 +18,42 @@ public class PlayerFactoryTest {
     @Test
     public void createsHumanPlayerForHumanVsComputerGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
-        assertTrue(playerFactory.createPlayer(GameMode.HumanVsComputer) instanceof HumanPlayer);
+        assertTrue(playerFactory.createPlayer1(GameMode.HumanVsComputer) instanceof HumanPlayer);
     }
 
     @Test
     public void createsComputerPlayerForHumanVsComputerGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
-        assertTrue(playerFactory.createOpponent(GameMode.HumanVsComputer) instanceof UnbeatableComputerPlayer);
+        assertTrue(playerFactory.createPlayer2(GameMode.HumanVsComputer) instanceof UnbeatableComputerPlayer);
     }
 
     @Test
     public void createsComputerPlayerForComputerVsHumanGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
-        assertTrue(playerFactory.createPlayer(GameMode.ComputerVsHuman) instanceof UnbeatableComputerPlayer);
+        assertTrue(playerFactory.createPlayer1(GameMode.ComputerVsHuman) instanceof UnbeatableComputerPlayer);
     }
 
     @Test
     public void createsHumanPlayerForComputerVsHumanGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
-        assertTrue(playerFactory.createOpponent(GameMode.ComputerVsHuman) instanceof HumanPlayer);
+        assertTrue(playerFactory.createPlayer2(GameMode.ComputerVsHuman) instanceof HumanPlayer);
     }
 
     @Test
     public void createsGuiPlayerForGuiHumanVsGuiHumanGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
-        assertTrue(playerFactory.createPlayer(GameMode.GuiHumanVsGuiHuman) instanceof GuiPlayer);
+        assertTrue(playerFactory.createPlayer1(GameMode.GuiHumanVsGuiHuman) instanceof GuiPlayer);
     }
 
     @Test
-    public void createsGuiPlayerAsOpponentForGuiHumanVsGuiHumanGame() {
+    public void createsGuiPlayer2ForGuiHumanVsGuiHumanGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
-        assertTrue(playerFactory.createOpponent(GameMode.GuiHumanVsGuiHuman) instanceof GuiPlayer);
+        assertTrue(playerFactory.createPlayer2(GameMode.GuiHumanVsGuiHuman) instanceof GuiPlayer);
     }
 
     @Test
-    public void createsCompuerOpponentForGuiHumanVsComputerGame() {
+    public void createsComputerPlayer2ForGuiHumanVsComputerGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
-        assertTrue(playerFactory.createOpponent(GameMode.GuiHumanVsComputer) instanceof UnbeatableComputerPlayer);
+        assertTrue(playerFactory.createPlayer2(GameMode.GuiHumanVsComputer) instanceof UnbeatableComputerPlayer);
     }
 }

@@ -2,11 +2,11 @@ package de.rabea.gui.view;
 
 import de.rabea.game.Board;
 import de.rabea.game.GameRunner;
-import de.rabea.player.GuiPlayer;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdater;
 import de.rabea.gui.clickhandler.EmptyCellClickHandler;
 import de.rabea.gui.clickhandler.FullCellClickHandler;
+import de.rabea.player.GuiPlayer;
 import de.rabea.player.PlayerFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
@@ -96,7 +96,7 @@ public class BoardViewTest {
                 new FullCellClickHandlerStub());
         findActiveButton(boardView.draw(board, false), 7).fire();
 
-        assertEquals(7, guiPlayer.getPosition(board));
+        assertEquals(7, guiPlayer.makeMove(board));
         assertTrue(gameRunnerSpy.displayBoard);
     }
 

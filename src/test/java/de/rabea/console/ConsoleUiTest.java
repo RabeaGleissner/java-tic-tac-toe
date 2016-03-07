@@ -112,13 +112,25 @@ public class ConsoleUiTest {
 
     @Test
     public void announceWinner() {
-        userInterface.announceGameEnd(X, true);
+        userInterface.announceGameEnd(X, new GameOverBoardStub());
         assertEquals("Game over! The winner is: X", fakeConsole.messagePrinted());
+    }
+
+    private class GameOverBoardStub extends Board {
+        @Override
+        public boolean gameOver() {
+            return true;
+        }
+
+        @Override
+        public boolean hasWinner() {
+            return true;
+        }
     }
 
     @Test
     public void announceDraw() {
-        userInterface.announceGameEnd(X, false);
+        userInterface.announceGameEnd(X, board);
         assertEquals("Game over! It's a draw.", fakeConsole.messagePrinted());
     }
 

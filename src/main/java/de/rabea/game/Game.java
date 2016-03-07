@@ -1,64 +1,53 @@
 package de.rabea.game;
 
-import de.rabea.player.GuiPlayer;
-import de.rabea.player.UnbeatableComputerPlayer;
-
 public class Game {
 
     private final UserInterface userInterface;
-    private final Player player;
-    private final Player opponent ;
+    private final Player player1;
+    private final Player player2;
     private Player currentPlayer;
 
-    public Game(UserInterface userInterface, Player player, Player opponent) {
+    public Game(UserInterface userInterface, Player player1, Player player2) {
         this.userInterface = userInterface;
-        this.player = player;
-        this.opponent = opponent;
-        this.currentPlayer = player;
+        this.player1 = player1;
+        this.player2 = player2;
+        this.currentPlayer = player1;
     }
 
     public void play(Board board) {
         userInterface.displayBoard(board, currentPlayer);
         while (gameIsNotOver(board) && currentPlayer.hasMove()) {
             board = playOneRound(currentPlayer, board);
-            if (gameIsNotOver(board)) {
-                switchPlayer();
-                updateView(board);
-            }
-        }
-        if (board.gameOver()) {
-            finishGame(currentPlayer.mark(), board);
-        }
-    }
-
-    private void updateView(Board board) {
-        if (!(currentPlayer instanceof UnbeatableComputerPlayer && player instanceof GuiPlayer)) {
+            switchPlayer(board);
             userInterface.displayBoard(board, currentPlayer);
         }
+        finishGame(board);
     }
 
-    private void switchPlayer() {
-        currentPlayer = currentPlayer == player ? opponent : player;
+    private void switchPlayer(Board board) {
+        if (gameIsNotOver(board)) {
+            currentPlayer = currentPlayer == player1 ? player2 : player1;
+        }
     }
 
     private Board playOneRound(Player player, Board board) {
-        return board.placeMark(player.getPosition(board), player.mark());
+        return board.placeMark(player.makeMove(board), player.mark());
     }
 
-    private void finishGame(Mark mark, Board board) {
-        userInterface.displayBoard(board, player);
-        userInterface.announceGameEnd(mark, board.hasWinner());
+    private void finishGame(Board board) {
+        userInterface.displayBoard(board, currentPlayer);
+        userInterface.announceGameEnd(currentPlayer.mark(), board);
     }
 
     private boolean gameIsNotOver(Board board) {
        return !board.gameOver();
     }
 
-    public Player getPlayer() {
-        return this.player;
+    Player getPlayer1() {
+        return this.player1;
     }
 
-    public Player getOpponent() {
-        return this.opponent;
+    Player getPlayer2() {
+        return this.player2;
     }
 }

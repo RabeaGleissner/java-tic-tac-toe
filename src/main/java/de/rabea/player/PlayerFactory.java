@@ -14,7 +14,7 @@ public class PlayerFactory {
         this.userInterface = userInterface;
     }
 
-    public Player createPlayer(GameMode gameMode) {
+    public Player createPlayer1(GameMode gameMode) {
         if (gameMode == GameMode.HumanVsHuman ||
                 gameMode == GameMode.HumanVsComputer) {
             return new HumanPlayer(userInterface, X);
@@ -26,7 +26,7 @@ public class PlayerFactory {
         }
     }
 
-    public Player createOpponent(GameMode gameMode) {
+    public Player createPlayer2(GameMode gameMode) {
         if (gameMode == GameMode.HumanVsComputer ||
                 gameMode == GameMode.ComputerVsComputer ||
                 gameMode == GameMode.GuiHumanVsComputer) {

@@ -93,8 +93,8 @@ public class ConsoleUi implements UserInterface {
     }
 
     @Override
-    public void announceGameEnd(Mark lastPlayedMark, boolean winner) {
-        if (winner) {
+    public void announceGameEnd(Mark lastPlayedMark, Board board) {
+        if (board.hasWinner()) {
             console.print(WINNER_ANNOUNCEMENT + lastPlayedMark.toString());
         } else {
             console.print(DRAW_ANNOUNCEMENT);

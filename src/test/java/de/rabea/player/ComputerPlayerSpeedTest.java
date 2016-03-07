@@ -17,11 +17,11 @@ public class ComputerPlayerSpeedTest {
 
     @Test(timeout=800)
     public void measureSpeedOfFirstMoveOn3x3Board() {
-        computer.getPosition(new Board(3));
+        computer.makeMove(new Board(3));
     }
 
     @Test(timeout=2999)
     public void measureSpeedOfFirstMoveOn4x4Board() {
-        computer.getPosition(new Board(4));
+        computer.makeMove(new Board(4));
     }
 }

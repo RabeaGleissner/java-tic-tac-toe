@@ -8,7 +8,7 @@ public interface UserInterface {
 
     int getBoardDimensionFromUser();
 
-    void announceGameEnd(Mark lastPlayedMark, boolean winner);
+    void announceGameEnd(Mark lastPlayedMark, Board board);
 
     boolean playAgain();
 }

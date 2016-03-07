@@ -49,8 +49,8 @@ public class GameRunner {
     }
 
     public Game createGame(GameMode gameMode) {
-        return new Game(userInterface, playerFactory.createPlayer(gameMode),
-                playerFactory.createOpponent(gameMode));
+        return new Game(userInterface, playerFactory.createPlayer1(gameMode),
+                playerFactory.createPlayer2(gameMode));
     }
 
     public Board createBoard(int boardSize) {

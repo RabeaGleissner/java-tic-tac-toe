@@ -16,13 +16,12 @@ public class FakeHumanPlayer extends HumanPlayer {
     }
 
     @Override
-    public int getPosition(Board board) {
+    public int makeMove(Board board) {
         return positions.remove(0);
     }
 
-    public void setPositions(Integer... givenPositions) {
+    public void futureMoves(Integer... givenPositions) {
         positions.addAll(Arrays.asList(givenPositions));
 
     }
-
 }
