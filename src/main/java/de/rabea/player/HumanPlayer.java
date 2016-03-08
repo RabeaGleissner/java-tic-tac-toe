@@ -14,7 +14,7 @@ public class HumanPlayer extends Player {
     }
 
     @Override
-    public int makeMove(Board board) {
+    public int getMove(Board board) {
         userInterface.askForPosition();
         return returnUsersPosition(board);
     }
@@ -39,11 +39,11 @@ public class HumanPlayer extends Player {
 
     private int getDifferentUserInputIfInputIsBad(Board board) {
         userInterface.notANumberWarning(board);
-        return makeMove(board);
+        return getMove(board);
     }
 
     private int getDifferentUserInputIfPositionUnavailable(Board board) {
         userInterface.positionUnavailableWarning(board);
-        return makeMove(board);
+        return getMove(board);
     }
 }

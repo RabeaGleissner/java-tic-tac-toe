@@ -16,7 +16,7 @@ public class FakeHumanPlayer extends HumanPlayer {
     }
 
     @Override
-    public int makeMove(Board board) {
+    public int getMove(Board board) {
         return positions.remove(0);
     }
 

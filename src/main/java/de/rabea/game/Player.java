@@ -10,7 +10,7 @@ public abstract class Player {
     public Mark mark() {
         return mark;
     }
-    public abstract int makeMove(Board board);
+    public abstract int getMove(Board board);
     public abstract boolean hasMove();
 
 

@@ -22,7 +22,7 @@ public class UnbeatableComputerPlayerTest {
         Board board = new Board(X,O, EMPTY,
                                 X,EMPTY,EMPTY,
                                 O,EMPTY,X);
-        assertEquals(4, unbeatableComputerPlayer.makeMove(board));
+        assertEquals(4, unbeatableComputerPlayer.getMove(board));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class UnbeatableComputerPlayerTest {
         Board board = new Board(O,EMPTY,X,
                                 X,X, EMPTY,
                                 O,EMPTY,EMPTY);
-        assertEquals(5, unbeatableComputerPlayer.makeMove(board));
+        assertEquals(5, unbeatableComputerPlayer.getMove(board));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class UnbeatableComputerPlayerTest {
         Board board = new Board(EMPTY,EMPTY,X,
                                 EMPTY,X, EMPTY,
                                 EMPTY,EMPTY,O);
-        assertEquals(6, unbeatableComputerPlayer.makeMove(board));
+        assertEquals(6, unbeatableComputerPlayer.getMove(board));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class UnbeatableComputerPlayerTest {
                 X, O, X, O,
                 EMPTY, O, EMPTY, EMPTY,
                 EMPTY, EMPTY, EMPTY, EMPTY);
-        assertEquals(13, unbeatableComputerPlayer.makeMove(board));
+        assertEquals(13, unbeatableComputerPlayer.getMove(board));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class UnbeatableComputerPlayerTest {
                                 X, O, X, O,
                                 X, EMPTY, EMPTY, EMPTY,
                                 EMPTY, EMPTY, EMPTY, EMPTY);
-        assertEquals(12, unbeatableComputerPlayer.makeMove(board));
+        assertEquals(12, unbeatableComputerPlayer.getMove(board));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class UnbeatableComputerPlayerTest {
                                 EMPTY, EMPTY, EMPTY, EMPTY,
                                 EMPTY, EMPTY, EMPTY, EMPTY,
                                 EMPTY, EMPTY, EMPTY, EMPTY);
-        assertEquals(3, unbeatableComputerPlayer.makeMove(board));
+        assertEquals(3, unbeatableComputerPlayer.getMove(board));
     }
 
     @Test
