@@ -1,6 +1,7 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
+import de.rabea.game.GameOverBoardStub;
 import de.rabea.game.GameRunner;
 import de.rabea.player.GuiPlayer;
 import de.rabea.player.PlayerFactory;
@@ -39,18 +40,5 @@ public class JavaFXUiTest {
         ui.setGameRunner(gameRunner);
         ui.getGameModeFromUser();
         assertTrue(viewUpdaterSpy.gameRunnerThatWasPassedIn != null);
-    }
-
-    private class GameOverBoardStub extends Board {
-
-        @Override
-        public boolean gameOver() {
-            return true;
-        }
-
-        @Override
-        public boolean hasWinner() {
-            return true;
-        }
     }
 }

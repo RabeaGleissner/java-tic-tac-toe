@@ -2,6 +2,7 @@ package de.rabea.console;
 
 import de.rabea.game.Board;
 import de.rabea.game.GameMode;
+import de.rabea.game.GameOverBoardStub;
 import de.rabea.game.Mark;
 import de.rabea.player.HumanPlayer;
 import org.junit.Before;
@@ -114,18 +115,6 @@ public class ConsoleUiTest {
     public void announceWinner() {
         userInterface.announceGameEnd(X, new GameOverBoardStub());
         assertEquals("Game over! The winner is: X", fakeConsole.messagePrinted());
-    }
-
-    private class GameOverBoardStub extends Board {
-        @Override
-        public boolean gameOver() {
-            return true;
-        }
-
-        @Override
-        public boolean hasWinner() {
-            return true;
-        }
     }
 
     @Test
