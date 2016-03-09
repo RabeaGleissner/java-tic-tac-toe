@@ -5,10 +5,10 @@ import de.rabea.game.Board;
 import de.rabea.game.Mark;
 import de.rabea.game.Player;
 
-public class HumanPlayer extends Player {
+public class ConsolePlayer extends Player {
     private final ConsoleUi userInterface;
 
-    public HumanPlayer(ConsoleUi userInterface, Mark mark) {
+    public ConsolePlayer(ConsoleUi userInterface, Mark mark) {
         super(mark);
         this.userInterface = userInterface;
     }

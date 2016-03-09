@@ -8,10 +8,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FakeHumanPlayer extends HumanPlayer {
+public class FakeConsolePlayer extends ConsolePlayer {
     private List<Integer> positions = new LinkedList<>();
 
-    public FakeHumanPlayer(ConsoleUi userInterface, Mark mark) {
+    public FakeConsolePlayer(ConsoleUi userInterface, Mark mark) {
         super(userInterface, mark);
     }
 
