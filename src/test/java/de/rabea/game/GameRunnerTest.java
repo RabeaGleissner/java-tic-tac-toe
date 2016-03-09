@@ -5,7 +5,6 @@ import de.rabea.console.FakeConsoleUserInterface;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdaterSpy;
 import de.rabea.player.*;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,13 +17,11 @@ import static org.junit.Assert.assertTrue;
 
 public class GameRunnerTest {
     private FakeConsoleUserInterface fakeConsoleUI;
-    private PlayerFactory playerFactory;
     private ViewUpdaterSpy viewUpdaterSpy;
 
     @Before
     public void setup() {
         fakeConsoleUI = new FakeConsoleUserInterface();
-        playerFactory = new PlayerFactory(fakeConsoleUI);
         viewUpdaterSpy = new ViewUpdaterSpy();
     }
 
@@ -41,28 +38,22 @@ public class GameRunnerTest {
         GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
         Board board = gameRunner.createBoard(3);
 
-        TestCase.assertEquals(3, board.getDimension());
-    }
-
-    @Test
-    public void creates4x4Board() {
-        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
-        Board board = gameRunner.createBoard(4);
-
-        TestCase.assertEquals(4, board.getDimension());
+        assertEquals(3, board.getDimension());
     }
 
     @Test
     public void showsOptionsForGameMode() {
         GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
         gameRunner.displayGameModeOptions();
+
         assertTrue(viewUpdaterSpy.hasShownGameModeOptions);
     }
 
     @Test
-    public void createsANewGame() {
+    public void createsNewGameWithGuiPlayerAndUnbeatablePlayer() {
         GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
         Game game = gameRunner.createGame(GameMode.GuiHumanVsComputer);
+
         assertTrue(game.getPlayer1() instanceof GuiPlayer);
         assertTrue(game.getPlayer2() instanceof UnbeatableComputerPlayer);
     }
@@ -74,15 +65,6 @@ public class GameRunnerTest {
         gameRunner.playWithFreshBoard(3);
 
         assertTrue(viewUpdaterSpy.hasShownBoard);
-    }
-
-    @Test
-    public void createsTwoHumanPlayersWhenRequestedForConsoleGame() {
-        fakeConsoleUI.setGameMode(HumanVsHuman);
-        GameRunner gameRunner = new GameRunner(fakeConsoleUI, playerFactory);
-        Game game = gameRunner.createGame(HumanVsHuman);
-        assertTrue(game.getPlayer1() instanceof HumanPlayer);
-        assertTrue(game.getPlayer2() instanceof HumanPlayer);
     }
 
     @Test
@@ -98,7 +80,7 @@ public class GameRunnerTest {
     }
 
     @Test
-    public void createsHumanAndComputerPlayerForConsoleGame() {
+    public void createsGameWithHumanAndComputerPlayer() {
         GameRunner gameRunner = new GameRunner(fakeConsoleUI,
                 new PlayerFactoryWithFakeComputerPlayer(fakeConsoleUI, createFakeComputerPlayerWithInput()));
         Game game =  gameRunner.createGame(HumanVsComputer);

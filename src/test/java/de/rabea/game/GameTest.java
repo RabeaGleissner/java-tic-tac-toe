@@ -19,7 +19,7 @@ public class GameTest {
     }
 
     @Test
-    public void playsHuman3x3GameOnce() {
+    public void playsHumanGameOnce() {
         FakeHumanPlayer fakePlayer1 = new FakeHumanPlayer(fakeConsoleUI, X);
         FakeHumanPlayer fakePlayer2= new FakeHumanPlayer(fakeConsoleUI, O);
         fakePlayer1.futureMoves(0,1,2);
@@ -33,21 +33,7 @@ public class GameTest {
     }
 
     @Test
-    public void playsHuman4x4GameOnce() {
-        FakeHumanPlayer fakePlayer1 = new FakeHumanPlayer(fakeConsoleUI, X);
-        FakeHumanPlayer fakePlayer2 = new FakeHumanPlayer(fakeConsoleUI, O);
-        fakePlayer1.futureMoves(0,1,2,3);
-        fakePlayer2.futureMoves(10,11,12);
-        fakeConsoleUI.replayChoice("no");
-
-        Game game = new Game(fakeConsoleUI, fakePlayer1, fakePlayer2);
-        game.play(new Board(4));
-
-        assertEquals(1, fakeConsoleUI.countAnnounceGameEndCalls);
-    }
-
-    @Test
-    public void playsHumanVsComputer3x3GameOnce() {
+    public void playsHumanVsComputerGameOnce() {
         FakeHumanPlayer fakeHumanPlayer = new FakeHumanPlayer(fakeConsoleUI, X);
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
         fakeHumanPlayer.futureMoves(8,7,6);
@@ -57,21 +43,6 @@ public class GameTest {
         Game gameWithFakeComputerPlayer = new Game(fakeConsoleUI, fakeHumanPlayer,
                 fakeComputerPlayer);
         gameWithFakeComputerPlayer.play(new Board(3));
-
-        assertEquals(1, fakeConsoleUI.countAnnounceGameEndCalls);
-    }
-
-    @Test
-    public void playsHumanVsComputer4x4GameOnce() {
-        FakeHumanPlayer fakeHumanPlayer = new FakeHumanPlayer(fakeConsoleUI, X);
-        FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
-        fakeHumanPlayer.futureMoves(0,4,8,12);
-        fakeComputerPlayer.giveNumbers(5,6,7);
-        fakeConsoleUI.replayChoice("no");
-
-        Game gameWithFakeComputerPlayer = new Game(fakeConsoleUI, fakeHumanPlayer,
-                fakeComputerPlayer);
-        gameWithFakeComputerPlayer.play(new Board(4));
 
         assertEquals(1, fakeConsoleUI.countAnnounceGameEndCalls);
     }
