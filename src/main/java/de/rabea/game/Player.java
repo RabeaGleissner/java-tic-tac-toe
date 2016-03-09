@@ -12,6 +12,5 @@ public abstract class Player {
     }
     public abstract int getMove(Board board);
     public abstract boolean hasMove();
-
-
+    public abstract Board makeMove(Board board);
 }

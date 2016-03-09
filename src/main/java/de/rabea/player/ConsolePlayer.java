@@ -24,6 +24,11 @@ public class ConsolePlayer extends Player {
         return true;
     }
 
+    @Override
+    public Board makeMove(Board board) {
+        return board.placeMark(getMove(board), this.mark);
+    }
+
     private int returnUsersPosition(Board board) {
         String userInput = userInterface.readUserInput();
         if (userInterface.isUserInputInvalid(userInput)) {

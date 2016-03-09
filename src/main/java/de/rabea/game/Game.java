@@ -34,7 +34,7 @@ public class Game {
     }
 
     private Board playOneRound(Player player, Board board) {
-        return board.placeMark(player.getMove(board), player.mark());
+        return player.makeMove(board);
     }
 
     private void finishGame(Board board) {

@@ -22,4 +22,9 @@ public class ComputerPlayer extends Player {
     public boolean hasMove() {
         return true;
     }
+
+    @Override
+    public Board makeMove(Board board) {
+        return board.placeMark(getMove(board), this.mark);
+    }
 }
