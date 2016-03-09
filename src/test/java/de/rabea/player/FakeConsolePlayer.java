@@ -4,7 +4,6 @@ import de.rabea.console.ConsoleUi;
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,8 +19,9 @@ public class FakeConsolePlayer extends ConsolePlayer {
         return positions.remove(0);
     }
 
-    public void futureMoves(Integer... givenPositions) {
-        positions.addAll(Arrays.asList(givenPositions));
-
+    public void willMakeMoves(FakePlayerMove... moves) {
+        for (FakePlayerMove move : moves) {
+            positions.add(move.ordinal());
+        }
     }
 }

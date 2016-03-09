@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
+import static de.rabea.player.FakePlayerMove.*;
 import static org.junit.Assert.assertEquals;
 
 public class GameTest {
@@ -22,8 +23,8 @@ public class GameTest {
     public void playsHumanGameOnce() {
         FakeConsolePlayer fakePlayer1 = new FakeConsolePlayer(fakeConsoleUI, X);
         FakeConsolePlayer fakePlayer2= new FakeConsolePlayer(fakeConsoleUI, O);
-        fakePlayer1.futureMoves(0,1,2);
-        fakePlayer2.futureMoves(4,5);
+        fakePlayer1.willMakeMoves(TOP_LEFT, TOP_CENTRE, TOP_RIGHT);
+        fakePlayer2.willMakeMoves(CENTRE_CENTRE,CENTRE_RIGHT);
         fakeConsoleUI.replayChoice("no");
 
         Game game = new Game(fakeConsoleUI, fakePlayer1, fakePlayer2);
@@ -36,8 +37,8 @@ public class GameTest {
     public void playsHumanVsComputerGameOnce() {
         FakeConsolePlayer fakeConsolePlayer = new FakeConsolePlayer(fakeConsoleUI, X);
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
-        fakeConsolePlayer.futureMoves(8,7,6);
-        fakeComputerPlayer.giveNumbers(1,2);
+        fakeConsolePlayer.willMakeMoves(BOTTOM_LEFT, BOTTOM_RIGHT, BOTTOM_CENTER);
+        fakeComputerPlayer.willMakeMoves(TOP_CENTRE, TOP_LEFT);
         fakeConsoleUI.replayChoice("no");
 
         Game gameWithFakeComputerPlayer = new Game(fakeConsoleUI, fakeConsolePlayer,

@@ -9,19 +9,22 @@ import java.util.List;
 
 public class FakeComputerPlayer extends ComputerPlayer {
 
-    private final List<Integer> listOfNumbers;
+    private final List<Integer> positions;
 
     public FakeComputerPlayer(Mark mark) {
         super(null, mark);
-        listOfNumbers = new LinkedList<>();
+        positions = new LinkedList<>();
     }
 
     @Override
     public int getMove(Board board) {
-        return listOfNumbers.remove(0);
+        return positions.remove(0);
     }
 
-    public void giveNumbers(Integer ... num) {
-        listOfNumbers.addAll(Arrays.asList(num));
+    public void willMakeMoves(FakePlayerMove... moves) {
+        for (FakePlayerMove move : moves) {
+            positions.add(move.ordinal());
+        }
+        positions.addAll(Arrays.asList());
     }
 }

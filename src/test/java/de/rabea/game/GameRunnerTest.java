@@ -12,6 +12,7 @@ import static de.rabea.game.GameMode.HumanVsComputer;
 import static de.rabea.game.GameMode.HumanVsHuman;
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
+import static de.rabea.player.FakePlayerMove.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -71,7 +72,8 @@ public class GameRunnerTest {
     public void playsHuman3x3ConsoleGameTwice() {
         fakeConsoleUI.setGameMode(HumanVsHuman, HumanVsHuman);
         PlayerFactoryWithTwoConsolePlayers playerFactoryWithTwoFakeHumans =
-                new PlayerFactoryWithTwoConsolePlayers(fakeConsoleUI, createFakeConsolePlayer1WithInput(), createFakeConsolePlayer2WithInput());
+                new PlayerFactoryWithTwoConsolePlayers(fakeConsoleUI,
+                        createFakeConsolePlayer1WithInput(), createFakeConsolePlayer2WithInput());
         fakeConsoleUI.setReplayChoice("yes", "no");
         fakeConsoleUI.setBoardDimensions(3,3);
         GameRunner gameRunner = new GameRunner(fakeConsoleUI, playerFactoryWithTwoFakeHumans);
@@ -90,19 +92,19 @@ public class GameRunnerTest {
 
     private FakeComputerPlayer createFakeComputerPlayerWithInput() {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
-        fakeComputerPlayer.giveNumbers(6, 7);
+        fakeComputerPlayer.willMakeMoves(BOTTOM_LEFT, BOTTOM_CENTER);
         return fakeComputerPlayer;
     }
 
     private FakeConsolePlayer createFakeConsolePlayer1WithInput() {
         FakeConsolePlayer fakeConsolePlayer = new FakeConsolePlayer(new FakeConsoleUserInterface(), X);
-        fakeConsolePlayer.futureMoves(0,1,2,0,1,2);
+        fakeConsolePlayer.willMakeMoves(TOP_LEFT, TOP_CENTRE, TOP_RIGHT, TOP_LEFT, TOP_CENTRE, TOP_RIGHT);
         return fakeConsolePlayer;
     }
 
     private FakeConsolePlayer createFakeConsolePlayer2WithInput() {
         FakeConsolePlayer fakeConsolePlayer = new FakeConsolePlayer(new FakeConsoleUserInterface(), X);
-        fakeConsolePlayer.futureMoves(8,7,8,7);
+        fakeConsolePlayer.willMakeMoves(BOTTOM_CENTER, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_LEFT);
         return fakeConsolePlayer;
     }
 
