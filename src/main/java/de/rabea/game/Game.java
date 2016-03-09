@@ -26,7 +26,10 @@ public class Game {
 
     private void switchPlayer(Board board) {
         if (gameIsNotOver(board)) {
-            currentPlayer = currentPlayer == player1 ? player2 : player1;
+            if (currentPlayer == player1) {
+                currentPlayer = player2;
+            }
+            else currentPlayer = player1;
         }
     }
 
