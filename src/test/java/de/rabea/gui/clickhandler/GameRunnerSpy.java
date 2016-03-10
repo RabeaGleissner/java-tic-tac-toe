@@ -25,7 +25,7 @@ public class GameRunnerSpy extends GameRunner {
     }
 
     @Override
-    public void setGameAndDisplayBoardSizeOptions(GameMode gameMode) {
+    public void setupGame(GameMode gameMode) {
         createsGameWithThisMode = gameMode;
     }
 }

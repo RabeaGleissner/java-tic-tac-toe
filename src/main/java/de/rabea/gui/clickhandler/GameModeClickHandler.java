@@ -17,9 +17,9 @@ public class GameModeClickHandler implements ClickHandler {
     @Override
     public void action(String gameOption) {
         if (gameOption.equals("HumanvsHuman")) {
-            gameRunner.setGameAndDisplayBoardSizeOptions(GuiHumanVsGuiHuman);
+            gameRunner.setupGame(GuiHumanVsGuiHuman);
         } else {
-            gameRunner.setGameAndDisplayBoardSizeOptions(GuiHumanVsComputer);
+            gameRunner.setupGame(GuiHumanVsComputer);
         }
 
     }

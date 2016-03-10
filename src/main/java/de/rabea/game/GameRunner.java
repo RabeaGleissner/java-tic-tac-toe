@@ -5,6 +5,7 @@ import de.rabea.player.PlayerFactory;
 public class GameRunner {
     private final UserInterface userInterface;
     private final PlayerFactory playerFactory;
+
     private GameMode gameMode;
     private Game game;
     private int boardSize;
@@ -15,10 +16,10 @@ public class GameRunner {
     }
 
     public void displayGameModeOptions() {
-       gameMode = userInterface.getGameModeFromUser();
+        gameMode = userInterface.getGameModeFromUser();
     }
 
-    public void setGameAndDisplayBoardSizeOptions(GameMode gameMode) {
+    public void setupGame(GameMode gameMode) {
         game = createGame(gameMode);
         boardSize = userInterface.getBoardDimensionFromUser();
     }
@@ -33,13 +34,21 @@ public class GameRunner {
 
     public void setUpConsoleGameAndPlay() {
         displayGameModeOptions();
-        setGameAndDisplayBoardSizeOptions(gameMode);
+        setupGame(gameMode);
         playWithFreshBoard(boardSize);
         replayIfRequested();
     }
 
-    private void replay() {
-        setUpConsoleGameAndPlay();
+    public Game createGame(GameMode gameMode) {
+        return new Game(
+                userInterface,
+                playerFactory.createPlayer1(gameMode),
+                playerFactory.createPlayer2(gameMode)
+        );
+    }
+
+    Board createBoard(int boardSize) {
+        return new Board(boardSize);
     }
 
     private void replayIfRequested() {
@@ -48,12 +57,7 @@ public class GameRunner {
         }
     }
 
-    public Game createGame(GameMode gameMode) {
-        return new Game(userInterface, playerFactory.createPlayer1(gameMode),
-                playerFactory.createPlayer2(gameMode));
-    }
-
-    public Board createBoard(int boardSize) {
-        return new Board(boardSize);
+    private void replay() {
+        setUpConsoleGameAndPlay();
     }
 }

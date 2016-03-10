@@ -29,9 +29,18 @@ public class GameRunnerTest {
     @Test
     public void displaysGameOptionsOnGui() {
         GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
-        gameRunner.setGameAndDisplayBoardSizeOptions(GameMode.GuiHumanVsComputer);
+        gameRunner.setupGame(GameMode.GuiHumanVsComputer);
 
         assertTrue(viewUpdaterSpy.hasShownBoardSizeOptions);
+    }
+
+    @Test
+    public void preparesGameAndShowsBoard() {
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        gameRunner.setupGame(GameMode.GuiHumanVsGuiHuman);
+        gameRunner.playWithFreshBoard(3);
+
+        assertTrue(viewUpdaterSpy.hasShownBoard);
     }
 
     @Test
@@ -52,7 +61,10 @@ public class GameRunnerTest {
 
     @Test
     public void createsNewGameWithGuiPlayerAndUnbeatablePlayer() {
-        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        GameRunner gameRunner = new GameRunner(
+                fakeConsoleUI,
+                new PlayerFactory(null)
+        );
         Game game = gameRunner.createGame(GameMode.GuiHumanVsComputer);
 
         assertTrue(game.getPlayer1() instanceof GuiPlayer);
@@ -60,12 +72,14 @@ public class GameRunnerTest {
     }
 
     @Test
-    public void preparesGameAndShowsBoard() {
-        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
-        gameRunner.setGameAndDisplayBoardSizeOptions(GameMode.GuiHumanVsGuiHuman);
-        gameRunner.playWithFreshBoard(3);
-
-        assertTrue(viewUpdaterSpy.hasShownBoard);
+    public void createsGameWithHumanAndComputerPlayer() {
+        GameRunner gameRunner = new GameRunner(
+                fakeConsoleUI,
+                new PlayerFactoryWithFakeComputerPlayer(fakeConsoleUI, createFakeComputerPlayerWithInput())
+        );
+        Game game =  gameRunner.createGame(HumanVsComputer);
+        assertTrue(game.getPlayer1() instanceof ConsolePlayer);
+        assertTrue(game.getPlayer2() instanceof FakeComputerPlayer);
     }
 
     @Test
@@ -79,15 +93,6 @@ public class GameRunnerTest {
         GameRunner gameRunner = new GameRunner(fakeConsoleUI, playerFactoryWithTwoFakeHumans);
         gameRunner.setUpConsoleGameAndPlay();
         assertEquals(2, fakeConsoleUI.countAnnounceGameEndCalls);
-    }
-
-    @Test
-    public void createsGameWithHumanAndComputerPlayer() {
-        GameRunner gameRunner = new GameRunner(fakeConsoleUI,
-                new PlayerFactoryWithFakeComputerPlayer(fakeConsoleUI, createFakeComputerPlayerWithInput()));
-        Game game =  gameRunner.createGame(HumanVsComputer);
-        assertTrue(game.getPlayer1() instanceof ConsolePlayer);
-        assertTrue(game.getPlayer2() instanceof FakeComputerPlayer);
     }
 
     private FakeComputerPlayer createFakeComputerPlayerWithInput() {
