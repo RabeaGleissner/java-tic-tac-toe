@@ -5,16 +5,16 @@ import de.rabea.game.Board;
 import de.rabea.game.Mark;
 import de.rabea.game.Player;
 
-public class HumanPlayer extends Player {
+public class ConsolePlayer extends Player {
     private final ConsoleUi userInterface;
 
-    public HumanPlayer(ConsoleUi userInterface, Mark mark) {
+    public ConsolePlayer(ConsoleUi userInterface, Mark mark) {
         super(mark);
         this.userInterface = userInterface;
     }
 
     @Override
-    public int makeMove(Board board) {
+    public int getMove(Board board) {
         userInterface.askForPosition();
         return returnUsersPosition(board);
     }
@@ -22,6 +22,11 @@ public class HumanPlayer extends Player {
     @Override
     public boolean hasMove() {
         return true;
+    }
+
+    @Override
+    public Board makeMove(Board board) {
+        return board.placeMark(getMove(board), this.mark);
     }
 
     private int returnUsersPosition(Board board) {
@@ -39,11 +44,11 @@ public class HumanPlayer extends Player {
 
     private int getDifferentUserInputIfInputIsBad(Board board) {
         userInterface.notANumberWarning(board);
-        return makeMove(board);
+        return getMove(board);
     }
 
     private int getDifferentUserInputIfPositionUnavailable(Board board) {
         userInterface.positionUnavailableWarning(board);
-        return makeMove(board);
+        return getMove(board);
     }
 }

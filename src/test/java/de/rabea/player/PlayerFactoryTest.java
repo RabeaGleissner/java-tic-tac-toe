@@ -18,7 +18,7 @@ public class PlayerFactoryTest {
     @Test
     public void createsHumanPlayerForHumanVsComputerGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
-        assertTrue(playerFactory.createPlayer1(GameMode.HumanVsComputer) instanceof HumanPlayer);
+        assertTrue(playerFactory.createPlayer1(GameMode.HumanVsComputer) instanceof ConsolePlayer);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class PlayerFactoryTest {
     @Test
     public void createsHumanPlayerForComputerVsHumanGame() {
         PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
-        assertTrue(playerFactory.createPlayer2(GameMode.ComputerVsHuman) instanceof HumanPlayer);
+        assertTrue(playerFactory.createPlayer2(GameMode.ComputerVsHuman) instanceof ConsolePlayer);
     }
 
     @Test

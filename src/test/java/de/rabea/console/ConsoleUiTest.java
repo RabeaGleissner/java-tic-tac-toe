@@ -2,8 +2,9 @@ package de.rabea.console;
 
 import de.rabea.game.Board;
 import de.rabea.game.GameMode;
+import de.rabea.game.GameOverBoardStub;
 import de.rabea.game.Mark;
-import de.rabea.player.HumanPlayer;
+import de.rabea.player.ConsolePlayer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,7 +30,7 @@ public class ConsoleUiTest {
     @Test
     public void displaysBoard() {
         Board board = new Board(3);
-        userInterface.displayBoard(board, new HumanPlayer(userInterface, Mark.X));
+        userInterface.displayBoard(board, new ConsolePlayer(userInterface, Mark.X));
         assertEquals(fakeConsole.messagePrinted(), "board placeholder");
     }
 
@@ -114,18 +115,6 @@ public class ConsoleUiTest {
     public void announceWinner() {
         userInterface.announceGameEnd(X, new GameOverBoardStub());
         assertEquals("Game over! The winner is: X", fakeConsole.messagePrinted());
-    }
-
-    private class GameOverBoardStub extends Board {
-        @Override
-        public boolean gameOver() {
-            return true;
-        }
-
-        @Override
-        public boolean hasWinner() {
-            return true;
-        }
     }
 
     @Test

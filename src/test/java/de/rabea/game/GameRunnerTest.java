@@ -5,7 +5,6 @@ import de.rabea.console.FakeConsoleUserInterface;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdaterSpy;
 import de.rabea.player.*;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,18 +12,17 @@ import static de.rabea.game.GameMode.HumanVsComputer;
 import static de.rabea.game.GameMode.HumanVsHuman;
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
+import static de.rabea.player.FakePlayerMove.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GameRunnerTest {
     private FakeConsoleUserInterface fakeConsoleUI;
-    private PlayerFactory playerFactory;
     private ViewUpdaterSpy viewUpdaterSpy;
 
     @Before
     public void setup() {
         fakeConsoleUI = new FakeConsoleUserInterface();
-        playerFactory = new PlayerFactory(fakeConsoleUI);
         viewUpdaterSpy = new ViewUpdaterSpy();
     }
 
@@ -41,28 +39,22 @@ public class GameRunnerTest {
         GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
         Board board = gameRunner.createBoard(3);
 
-        TestCase.assertEquals(3, board.getDimension());
-    }
-
-    @Test
-    public void creates4x4Board() {
-        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
-        Board board = gameRunner.createBoard(4);
-
-        TestCase.assertEquals(4, board.getDimension());
+        assertEquals(3, board.getDimension());
     }
 
     @Test
     public void showsOptionsForGameMode() {
         GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
         gameRunner.displayGameModeOptions();
+
         assertTrue(viewUpdaterSpy.hasShownGameModeOptions);
     }
 
     @Test
-    public void createsANewGame() {
+    public void createsNewGameWithGuiPlayerAndUnbeatablePlayer() {
         GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
         Game game = gameRunner.createGame(GameMode.GuiHumanVsComputer);
+
         assertTrue(game.getPlayer1() instanceof GuiPlayer);
         assertTrue(game.getPlayer2() instanceof UnbeatableComputerPlayer);
     }
@@ -77,19 +69,11 @@ public class GameRunnerTest {
     }
 
     @Test
-    public void createsTwoHumanPlayersWhenRequestedForConsoleGame() {
-        fakeConsoleUI.setGameMode(HumanVsHuman);
-        GameRunner gameRunner = new GameRunner(fakeConsoleUI, playerFactory);
-        Game game = gameRunner.createGame(HumanVsHuman);
-        assertTrue(game.getPlayer1() instanceof HumanPlayer);
-        assertTrue(game.getPlayer2() instanceof HumanPlayer);
-    }
-
-    @Test
     public void playsHuman3x3ConsoleGameTwice() {
         fakeConsoleUI.setGameMode(HumanVsHuman, HumanVsHuman);
-        PlayerFactoryWithTwoFakeHumanPlayers playerFactoryWithTwoFakeHumans =
-                new PlayerFactoryWithTwoFakeHumanPlayers(fakeConsoleUI, createFakeHumanPlayer1WithInput(), createFakeHumanPlayer2WithInput());
+        PlayerFactoryWithTwoConsolePlayers playerFactoryWithTwoFakeHumans =
+                new PlayerFactoryWithTwoConsolePlayers(fakeConsoleUI,
+                        createFakeConsolePlayer1WithInput(), createFakeConsolePlayer2WithInput());
         fakeConsoleUI.setReplayChoice("yes", "no");
         fakeConsoleUI.setBoardDimensions(3,3);
         GameRunner gameRunner = new GameRunner(fakeConsoleUI, playerFactoryWithTwoFakeHumans);
@@ -98,30 +82,30 @@ public class GameRunnerTest {
     }
 
     @Test
-    public void createsHumanAndComputerPlayerForConsoleGame() {
+    public void createsGameWithHumanAndComputerPlayer() {
         GameRunner gameRunner = new GameRunner(fakeConsoleUI,
                 new PlayerFactoryWithFakeComputerPlayer(fakeConsoleUI, createFakeComputerPlayerWithInput()));
         Game game =  gameRunner.createGame(HumanVsComputer);
-        assertTrue(game.getPlayer1() instanceof HumanPlayer);
+        assertTrue(game.getPlayer1() instanceof ConsolePlayer);
         assertTrue(game.getPlayer2() instanceof FakeComputerPlayer);
     }
 
     private FakeComputerPlayer createFakeComputerPlayerWithInput() {
         FakeComputerPlayer fakeComputerPlayer = new FakeComputerPlayer(O);
-        fakeComputerPlayer.giveNumbers(6, 7);
+        fakeComputerPlayer.willMakeMoves(BOTTOM_LEFT, BOTTOM_CENTER);
         return fakeComputerPlayer;
     }
 
-    private FakeHumanPlayer createFakeHumanPlayer1WithInput() {
-        FakeHumanPlayer fakeHumanPlayer = new FakeHumanPlayer(new FakeConsoleUserInterface(), X);
-        fakeHumanPlayer.futureMoves(0,1,2,0,1,2);
-        return fakeHumanPlayer;
+    private FakeConsolePlayer createFakeConsolePlayer1WithInput() {
+        FakeConsolePlayer fakeConsolePlayer = new FakeConsolePlayer(new FakeConsoleUserInterface(), X);
+        fakeConsolePlayer.willMakeMoves(TOP_LEFT, TOP_CENTRE, TOP_RIGHT, TOP_LEFT, TOP_CENTRE, TOP_RIGHT);
+        return fakeConsolePlayer;
     }
 
-    private FakeHumanPlayer createFakeHumanPlayer2WithInput() {
-        FakeHumanPlayer fakeHumanPlayer = new FakeHumanPlayer(new FakeConsoleUserInterface(), X);
-        fakeHumanPlayer.futureMoves(8,7,8,7);
-        return fakeHumanPlayer;
+    private FakeConsolePlayer createFakeConsolePlayer2WithInput() {
+        FakeConsolePlayer fakeConsolePlayer = new FakeConsolePlayer(new FakeConsoleUserInterface(), X);
+        fakeConsolePlayer.willMakeMoves(BOTTOM_CENTER, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_LEFT);
+        return fakeConsolePlayer;
     }
 
     private class PlayerFactoryWithFakeComputerPlayer extends PlayerFactory {
@@ -134,7 +118,7 @@ public class GameRunnerTest {
 
         @Override
         public Player createPlayer1(GameMode gameMode) {
-            return new FakeHumanPlayer(fakeConsoleUI, X);
+            return new FakeConsolePlayer(fakeConsoleUI, X);
         }
 
         @Override
@@ -143,11 +127,11 @@ public class GameRunnerTest {
         }
     }
 
-    private class PlayerFactoryWithTwoFakeHumanPlayers extends PlayerFactory {
-        private final FakeHumanPlayer fakePlayer1;
-        private final FakeHumanPlayer fakePlayer2;
+    private class PlayerFactoryWithTwoConsolePlayers extends PlayerFactory {
+        private final FakeConsolePlayer fakePlayer1;
+        private final FakeConsolePlayer fakePlayer2;
 
-        public PlayerFactoryWithTwoFakeHumanPlayers(ConsoleUi userInterface, FakeHumanPlayer player1, FakeHumanPlayer player2) {
+        public PlayerFactoryWithTwoConsolePlayers(ConsoleUi userInterface, FakeConsolePlayer player1, FakeConsolePlayer player2) {
             super(userInterface);
             this.fakePlayer1 = player1;
             this.fakePlayer2 = player2;

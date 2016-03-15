@@ -17,7 +17,7 @@ public class PlayerFactory {
     public Player createPlayer1(GameMode gameMode) {
         if (gameMode == GameMode.HumanVsHuman ||
                 gameMode == GameMode.HumanVsComputer) {
-            return new HumanPlayer(userInterface, X);
+            return new ConsolePlayer(userInterface, X);
         } else if (gameMode == GameMode.ComputerVsComputer ||
                 gameMode == GameMode.ComputerVsHuman) {
             return new UnbeatableComputerPlayer(X);
@@ -33,7 +33,7 @@ public class PlayerFactory {
             return new UnbeatableComputerPlayer(O);
         } else if (gameMode == GameMode.HumanVsHuman ||
                 gameMode == GameMode.ComputerVsHuman) {
-            return new HumanPlayer(userInterface, O);
+            return new ConsolePlayer(userInterface, O);
         } else {
             return new GuiPlayer(O);
         }

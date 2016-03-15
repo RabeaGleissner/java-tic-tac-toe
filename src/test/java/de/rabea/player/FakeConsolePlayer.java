@@ -4,24 +4,24 @@ import de.rabea.console.ConsoleUi;
 import de.rabea.game.Board;
 import de.rabea.game.Mark;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FakeHumanPlayer extends HumanPlayer {
+public class FakeConsolePlayer extends ConsolePlayer {
     private List<Integer> positions = new LinkedList<>();
 
-    public FakeHumanPlayer(ConsoleUi userInterface, Mark mark) {
+    public FakeConsolePlayer(ConsoleUi userInterface, Mark mark) {
         super(userInterface, mark);
     }
 
     @Override
-    public int makeMove(Board board) {
+    public int getMove(Board board) {
         return positions.remove(0);
     }
 
-    public void futureMoves(Integer... givenPositions) {
-        positions.addAll(Arrays.asList(givenPositions));
-
+    public void willMakeMoves(FakePlayerMove... moves) {
+        for (FakePlayerMove move : moves) {
+            positions.add(move.ordinal());
+        }
     }
 }

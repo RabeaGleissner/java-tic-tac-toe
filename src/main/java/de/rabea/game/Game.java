@@ -26,12 +26,15 @@ public class Game {
 
     private void switchPlayer(Board board) {
         if (gameIsNotOver(board)) {
-            currentPlayer = currentPlayer == player1 ? player2 : player1;
+            if (currentPlayer == player1) {
+                currentPlayer = player2;
+            }
+            else currentPlayer = player1;
         }
     }
 
     private Board playOneRound(Player player, Board board) {
-        return board.placeMark(player.makeMove(board), player.mark());
+        return player.makeMove(board);
     }
 
     private void finishGame(Board board) {

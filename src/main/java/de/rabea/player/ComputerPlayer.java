@@ -13,7 +13,7 @@ public class ComputerPlayer extends Player {
     }
 
     @Override
-    public int makeMove(Board board) {
+    public int getMove(Board board) {
         int index = randomNumberCalculator.randomNumber(board.emptyCells().size());
         return board.emptyCells().get(index);
     }
@@ -21,5 +21,10 @@ public class ComputerPlayer extends Player {
     @Override
     public boolean hasMove() {
         return true;
+    }
+
+    @Override
+    public Board makeMove(Board board) {
+        return board.placeMark(getMove(board), this.mark);
     }
 }
