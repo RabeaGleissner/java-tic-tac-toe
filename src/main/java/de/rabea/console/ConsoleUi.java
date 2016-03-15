@@ -42,9 +42,9 @@ public class ConsoleUi implements UserInterface {
     }
 
     @Override
-    public GameMode getGameModeFromUser() {
+    public GameMode getGameModeFromUser(GameFactory gameFactory) {
         presentGameOptions();
-        return gameMode();
+        return gameMode(gameFactory);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class ConsoleUi implements UserInterface {
         console.print(GAME_OPTIONS);
     }
 
-    private GameMode gameMode() {
+    private GameMode gameMode(GameFactory gameFactory) {
         String userChoice = console.readUserInput();
         switch (userChoice) {
             case "1":
@@ -88,7 +88,7 @@ public class ConsoleUi implements UserInterface {
             case "4":
                 return GameMode.ComputerVsComputer;
             default:
-                return getGameModeFromUser();
+                return getGameModeFromUser(gameFactory);
         }
     }
 

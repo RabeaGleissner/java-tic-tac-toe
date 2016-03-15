@@ -4,7 +4,7 @@ public interface UserInterface {
 
     void displayBoard(Board board, Player player);
 
-    GameMode getGameModeFromUser();
+    GameMode getGameModeFromUser(GameFactory gameFactory);
 
     int getBoardDimensionFromUser();
 

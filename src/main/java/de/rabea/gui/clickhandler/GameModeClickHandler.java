@@ -1,26 +1,31 @@
 package de.rabea.gui.clickhandler;
 
-import de.rabea.game.GameRunner;
+import de.rabea.game.GameFactory;
+import de.rabea.game.GameMode;
 import de.rabea.gui.ClickHandler;
-
-import static de.rabea.game.GameMode.GuiHumanVsComputer;
-import static de.rabea.game.GameMode.GuiHumanVsGuiHuman;
+import de.rabea.gui.GameContext;
 
 public class GameModeClickHandler implements ClickHandler {
 
-    private final GameRunner gameRunner;
+    private GameFactory gameFactory;
+    private GameContext context;
 
-    public GameModeClickHandler(GameRunner gameRunner) {
-        this.gameRunner = gameRunner;
+    public GameModeClickHandler(GameFactory gameFactory) {
+        this.gameFactory = gameFactory;
+    }
+
+    public GameModeClickHandler(GameContext context) {
+        this.context = context;
     }
 
     @Override
     public void action(String gameOption) {
-        if (gameOption.equals("HumanvsHuman")) {
-            gameRunner.setupGame(GuiHumanVsGuiHuman);
+        GameMode gameMode;
+        if (gameOption.equals("Human vs Human")) {
+            gameMode = GameMode.GuiHumanVsGuiHuman;
         } else {
-            gameRunner.setupGame(GuiHumanVsComputer);
+            gameMode = GameMode.GuiHumanVsComputer;
         }
-
+        context.setGame(gameFactory.createGame(gameMode));
     }
 }

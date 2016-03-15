@@ -1,6 +1,7 @@
 package de.rabea.gui.view;
 
 import de.rabea.game.Board;
+import de.rabea.game.GameFactory;
 import de.rabea.game.GameRunner;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdater;
@@ -27,8 +28,8 @@ public class BoardViewTest {
     @Before
     public void setUp() {
         new JFXPanel();
-        gameRunner = new GameRunner(new JavaFXUi(new ViewUpdater(new Scene(new GridPane()))),
-                new PlayerFactory(null));
+        JavaFXUi ui = new JavaFXUi(new ViewUpdater(new Scene(new GridPane())));
+        gameRunner = new GameRunner(ui, new GameFactory(ui, new PlayerFactory(null)));
     }
 
     @Test

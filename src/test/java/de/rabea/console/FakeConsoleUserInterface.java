@@ -1,6 +1,7 @@
 package de.rabea.console;
 
 import de.rabea.game.Board;
+import de.rabea.game.GameFactory;
 import de.rabea.game.GameMode;
 import de.rabea.game.Mark;
 
@@ -67,7 +68,7 @@ public class FakeConsoleUserInterface extends ConsoleUi {
     }
 
     @Override
-    public GameMode getGameModeFromUser() {
+    public GameMode getGameModeFromUser(GameFactory gameFactory) {
         return gameModes.remove(0);
     }
 

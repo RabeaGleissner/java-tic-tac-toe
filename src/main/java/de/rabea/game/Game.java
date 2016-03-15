@@ -46,11 +46,11 @@ public class Game {
        return !board.gameOver();
     }
 
-    Player getPlayer1() {
+    public Player getPlayer1() {
         return this.player1;
     }
 
-    Player getPlayer2() {
+    public Player getPlayer2() {
         return this.player2;
     }
 }

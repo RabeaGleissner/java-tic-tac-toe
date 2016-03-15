@@ -1,9 +1,6 @@
 package de.rabea.console;
 
-import de.rabea.game.Board;
-import de.rabea.game.GameMode;
-import de.rabea.game.GameOverBoardStub;
-import de.rabea.game.Mark;
+import de.rabea.game.*;
 import de.rabea.player.ConsolePlayer;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +15,7 @@ public class ConsoleUiTest {
     private ConsoleUi userInterface;
     private FakeConsole fakeConsole;
     private Board board;
+    private GameFactory gameFactory;
 
     @Before
     public void setup() {
@@ -62,31 +60,31 @@ public class ConsoleUiTest {
     @Test
     public void returnsHvHGameModeWhenUserEnters1() {
         fakeConsole.userInput("1");
-        assertEquals(GameMode.HumanVsHuman, userInterface.getGameModeFromUser());
+        assertEquals(GameMode.HumanVsHuman, userInterface.getGameModeFromUser(gameFactory));
     }
 
     @Test
     public void returnsHvCGameModeWhenUserEnters2() {
         fakeConsole.userInput("2");
-        assertEquals(GameMode.HumanVsComputer, userInterface.getGameModeFromUser());
+        assertEquals(GameMode.HumanVsComputer, userInterface.getGameModeFromUser(gameFactory));
     }
 
     @Test
     public void returnsCvHGameModeWhenUserEnters3() {
         fakeConsole.userInput("3");
-        assertEquals(GameMode.ComputerVsHuman, userInterface.getGameModeFromUser());
+        assertEquals(GameMode.ComputerVsHuman, userInterface.getGameModeFromUser(gameFactory));
     }
     
     @Test
     public void returnsCvCGameModeWhenUserEnters1() {
         fakeConsole.userInput("4");
-        assertEquals(GameMode.ComputerVsComputer, userInterface.getGameModeFromUser());
+        assertEquals(GameMode.ComputerVsComputer, userInterface.getGameModeFromUser(gameFactory));
     }
 
     @Test
     public void asksTheUserAgainForGameModeIfBadInputIsEntered() {
         fakeConsole.userInput("hello", "1");
-        userInterface.getGameModeFromUser();
+        userInterface.getGameModeFromUser(gameFactory);
         assertEquals("Please choose the game mode. \n 1 - Human vs Human\n 2 - Human vs Computer\n 3 - Computer vs Human\n 4 - Computer vs Computer", fakeConsole.messagePrinted());
     }
 

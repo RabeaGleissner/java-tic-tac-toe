@@ -1,6 +1,7 @@
 package de.rabea.gui;
 
 import de.rabea.game.Board;
+import de.rabea.game.GameFactory;
 import de.rabea.game.GameRunner;
 import de.rabea.game.Mark;
 import de.rabea.gui.clickhandler.EmptyCellClickHandler;
@@ -20,8 +21,8 @@ public class ViewUpdater {
         this.scene = scene;
     }
 
-    public void showGameModeOptions(GameRunner gameRunner) {
-        scene.setRoot(new GameModeView().draw(gameRunner));
+    public void showGameModeOptions(JavaFXUi ui, GameFactory gameFactory) {
+        scene.setRoot(new GameModeView().draw(ui, gameFactory));
     }
 
     public void showBoardSizeOptionsView(GameRunner gameRunner) {

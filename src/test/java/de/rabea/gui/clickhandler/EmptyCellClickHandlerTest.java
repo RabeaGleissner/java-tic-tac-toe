@@ -1,6 +1,7 @@
 package de.rabea.gui.clickhandler;
 
 import de.rabea.game.Board;
+import de.rabea.game.GameFactory;
 import de.rabea.game.GameRunner;
 import de.rabea.game.UserInterface;
 import de.rabea.player.GuiPlayer;
@@ -24,8 +25,8 @@ public class EmptyCellClickHandlerTest {
 
     public class GameRunnerStub extends GameRunner {
 
-        public GameRunnerStub(UserInterface userInterface, PlayerFactory playerFactory) {
-            super(userInterface, playerFactory);
+        public GameRunnerStub(UserInterface userInterface, GameFactory gameFactory) {
+            super(userInterface, gameFactory);
         }
 
         @Override

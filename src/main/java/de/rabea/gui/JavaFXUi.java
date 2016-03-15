@@ -24,8 +24,8 @@ public class JavaFXUi implements UserInterface {
     }
 
     @Override
-    public GameMode getGameModeFromUser() {
-        viewUpdater.showGameModeOptions(gameRunner);
+    public GameMode getGameModeFromUser(GameFactory gameFactory) {
+        viewUpdater.showGameModeOptions(this, gameFactory);
         return null;
     }
 

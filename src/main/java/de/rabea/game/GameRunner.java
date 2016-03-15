@@ -1,22 +1,20 @@
 package de.rabea.game;
 
-import de.rabea.player.PlayerFactory;
-
 public class GameRunner {
     private final UserInterface userInterface;
-    private final PlayerFactory playerFactory;
+    private GameFactory gameFactory;
 
     private GameMode gameMode;
     private Game game;
     private int boardSize;
 
-    public GameRunner(UserInterface userInterface, PlayerFactory playerFactory) {
+    public GameRunner(UserInterface userInterface, GameFactory gameFactory) {
         this.userInterface = userInterface;
-        this.playerFactory = playerFactory;
+        this.gameFactory = gameFactory;
     }
 
     public void displayGameModeOptions() {
-        gameMode = userInterface.getGameModeFromUser();
+        gameMode = userInterface.getGameModeFromUser(gameFactory);
     }
 
     public void setupGame(GameMode gameMode) {
@@ -40,11 +38,7 @@ public class GameRunner {
     }
 
     public Game createGame(GameMode gameMode) {
-        return new Game(
-                userInterface,
-                playerFactory.createPlayer1(gameMode),
-                playerFactory.createPlayer2(gameMode)
-        );
+        return gameFactory.createGame(gameMode);
     }
 
     Board createBoard(int boardSize) {
