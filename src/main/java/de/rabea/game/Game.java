@@ -45,12 +45,4 @@ public class Game {
     private boolean gameIsNotOver(Board board) {
        return !board.gameOver();
     }
-
-    Player getPlayer1() {
-        return this.player1;
-    }
-
-    Player getPlayer2() {
-        return this.player2;
-    }
 }
