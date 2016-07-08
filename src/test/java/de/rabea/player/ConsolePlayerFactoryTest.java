@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class PlayerFactoryTest {
+public class ConsolePlayerFactoryTest {
     private FakeConsoleUserInterface fakeConsoleUserInterface;
 
     @Before
@@ -17,43 +17,31 @@ public class PlayerFactoryTest {
 
     @Test
     public void createsHumanPlayerForHumanVsComputerGame() {
-        PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
+        ConsolePlayerFactory playerFactory = new ConsolePlayerFactory(fakeConsoleUserInterface);
         assertTrue(playerFactory.createPlayer1(GameMode.HumanVsComputer) instanceof ConsolePlayer);
     }
 
     @Test
     public void createsComputerPlayerForHumanVsComputerGame() {
-        PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
+        ConsolePlayerFactory playerFactory = new ConsolePlayerFactory(fakeConsoleUserInterface);
         assertTrue(playerFactory.createPlayer2(GameMode.HumanVsComputer) instanceof UnbeatableComputerPlayer);
     }
 
     @Test
     public void createsComputerPlayerForComputerVsHumanGame() {
-        PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
+        ConsolePlayerFactory playerFactory = new ConsolePlayerFactory(fakeConsoleUserInterface);
         assertTrue(playerFactory.createPlayer1(GameMode.ComputerVsHuman) instanceof UnbeatableComputerPlayer);
     }
 
     @Test
     public void createsHumanPlayerForComputerVsHumanGame() {
-        PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
+        ConsolePlayerFactory playerFactory = new ConsolePlayerFactory(fakeConsoleUserInterface);
         assertTrue(playerFactory.createPlayer2(GameMode.ComputerVsHuman) instanceof ConsolePlayer);
     }
 
     @Test
-    public void createsGuiPlayerForGuiHumanVsGuiHumanGame() {
-        PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
-        assertTrue(playerFactory.createPlayer1(GameMode.GuiHumanVsGuiHuman) instanceof GuiPlayer);
-    }
-
-    @Test
-    public void createsGuiPlayer2ForGuiHumanVsGuiHumanGame() {
-        PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
-        assertTrue(playerFactory.createPlayer2(GameMode.GuiHumanVsGuiHuman) instanceof GuiPlayer);
-    }
-
-    @Test
     public void createsComputerPlayer2ForGuiHumanVsComputerGame() {
-        PlayerFactory playerFactory = new PlayerFactory(fakeConsoleUserInterface);
+        ConsolePlayerFactory playerFactory = new ConsolePlayerFactory(fakeConsoleUserInterface);
         assertTrue(playerFactory.createPlayer2(GameMode.GuiHumanVsComputer) instanceof UnbeatableComputerPlayer);
     }
 }

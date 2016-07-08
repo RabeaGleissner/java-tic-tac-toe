@@ -4,7 +4,7 @@ import de.rabea.game.Board;
 import de.rabea.game.GameOverBoardStub;
 import de.rabea.game.GameRunner;
 import de.rabea.player.GuiPlayer;
-import de.rabea.player.PlayerFactory;
+import de.rabea.player.ConsolePlayerFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,7 +36,7 @@ public class JavaFXUiTest {
     @Test
     public void setsGameRunner() {
         JavaFXUi ui = new JavaFXUi(viewUpdaterSpy);
-        GameRunner gameRunner = new GameRunner(ui, new PlayerFactory(null));
+        GameRunner gameRunner = new GameRunner(ui, new ConsolePlayerFactory(null));
         ui.setGameRunner(gameRunner);
         ui.getGameModeFromUser();
         assertTrue(viewUpdaterSpy.gameRunnerThatWasPassedIn != null);

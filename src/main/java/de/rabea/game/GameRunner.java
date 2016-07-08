@@ -1,7 +1,5 @@
 package de.rabea.game;
 
-import de.rabea.player.PlayerFactory;
-
 public class GameRunner {
     private final UserInterface userInterface;
     private final PlayerFactory playerFactory;

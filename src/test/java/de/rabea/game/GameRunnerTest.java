@@ -28,7 +28,7 @@ public class GameRunnerTest {
 
     @Test
     public void displaysGameOptionsOnGui() {
-        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new ConsolePlayerFactory(null));
         gameRunner.setGameAndDisplayBoardSizeOptions(GameMode.GuiHumanVsComputer);
 
         assertTrue(viewUpdaterSpy.hasShownBoardSizeOptions);
@@ -36,7 +36,7 @@ public class GameRunnerTest {
 
     @Test
     public void creates3x3Board() {
-        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new ConsolePlayerFactory(null));
         Board board = gameRunner.createBoard(3);
 
         assertEquals(3, board.getDimension());
@@ -44,7 +44,7 @@ public class GameRunnerTest {
 
     @Test
     public void showsOptionsForGameMode() {
-        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new ConsolePlayerFactory(null));
         gameRunner.displayGameModeOptions();
 
         assertTrue(viewUpdaterSpy.hasShownGameModeOptions);
@@ -52,7 +52,7 @@ public class GameRunnerTest {
 
     @Test
     public void createsNewGameWithGuiPlayerAndUnbeatablePlayer() {
-        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new GuiPlayerFactory());
         Game game = gameRunner.createGame(GameMode.GuiHumanVsComputer);
 
         assertTrue(game.getPlayer1() instanceof GuiPlayer);
@@ -61,7 +61,7 @@ public class GameRunnerTest {
 
     @Test
     public void preparesGameAndShowsBoard() {
-        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new PlayerFactory(null));
+        GameRunner gameRunner = new GameRunner(new JavaFXUi(viewUpdaterSpy), new GuiPlayerFactory());
         gameRunner.setGameAndDisplayBoardSizeOptions(GameMode.GuiHumanVsGuiHuman);
         gameRunner.playWithFreshBoard(3);
 
@@ -108,7 +108,7 @@ public class GameRunnerTest {
         return fakeConsolePlayer;
     }
 
-    private class PlayerFactoryWithFakeComputerPlayer extends PlayerFactory {
+    private class PlayerFactoryWithFakeComputerPlayer extends ConsolePlayerFactory {
         private final FakeComputerPlayer fakeComputerPlayer;
 
         public PlayerFactoryWithFakeComputerPlayer(ConsoleUi userInterface, FakeComputerPlayer fakeComputerPlayer) {
@@ -127,7 +127,7 @@ public class GameRunnerTest {
         }
     }
 
-    private class PlayerFactoryWithTwoConsolePlayers extends PlayerFactory {
+    private class PlayerFactoryWithTwoConsolePlayers extends ConsolePlayerFactory {
         private final FakeConsolePlayer fakePlayer1;
         private final FakeConsolePlayer fakePlayer2;
 

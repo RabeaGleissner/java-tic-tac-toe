@@ -3,14 +3,15 @@ package de.rabea.player;
 import de.rabea.console.ConsoleUi;
 import de.rabea.game.GameMode;
 import de.rabea.game.Player;
+import de.rabea.game.PlayerFactory;
 
 import static de.rabea.game.Mark.O;
 import static de.rabea.game.Mark.X;
 
-public class PlayerFactory {
+public class ConsolePlayerFactory implements PlayerFactory {
     private final ConsoleUi userInterface;
 
-    public PlayerFactory(ConsoleUi userInterface) {
+    public ConsolePlayerFactory(ConsoleUi userInterface) {
         this.userInterface = userInterface;
     }
 
@@ -18,11 +19,8 @@ public class PlayerFactory {
         if (gameMode == GameMode.HumanVsHuman ||
                 gameMode == GameMode.HumanVsComputer) {
             return new ConsolePlayer(userInterface, X);
-        } else if (gameMode == GameMode.ComputerVsComputer ||
-                gameMode == GameMode.ComputerVsHuman) {
-            return new UnbeatableComputerPlayer(X);
         } else {
-            return new GuiPlayer(X);
+            return new UnbeatableComputerPlayer(X);
         }
     }
 
@@ -31,11 +29,8 @@ public class PlayerFactory {
                 gameMode == GameMode.ComputerVsComputer ||
                 gameMode == GameMode.GuiHumanVsComputer) {
             return new UnbeatableComputerPlayer(O);
-        } else if (gameMode == GameMode.HumanVsHuman ||
-                gameMode == GameMode.ComputerVsHuman) {
-            return new ConsolePlayer(userInterface, O);
         } else {
-            return new GuiPlayer(O);
+            return new ConsolePlayer(userInterface, O);
         }
     }
 }

@@ -4,7 +4,7 @@ import de.rabea.game.Board;
 import de.rabea.game.GameRunner;
 import de.rabea.game.UserInterface;
 import de.rabea.player.GuiPlayer;
-import de.rabea.player.PlayerFactory;
+import de.rabea.player.ConsolePlayerFactory;
 import org.junit.Test;
 
 import static de.rabea.game.Mark.O;
@@ -24,7 +24,7 @@ public class EmptyCellClickHandlerTest {
 
     public class GameRunnerStub extends GameRunner {
 
-        public GameRunnerStub(UserInterface userInterface, PlayerFactory playerFactory) {
+        public GameRunnerStub(UserInterface userInterface, ConsolePlayerFactory playerFactory) {
             super(userInterface, playerFactory);
         }
 

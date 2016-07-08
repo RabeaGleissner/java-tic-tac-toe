@@ -3,7 +3,7 @@ package de.rabea.gui.view;
 import de.rabea.game.GameRunner;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdater;
-import de.rabea.player.PlayerFactory;
+import de.rabea.player.ConsolePlayerFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,7 +25,7 @@ public class GameEndViewTest {
     public void setUp() {
         new JFXPanel();
         gameRunner = new GameRunner(new JavaFXUi(new ViewUpdater(new Scene(new GridPane()))),
-                new PlayerFactory(null));
+                new ConsolePlayerFactory(null));
     }
 
     @Test

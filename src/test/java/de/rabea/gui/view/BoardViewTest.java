@@ -7,7 +7,7 @@ import de.rabea.gui.ViewUpdater;
 import de.rabea.gui.clickhandler.EmptyCellClickHandler;
 import de.rabea.gui.clickhandler.FullCellClickHandler;
 import de.rabea.player.GuiPlayer;
-import de.rabea.player.PlayerFactory;
+import de.rabea.player.ConsolePlayerFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -28,7 +28,7 @@ public class BoardViewTest {
     public void setUp() {
         new JFXPanel();
         gameRunner = new GameRunner(new JavaFXUi(new ViewUpdater(new Scene(new GridPane()))),
-                new PlayerFactory(null));
+                new ConsolePlayerFactory(null));
     }
 
     @Test

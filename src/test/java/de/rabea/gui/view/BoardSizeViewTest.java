@@ -3,7 +3,7 @@ package de.rabea.gui.view;
 import de.rabea.game.GameRunner;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdater;
-import de.rabea.player.PlayerFactory;
+import de.rabea.player.ConsolePlayerFactory;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,7 +29,7 @@ public class BoardSizeViewTest {
     public void asksUserToSelectBoardSize() {
         BoardSizeView boardSizeView = new BoardSizeView();
         Parent parent = boardSizeView.draw(new GameRunner(new JavaFXUi(viewUpdater),
-                new PlayerFactory(null)));
+                new ConsolePlayerFactory(null)));
         Label label = (Label) parent.getChildrenUnmodifiable().get(0);
 
         assertEquals("Please select a board size:", label.getText());
@@ -39,7 +39,7 @@ public class BoardSizeViewTest {
     public void hasButtonToChoose3x3Board() {
         BoardSizeView boardSizeView = new BoardSizeView();
         Parent parent = boardSizeView.draw(new GameRunner(new JavaFXUi(viewUpdater),
-                new PlayerFactory(null)));
+                new ConsolePlayerFactory(null)));
         Button button = (Button) parent.getChildrenUnmodifiable().get(1);
 
         assertEquals("3x3 board", button.getText());
@@ -49,7 +49,7 @@ public class BoardSizeViewTest {
     public void hasButtonToChoose4x4Board() {
         BoardSizeView boardSizeView = new BoardSizeView();
         Parent parent = boardSizeView.draw(new GameRunner(new JavaFXUi(viewUpdater),
-                new PlayerFactory(null)));
+                new ConsolePlayerFactory(null)));
         Button button = (Button) parent.getChildrenUnmodifiable().get(2);
 
         assertEquals("4x4 board", button.getText());

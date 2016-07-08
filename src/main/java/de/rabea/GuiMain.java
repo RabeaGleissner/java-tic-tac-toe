@@ -3,7 +3,7 @@ package de.rabea;
 import de.rabea.game.GameRunner;
 import de.rabea.gui.JavaFXUi;
 import de.rabea.gui.ViewUpdater;
-import de.rabea.player.PlayerFactory;
+import de.rabea.player.GuiPlayerFactory;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -18,7 +18,7 @@ public class GuiMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         JavaFXUi ui = new JavaFXUi(new ViewUpdater(scene));
-        GameRunner gameRunner = new GameRunner(ui, new PlayerFactory(null));
+        GameRunner gameRunner = new GameRunner(ui, new GuiPlayerFactory());
         ui.setGameRunner(gameRunner);
         gameRunner.displayGameModeOptions();
     }
