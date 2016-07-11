@@ -122,6 +122,24 @@ public class BoardTest {
         }
     }
 
+    @Test
+    public void returnsTrueIfCellIsAtTheEndOfARow() {
+        Board board = new Board(3);
+        assertTrue(board.isEndOfRow(2));
+    }
+
+    @Test
+    public void returnsFalseIfCellIsAtTheEndOfARow() {
+        Board board = new Board(3);
+        assertFalse(board.isEndOfRow(1));
+    }
+
+    @Test
+    public void returnsTrueIfItIsNotTheLastCell() {
+        Board board = new Board(3);
+        assertTrue(board.isNotLastCellIndex(1));
+    }
+
     private Board full3x3BoardNoWinner() {
         return new Board(
                 X, X, O,
