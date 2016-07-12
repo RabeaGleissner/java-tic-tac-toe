@@ -25,6 +25,6 @@ public class FakePlayer extends Player {
 
     @Override
     public Board makeMove(Board board) {
-        return board.placeMark(moves.remove(0), mark);
+        return board.placeMark(moves.remove(0));
     }
 }

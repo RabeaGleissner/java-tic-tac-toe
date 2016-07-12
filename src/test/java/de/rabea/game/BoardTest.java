@@ -28,8 +28,14 @@ public class BoardTest {
 
     @Test
     public void positionIsNoLongerAvailable() {
-        Board nextBoard = new Board(3).placeMark(1, X);
+        Board nextBoard = new Board(3).placeMark(1);
         assertFalse(nextBoard.isPositionAvailable(1));
+    }
+
+    @Test
+    public void calculatesNextPlayerMark() {
+        Board nextBoard = new Board(3).placeMark(1);
+        assertEquals(O, nextBoard.nextPlayerMark());
     }
 
     @Test
@@ -108,7 +114,7 @@ public class BoardTest {
     @Test
     public void placesMarkOnNewBoard() {
         Board board = new Board(3);
-        board.placeMark(1, X);
+        board.placeMark(1);
         assertEquals(9, board.emptyCells().size());
     }
 

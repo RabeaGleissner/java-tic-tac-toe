@@ -2,6 +2,7 @@ package de.rabea.game;
 
 import java.util.*;
 
+import static de.rabea.game.Mark.*;
 import static de.rabea.game.Mark.EMPTY;
 
 public class Board {
@@ -33,9 +34,9 @@ public class Board {
         return cells;
     }
 
-    public Board placeMark(int position, Mark mark) {
+    public Board placeMark(int position) {
         Mark[] gameStateCopy = this.cells().clone();
-        gameStateCopy[position] = mark;
+        gameStateCopy[position] = nextPlayerMark();
         return new Board(gameStateCopy);
     }
 
@@ -185,5 +186,32 @@ public class Board {
             marks.put(i, cells[i]);
         }
         return marks;
+    }
+
+    public Mark nextPlayerMark() {
+        if (countForX() > countForO()) {
+            return O;
+        }
+        return X;
+    }
+
+    private int countForO() {
+        int oCount = 0;
+        for (Mark cell : cells()) {
+            if (cell == O) {
+                oCount += 1;
+            }
+        }
+        return oCount;
+    }
+
+    private int countForX() {
+        int xCount = 0;
+        for (Mark cell : cells()) {
+            if (cell == X) {
+                xCount += 1;
+            }
+        }
+        return xCount;
     }
 }
