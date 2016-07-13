@@ -4,6 +4,7 @@ import java.util.*;
 
 import static de.rabea.game.Mark.*;
 import static de.rabea.game.Mark.EMPTY;
+import static java.util.Arrays.*;
 
 public class Board {
 
@@ -169,7 +170,7 @@ public class Board {
             second[i] = cells[offset];
             offset += dimension - 1;
         }
-        return Arrays.asList(new Line(first), new Line(second));
+        return asList(new Line(first), new Line(second));
     }
 
     public Mark winningPlayerMark() {
@@ -189,29 +190,13 @@ public class Board {
     }
 
     public Mark nextPlayerMark() {
-        if (countForX() > countForO()) {
+        if (countFor(X) > countFor(O)) {
             return O;
         }
         return X;
     }
 
-    private int countForO() {
-        int oCount = 0;
-        for (Mark cell : cells()) {
-            if (cell == O) {
-                oCount += 1;
-            }
-        }
-        return oCount;
-    }
-
-    private int countForX() {
-        int xCount = 0;
-        for (Mark cell : cells()) {
-            if (cell == X) {
-                xCount += 1;
-            }
-        }
-        return xCount;
+    private int countFor(Mark mark) {
+        return (int) stream(cells).filter(x -> x == mark).count();
     }
 }
