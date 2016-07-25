@@ -61,4 +61,13 @@ public class UnbeatableComputerPlayerTest {
     public void alwaysHasMoveAvailable() {
         assertTrue(unbeatableComputerPlayer.hasMove());
     }
+
+    @Test
+    public void makesWinningMoveOn4x4() {
+        Board board = new Board(X, O, X, O,
+                X, O, X, O,
+                EMPTY, O, EMPTY, EMPTY,
+                EMPTY, EMPTY, EMPTY, EMPTY);
+        assertEquals(13, unbeatableComputerPlayer.getMove(board));
+    }
 }

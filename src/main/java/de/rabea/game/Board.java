@@ -41,6 +41,12 @@ public class Board {
         return new Board(gameStateCopy);
     }
 
+    public Board placeMark(int position, Mark mark) {
+        Mark[] gameStateCopy = this.cells().clone();
+        gameStateCopy[position] = mark;
+        return new Board(gameStateCopy);
+    }
+
     public boolean gameOver() {
         return isFull() || hasWinner();
     }
